@@ -17,4 +17,8 @@ def create_pull_request(date=None):
     """
     assert date is not None, "Date cannot be None"
     branch = "daily-updates-{}".format(date)
-    subprocess.run(["gh", "pr", "create", "--base", "main", "--head", branch, "--title", "Daily Updates", "--body", "Auto-generated updates"], check=True)
+    try:
+        subprocess.run(["gh", "pr", "create", "--base", "main", "--head", branch, "--title", "Daily Updates", "--body",
+                        "Auto-generated updates"], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error occurred while creating PR: {e}")
