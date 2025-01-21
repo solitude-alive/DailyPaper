@@ -5,7 +5,7 @@ from script.fetch_papers import fetch_papers
 from script.filter_papers import filter_papers, select_top_papers, duplicate_papers
 from script.summarize_papers import summarize_and_score
 from script.generate_markdown import generate_markdown_for_day, update_all_papers
-from script.update_readme import update_readme_with_highlight_papers
+from script.update_daily import update_daily_papers
 from script.git_operations import git_commit_and_push, create_pull_request
 
 
@@ -43,7 +43,8 @@ def main():
         summary, score = summarize_and_score(paper)
         paper["summary"] = summary
         paper["score"] = score
-        time.sleep(4) # Sleep for 4 seconds to avoid rate limiting, 15 requests per minute allowed by GitHub Models
+
+        # time.sleep(4) # Sleep for 4 seconds to avoid rate limiting, 15 requests per minute allowed by GitHub Models
 
     print("Selecting top papers...")
     highlight_papers = select_top_papers(filtered_papers, highlight_number)
@@ -52,7 +53,7 @@ def main():
     generate_markdown_for_day(filtered_papers, date)
 
     print("Updating highlight papers to README.md ...")
-    update_readme_with_highlight_papers(highlight_papers, filtered_papers,date)
+    update_daily_papers(highlight_papers, filtered_papers,date)
 
     print("Updating all papers file...")
     update_all_papers(filtered_papers)
