@@ -43,7 +43,7 @@ def main():
         summary, score = summarize_and_score(paper)
         paper["summary"] = summary
         paper["score"] = score
-        # time.sleep(4) # Sleep for 4 seconds to avoid rate limiting, 15 requests per minute allowed by GitHub Models
+        time.sleep(4) # Sleep for 4 seconds to avoid rate limiting, 15 requests per minute allowed by GitHub Models
 
     print("Selecting top papers...")
     highlight_papers = select_top_papers(filtered_papers, highlight_number)
@@ -61,7 +61,7 @@ def main():
     git_commit_and_push(date)
 
     print("Creating pull request on GitHub...")
-    create_pull_request()
+    create_pull_request(date)
 
     print("Workflow completed successfully.")
 
