@@ -30,6 +30,10 @@ def main():
     filtered_papers = duplicate_papers(filtered_papers)
     print("Number of papers after deduplication:", len(filtered_papers))
 
+    if len(filtered_papers) == 0:
+        print("No new papers found. Exiting.")
+        return
+
     print("Summarizing and scoring papers...")
 
     # sort the papers by date and time, so that the latest papers are at the bottom
