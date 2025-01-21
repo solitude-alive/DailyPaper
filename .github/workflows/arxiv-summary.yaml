@@ -2,7 +2,7 @@ name: Arxiv Paper Summarizer
 
 on:
   schedule:
-    - cron: "0 6 * * *"  # Run daily at 6 AM UTC
+    - cron: "0 3 * * *"  # Run daily at 6 AM UTC
 
 jobs:
   summarize:
