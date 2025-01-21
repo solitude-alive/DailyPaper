@@ -1,13 +1,15 @@
 import subprocess
 
-def git_commit_and_push(date=None):
+def git_commit_and_push(date=None, base_path="summaries"):
     """
     Automates git commit and push process.
     """
     assert date is not None, "Date cannot be None"
     branch = "daily-updates-{}".format(date)
     subprocess.run(["git", "checkout", "-b", branch], check=True)
-    subprocess.run(["git", "add", "."], check=True)
+    subprocess.run(["git", "add", "*.md"], check=True)
+    subprocess.run(["git", "add", "summaries/*.md"], check=True)
+    subprocess.run(["git", "add", "summaries/*/*.md"], check=True)
     subprocess.run(["git", "commit", "-m", "Daily update"], check=True)
     subprocess.run(["git", "push", "-u", "origin", branch], check=True)
 
