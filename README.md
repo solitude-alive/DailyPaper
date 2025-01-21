@@ -3,4 +3,3 @@ This project is an automated pipeline for fetching, filtering, summarizing, and 
 
 # [The Latest Daily Paper](./DailyPaper.md)
 
-
