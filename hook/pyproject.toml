@@ -1,0 +1,24 @@
+# ---- All project specifications ---- #
+[project]
+name = "DailyPaper"
+description = "Generate a daily paper from a list of sources"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {file = "LICENSE"}
+
+[project.urls]
+GitHub = ""
+
+# ---- Tooling specifications ---- #
+[tool.usort]
+first_party_detection = false
+
+[tool.black]
+target-version = ["py39"]
+
+[tool.pydoclint]
+style = 'google'
+check-return-types = 'False'
+
+[tool.pytest.ini_options]
+addopts = ["--showlocals", "--import-mode=prepend", "--without-integration", "--without-slow-integration"]

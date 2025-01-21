@@ -1,0 +1,28 @@
+name: Arxiv Paper Summarizer
+
+on:
+  schedule:
+    - cron: "0 6 * * *"  # Run daily at 6 AM UTC
+
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: Install Dependencies
+        run: pip install requests openai
+
+      - name: Run Paper Summarizer
+        run: |
+          python main.py
+
+      - name: Commit and Push Changes
+        run: |
+          python scripts/git_operations.py
