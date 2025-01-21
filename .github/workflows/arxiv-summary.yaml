@@ -23,10 +23,6 @@ jobs:
         env: |
           GITHUB_TOKEN: ${{ secrets.LLM_TOKEN }}
 
-      - name: Run Paper Summarizer
+      - name: Run Paper Summarizer, commit, push and create PR
         run: |
           python main.py
-
-      - name: Commit and Push Changes
-        run: |
-          python scripts/git_operations.py
