@@ -19,6 +19,10 @@ jobs:
       - name: Install Dependencies
         run: pip install requests openai
 
+      - name: Load Environment Variables
+        env: |
+          GITHUB_TOKEN: ${{ secrets.LLM_TOKEN }}
+
       - name: Run Paper Summarizer
         run: |
           python main.py
