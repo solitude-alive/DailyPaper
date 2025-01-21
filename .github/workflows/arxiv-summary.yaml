@@ -7,6 +7,10 @@ on:
 jobs:
   summarize:
     runs-on: ubuntu-latest
+
+    env:  # Define environment variables
+      GITHUB_TOKEN: ${{ secrets.LLM_TOKEN }}
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -18,10 +22,6 @@ jobs:
 
       - name: Install Dependencies
         run: pip install requests openai
-
-      - name: Load Environment Variables
-        env: |
-          GITHUB_TOKEN: ${{ secrets.LLM_TOKEN }}
 
       - name: Run Paper Summarizer, commit, push and create PR
         run: |
