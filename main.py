@@ -43,7 +43,6 @@ def main():
         summary, score = summarize_and_score(paper)
         paper["summary"] = summary
         paper["score"] = score
-
         # time.sleep(4) # Sleep for 4 seconds to avoid rate limiting, 15 requests per minute allowed by GitHub Models
 
     print("Selecting top papers...")

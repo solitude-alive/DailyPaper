@@ -11,8 +11,10 @@ def git_commit_and_push(date=None):
     subprocess.run(["git", "commit", "-m", "Daily update"], check=True)
     subprocess.run(["git", "push", "-u", "origin", branch], check=True)
 
-def create_pull_request(branch="daily-updates"):
+def create_pull_request(date=None):
     """
     Automates pull request creation using GitHub CLI.
     """
+    assert date is not None, "Data cannot be None"
+    branch = "daily-updates-{}".format(date)
     subprocess.run(["gh", "pr", "create", "--base", "main", "--head", branch, "--title", "Daily Updates", "--body", "Auto-generated updates"], check=True)
