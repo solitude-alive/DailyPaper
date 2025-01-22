@@ -1,0 +1,58 @@
+name: Auto Merge PR
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  strict-auto-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Fetch the list of changed files in the PR
+      - name: Get Changed Files
+        id: changed-files
+        run: |
+          git fetch origin main
+          git diff --name-only origin/main...HEAD > changed_files.txt
+          echo "Changed files:"
+          cat changed_files.txt
+          echo "::set-output name=files::$(cat changed_files.txt)"
+
+      # Step 3: Validate Changed Files
+      - name: Validate Changed Files
+        id: validate-files
+        run: |
+          # Define the allowed files and patterns
+          ALLOWED_PATTERNS="README.md|DailyPaper.md|summaries/[^/]+\.md|summaries/.*/[^/]+\.md"
+
+          # Check if any file does not match the allowed patterns
+          INVALID_FILES=$(grep -vE "${ALLOWED_PATTERNS}" changed_files.txt || true)
+
+          if [ -n "$INVALID_FILES" ]; then
+            echo "Invalid files found:"
+            echo "$INVALID_FILES"
+            echo "::set-output name=invalid::true"
+          else
+            echo "All files are valid."
+            echo "::set-output name=invalid::false"
+          fi
+
+      # Step 4: Merge the PR if all files are valid
+      - name: Merge Pull Request
+        if: steps.validate-files.outputs.invalid == 'false'
+        run: |
+          gh pr merge ${{ github.event.pull_request.number }} --merge --admin
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Step 5: Fail the workflow if invalid files are detected
+      - name: Fail on Invalid Files
+        if: steps.validate-files.outputs.invalid == 'true'
+        run: |
+          echo "The pull request contains files outside the allowed list. Exiting."
+          exit 1
