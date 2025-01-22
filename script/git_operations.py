@@ -52,3 +52,4 @@ def create_pull_request(date=None):
         )
     except subprocess.CalledProcessError as e:
         print(f"Error occurred while creating PR: {e}")
+        assert False, "Error occurred while creating PR"
