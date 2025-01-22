@@ -1,8 +1,10 @@
 import os
 
+
 def create_directory(path):
     if not os.path.exists(path):
         os.makedirs(path)
+
 
 def generate_markdown_for_day(papers, date, base_path="summaries"):
     """

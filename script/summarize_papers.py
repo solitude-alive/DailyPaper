@@ -1,18 +1,20 @@
 import os
-from openai import OpenAI
 
 import re
 
+from openai import OpenAI
+
 
 # To authenticate with the model you will need to generate a personal access token (PAT) in your GitHub settings.
-# Create your PAT token by following instructions here: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
+# Create your PAT token by following instructions here:
+# https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
 client = OpenAI(
     base_url="https://models.inference.ai.azure.com",
     api_key=os.environ["GITHUB_TOKEN"],
 )
 
 
-def extract_score(response_content):
+def extract_score(response_content: str):
     """
     Extracts the score (1-10) from the response content where the score is preceded by any content
     and followed directly by a number.
@@ -34,13 +36,19 @@ def summarize_and_score(paper):
     """
     Summarizes the paper and assigns a score using an LLM.
     """
-    prompt = (f"Please provide a concise summary of the following paper:\n\n"
-              f"Title: {paper['title']}\nAbstract: {paper['abstract']}\n\n"
-              "Additionally, conduct a **rigorous and critical evaluation** of the paper's novelty and significance within the field. "
-              "Assign a score between 1 and 10, where 1 indicates a paper with negligible novelty or impact, and 10 represents an exceptional, game-changing contribution. "
-              "Be **critical** in your assessment, ensuring that your score is based on clear, well-reasoned arguments. "
-              "Provide a thorough justification for the score, discussing the strengths and weaknesses of the paper, as well as its potential influence on the field. "
-              "Include the score at the end in the format 'Score: X', with an emphasis on providing a **rigorous rationale** for the score assigned.")
+    prompt = (
+        f"Please provide a concise summary of the following paper:\n\n"
+        f"Title: {paper['title']}\nAbstract: {paper['abstract']}\n\n"
+        "Additionally, conduct a **rigorous and critical evaluation** of the paper's "
+        "novelty and significance within the field. "
+        "Assign a score between 1 and 10, where 1 indicates a paper with negligible novelty or impact, "
+        "and 10 represents an exceptional contribution. "
+        "Be **critical** in your assessment, ensuring that your score is based on clear, well-reasoned arguments. "
+        "Provide a thorough justification for the score, discussing the strengths and weaknesses of the paper, "
+        "as well as its potential influence on the field. "
+        "Include the score at the end in the format 'Score: X', "
+        "with an emphasis on providing a **rigorous rationale** for the score assigned."
+    )
     response = client.chat.completions.create(
         messages=[
             {
@@ -50,19 +58,21 @@ def summarize_and_score(paper):
             {
                 "role": "user",
                 "content": "{}".format(prompt),
-            }
+            },
         ],
         model="gpt-4o-mini",
         temperature=1,
         max_tokens=4096,
-        top_p=1
+        top_p=1,
     )
 
     summary = response.choices[0].message.content
 
     # Clean the summary to remove unnecessary blank lines
     summary = summary.strip()
-    summary = re.sub(r'\n+', ' ', summary)  # Replace multiple newlines with a single space
+    summary = re.sub(
+        r"\n+", " ", summary
+    )  # Replace multiple newlines with a single space
 
     # Extract the score from the response content
     score = extract_score(summary)
