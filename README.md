@@ -11,6 +11,7 @@ This project automates the process of fetching, filtering, and summarizing resea
 4. **Score**: The pipeline scores the papers based on the summaries.
 5. **Highlight**: The pipeline highlights the most important papers based on the scores.
 6. **Report**: The pipeline generates a daily markdown report of the papers.
+7. **Commit, Push, and Pull Request**: The pipeline automatically commits the report to the repository, pushes the changes, and creates a pull request.
 
 ### Acknowledgements
 
@@ -18,4 +19,4 @@ This project draws inspiration from the following open-source projects:
 
 - [DailyArxiv](https://github.com/zezhishao/DailyArXiv)
 
-ChatGTP 4o also helped a lot.
+ChatGPT also helped in the development of this project.
