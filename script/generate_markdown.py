@@ -19,7 +19,7 @@ def generate_markdown_for_day(papers, date, base_path="summaries"):
     with open(daily_file, "w") as f:
         f.write(f"# Daily Summary: {date}\n\n")
         for paper in papers:
-            f.write(f"## {paper['title']}\n")
+            f.write(f"### {paper['title']}\n")
             f.write(f"- **Link**: [Link to Paper]({paper['link']})\n")
             f.write(f"- **Authors**: {', '.join(paper['authors'])}\n")
             f.write(f"- **Abstract**: {paper['abstract']}\n")
@@ -35,7 +35,9 @@ def update_all_papers(papers, base_path="summaries"):
     all_papers_file = os.path.join(base_path, "all_papers.md")
     with open(all_papers_file, "a") as f:
         for paper in papers:
-            f.write(f"- **[Title: {paper['title']}]({paper['link']})**\n")
-            f.write(f"  - **Classification**: {paper['category']}\n")
-            f.write(f"  - **Summary**: {paper['summary']}\n")
-            f.write(f"  - **Score**: {paper['score']}/10\n\n")
+            f.write(f"### **[Title: {paper['title']}]({paper['link']})**\n")
+            f.write(f"- **Authors**: {', '.join(paper['authors'])}\n")
+            f.write(f"- **Classification**: {paper['category']}\n")
+            f.write(f"- **Summary**: {paper['summary']}\n")
+            f.write(f"- **Abstract**: {paper['abstract']}\n")
+            f.write(f"- **Score**: {paper['score']}/10\n\n")
