@@ -13,6 +13,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      # Step 2: Debug fetch
       - name: Debug Fetch
         run: |
           echo "Remote branches:"
@@ -24,7 +25,7 @@ jobs:
           echo "Remote HEAD for origin/main:"
           git ls-remote origin refs/heads/main
 
-      # Step 2: Fetch the list of changed files in the PR
+      # Step 3: Fetch the list of changed files in the PR
       - name: Get Changed Files
         run: |
           git fetch origin main
@@ -40,7 +41,7 @@ jobs:
           cat changed_files.txt
           echo "::set-output name=files::$(cat changed_files.txt)"
 
-      # Step 3: Validate Changed Files
+      # Step 4: Validate Changed Files
       - name: Validate Changed Files
         id: validate-files
         run: |
@@ -59,7 +60,7 @@ jobs:
             echo "::set-output name=invalid::false"
           fi
 
-      # Step 4: Merge the PR if all files are valid
+      # Step 5: Merge the PR if all files are valid
       - name: Merge Pull Request
         if: steps.validate-files.outputs.invalid == 'false'
         run: |
@@ -67,7 +68,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.LLM_TOKEN }}
 
-      # Step 5: Fail the workflow if invalid files are detected
+      # Step 6: Fail the workflow if invalid files are detected
       - name: Fail on Invalid Files
         if: steps.validate-files.outputs.invalid == 'true'
         run: |
