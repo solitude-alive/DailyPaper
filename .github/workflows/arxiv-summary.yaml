@@ -25,8 +25,10 @@ jobs:
 
       - name: Set up Git config
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "${{ secrets.GIT_EMAIL }}"
+          git config --global credential.helper cache
+          echo "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com" > ~/.git-credentials
 
       - name: Run Paper Summarizer, commit, push and create PR
         run: |
