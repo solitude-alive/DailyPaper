@@ -1,10 +1,19 @@
 import os
 import re
+from typing import List
+
+import feedparser
 
 
-def filter_papers(feed, keywords: list):
+def filter_papers(feed: feedparser.FeedParserDict, keywords: list) -> List[dict]:
     """
     Filters papers based on the provided keywords.
+
+    Args:
+        feed (feedparser.FeedParserDict): The list of papers fetched from the Arxiv API.
+        keywords (list): The list of keywords to filter the papers.
+    Returns:
+        List[dict]: The list of papers that contain the keywords in their titles or abstracts.
     """
     papers = []
     for entry in feed.get("entries", []):
@@ -35,9 +44,15 @@ def filter_papers(feed, keywords: list):
     return papers
 
 
-def select_top_papers(papers, n=10):
+def select_top_papers(papers: List[dict], n: int = 10) -> List[dict]:
     """
     Selects the top N papers based on their scores.
+
+    Args:
+        papers (List[dict]): The list of papers with scores.
+        n (int): The number of top papers to select.
+    Returns:
+        List[dict]: The top N papers based on their scores.
     """
     top_papers = []
     last_score = 0
@@ -55,9 +70,15 @@ def select_top_papers(papers, n=10):
     return top_papers
 
 
-def duplicate_papers(papers, base_path="summaries"):
+def duplicate_papers(papers: List[dict], base_path: str = "summaries") -> List[dict]:
     """
     Deduplicates papers based on the link.
+
+    Args:
+        papers (List[dict]): The list of papers to deduplicate.
+        base_path (str): The base path to the summary directory.
+    Returns:
+        List[dict]: The deduplicated list of papers.
     """
     all_papers_file = os.path.join(base_path, "all_papers.md")
 

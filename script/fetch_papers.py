@@ -6,7 +6,7 @@ import requests
 
 def fetch_papers(
     query: str, max_results: int = 50, retries: int = 3, wait_time: int = 30
-):
+) -> feedparser.FeedParserDict:
     """
     Fetches papers from Arxiv and retries on errors.
 
@@ -17,7 +17,7 @@ def fetch_papers(
         wait_time (int): Wait time (in seconds) between retries.
 
     Returns:
-        List[dict]: A list of dictionaries containing paper details.
+        feedparser.FeedParserDict: A dictionary of containing paper details.
 
     Raises:
         requests.exceptions.RequestException: If an error occurs during the request.
