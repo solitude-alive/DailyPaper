@@ -8,8 +8,8 @@ jobs:
   summarize:
     runs-on: ubuntu-latest
 
-  permissions:
-    contents: write
+    permissions:
+      contents: write
 
     env:  # Define environment variables
       GITHUB_TOKEN: ${{ secrets.LLM_TOKEN }}
