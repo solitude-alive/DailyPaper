@@ -33,6 +33,10 @@ def main():
 
     print("Deduplicating papers already stored in the all_papers.md file...")
     # Deduplicate papers based on the title
+
+    # sort the papers by date and time, so that the latest papers are at the bottom
+    filtered_papers = sorted(filtered_papers, key=lambda x: x["link"], reverse=False)
+
     filtered_papers = duplicate_papers(filtered_papers)
     print("Number of papers after deduplication:", len(filtered_papers))
 
@@ -41,9 +45,6 @@ def main():
         return
 
     print("Summarizing and scoring papers...")
-
-    # sort the papers by date and time, so that the latest papers are at the bottom
-    filtered_papers = sorted(filtered_papers, key=lambda x: x["link"], reverse=False)
 
     for paper in filtered_papers:
         summary, score = summarize_and_score(paper)
@@ -59,7 +60,7 @@ def main():
     print("Generating daily markdown file...")
     generate_markdown_for_day(filtered_papers, date)
 
-    print("Updating highlight papers to README.md ...")
+    print("Updating highlight papers to DailyPaper.md ...")
     update_daily_papers(highlight_papers, filtered_papers, date)
 
     print("Updating all papers file...")

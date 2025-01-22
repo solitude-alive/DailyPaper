@@ -32,9 +32,14 @@ def extract_score(response_content: str):
     return 0
 
 
-def summarize_and_score(paper):
+def summarize_and_score(paper: dict) -> tuple[str, int]:
     """
     Summarizes the paper and assigns a score using an LLM.
+
+    Args:
+        paper (dict): The paper details containing the title and abstract.
+    Returns:
+        tuple[str, int]: The summary of the paper, and the assigned score.
     """
     prompt = (
         f"Please provide a concise summary of the following paper:\n\n"

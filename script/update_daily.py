@@ -1,4 +1,7 @@
-def update_daily_papers(hl_papers, papers, date):
+from typing import List
+
+
+def update_daily_papers(hl_papers: List[dict], papers: List[dict], date: str) -> None:
     """
     Updates the DailyPaper.md file with the highlight papers.
     Target format:
@@ -9,6 +12,11 @@ def update_daily_papers(hl_papers, papers, date):
         - **Score**: {paper['score']}/10
         ...
         ## Other Papers
+
+    Args:
+        hl_papers (List[dict]): The list of highlight papers.
+        papers (List[dict]): The list of all papers.
+        date (str): The date of the papers.
     """
     file = "DailyPaper.md"
 
