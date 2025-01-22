@@ -68,7 +68,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.LLM_TOKEN }}
 
-      # Step 6: Fail the workflow if invalid files are detected
+      # Step 6: Delete the branch after merging
+      - name: Delete Branch
+        if: steps.validate-files.outputs.invalid == 'false'
+        run: |
+          gh pr close ${{ github.event.pull_request.number }} --delete-branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.LLM_TOKEN }}
+
+
+      # Step 7: Fail the workflow if invalid files are detected
       - name: Fail on Invalid Files
         if: steps.validate-files.outputs.invalid == 'true'
         run: |
