@@ -24,7 +24,7 @@ def git_commit_and_push(date=None, base_path="summaries"):
             if attempt < retries:
                 print(f"Retrying... (Attempt {attempt}/{retries})")
             else:
-                print("Max retries reached. Exiting.")
+                assert False, "Error occurred while committing and pushing"
 
 
 def create_pull_request(date=None):
