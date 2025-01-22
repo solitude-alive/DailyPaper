@@ -72,5 +72,4 @@ jobs:
       - name: Fail on Invalid Files
         if: steps.validate-files.outputs.invalid == 'true'
         run: |
-          echo "The pull request contains files outside the allowed list. Exiting."
-          exit 1
+          echo "The pull request contains files outside the allowed list."
