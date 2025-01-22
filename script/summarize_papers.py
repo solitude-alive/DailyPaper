@@ -34,11 +34,11 @@ def summarize_and_score(paper):
     """
     Summarizes the paper and assigns a score using an LLM.
     """
-    prompt = (f"Please provide a detailed summary of the following paper:\n\n"
+    prompt = (f"Please provide a concise summary of the following paper:\n\n"
               f"Title: {paper['title']}\nAbstract: {paper['abstract']}\n\n"
               "Additionally, conduct a **rigorous and critical evaluation** of the paper's novelty and significance within the field. "
               "Assign a score between 1 and 10, where 1 indicates a paper with negligible novelty or impact, and 10 represents an exceptional, game-changing contribution. "
-              "Be **exceptionally critical** in your assessment, ensuring that your score is based on clear, well-reasoned arguments. "
+              "Be **critical** in your assessment, ensuring that your score is based on clear, well-reasoned arguments. "
               "Provide a thorough justification for the score, discussing the strengths and weaknesses of the paper, as well as its potential influence on the field. "
               "Include the score at the end in the format 'Score: X', with an emphasis on providing a **rigorous rationale** for the score assigned.")
     response = client.chat.completions.create(
