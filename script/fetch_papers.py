@@ -1,9 +1,12 @@
-import requests
 import time
+
 import feedparser
+import requests
 
 
-def fetch_papers(query, max_results=50, retries=3, wait_time=30):
+def fetch_papers(
+    query: str, max_results: int = 50, retries: int = 3, wait_time: int = 30
+):
     """
     Fetches papers from Arxiv and retries on errors.
 
@@ -15,6 +18,10 @@ def fetch_papers(query, max_results=50, retries=3, wait_time=30):
 
     Returns:
         List[dict]: A list of dictionaries containing paper details.
+
+    Raises:
+        requests.exceptions.RequestException: If an error occurs during the request.
+        feedparser.NonXMLContentType: If the response content is not XML.
     """
     base_url = "http://export.arxiv.org/api/query"
     params = {
@@ -37,14 +44,18 @@ def fetch_papers(query, max_results=50, retries=3, wait_time=30):
 
             return feed
 
-        except (requests.exceptions.RequestException, feedparser.NonXMLContentType) as e:
+        except (
+            requests.exceptions.RequestException,
+            feedparser.NonXMLContentType,
+        ) as e:
             # Handle HTTP or parsing errors
             print(f"Error occurred: {e}")
             attempt += 1
             if attempt < retries:
-                print(f"Retrying in {wait_time} seconds... (Attempt {attempt}/{retries})")
+                print(
+                    f"Retrying in {wait_time} seconds... (Attempt {attempt}/{retries})"
+                )
                 time.sleep(wait_time)
             else:
                 print("Max retries reached. Exiting.")
                 raise
-
