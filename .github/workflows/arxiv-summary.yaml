@@ -2,7 +2,7 @@ name: Arxiv Paper Summarizer
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # Run daily at 0 AM UTC, or 8:00 Shanghai
+    - cron: "0 23 * * *"  # Run daily at 23 UTC, or 7:00 Shanghai
   workflow_dispatch: # Manually trigger the workflow
 
 jobs:
