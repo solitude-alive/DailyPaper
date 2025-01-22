@@ -20,3 +20,7 @@ This project draws inspiration from the following open-source projects:
 - [DailyArxiv](https://github.com/zezhishao/DailyArXiv)
 
 ChatGPT also helped in the development of this project.
+
+### License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
