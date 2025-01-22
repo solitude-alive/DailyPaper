@@ -13,6 +13,17 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Debug Fetch
+        run: |
+          echo "Remote branches:"
+          git branch -r
+          echo "Local branches:"
+          git branch
+          echo "Current HEAD:"
+          git rev-parse HEAD
+          echo "Remote HEAD for origin/main:"
+          git ls-remote origin refs/heads/main
+
       # Step 2: Fetch the list of changed files in the PR
       - name: Get Changed Files
         run: |
