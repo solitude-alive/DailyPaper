@@ -13,3 +13,9 @@ This project automates the process of fetching, filtering, and summarizing resea
 6. **Report**: The pipeline generates a daily markdown report of the papers.
 
 ### Acknowledgements
+
+This project draws inspiration from the following open-source projects:
+
+- [DailyArxiv](https://github.com/zezhishao/DailyArXiv)
+
+ChatGTP 4o also helped a lot.
