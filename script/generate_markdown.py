@@ -55,7 +55,7 @@ def update_all_papers(papers: List[dict], base_path: str = "summaries"):
     all_papers_file = os.path.join(base_path, "all_papers.md")
     with open(all_papers_file, "a") as f:
         for paper in papers:
-            f.write(f"### **[Title: {paper['title']}]({paper['link']})**\n")
+            f.write(f"### **[{paper['title']}]({paper['link']})**\n")
             f.write(f"- **Authors**: {', '.join(paper['authors'])}\n")
             f.write(f"- **Classification**: {paper['category']}\n")
             f.write(f"- **Summary**: {paper['summary']}\n")
