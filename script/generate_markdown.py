@@ -44,16 +44,18 @@ def generate_markdown_for_day(
             f.write(f"- **Score**: {paper['score']}/10\n\n")
 
 
-def update_all_papers(papers: List[dict], base_path: str = "summaries"):
+def update_all_papers(papers: List[dict], date: str, base_path: str = "summaries"):
     """
     Appends new papers to the all_papers.md file.
 
     Args:
         papers (List[dict]): The list of papers to append.
+        date (str): The date of the papers.
         base_path (str): The base path to store the summaries
     """
     all_papers_file = os.path.join(base_path, "all_papers.md")
     with open(all_papers_file, "a") as f:
+        f.write(f"## Date: {date}\n")
         for paper in papers:
             f.write(f"### **[{paper['title']}]({paper['link']})**\n")
             f.write(f"- **Authors**: {', '.join(paper['authors'])}\n")
