@@ -64,7 +64,7 @@ def main():
     update_daily_papers(highlight_papers, filtered_papers, date)
 
     print("Updating all papers file...")
-    update_all_papers(filtered_papers)
+    update_all_papers(filtered_papers, date)
 
     print("Committing and pushing changes to Git...")
     git_commit_and_push(date)
