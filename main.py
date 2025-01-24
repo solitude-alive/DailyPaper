@@ -32,13 +32,13 @@ def main():
     print("Number of papers fetched:", len(filtered_papers))
 
     print("Deduplicating papers already stored in the all_papers.md file...")
-    # Deduplicate papers based on the title
+
+    # Deduplicate papers based on the title, the latest paper are at the top
+    filtered_papers = duplicate_papers(filtered_papers)
+    print("Number of papers after deduplication:", len(filtered_papers))
 
     # sort the papers by date and time, so that the latest papers are at the bottom
     filtered_papers = sorted(filtered_papers, key=lambda x: x["link"], reverse=False)
-
-    filtered_papers = duplicate_papers(filtered_papers)
-    print("Number of papers after deduplication:", len(filtered_papers))
 
     if len(filtered_papers) == 0:
         print("No new papers found. Exiting.")
