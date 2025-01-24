@@ -19,7 +19,7 @@ def main():
         "Diffusion Model",
         "Generative Adversarial Networks",
     ]  # Keywords to filter papers
-    max_results = 100  # Maximum number of papers to fetch
+    max_results = 150  # Maximum number of papers to fetch
     highlight_number = 5  # Number of papers to highlight
 
     date = datetime.datetime.now().strftime("%Y-%m-%d")
