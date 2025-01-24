@@ -33,7 +33,7 @@ def main():
 
     print("Deduplicating papers already stored in the all_papers.md file...")
 
-    # Deduplicate papers based on the title, the latest paeper are at the top
+    # Deduplicate papers based on the title, the latest paper are at the top
     filtered_papers = duplicate_papers(filtered_papers)
     print("Number of papers after deduplication:", len(filtered_papers))
 
