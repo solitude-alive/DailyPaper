@@ -18,6 +18,8 @@ def main():
         "Watermarking",
         "Diffusion Model",
         "Generative Adversarial Networks",
+        "Chain-of-Thought",
+        "Image Generation"
     ]  # Keywords to filter papers
     max_results = 150  # Maximum number of papers to fetch
     highlight_number = 5  # Number of papers to highlight
