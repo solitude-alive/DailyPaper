@@ -1,7 +1,10 @@
 # Daily Paper
 This project automates the process of fetching, filtering, and summarizing research papers from ArXiv based on user-defined keywords. Using GitHub Actions and an external LLM for summarization and scoring, it generates daily markdown reports highlighting the most relevant papers.
 
-# [The Latest Daily Paper](./DailyPaper.md)
+# Paper
+
+- [Daily Papers](./DailyPaper.md)
+- [All Papers](./summaries/all_papers.md)
 
 ### How it works
 

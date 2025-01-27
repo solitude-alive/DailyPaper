@@ -29,4 +29,4 @@ def update_daily_papers(hl_papers: List[dict], papers: List[dict], date: str) ->
             f.write(f"- **Score**: {paper['score']}/10\n\n")
         f.write("## Other Papers\n")
         for paper in papers:
-            f.write(f"### **[Title: {paper['title']}]({paper['link']})**\n")
+            f.write(f"### **[{paper['title']}]({paper['link']})**\n")
