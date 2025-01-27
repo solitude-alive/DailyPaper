@@ -19,23 +19,23 @@ def main():
         "Diffusion Model",
         "Generative Adversarial Networks",
         "Chain-of-Thought",
-        "Image Generation"
+        "Image Generation",
     ]  # Keywords to filter papers
-    max_results = 150  # Maximum number of papers to fetch
+    max_results = 500  # Maximum number of papers to fetch
     highlight_number = 5  # Number of papers to highlight
 
     date = datetime.datetime.now().strftime("%Y-%m-%d")
 
     print("Fetching papers from Arxiv...")
     raw_feed = fetch_papers(query, max_results)
+    print("Number of papers fetched:", len(raw_feed))
 
     print("Filtering papers based on keywords...")
     filtered_papers = filter_papers(raw_feed, keywords)
-    print("Number of papers fetched:", len(filtered_papers))
-
-    print("Deduplicating papers already stored in the all_papers.md file...")
+    print("Number of related papers fetched:", len(filtered_papers))
 
     # Deduplicate papers based on the title, the latest paper are at the top
+    print("Deduplicating papers already stored in the all_papers.md file...")
     filtered_papers = duplicate_papers(filtered_papers)
     print("Number of papers after deduplication:", len(filtered_papers))
 
@@ -45,6 +45,9 @@ def main():
     if len(filtered_papers) == 0:
         print("No new papers found. Exiting.")
         return
+    elif len(filtered_papers) > 150:
+        print("Too many papers found. Only use the latest 150 papers.")
+        filtered_papers = filtered_papers[:150]
 
     print("Summarizing and scoring papers...")
 

@@ -2,21 +2,19 @@ import os
 import re
 from typing import List
 
-import feedparser
 
-
-def filter_papers(feed: feedparser.FeedParserDict, keywords: list) -> List[dict]:
+def filter_papers(feed: list, keywords: list) -> List[dict]:
     """
     Filters papers based on the provided keywords.
 
     Args:
-        feed (feedparser.FeedParserDict): The list of papers fetched from the Arxiv API.
+        feed (list): The list of papers fetched from the Arxiv API.
         keywords (list): The list of keywords to filter the papers.
     Returns:
         List[dict]: The list of papers that contain the keywords in their titles or abstracts.
     """
     papers = []
-    for entry in feed.get("entries", []):
+    for entry in feed:
         title = entry.get("title", "").strip()
         # clean the title to remove unnecessary whitespace
         title = re.sub(r"\n+", " ", title)
@@ -70,13 +68,19 @@ def select_top_papers(papers: List[dict], n: int = 10) -> List[dict]:
     return top_papers
 
 
-def duplicate_papers(papers: List[dict], base_path: str = "summaries") -> List[dict]:
+def duplicate_papers(
+    papers: List[dict], base_path: str = "summaries", latest_num: int = 100
+) -> List[dict]:
     """
     Deduplicates papers based on the link.
+    Checks if the paper link is already present in the all_papers.md file.
+        To avoid summarizing the same paper multiple times.
+        Load the 100 most recent papers from all_papers.md and compare the links.
 
     Args:
         papers (List[dict]): The list of papers to deduplicate.
         base_path (str): The base path to the summary directory.
+        latest_num (int): The number of latest papers to load from all_papers.md.
     Returns:
         List[dict]: The deduplicated list of papers.
     """
@@ -85,22 +89,25 @@ def duplicate_papers(papers: List[dict], base_path: str = "summaries") -> List[d
     if not os.path.exists(all_papers_file):
         return papers
 
-    # Read the existing papers from the all_papers.md file and extract the latest link
-    latest_link = None
+    # Read the existing papers from the all_papers.md file and extract the 100 most recent links
+    exists_link = []  # descending order
     with open(all_papers_file, "r") as f:
         lines = f.readlines()
-        for line in reversed(lines):
+        for i, line in enumerate(reversed(lines)):
             match = re.search(r"\[.*?\]\((.*?)\)", line)
             if match:
                 latest_link = match.group(1)
+                exists_link.append(latest_link)
+                i = i + 1
+            if i >= latest_num:
                 break
 
     unique_papers = []
 
     for paper in papers:
-        if paper["link"] > latest_link:
+        if paper["link"] not in exists_link:
             unique_papers.append(paper)
         else:
-            break
+            print(f"- Paper already exists: {paper['title']} -")
 
     return unique_papers
