@@ -38,4 +38,5 @@ jobs:
 
       - name: Run Paper Summarizer, commit, push and create PR
         run: |
+          python -m pip install --upgrade pymupdf
           python main.py
