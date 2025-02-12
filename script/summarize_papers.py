@@ -1,6 +1,7 @@
 import os
 
 import re
+import time
 from abc import ABC, abstractmethod
 
 from google import genai
@@ -117,12 +118,28 @@ class GeminiQuery(Query):
             "with an emphasis on providing a **rigorous rationale** for the score assigned."
         )
 
-        response = self.client.models.generate_content(
-            model="gemini-1.5-flash", contents=prompt
-        )
-        summary = response.text
-        score = extract_score(summary)
-        return summary, score
+        try:
+            response = self.client.models.generate_content(
+                model="gemini-1.5-flash", contents=prompt
+            )
+            summary = response.text
+            score = extract_score(summary)
+            return summary, score
+        except Exception as e:
+            print(f"Error occurred while generating content: {e}")
+            print("Trying again ... in 30 seconds")
+            time.sleep(30)
+            try:
+                response = self.client.models.generate_content(
+                    model="gemini-1.5-flash", contents=prompt
+                )
+                summary = response.text
+                score = extract_score(summary)
+                return summary, score
+            except Exception as e:
+                print(f"Error still occurred while generating content: {e}")
+                print("Using OpenAI instead.")
+                return OpenAIQuery()(paper)
 
 
 def summarize_and_score(paper: dict, query: str = "Gemini") -> tuple[str, int]:
@@ -137,11 +154,10 @@ def summarize_and_score(paper: dict, query: str = "Gemini") -> tuple[str, int]:
     Raises:
         ValueError: If an invalid query type is provided.
     """
+    print(f"Summarizing and scoring paper with {query}")
     if query == "OpenAI":
-        print("Using OpenAI Query ...")
         query = OpenAIQuery()
     elif query == "Gemini":
-        print("Using Gemini Query ...")
         query = GeminiQuery()
     else:
         raise ValueError("Invalid query type. Please select 'OpenAI' or 'Gemini'.")
