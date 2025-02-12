@@ -19,7 +19,7 @@ def filter_papers(feed: list, keywords: list) -> List[dict]:
         # clean the title to remove unnecessary whitespace
         title = re.sub(r"\n+", " ", title)
         title = re.sub(r"\s{2,}", " ", title)
-        print(title)
+        # print(title)
         # Clean the abstract to remove unnecessary blank lines
         abstract = entry.get("summary", "").strip()
         abstract = re.sub(

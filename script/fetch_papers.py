@@ -1,6 +1,8 @@
+import os
 import time
 
 import feedparser
+import fitz
 import requests
 
 
@@ -99,3 +101,60 @@ def fetch_papers(
                     ) from e
 
     return all_entries[:max_results]  # Return exactly max_results
+
+
+def fetch_pdf(url: str, max_retries: int = 3, wait_time: int = 15) -> str:
+    """
+    Fetch and extract text from a PDF file hosted on arXiv.
+
+    Args:
+        url (str): The arXiv URL (e.g., "https://arxiv.org/abs/2401.12345").
+        max_retries (int): Number of retry attempts in case of failure. Default is 3.
+        wait_time (int): Initial wait time (in seconds) before retrying. Default is 15s.
+
+    Returns:
+        str: Extracted text from the PDF, or an error message if extraction fails.
+    """
+    # Extract the arXiv ID from the URL
+    try:
+        arxiv_id = url.strip().split("/")[-1]
+        pdf_url = f"https://arxiv.org/pdf/{arxiv_id}.pdf"
+    except IndexError:
+        return "Invalid arXiv URL format."
+
+    save_path = "./tmp.pdf"
+
+    for attempt in range(max_retries):
+        try:
+            print(f"Attempt {attempt + 1}: Downloading {pdf_url} ...")
+            response = requests.get(
+                pdf_url, timeout=15
+            )  # Set a timeout to prevent hanging
+
+            if response.status_code == 200:
+                with open(save_path, "wb") as f:
+                    f.write(response.content)
+                print(f"PDF downloaded successfully: {save_path}")
+                break  # Exit loop on success
+            else:
+                print(
+                    f"Error: HTTP {response.status_code} - Retrying in {wait_time} seconds..."
+                )
+        except requests.RequestException as e:
+            print(f"Request failed: {e} - Retrying in {wait_time} seconds...")
+
+        time.sleep(wait_time)  # Wait before retrying
+    else:
+        return "Failed to download PDF after multiple attempts."
+
+    # Extract text from the PDF
+    try:
+        doc = fitz.open(save_path)
+        text = "\n".join([page.get_text("text") for page in doc])
+
+        # Cleanup: remove the temporary PDF file
+        os.remove(save_path)
+
+        return text if text.strip() else "PDF extracted but contains no readable text."
+    except Exception as e:
+        return f"PDF extraction failed: {e}"
