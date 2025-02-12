@@ -56,8 +56,10 @@ def main():
         paper["summary"] = summary
         paper["score"] = score
         time.sleep(
-            4
-        )  # Sleep for 4 seconds to avoid rate limiting, 15 requests per minute allowed by GitHub Models
+            10
+        )  # Sleep for 4 seconds to avoid rate limiting,
+            # 15 requests per minute allowed by GitHub Models, and Gemini API
+            # 1M tokens per minute allowed by Gemini API
 
     print("Selecting top papers...")
     highlight_papers = select_top_papers(filtered_papers, highlight_number)
