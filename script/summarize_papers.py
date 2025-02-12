@@ -118,17 +118,9 @@ class GeminiQuery(Query):
             "with an emphasis on providing a **rigorous rationale** for the score assigned."
         )
 
-        try:
-            response = self.client.models.generate_content(
-                model="gemini-1.5-flash", contents=prompt
-            )
-            summary = response.text
-            score = extract_score(summary)
-            return summary, score
-        except Exception as e:
-            print(f"Error occurred while generating content: {e}")
-            print("Trying again ... in 30 seconds")
-            time.sleep(30)
+        attempt = 0
+        retries = 3
+        while attempt < retries:
             try:
                 response = self.client.models.generate_content(
                     model="gemini-1.5-flash", contents=prompt
@@ -137,9 +129,14 @@ class GeminiQuery(Query):
                 score = extract_score(summary)
                 return summary, score
             except Exception as e:
-                print(f"Error still occurred while generating content: {e}")
-                print("Using OpenAI instead.")
-                return OpenAIQuery()(paper)
+                print(f"Error occurred while generating content: {e}")
+                print("Trying again ... in 10 seconds")
+                attempt += 1
+                if attempt < retries:
+                    time.sleep(10)
+
+        print("Using OpenAI as a fallback")
+        return OpenAIQuery()(paper)
 
 
 def summarize_and_score(paper: dict, query: str = "Gemini") -> tuple[str, int]:
