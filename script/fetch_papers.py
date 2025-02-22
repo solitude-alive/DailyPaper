@@ -103,6 +103,66 @@ def fetch_papers(
     return all_entries[:max_results]  # Return exactly max_results
 
 
+def download_pdf(
+    url: str, save_path: str = "./tmp.pdf", max_retries: int = 3, wait_time: int = 15
+) -> bool:
+    """
+    Downloads a PDF file from a given URL and saves it to the specified path.
+
+    Args:
+        url (str): The URL of the PDF file to download.
+        save_path (str): The path where the PDF file will be saved.
+        max_retries (int): Number of retry attempts in case of failure. Default is 3.
+        wait_time (int): Initial wait time (in seconds) before retrying. Default is 15s.
+
+    Returns:
+        bool: True if the PDF was downloaded successfully, False otherwise.
+    """
+    # Extract the arXiv ID from the URL
+    try:
+        arxiv_id = url.strip().split("/")[-1]
+        pdf_url = f"https://arxiv.org/pdf/{arxiv_id}.pdf"
+    except IndexError:
+        return False
+
+    for attempt in range(max_retries):
+        try:
+            print(f"Attempt {attempt + 1}: Downloading {pdf_url} ...")
+            response = requests.get(
+                pdf_url, timeout=15
+            )  # Set a timeout to prevent hanging
+
+            if response.status_code == 200:
+                with open(save_path, "wb") as f:
+                    f.write(response.content)
+                print(f"PDF downloaded successfully: {save_path}")
+                return True
+            else:
+                print(
+                    f"Error: HTTP {response.status_code} - Retrying in {wait_time} seconds..."
+                )
+        except requests.RequestException as e:
+            print(f"Request failed: {e} - Retrying in {wait_time} seconds...")
+
+        time.sleep(wait_time)  # Wait before retrying
+    else:
+        return False
+
+
+def remove_pdf(save_path: str = "./tmp.pdf") -> None:
+    """
+    Removes the PDF file at the specified path.
+
+    Args:
+        save_path (str): The path to the PDF file.
+    """
+    try:
+        os.remove(save_path)
+        print(f"PDF file removed: {save_path}")
+    except FileNotFoundError:
+        print(f"PDF file not found: {save_path}")
+
+
 def fetch_pdf(url: str, max_retries: int = 3, wait_time: int = 15) -> str:
     """
     Fetch and extract text from a PDF file hosted on arXiv.
