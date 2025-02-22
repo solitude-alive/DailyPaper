@@ -1,4 +1,5 @@
 import os
+import pathlib
 
 import re
 import time
@@ -8,7 +9,7 @@ from google import genai
 
 from openai import OpenAI
 
-from script.fetch_papers import fetch_pdf
+from script.fetch_papers import download_pdf, remove_pdf
 
 
 def extract_score(response_content: str):
@@ -102,11 +103,9 @@ class GeminiQuery(Query):
         self.client = genai.Client(api_key=os.environ["GOOGLE_TOKEN"])
 
     def __call__(self, paper: dict):
-        paper_html = fetch_pdf(paper["link"])
+        paper_pdf = download_pdf(paper["link"])
         prompt = (
-            f"Please provide a concise summary of the following paper:\n\n"
-            f"Title: {paper['title']}\n"
-            f"HTML format: {paper_html}\n\n"
+            "Please provide a concise summary of the paper.\n"
             "Additionally, conduct a **rigorous and critical evaluation** of the paper's "
             "novelty and significance within the field. "
             "Assign a score between 1 and 10, where 1 indicates a paper with negligible novelty or impact, "
@@ -122,11 +121,27 @@ class GeminiQuery(Query):
         retries = 3
         while attempt < retries:
             try:
-                response = self.client.models.generate_content(
-                    model="gemini-1.5-flash", contents=prompt
-                )
-                summary = response.text
-                score = extract_score(summary)
+                if paper_pdf:
+                    file_path = pathlib.Path("./tmp.pdf")
+                    # Upload the PDF using the File API
+                    sample_file = self.client.files.upload(
+                        file=file_path,
+                    )
+                    response = self.client.models.generate_content(
+                        model="gemini-1.5-flash", contents=[sample_file, prompt]
+                    )
+                    summary = response.text
+                    score = extract_score(summary)
+                    remove_pdf("./tmp.pdf")
+                else:
+                    print("Failed to download the PDF. Using the abstract instead.")
+                    paper_abstract = paper["abstract"]
+                    prompt = f"{paper_abstract}\n{prompt}"
+                    response = self.client.models.generate_content(
+                        model="gemini-1.5-flash", contents=prompt
+                    )
+                    summary = response.text
+                    score = extract_score(summary)
                 return summary, score
             except Exception as e:
                 print(f"Error occurred while generating content: {e}")
