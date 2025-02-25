@@ -1,16 +1,7 @@
 import os
 from typing import List
 
-
-def create_directory(path: str) -> None:
-    """
-    Creates a directory if it does not exist.
-
-    Args:
-        path (str): The directory path to create.
-    """
-    if not os.path.exists(path):
-        os.makedirs(path)
+from script.utils import create_directory
 
 
 def generate_markdown_for_day(

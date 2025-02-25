@@ -1,5 +1,10 @@
+import asyncio
 import os
 import time
+
+import aiofiles
+
+import aiohttp
 
 import feedparser
 import fitz
@@ -103,50 +108,58 @@ def fetch_papers(
     return all_entries[:max_results]  # Return exactly max_results
 
 
-def download_pdf(
-    url: str, save_path: str = "./tmp.pdf", max_retries: int = 3, wait_time: int = 15
-) -> bool:
+async def download_pdf(
+    url: str, save_dir: str = "papers", max_retries: int = 3, wait_time: int = 15
+) -> str:
     """
-    Downloads a PDF file from a given URL and saves it to the specified path.
+    Asynchronously downloads a PDF file from a given URL and saves it to the specified path.
 
     Args:
         url (str): The URL of the PDF file to download.
-        save_path (str): The path where the PDF file will be saved.
+        save_dir (str): The path where the PDF file will be saved.
         max_retries (int): Number of retry attempts in case of failure. Default is 3.
         wait_time (int): Initial wait time (in seconds) before retrying. Default is 15s.
 
     Returns:
-        bool: True if the PDF was downloaded successfully, False otherwise.
+        str: return the path if the PDF was downloaded successfully, otherwise an empty string.
     """
-    # Extract the arXiv ID from the URL
     try:
         arxiv_id = url.strip().split("/")[-1]
         pdf_url = f"https://arxiv.org/pdf/{arxiv_id}.pdf"
     except IndexError:
-        return False
+        return ""
 
     for attempt in range(max_retries):
         try:
+            save_path = os.path.join(save_dir, f"{arxiv_id}.pdf")
             print(f"Attempt {attempt + 1}: Downloading {pdf_url} ...")
-            response = requests.get(
-                pdf_url, timeout=15
-            )  # Set a timeout to prevent hanging
+            timeout = aiohttp.ClientTimeout(
+                total=600
+            )  # Increase timeout to 600 seconds
+            async with aiohttp.ClientSession(timeout=timeout) as session:
+                async with session.get(pdf_url, allow_redirects=True) as response:
+                    if response.status == 200:
+                        # Stream the content to file instead of loading everything into memory
+                        async with aiofiles.open(save_path, "wb") as f:
+                            # Process the download in smaller chunks to avoid timeout
+                            chunk_size = 1024 * 1024  # 1MB chunks
+                            async for chunk in response.content.iter_chunked(
+                                chunk_size
+                            ):
+                                await f.write(chunk)
 
-            if response.status_code == 200:
-                with open(save_path, "wb") as f:
-                    f.write(response.content)
-                print(f"PDF downloaded successfully: {save_path}")
-                return True
-            else:
-                print(
-                    f"Error: HTTP {response.status_code} - Retrying in {wait_time} seconds..."
-                )
-        except requests.RequestException as e:
+                        print(f"PDF downloaded successfully: {save_path}")
+                        return save_path
+                    else:
+                        print(
+                            f"Error: HTTP {response.status} - Retrying in {wait_time} seconds..."
+                        )
+        except aiohttp.ClientError as e:
             print(f"Request failed: {e} - Retrying in {wait_time} seconds...")
 
-        time.sleep(wait_time)  # Wait before retrying
-    else:
-        return False
+        await asyncio.sleep(wait_time)  # Async sleep before retrying
+
+    return ""
 
 
 def remove_pdf(save_path: str = "./tmp.pdf") -> None:

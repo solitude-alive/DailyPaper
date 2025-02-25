@@ -1,11 +1,11 @@
+import asyncio
 import datetime
-import time
 
 from script.fetch_papers import fetch_papers
 from script.filter_papers import duplicate_papers, filter_papers, select_top_papers
 from script.generate_markdown import generate_markdown_for_day, update_all_papers
 from script.git_operations import create_pull_request, git_commit_and_push
-from script.summarize_papers import summarize_and_score
+from script.process_papers import process_papers
 from script.update_daily import update_daily_papers
 
 
@@ -51,13 +51,7 @@ def main():
 
     print("Summarizing and scoring papers...")
 
-    for paper in filtered_papers:
-        summary, score = summarize_and_score(paper)
-        paper["summary"] = summary
-        paper["score"] = score
-        time.sleep(4)  # Sleep for 4 seconds to avoid rate limiting,
-        # 15 requests per minute allowed by GitHub Models, and Gemini API
-        # 1M tokens per minute allowed by Gemini API
+    asyncio.run(process_papers(filtered_papers))
 
     print("Selecting top papers...")
     highlight_papers = select_top_papers(filtered_papers, highlight_number)
