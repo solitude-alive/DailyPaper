@@ -3,3 +3,5 @@ openai
 feedparser
 google-genai
 fitz
+aiofiles
+aiohttp
