@@ -1,375 +1,328 @@
-# The Latest Daily Papers - Date: 2025-02-27
+# The Latest Daily Papers - Date: 2025-02-28
 ## Highlight Papers
-### **[KiRAG: Knowledge-Driven Iterative Retriever for Enhancing Retrieval-Augmented Generation](http://arxiv.org/abs/2502.18397v1)**
-- **Summary**: Here's a concise summary and critical evaluation of the paper "KiRAG: Knowledge-Driven Iterative Retriever for Enhancing Retrieval-Augmented Generation":
-
-**Summary:**
-
-The paper introduces KiRAG, a novel iterative retrieval-augmented generation (iRAG) model designed to improve performance on multi-hop question answering (QA). KiRAG addresses two key challenges in existing iRAG models: susceptibility to irrelevant/inaccurate information and the inability to dynamically adapt to evolving information needs during multi-step reasoning. KiRAG overcomes these limitations by (1) decomposing documents into knowledge triples for more factually reliable retrieval and (2) employing a knowledge-driven iterative retrieval framework that dynamically identifies and retrieves information bridging existing knowledge gaps, creating a reasoning chain. Experiments on several multi-hop QA datasets demonstrate significant improvements in retrieval and QA performance compared to existing iRAG models.
-
-**Critical Evaluation:**
-
-**Strengths:**
-
-*   **Addresses a well-defined problem:** Multi-hop QA is a challenging task for traditional RAG models, and the paper clearly articulates the limitations of existing iRAG approaches in this domain.
-*   **Novel approach:**  The use of knowledge triples for iterative retrieval is a sensible and practical approach to enhance factual accuracy and focus the retrieval process.  The knowledge-driven iterative retrieval, dynamically adapting to evolving information needs, is a significant contribution. Building and refining a chain-of-thought through retrieved knowledge triples ensures context preservation during retrieval.
-*   **Strong experimental results:** The paper provides comprehensive experimental results on several benchmarks, consistently demonstrating superior retrieval and QA performance compared to a range of competitive baselines, including other iterative RAG models and enhanced retrieval methods.  The ablation studies effectively isolate the contributions of each component of KiRAG.
-*   **Rigorous analysis:** The paper includes detailed analysis of the model's behavior, including examination of retrieval performance at different reasoning steps and case studies illustrating the model's reasoning process. Further ablations quantify and analyze important design aspects such as K (number of retrieved documents) and N (candidate triples) during the chain construction, as well as comparisons among different LLMs as the constructor or reader.
-*   **Generalizability:** The experiments demonstrating effective performance across datasets not used for training show good potential for generalization. The implementation is publicly accessible.
-*  **Clear and well-organized:** The paper is well-written and easy to understand, clearly explaining the proposed approach and the experimental setup.
-
-**Weaknesses:**
-
-*   **Reliance on pre-computed knowledge triples:**  While pre-computing triples improves efficiency, it introduces an extra step in the pipeline and might not scale well to extremely large corpora. A fully end-to-end approach that dynamically extracts triples could be explored. However, its efficiency will come into question.
-*   **Silver data creation:** The Reasoning Chain Aligner requires training. However, the data is only weakly labeled, so it may suffer in the ability to generalize. However, the experiments still present improvements, indicating good performance.
-*   **Evaluation metric limitations:** While the paper uses standard QA metrics (EM and F1), these metrics don't fully capture the nuances of multi-hop reasoning. A more fine-grained analysis of the reasoning process, perhaps through human evaluation, could provide further insights. It would be worthwhile to analyze the failure cases, and how they can be improved.
-*   **Marginal Novelty:** The idea of using Knowledge Graphs/Triples to improve QA is not entirely new. However, the iterative construction of a reasoning chain from these triples during retrieval is novel, as it effectively balances knowledge grounding and iterative reasoning, showing high impact within the LLM and QA community.
-
-**Significance:**
-
-KiRAG represents a significant advancement in iRAG models for multi-hop QA. By leveraging knowledge triples and dynamically adapting the retrieval process, it achieves superior performance and addresses key limitations of existing approaches. The paper is likely to have a strong influence on future research in this area. The use of document-grounded knowledge to improve the reasoning ability of LLMs during retrieval is a promising avenue for further research.
-
-**Justification for Score:**
-
-Considering the strengths and weaknesses, I give this paper a **Score: 8**.
-
-The paper presents a well-executed solution to a clearly defined problem within the RAG space. The technical approach is novel and the experimental results are convincing. While the reliance on pre-computed triples and the reliance on existing LLMs as a constructor represents a potential limitation, the overall contribution is significant enough to warrant a high score. It represents a considerable refinement and improvement over existing iterative retrieval methods, and is likely to guide future work on incorporating knowledge graphs/triples within LLM applications.
-
-- **Score**: 8/10
-
-### **[Deep-Bench: Deep Learning Benchmark Dataset for Code Generation](http://arxiv.org/abs/2502.18726v1)**
-- **Summary**: Here's a concise summary and a critical evaluation of the "Deep-Bench: Deep Learning Benchmark Dataset for Code Generation" paper:
-
-**Summary:**
-
-The paper introduces Deep-Bench, a new benchmark dataset for evaluating the performance of Large Language Models (LLMs) in generating Deep Learning (DL) code. Deep-Bench is designed to address the limitations of existing benchmarks like DS-1000, which primarily focus on small code snippets for pre/post-processing tasks. Deep-Bench provides a more comprehensive dataset covering the entire DL pipeline, including pre-processing, model construction, training, inference, and evaluation. It also categorizes DL problems based on phases, ML tasks (classification, regression, etc.), and input data types (tabular, image, text). The paper presents an initial evaluation of several state-of-the-art LLMs on Deep-Bench, revealing their challenges in generating accurate and executable DL code compared to more general code generation tasks. The authors also conduct a qualitative analysis of the types of bugs found in LLM-generated DL code.
-
-**Critical Evaluation:**
-
-**Novelty:** The paper's primary novelty lies in the creation of the Deep-Bench dataset itself. While other code generation benchmarks exist, Deep-Bench is specifically tailored to DL code generation and provides a more holistic view of the DL development lifecycle. The categorization of DL problems based on phases, tasks, and input data types is also a valuable contribution, allowing for a more granular analysis of LLM performance.
-
-**Significance:** The significance of Deep-Bench stems from its potential to drive research and development in DL code generation. By providing a more challenging and comprehensive benchmark, it can help researchers identify the strengths and weaknesses of existing LLMs and develop new techniques for improving their ability to generate accurate and reliable DL code. The bug taxonomy also offers insights into the specific challenges that LLMs face in generating DL code compared to general-purpose code.
-
-**Strengths:**
-
-*   **Comprehensive coverage:** Deep-Bench covers a wide range of DL phases, tasks, and input data types, making it a more representative benchmark than existing datasets.
-*   **Categorization:** The categorization of DL problems allows for a more detailed analysis of LLM performance and identification of specific areas for improvement.
-*   **Bug taxonomy:** The bug taxonomy provides insights into the types of errors that LLMs make when generating DL code.
-*   **Evaluation of SOTA LLMs:** The initial evaluation of several state-of-the-art LLMs on Deep-Bench provides a baseline for future research.
-*   **Availability of data and resources:** The dataset and docker images available from this paper greatly increases the reproducibility and wide spread adoption of this work.
-
-**Weaknesses:**
-
-*   **Dataset size:** While Deep-Bench is more comprehensive than DS-1000, its size (520 instances) might be considered relatively small compared to some other code generation benchmarks. This could limit the statistical power of certain analyses.
-*   **Data Selection & Bias:** The selection of code snippets solely from starred GitHub repos may introduce a bias towards specific libraries, coding styles, or problem types.
-*   **Evaluation Metric:** While pass@k is a common metric, it primarily indicates executability, it may not capture code quality in its entirety (readability, efficiency).
-*   **Prompt Engineering:** The intentional avoidance of advanced prompting may limit what is being measured to the general knowledge of the LLMs, without giving an indication of best possible performance for specific tasks.
-
-**Influence:**
-
-Deep-Bench has the potential to become a widely used benchmark for DL code generation, similar to how DS-1000 is used for general data science code generation. It can help accelerate research in this area by providing a standardized platform for evaluating and comparing different approaches. The bug taxonomy can also inform the development of new techniques for improving the accuracy and reliability of LLM-generated DL code. Over time, it could also incentivize the creation of better training datasets for LLMs focused on DL.
-
-**Justification for Score:**
-
-Deep-Bench is a valuable contribution to the field of DL code generation. The comprehensive coverage of the DL pipeline, the categorization of DL problems, and the bug taxonomy are all significant strengths. It will provide guidance on what prompts and general approaches are more accurate, and will help improve LLM code generation models for years to come. While the dataset size and GitHub repo data source might have certain limitations and biases, the benefits of Deep-Bench outweigh these drawbacks. It helps the DL LLM code generation community a much needed benchmark, moving the community forward, with reproducible data points. Overall, Deep-Bench represents a substantial step forward and is well worth the effort by the authors.
-
-Score: 8
-
-- **Score**: 8/10
-
-### **[Learning to Generate Structured Output with Schema Reinforcement Learning](http://arxiv.org/abs/2502.18878v1)**
-- **Summary**: Here's a concise summary and a critical evaluation of the provided paper:
-
-**Summary:**
-
-The paper introduces SchemaBench, a benchmark for evaluating large language models' (LLMs) ability to generate valid JSON outputs according to given schemas.  It identifies challenges in structure understanding, escaping, and following natural language descriptions within schemas. The paper proposes Schema Reinforcement Learning (SRL), a training method incorporating a fine-grained schema validator and "Thoughts of Structure" (ToS) to improve JSON generation. The authors demonstrate that SRL enhances model performance on both JSON generation and downstream tasks (BFCL), exceeding supervised fine-tuning baselines.
-
-**Critical Evaluation:**
-
-The paper addresses a relevant and important problem: enabling LLMs to reliably generate structured outputs, particularly JSON. While JSON is widely used, existing methods and benchmarks have limitations in dealing with complex schemas and nuanced constraints.
-
-**Novelty:**
-
-*   **Benchmark (SchemaBench):** The creation of a dataset of approximately 40,000 JSON schemas is a significant contribution. The paper presents a detailed description of the data collection and cleaning pipeline. This benchmark has the potential to serve as a valuable resource for the community, enabling more rigorous evaluation of LLMs' structured output generation capabilities.
-*   **Schema Reinforcement Learning (SRL):** The use of reinforcement learning with a fine-grained schema validator is a novel approach. The idea of incorporating RL to address the sensitivity of JSON formatting and optimize for nuanced correctness is well-reasoned.  The combination of SRL with Thoughts of Structure (ToS) is a further innovation.
-*   **Thoughts of Structure (ToS):** While inspired by Chain-of-Thought prompting, ToS adapts the reasoning process specifically to the generation of JSON structures. Training the model to explicitly outline the reasoning steps before producing JSON could improve its ability to handle complex schemas and dependencies.
-
-**Significance:**
-
-*   **Improved JSON Generation:** The experimental results demonstrate significant improvements in JSON generation accuracy using SRL, particularly when compared to supervised fine-tuning. The gains on complex schemas are especially noteworthy.
-*   **Downstream Task Performance:** The positive results on BFCL indicate that the improvements in JSON generation translate to tangible benefits in downstream applications. This is a crucial finding, showing that the research is not simply optimizing for a specific metric but rather improving the usability of LLMs in real-world scenarios.
-*   **Practical Implications:** Reliable JSON generation is essential for integrating LLMs with existing systems and APIs. By improving this capability, the paper makes LLMs more versatile and useful in a wider range of applications.
-
-**Weaknesses:**
-
-*   **Limited Analysis of ToS:** While ToS is presented as a key component, the paper could benefit from a more in-depth analysis of its effectiveness. Are there specific types of schemas or tasks where ToS is most beneficial?
-*   **Benchmark Diversity:** While the 40K schema dataset is substantial, further information on the distribution of schema types and complexities could be provided. Are certain types of schemas over- or under-represented?
-*   **Generalization:** While the paper shows improvements on BFCL, additional experiments on other downstream tasks would strengthen the claims about generalization.
-
-**Justification:**
-
-The paper is well-motivated, presents a clearly defined problem, and proposes a novel solution. The benchmark, SRL framework, and ToS component represent valuable contributions to the field. While some areas could benefit from further analysis, the paper demonstrates a significant advancement in enabling LLMs to generate valid and useful JSON outputs. The significant performance gains and the potential impact on downstream tasks justify a relatively high score.
-
-**Score: 8**
-
-- **Score**: 8/10
-
-### **[GenTool: Enhancing Tool Generalization in Language Models through Zero-to-One and Weak-to-Strong Simulation](http://arxiv.org/abs/2502.18990v1)**
-- **Summary**: Here's a summary and critical evaluation of the paper "GenTool: Enhancing Tool Generalization in Language Models through Zero-to-One and Weak-to-Strong Simulation":
-
-**Summary:**
-
-The paper introduces GenTool, a novel training framework designed to improve the tool utilization capabilities of Large Language Models (LLMs), specifically focusing on generalization. GenTool tackles two key generalization challenges: zero-to-one generalization (adopting a tool when none were initially available) and weak-to-strong generalization (transitioning from a less effective to a more capable tool). The approach involves creating synthetic training data simulating these scenarios and using a two-stage fine-tuning process that first optimizes tool ranking and then refines tool selection. Experiments across various models (1B to 8B parameters) demonstrate significant improvements in tool-usage accuracy, surpassing even GPT-4o performance in certain aspects.  The paper also includes ablation studies and empirical analyses exploring factors that influence tool generalization.
-
-**Critical Evaluation:**
-
-**Novelty:**  The paper demonstrates several novel aspects:
-
-*   **Structured Generalization Dimensions:**  The explicit framing of tool generalization as encompassing "zero-to-one" and "weak-to-strong" challenges provides a clear conceptual framework. This is more structured than simply aiming for general "tool usage improvement."
-*   **Synthetic Data Generation Pipeline:**  The development of a high-quality synthetic dataset specifically designed to address these generalization dimensions is a significant contribution. The process of generating "weak tools" and creating queries that differentiate their capabilities from "strong tools" is well-motivated and executed.  The design of the data generation process using a powerful LLM (GPT-4o) combined with human verification adds to the quality of the dataset.
-*   **Two-Stage Fine-Tuning:**  The fine-tuning strategy prioritizing tool ranking before selection is a worthwhile innovation. It allows the model to learn functional relationships and comparisons between tools rather than simply mapping queries to tools.
-
-**Significance:**
-
-*   **Addressing a Real-World Problem:** The paper directly addresses a critical limitation of LLMs in real-world applications, where the availability and capabilities of tools can change dynamically. Generalization to unseen tools and usage patterns is crucial for robust performance.
-*   **Empirical Validation:** The comprehensive experiments across multiple models and generalization scenarios provide strong evidence of GenTool's effectiveness.  The comparisons with strong baselines, including GPT-4o, are compelling.
-*   **In-depth Analysis:** The ablation studies and empirical analyses offer valuable insights into the factors affecting tool generalization. The investigation of the impact of related examples quantity and the contributions of different pair types (Zero-to-One vs Weak-to-Strong) deepen our understanding of these challenges.
-*   **Limitations Acknowledged:** The paper acknowledges the limitations regarding model scale and the focus on single-query, single-tool scenarios. Acknowledging such limitations enhances the credibility of the research.
-
-**Weaknesses:**
-
-*   **Dependence on Synthetic Data:** While the synthetic data generation is a strength, it also represents a potential weakness. The effectiveness of GenTool is tied to the quality and representativeness of the synthetic data. Potential biases introduced by GPT-4o, despite the human verification stage, should be considered. It's not guaranteed this framework will transfer well to datasets outside of a simulated setting, and it would have been stronger if experiments were run on more diverse sources of data.
-*   **Limited Model Scale Explored:** While experiments cover a range of models, exploring larger models (beyond 8B parameters) would further strengthen the results, especially given the data generation process relies on GPT-4o.
-
-**Potential Influence:**
-
-GenTool has the potential to significantly influence the development of more robust and adaptable LLM-based AI assistants. The framework and insights provided by this research can guide future efforts in tool learning and generalization, ultimately leading to more reliable and versatile AI systems.
-
-The structured approach to both training and evaluation, along with the release of a high-quality synthetic dataset (presumably), makes this work reproducible and valuable to the research community.
-
-Considering the novelty and impact, while acknowledging the limitations, I believe the paper deserves a strong score.
-
-Score: 8
-Rationale:
-This paper has strong potential to meaningfully advance tool usage with LLMs through its targeted approach and data generation techniques. However, its dependence on high-quality synthetic data, and unproven transferability prevent it from achieving a higher score. The findings are particularly compelling due to clear improvements over SOTA models such as GPT-4o, and the paper provides valuable practical insight to improve tool generalization capabilities.
-
-- **Score**: 8/10
-
-### **[BIG-Bench Extra Hard](http://arxiv.org/abs/2502.19187v1)**
+### **[Distill Not Only Data but Also Rewards: Can Smaller Language Models Surpass Larger Ones?](http://arxiv.org/abs/2502.19557v1)**
 - **Summary**: Here's a summary and critical evaluation of the provided paper:
 
 **Summary:**
 
-The paper introduces BIG-Bench Extra Hard (BBEH), a new benchmark designed to evaluate the reasoning capabilities of Large Language Models (LLMs). BBEH addresses the saturation of existing benchmarks, particularly BIG-Bench Hard (BBH), where state-of-the-art models achieve near-perfect scores. BBEH replaces each task in BBH with a novel, more difficult counterpart probing similar reasoning skills but requiring more complex reasoning abilities such as multi-hop reasoning, learning on the fly, error detection in reasoning traces, long-context processing, and going against strong priors. The authors evaluate several LLMs on BBEH and find that even the best models achieve significantly lower accuracy than on BBH, demonstrating the increased difficulty. The paper also includes a failure analysis, highlighting areas where LLMs struggle. The BBEH dataset is publicly released.
+The paper introduces a novel knowledge distillation pipeline for large language models (LLMs) that goes beyond traditional supervised fine-tuning (SFT) by also distilling reward signals. Recognizing the limitations of directly eliciting reliable reward signals from teacher LLMs (due to biases and inconsistencies), the method proposes a self-supervised approach for generating "pseudo-rewards." This involves leveraging the inherent structure of both teacher and student model responses. A reward model is trained on these pseudo-rewards, guiding reinforcement learning (RL) to further refine the student model after an initial SFT warm-up. Experiments on GSM8K and MMLU-PRO demonstrate that this approach consistently outperforms SFT-based methods, enabling student models to even surpass their teachers' performance.  The key innovation lies in the self-supervised reward learning aspect, reducing reliance on external or unreliable teacher feedback.
 
 **Critical Evaluation:**
 
-The paper makes a valuable contribution to the field of LLM evaluation. The saturation of existing benchmarks is a well-recognized problem, hindering progress and making it difficult to meaningfully compare models. BBEH effectively addresses this by creating a more challenging benchmark that pushes the boundaries of LLM reasoning.
+**Novelty:** The paper demonstrates a clear and valuable step beyond standard knowledge distillation techniques. While SFT is widely used, the authors correctly identify its limitations in fully exploiting the potential of teacher LLMs, specifically their ability to implicitly convey response quality. Introducing a self-supervised reward learning mechanism is the core novelty. The use of pseudo-rewards generated by analyzing the structure of both teacher and student responses is an innovative way to circumvent the need for explicit, often biased, teacher evaluations. It's a clever adaptation of self-supervision principles to the context of LLM distillation.
+
+**Significance:** The potential impact of this work is considerable.  Scalable and efficient distillation is crucial for democratizing access to powerful language models by allowing smaller models to achieve comparable or superior performance. The paper's ability to enable smaller student models to outperform their larger teachers is significant.  The reduction in dependence on external reward supervision addresses a significant bottleneck in current RLHF and RLAIF workflows, making it potentially more scalable. The experimental results provide strong empirical evidence for the effectiveness of the proposed method across different datasets (GSM8K and MMLU-PRO) and using various model sizes.
 
 **Strengths:**
 
-*   **Addresses a Critical Need:** The paper directly tackles the problem of benchmark saturation, which is crucial for continued progress in LLM research.
-*   **Well-Designed Benchmark:** BBEH is carefully constructed, maintaining the diversity of reasoning skills present in BBH while significantly increasing the difficulty. The specific reasoning skills targeted (multi-hop reasoning, long-context, etc.) are relevant and important for real-world applications.
-*   **Semi-Adversarial Approach:** The use of a semi-adversarial approach to create the benchmark by iterating on difficulty while evaluating against strong reference models is a sound methodology.
-*   **Comprehensive Evaluation:** The paper provides a thorough evaluation of several state-of-the-art LLMs on BBEH, demonstrating its difficulty.
-*   **Failure Analysis:** The inclusion of a failure analysis provides valuable insights into the limitations of current LLMs and guides future research directions.
-*   **Publicly Released Dataset:** The public release of BBEH makes it accessible to the research community, fostering further investigation and development.
+*   **Clear Problem Definition:** The paper accurately identifies the limitations of SFT-based distillation and the challenges in extracting reliable rewards directly from teacher LLMs.
+*   **Innovative Approach:** The self-supervised reward learning mechanism is a well-motivated and cleverly designed solution. The focus on structured relationships is key.
+*   **Strong Empirical Results:** The experiments are well-designed and the results provide strong evidence supporting the effectiveness of the method. Demonstrating that student models can surpass their teachers is particularly compelling.
+*   **Detailed Ablation Studies:** The ablation studies rigorously examine the contribution of each component of the proposed pipeline, further solidifying the claims. The careful analysis of the teacher's evaluation ability is also helpful.
+*   **Well-Written and Organized:** The paper is easy to follow, with a clear explanation of the methodology and experimental setup.
 
 **Weaknesses:**
 
-*   **Reference Model Bias:**  The semi-adversarial approach is a double-edged sword. While effective in creating a difficult benchmark, it introduces a potential bias toward the failure modes of the reference models used during construction.  Other types of reasoning biases that may be common to other model types would be missed. The authors acknowledge this limitation, but it is important to keep in mind when interpreting the results.
-*   **Limited Ground Truth Verification?** The paper mentions verification of correctness but doesn't specify the degree to which humans were used to independently verify ground truth answers to the new challenging tasks. It relies somewhat on automated metrics. This is not a major weakness, but stronger human validation would bolster the dataset's reliability.
-*   **Proxy Metrics for "Thinking":** While the use of output length as a proxy for the amount of "thinking" required is a reasonable heuristic, it is an indirect measure and might not always be accurate. More direct measures of reasoning complexity (e.g., step count in a formal logic system) would be valuable in future work.
+*   **Limited Scope of Tasks:** While GSM8K and MMLU-PRO are valuable benchmarks, they may not fully represent the broad spectrum of LLM capabilities. Evaluating on a wider range of tasks, including generation, summarization, or dialogue, would further strengthen the claims.
+*   **Computational Cost Analysis:** Although the paper argues for efficiency, a more explicit analysis of the computational cost of the proposed method compared to traditional SFT is needed. This should include training time and resource requirements for the reward model.
+*   **Explainability of Reward Model:** While the performance of the reward model is evaluated, the paper lacks insights into *what* the reward model is actually learning.  Analyzing the features it relies on for assigning rewards could provide valuable insights and help ensure that the rewards align with desired outcomes.
+*   **Bias Considerations:** Self-supervised learning can still propagate biases present in the teacher model.  While the paper addresses the bias in *eliciting* rewards directly, it doesn't deeply investigate potential biases *learned* by the reward model.
+*   **Hyperparameter Sensitivity:** Given the complexity of the pipeline (SFT, reward model training, RL), it is possible that the performance is highly sensitive to hyperparameter tuning.  More discussion about the sensitivity of the method and the robustness of the chosen hyperparameter settings would be useful.
 
-**Novelty and Significance:**
+**Overall:** The paper presents a significant and novel contribution to knowledge distillation for LLMs. The self-supervised reward learning approach effectively addresses the limitations of SFT and reduces reliance on potentially unreliable teacher evaluations. While there are some limitations in the scope of tasks and potential biases, the strong empirical results and detailed ablation studies make a compelling case for the effectiveness and potential impact of the method.
 
-The creation of BBEH is a novel and significant contribution. While other benchmarks exist, BBEH's specific focus on pushing the limits of general reasoning while maintaining diversity and avoiding simple mathematical or coding tasks sets it apart. The paper directly enables researchers to better understand the reasoning limitations of LLMs beyond the abilities captured in current popular benchmarks. The impact of this paper is highly likely to increase as more advanced reasoning benchmarks are released following this paper. The analysis and identified failure modes are also useful contributions.
+**Score: 8**
 
-**Justification for Score:**
+**Rationale:**
 
-Considering the strengths and weaknesses, I assign a score of **8**. BBEH is a significant advance in LLM evaluation, addressing a critical need and providing a valuable resource for the research community. The limitations regarding reference model bias and proxy metrics, while present, do not significantly diminish the overall impact of the paper. BBEH has the potential to shape the future direction of LLM research by driving the development of more robust and general reasoning capabilities.
+A score of 8 is justified due to the paper's clear novelty and potential significance within the field of LLM distillation. The paper demonstrates a strong understanding of the problems with previous reward methods and offers a novel solution that reduces its reliance on human expertise. The strong results across the datasets used support the claims made and overall contribute to the idea of more efficient LLMs. However, the limitations in the evaluation scope and potential biases and lack of explainability prevent the paper from receiving a higher score. Further investigation into these areas would make this a 9 or 10.
+
+- **Score**: 8/10
+
+### **[Preference Learning Unlocks LLMs' Psycho-Counseling Skills](http://arxiv.org/abs/2502.19731v1)**
+- **Summary**: Here's a summary and critical evaluation of the paper:
+
+**Summary:**
+
+The paper introduces a novel approach to enhance the psycho-counseling skills of Large Language Models (LLMs).  Recognizing the limitations of existing LLMs due to the scarcity of high-quality, privacy-protected psycho-counseling data and the variability in therapists' response quality, the authors propose a set of professional principles to evaluate therapist responses. They leverage these principles to create a preference dataset, *PsychoCounsel-Preference*, containing 36,000 high-quality comparison pairs. This dataset is then used to train reward models and fine-tune LLMs using both offline and online preference learning techniques. The resulting model, *PsychoCounsel-Llama3-8B*, demonstrates impressive performance, achieving a high win rate against GPT-4 in evaluations judged by professional psychologists. The authors release the dataset, the fine-tuned model, and the reward model to facilitate further research.
+
+**Critical Evaluation:**
+
+*   **Novelty:** The paper demonstrates significant novelty. While applying LLMs to mental health is not entirely new, the specific approach of creating a high-quality *preference* dataset grounded in *professional psycho-counseling principles* is a valuable contribution. The effort put into defining these principles in collaboration with social work and psychiatry professors, and then ensuring dataset reliability through expert annotation, differentiates this work. Prior work relied on more generic data or less rigorously defined evaluation criteria. The iterative online preference learning also adds novelty.
+
+*   **Significance:** The paper's significance stems from several factors:
+
+    *   **Addressing a Real-World Problem:** It tackles the important and timely challenge of increasing access to mental health support through AI.
+    *   **Data Contribution:** The *PsychoCounsel-Preference* dataset is a valuable resource for the community. The scarcity of such data, due to privacy concerns, makes this a particularly important contribution.
+    *   **Performance Improvement:** The reported win rate against GPT-4 (87%) is compelling, suggesting that the proposed approach is effective in improving the quality of LLM-generated responses in a psycho-counseling context. This is a significant step towards building more reliable and helpful AI assistants.
+    *   **Focus on Ethical Considerations:** The paper includes a detailed ethics statement, addressing potential risks and responsible use of the technology, a crucial aspect in this sensitive domain.
+
+*   **Strengths:**
+
+    *   **Rigorous Methodology:** The paper employs a well-defined methodology, including the development of professional principles, expert annotation, and robust evaluation.
+    *   **Dataset Quality:** The emphasis on high-quality, preference-based data is a key strength.
+    *   **Strong Results:** The reported performance is impressive and well-supported by the experiments.
+    *   **Open Source Release:** The public release of the dataset and models promotes reproducibility and further research.
+    *   **Clear Problem Formulation:** The paper clearly articulates the challenges and limitations of existing approaches.
+
+*   **Weaknesses:**
+
+    *   **Limited Scope of Evaluation:** While the win rate against GPT-4 is high, more detailed analysis of the specific strengths and weaknesses of the model's responses would be valuable. A deeper exploration of failure cases and edge cases would add further credibility.
+    *   **Dependency on GPT-4 for Annotation:** While GPT-4 is used for annotation of responses which are then used in the generation of the preference dataset, its inherent biases or limitations could influence the created data and thus the final model. Though the authors attempt to mitigate this by involving human experts for verification this remains a limitation.
+    *   **Potential for Overfitting to the Dataset:** There's a risk that the model may be overfitting to the characteristics of the *PsychoCounsel-Preference* dataset, limiting its generalization to unseen situations or different client demographics.
+    *   **Emphasis on Short-Term Support:** The paper specifically focuses on psycho-counseling, which is a short-term supportive process. It is yet to be tested in longer, more complex therapeutic settings.
+
+*   **Potential Influence:** The paper has the potential to significantly influence the field by:
+
+    *   **Setting a New Standard for LLMs in Mental Health:** By demonstrating the importance of high-quality preference data and professional principles, it sets a higher bar for future research.
+    *   **Inspiring Further Research:** The release of the dataset and models will enable other researchers to build upon this work and explore new approaches.
+    *   **Promoting Ethical Development:** The emphasis on ethical considerations will contribute to the responsible development of AI in mental health.
+
+**Justification of Score:**
+
+Considering the strengths and weaknesses discussed above, the paper represents a valuable and significant contribution to the field. It successfully addresses a key challenge, provides a novel solution, and demonstrates compelling results. While some limitations exist, such as potential overfitting and limited evaluation scope, the paper's overall impact is substantial. The approach is innovative, the resource contribution is meaningful, and the ethical considerations are well addressed.
 
 Score: 8
 
 - **Score**: 8/10
 
-### **[Two Heads Are Better Than One: Dual-Model Verbal Reflection at Inference-Time](http://arxiv.org/abs/2502.19230v1)**
-- **Summary**: Okay, here's a concise summary and critical evaluation of the provided paper, focusing on novelty, significance, and a justified score:
+### **[Beneath the Surface: How Large Language Models Reflect Hidden Bias](http://arxiv.org/abs/2502.19749v1)**
+- **Summary**: Okay, here's a concise summary and a critical evaluation of the paper:
 
 **Summary:**
 
-The paper introduces a dual-model framework called DARS (Dual-model Reflective Scoring) to improve the reasoning and explainability of Large Language Models (LLMs) in Automated Student Answer Scoring (ASAS). It addresses two key challenges: 1) the lack of explicit feedback in preference optimization methods and 2) the limitations of single-model verbal reflection techniques. DARS uses a contrastive reflection synthesis pipeline to generate precise verbal reflection data and then trains specialized Reasoner and Critic models. The Reasoner model refines assessments based on the Critic's feedback, which integrates process and outcome reward modeling. The authors demonstrate that DARS outperforms traditional preference optimization methods and offers superior reasoning performance and transparency compared to single-model approaches. They show that a larger Critic is often more beneficial than a larger Reasoner and show generalization to unseen questions.
+The paper introduces the Hidden Bias Benchmark (HBB), a new dataset and methodology designed to assess subtle, contextually hidden biases in Large Language Models (LLMs).  Unlike existing benchmarks that focus on overt biases through direct associations between demographic terms and biased concepts, HBB uses realistic scenarios and indirect descriptors to expose biases that LLMs often conceal through self-regulation and alignment strategies. The paper evaluates several state-of-the-art LLMs using HBB, demonstrating that while these models may perform well on overt bias benchmarks, they still exhibit significant biases when exposed to nuanced, hidden bias contexts. The authors also propose a semi-generation-based version of HBB (HBB-SG) for evaluating biases in generative tasks. The paper conceptualizes hidden bias, provides a new dataset, analyzes several LLMs, and concludes that HBB is a useful tool for uncovering biases that previous benchmarks miss.
 
 **Critical Evaluation:**
 
-*   **Novelty:**
+The paper makes a valuable contribution by addressing a crucial limitation of existing bias benchmarks for LLMs. As LLMs become more sophisticated and are increasingly fine-tuned to avoid overt biases, traditional benchmarks become less effective at detecting the subtler, often more insidious, biases that remain. HBB's focus on contextualized scenarios and indirect descriptors is a significant step forward in more realistically evaluating these models.
 
-    *   The *contrastive reflection synthesis pipeline* to generate training data for error correction is a substantial contribution. It allows for the creation of detailed, trace-level reflections, which are often lacking in current approaches. The use of structured thought trees to identify mismatches in key element assessments leading to potential errors is innovative.
-    *   The *dual-model architecture (Reasoner and Critic)* with specialized roles and independent training is a novel way to approach the self-reflection problem in LLMs. This is distinct from existing VRL techniques that rely on iterative refinement within a single model.
-    *   The *integration of process and outcome reward modeling* in the Critic without relying on human labels (or "oracle" labels, which may not be accurate) for verification is valuable.
-    *   The finding that scaling the *Critic model size has more influence on the performance than scaling the Reasoner model size* is a counter-intuitive, valuable empirical insight that can change the future direction.
+**Strengths:**
 
-*   **Significance:**
+*   **Novelty:** The HBB is genuinely novel. By shifting the focus from overt associations to hidden, contextual biases, the authors introduce a new dimension to bias evaluation. This approach is timely and addresses a clear need in the field. The introduction of the HBB-SG further expands the usefulness of the benchmark to generative contexts.
+*   **Methodology:** The methodology for constructing the dataset appears well-reasoned. The use of GPT-4o (or another LLM) to generate initial scenarios and answer options, followed by manual review, seems like a practical approach to creating a sufficiently large and diverse dataset. The careful design of demographic descriptors to vary explicitness is also a strength.
+*   **Empirical Evaluation:** The evaluation of several state-of-the-art LLMs provides strong evidence that HBB effectively uncovers biases that are missed by existing benchmarks. The finding that GPT-4o, a more advanced model, exhibits higher hidden bias scores compared to its overt bias scores is particularly noteworthy and supports the paper's central argument. The comparison of refuse rates across models and datasets offers valuable insights into model comprehension.
+*   **Dataset Availability:** The authors have made their data, code, and results publicly available, enhancing the reproducibility and facilitating further research.
 
-    *   The paper addresses a crucial problem in LLM research: improving reasoning and explainability in complex tasks. Automated Student Answer Scoring is a pertinent application area due to the stringent requirements for accurate and explainable assessments.
-    *   The performance improvements over existing methods, along with the detailed empirical analysis (including ablation studies), demonstrate the effectiveness of the DARS framework.
-    *   The framework makes VRL useful in scenarios where the models cannot be directly fine-tuned, a common situation for LLMs.
-    *   Human evaluation confirmed that Critic-generated reflection provided actionable guidance that could be reliability followed by the reasoner.
+**Weaknesses:**
 
-*   **Strengths:**
+*   **Potential for Dataset Bias:** While the methodology aims for fairness, there's always a risk that the process of generating and curating the HBB dataset may introduce its own biases. The authors acknowledge that reliance on Western societal norms is a potential limitation. This is a common issue with any dataset, but it's essential to acknowledge and address the possibility.
+*   **Subjectivity in Evaluation:** While the methodology for *measuring* the bias is relatively objective (comparing probabilities of answer choices), the initial *identification* of a scenario as exhibiting a hidden bias might involve some subjective interpretation. There is not a clear objective, agreed upon definition for what constitues hidden bias.
+*   **Limited Scope of Demographic Categories:** The dataset covers five social categories: Age, Gender, Race Ethnicity, Socioeconomic Class, and Religions. While this is a reasonable starting point, other demographic categories, such as disability status, sexual orientation, or body type, could also be considered in future iterations.
+*   **Limited Bias Direction Analysis**: The benchmark does not include bias directionality (favoring traditional vs non traditional associations), which makes it harder to develop mitigation strategies
+*   **Lack of Comprehensive Mitigation Strategies:** The paper primarily focuses on *identifying* hidden biases. While it acknowledges the importance of mitigation, it doesn't offer concrete strategies for reducing these biases in LLMs. This is a significant limitation, although it falls outside the paper's primary scope.
 
-    *   Well-defined problem and clear research questions.
-    *   Methodologically sound, with a detailed description of the DARS framework and the contrastive reflection synthesis pipeline.
-    *   Comprehensive experiments with multiple datasets, evaluation metrics, and ablation studies.
-    *   The code and data will be released (at least, according to the paper) ensuring reproducibility.
-    *   Insightful empirical findings, particularly the scaling law observation.
-    *   The authors are rigorous in testing a variety of model scales and architectures.
-    *   The study demonstrates the capability of the Critic to still provide useful feedback on novel or unseed data.
+**Overall Assessment:**
 
-*   **Weaknesses:**
+The HBB addresses a significant gap in the existing landscape of bias benchmarks for LLMs. The focus on hidden, contextual biases is timely and relevant. The evaluation methodology is well-designed, and the empirical results provide compelling evidence that HBB effectively uncovers biases that are missed by traditional approaches. While the paper has some limitations, its strengths outweigh its weaknesses. The HBB is a valuable contribution to the field and is likely to influence future research on bias evaluation and mitigation in LLMs. The finding that the supposedly more aligned model (GPT-4o) displays greater hidden bias, despite doing well in traditional benchmarks, really emphasizes the significance of the HBB.
 
-    *   The reliance on synthetic data generation could be a limitation. While the paper demonstrates the effectiveness of the approach, the quality of the synthetic data directly impacts the performance of the trained models. The authors do demonstrate generalizability of the synthetic data and the overall model to new datasets.
-    *   The study primarily focuses on ASAS. While the principles may be applicable to other reasoning tasks, further research is needed to demonstrate broad generalizability.
-    *   The increased training FLOPs involved in training both a Reasoner and a Critic, are a potential barrier to wider adoption. While future work should also consider better optimization of training approaches.
+**Score: 8**
 
-*   **Potential Influence:**
+**Rationale for the Score:**
 
-    *   The DARS framework could inspire new approaches to self-reflection in LLMs, particularly by focusing on specialized model architectures and targeted feedback mechanisms.
-    *   The contrastive reflection synthesis pipeline provides a valuable technique for generating training data for error correction.
-    *   The findings on scaling laws could guide future research on model architectures and training strategies for VRL.
-    *   The code and data availability will enable other researchers to build upon and extend this work.
+A score of 8 reflects the paper's significant contribution to the field. The novelty of the HBB, the well-reasoned methodology, and the compelling empirical results make it a valuable addition to the toolkit for evaluating LLMs. The strengths justify the score, while the weaknesses, though acknowledged, do not diminish the overall impact of the work. The paper's focus on identification rather than mitigation is acceptable, as it establishes an effective method to assess hidden bias but further work to investigate mitigation strategies is required.
 
-**Justification:**
+- **Score**: 8/10
 
-The paper offers a novel and well-executed solution to improve LLM reasoning and explainability within the ASAS task. The contrastive reflection synthesis pipeline and the dual-model architecture are innovative contributions. The thorough experimental analysis and the insightful findings further enhance the paper's significance. There are some limitations regarding synthetic data reliance and generalizability, these are appropriately acknowledged by the authors and do not detract significantly from the overall contribution. The framework has the potential to influence future research on self-reflection and reasoning in LLMs.
+### **[Foot-In-The-Door: A Multi-turn Jailbreak for LLMs](http://arxiv.org/abs/2502.19820v1)**
+- **Summary**: Okay, here's a concise summary and a critical evaluation of the paper "Foot-In-The-Door: A Multi-turn Jailbreak for LLMs":
+
+**Summary:**
+
+The paper introduces FITD, a novel multi-turn jailbreak method for Large Language Models (LLMs).  FITD is inspired by the psychological "foot-in-the-door" principle, where small initial commitments lower resistance to larger, more unethical requests. The method works by progressively escalating the malicious intent of user queries through intermediate "bridge" prompts.  If the model refuses or provides a misaligned response, the method uses `SlipperySlopeParaphrase` (to ease the model into more harmful content) or `Re-Align` (to nudge the model's response to better align with the malicious intent). The authors demonstrate that FITD achieves significantly higher attack success rates (ASR) than existing jailbreak methods across several LLMs. The paper also analyzes LLM self-corruption during these multi-turn interactions, highlighting vulnerabilities in current alignment strategies.
+
+**Critical Evaluation:**
+
+**Novelty:** The core idea of leveraging the foot-in-the-door psychological principle for jailbreaking LLMs is relatively novel. While multi-turn jailbreaks exist, explicitly modeling and exploiting the gradual escalation of malicious intent with psychologically inspired techniques is a clear differentiator. The use of `SlipperySlopeParaphrase` and `Re-Align` modules, while not groundbreaking in themselves (paraphrasing and alignment techniques are well-established), are strategically integrated to facilitate this gradual escalation. The combination of these elements, specifically within the context of multi-turn jailbreaking, represents a novel approach.
+
+**Significance:** The paper is significant for several reasons:
+
+*   **High Attack Success Rate:** The demonstrated performance of FITD, significantly outperforming existing methods across a range of LLMs, underscores the vulnerability of current safety measures. This is a practical demonstration of a potentially serious weakness. The authors claim an average success rate of 94%, this alone draws attention to the paper.
+
+*   **Understanding Self-Corruption:** The analysis of LLM "self-corruption" is valuable. While the term may be anthropomorphic, the concept of how multi-turn interactions can erode alignment and lead to progressively harmful outputs is an important contribution. The implication that current safety measures lack explicit mechanisms to prevent such degradation in multi-turn conversations needs further examination.
+
+*   **Motivating Future Research:** The paper explicitly calls for and should motivate future research in AI safety. The need for real-time adaptive monitoring and stronger alignment methods designed to prevent gradual erosion in mult-turn dialogues is highlighted.
+
+*   **Ethical Disclosure:** The ethical consideration and disclosure is a positive aspect of the research.
+
+**Strengths:**
+
+*   The foot-in-the-door principle provides an appealing and understandable conceptual framework.
+*   The experimental results are strong, showing consistent improvement over baselines across multiple LLMs and evaluation datasets.
+*   The ablation study clearly identifies the contribution of each component of the FITD method.
+*   The cross-model transferability evaluation adds practical value by showing how attacks developed on one model can be used on others.
+*   The writing is clear and generally well-organized.
+*   The code and data are publicly available, enhancing reproducibility and further research.
+
+**Weaknesses:**
+
+*   **Limited Scope of Analysis:** The analysis of *why* the foot-in-the-door effect works in LLMs could be more in-depth. While the paper *demonstrates* the effect, a more mechanistic understanding would be valuable.  Is it a simple erosion of a threshold? Is it about changing the model's internal representation of the user's intent? More speculation on the underlying mechanisms is needed.
+*   **Dataset Bias**: The dataset focuses on specific known jailbreaking vulnerabilities, which might introduce some bias.
+*   **GPT-4 Dependency**: The evaluation depends on GPT-4 (closed source and might vary) to assess both the effectiveness of attacks as well as harmfulness level, which should be taken into consideration.
+*   **Limited Mitigation Strategies Investigated:** The defense strategy section is relatively limited. While it shows current mitigation methods are not sufficient, further investigation into promising avenues of defense is needed.
+
+**Overall Score and Justification:**
+
+The paper presents a novel and effective jailbreaking technique that convincingly demonstrates a vulnerability in current LLM alignment strategies. The high attack success rate and the insightful analysis of "self-corruption" contribute significantly to the field of AI safety. While the mechanistic understanding of the foot-in-the-door effect in LLMs could be more thoroughly explored, the practical impact and the clear call for further research make this a valuable contribution.
 
 Score: 8
+
+**Rigorous Rationale:**
+The assigned score is 8 because the paper does a very good job in 1) bringing up the issue of LLM self-corruption, 2) using psychologically informed methods to attack alignment and 3) demonstrates them rigorously with well designed experiments. However, the method still depends on several pre-existing techniques such as paraphrasing. Further, the paper spends less time on analyzing the root cause of the phenomenon, e.g. is there model representation shift? Therefore the method is considered novel and effective but lacking a deeper dive.
+
+- **Score**: 8/10
+
+### **[LongRoPE2: Near-Lossless LLM Context Window Scaling](http://arxiv.org/abs/2502.20082v1)**
+- **Summary**: Here's a concise summary and critical evaluation of the LongRoPE2 paper:
+
+**Summary:**
+
+The LongRoPE2 paper introduces a novel approach to extend the context window of pre-trained Large Language Models (LLMs) while preserving short-context performance. It addresses the out-of-distribution (OOD) issues in RoPE embeddings by: (1) hypothesizing that insufficient training in higher RoPE dimensions causes persistent OOD problems; (2) proposing an evolution-guided RoPE rescaling algorithm using a "needle-driven" perplexity evaluation; and (3) employing a mixed context window training approach that fine-tunes model weights to adapt to rescaled RoPE while maintaining short-context performance with the original RoPE. Experiments on LLaMA3-8B and Phi3-mini demonstrate the effectiveness of LongRoPE2, achieving a 128K context length with minimal performance degradation and significantly fewer training tokens compared to other methods.
+
+**Critical Evaluation:**
+
+**Novelty:** The paper presents several novel contributions, but their collective significance is what makes the paper strong.
+
+*   **Hypothesis of Insufficient Training:**  The hypothesis that insufficient training in higher RoPE dimensions is a key driver of OOD issues is an interesting and plausible explanation for why existing scaling methods sometimes require scaling factors beyond theoretically derived values. This hypothesis provides a clear direction for the subsequent innovations. It builds on existing knowledge but frames the problem in a new light, suggesting that training dynamics, rather than just geometric considerations, are crucial.
+
+*   **Needle-Driven Perplexity:** The needle-driven perplexity (PPL) evaluation is a practical and valuable improvement over standard PPL for assessing long-context performance. The idea of focusing on specific "answer" tokens directly addresses the issue that standard PPL can be diluted by irrelevant parts of the context, making this a good way of getting around standard limitations.
+
+*   **Mixed Context Window Training:** The mixed context window training approach is a simple yet effective way to preserve short-context performance. The technique is particularly useful for practical LLM deployment. It’s not completely new in principle, but the specific implementation and its successful application in this context are notable.
+
+**Significance:**
+
+*   **Performance Gains:** The experimental results demonstrate a clear improvement over existing RoPE scaling methods, especially on the RULER benchmark and needle-in-a-haystack tasks. The fact that LongRoPE2 achieves a 128K effective context window with minimal performance degradation is a significant result, especially given the model size.
+*   **Training Efficiency:** The training efficiency (requiring significantly fewer tokens than, for example, LLaMA3.1) makes this approach attractive for practical applications. The method reduces the computational burden on the model by fine-tuning a limited amount of parameters.
+*   **Practical Impact:** The preservation of short-context performance is crucial for real-world LLM deployments. Many existing context extension methods suffer from a noticeable drop in performance on standard tasks, which limits their usability. LongRoPE2's ability to retain short-context accuracy makes it a more viable solution for extending context windows.
+*   **Generalizability:** The successful application of LongRoPE2 to both LLaMA3-8B and Phi3-mini suggests that the approach is generalizable to different model architectures and sizes.
+
+**Weaknesses:**
+
+*   **Search Space Limitations:** While evolutionary search has its merits, constraining the search space could prevent the method from finding truly optimal configurations. While justified for efficiency, this could be a potential bottleneck.
+*   **Dependence on Synthetic Data:** The needle-driven perplexity evaluation relies on synthetic data. Although controlled and effective, it's essential to validate findings with more diverse, real-world long documents.
+*   **Complexity:** While achieving efficiency gains from limited token training, the method has a higher degree of complexity compared to simpler extrapolation techniques.
+*   **Limited Context Window:** While 128k context window is very useful, it is limited compared to other techniques.
+
+**Score:** 8
+
+**Justification:** LongRoPE2 represents a substantial advancement in RoPE-based context window extension. The paper's strengths lie in its well-motivated hypothesis, practical innovations (needle-driven PPL, mixed training), impressive performance gains, and strong focus on maintaining short-context accuracy. The method is particularly interesting because of its reduced need of large amounts of training tokens compared to other methods. While there are some limitations regarding the synthetic data and scope of search limitations, the results are strong enough to be a highly influential tool.
+
 
 - **Score**: 8/10
 
 ## Other Papers
-### **[How Far are LLMs from Real Search? A Comprehensive Study on Efficiency, Completeness, and Inherent Capabilities](http://arxiv.org/abs/2502.18387v2)**
-### **[Monte Carlo Temperature: a robust sampling strategy for LLM's uncertainty quantification methods](http://arxiv.org/abs/2502.18389v1)**
-### **[KiRAG: Knowledge-Driven Iterative Retriever for Enhancing Retrieval-Augmented Generation](http://arxiv.org/abs/2502.18397v1)**
-### **[OmniAlign-V: Towards Enhanced Alignment of MLLMs with Human Preference](http://arxiv.org/abs/2502.18411v1)**
-### **[TextGames: Learning to Self-Play Text-Based Puzzle Games via Language Model Reasoning](http://arxiv.org/abs/2502.18431v1)**
-### **[ToMCAT: Theory-of-Mind for Cooperative Agents in Teams via Multiagent Diffusion Policies](http://arxiv.org/abs/2502.18438v1)**
-### **[MAPoRL: Multi-Agent Post-Co-Training for Collaborative Large Language Models with Reinforcement Learning](http://arxiv.org/abs/2502.18439v1)**
-### **[SWE-RL: Advancing LLM Reasoning via Reinforcement Learning on Open Software Evolution](http://arxiv.org/abs/2502.18449v1)**
-### **[FRIDA to the Rescue! Analyzing Synthetic Data Effectiveness in Object-Based Common Sense Reasoning for Disaster Response](http://arxiv.org/abs/2502.18452v1)**
-### **[LLM-Based Design Pattern Detection](http://arxiv.org/abs/2502.18458v1)**
-### **[FactReasoner: A Probabilistic Approach to Long-Form Factuality Assessment for Large Language Models](http://arxiv.org/abs/2502.18573v1)**
-### **[Scalable Best-of-N Selection for Large Language Models via Self-Certainty](http://arxiv.org/abs/2502.18581v1)**
-### **[Chain of Draft: Thinking Faster by Writing Less](http://arxiv.org/abs/2502.18600v1)**
-### **[Toward Breaking Watermarks in Distortion-free Large Language Models](http://arxiv.org/abs/2502.18608v1)**
-### **[Diffusion Models for conditional MRI generation](http://arxiv.org/abs/2502.18620v1)**
-### **[PacQ: A SIMT Microarchitecture for Efficient Dataflow in Hyper-asymmetric GEMMs](http://arxiv.org/abs/2502.18627v1)**
-### **[Steered Generation via Gradient Descent on Sparse Features](http://arxiv.org/abs/2502.18644v1)**
-### **[Single- vs. Dual-Prompt Dialogue Generation with LLMs for Job Interviews in Human Resources](http://arxiv.org/abs/2502.18650v1)**
-### **[Independent Mobility GPT (IDM-GPT): A Self-Supervised Multi-Agent Large Language Model Framework for Customized Traffic Mobility Analysis Using Machine Learning Models](http://arxiv.org/abs/2502.18652v1)**
-### **[Discriminative Finetuning of Generative Large Language Models without Reward Models and Preference Data](http://arxiv.org/abs/2502.18679v1)**
-### **[Comparing Native and Non-native English Speakers' Behaviors in Collaborative Writing through Visual Analytics](http://arxiv.org/abs/2502.18681v1)**
-### **[Adaptive conditional latent diffusion maps beam loss to 2D phase space projections](http://arxiv.org/abs/2502.18684v1)**
-### **[Policy-as-Prompt: Rethinking Content Moderation in the Age of Large Language Models](http://arxiv.org/abs/2502.18695v1)**
-### **[MPO: An Efficient Post-Processing Framework for Mixing Diverse Preference Alignment](http://arxiv.org/abs/2502.18699v1)**
-### **[A Cooperative Multi-Agent Framework for Zero-Shot Named Entity Recognition](http://arxiv.org/abs/2502.18702v1)**
-### **[TrajLLM: A Modular LLM-Enhanced Agent-Based Framework for Realistic Human Trajectory Simulation](http://arxiv.org/abs/2502.18712v1)**
-### **[Talking to the brain: Using Large Language Models as Proxies to Model Brain Semantic Representation](http://arxiv.org/abs/2502.18725v1)**
-### **[Deep-Bench: Deep Learning Benchmark Dataset for Code Generation](http://arxiv.org/abs/2502.18726v1)**
-### **[Random Forest-of-Thoughts: Uncertainty-aware Reasoning for Computational Social Science](http://arxiv.org/abs/2502.18729v1)**
-### **[Cross-Modality Investigation on WESAD Stress Classification](http://arxiv.org/abs/2502.18733v1)**
-### **[AI-Instruments: Embodying Prompts as Instruments to Abstract & Reflect Graphical Interface Commands as General-Purpose Tools](http://arxiv.org/abs/2502.18736v1)**
-### **[Like Father, Like Son: Kinship-Aware Preference Mapping (KARMA) for Automatic Alignment in Large Language Models](http://arxiv.org/abs/2502.18744v1)**
-### **[Automatic Prompt Optimization via Heuristic Search: A Survey](http://arxiv.org/abs/2502.18746v1)**
-### **[Spectral-Enhanced Transformers: Leveraging Large-Scale Pretrained Models for Hyperspectral Object Tracking](http://arxiv.org/abs/2502.18748v1)**
-### **[M-ANT: Efficient Low-bit Group Quantization for LLMs via Mathematically Adaptive Numerical Type](http://arxiv.org/abs/2502.18755v1)**
-### **[Training Large Recommendation Models via Graph-Language Token Alignment](http://arxiv.org/abs/2502.18757v1)**
-### **[CommGPT: A Graph and Retrieval-Augmented Multimodal Communication Foundation Model](http://arxiv.org/abs/2502.18763v1)**
-### **[Reward Shaping to Mitigate Reward Hacking in RLHF](http://arxiv.org/abs/2502.18770v1)**
-### **[Exploring Graph Tasks with Pure LLMs: A Comprehensive Benchmark and Investigation](http://arxiv.org/abs/2502.18771v1)**
-### **[Plutus: Benchmarking Large Language Models in Low-Resource Greek Finance](http://arxiv.org/abs/2502.18772v1)**
-### **[M2-omni: Advancing Omni-MLLM for Comprehensive Modality Support with Competitive Performance](http://arxiv.org/abs/2502.18778v1)**
-### **[Towards Optimal Multi-draft Speculative Decoding](http://arxiv.org/abs/2502.18779v1)**
-### **[Active Few-Shot Learning for Text Classification](http://arxiv.org/abs/2502.18782v1)**
-### **[Seeing the Forest for the Trees: A Large Scale, Continuously Updating Meta-Analysis of Frontier LLMs](http://arxiv.org/abs/2502.18791v1)**
-### **[SolEval: Benchmarking Large Language Models for Repository-level Solidity Code Generation](http://arxiv.org/abs/2502.18793v1)**
-### **[Optimal Stochastic Trace Estimation in Generative Modeling](http://arxiv.org/abs/2502.18808v1)**
-### **[Holistic Audit Dataset Generation for LLM Unlearning via Knowledge Graph Traversal and Redundancy Removal](http://arxiv.org/abs/2502.18810v1)**
-### **[Judge as A Judge: Improving the Evaluation of Retrieval-Augmented Generation through the Judge-Consistency of Large Language Models](http://arxiv.org/abs/2502.18817v1)**
-### **[CAMEx: Curvature-aware Merging of Experts](http://arxiv.org/abs/2502.18821v1)**
-### **[Data-Efficient Multi-Agent Spatial Planning with LLMs](http://arxiv.org/abs/2502.18822v1)**
-### **[Evidence-Driven Marker Extraction for Social Media Suicide Risk Detection](http://arxiv.org/abs/2502.18823v1)**
-### **[Sentiment Analysis of Movie Reviews Using BERT](http://arxiv.org/abs/2502.18841v1)**
-### **[Sliding Window Attention Training for Efficient Large Language Models](http://arxiv.org/abs/2502.18845v1)**
-### **[A Causal Lens for Evaluating Faithfulness Metrics](http://arxiv.org/abs/2502.18848v1)**
-### **[Marking Code Without Breaking It: Code Watermarking for Detecting LLM-Generated Code](http://arxiv.org/abs/2502.18851v1)**
-### **[A Theoretical Perspective: How to Prevent Model Collapse in Self-consuming Training Loops](http://arxiv.org/abs/2502.18865v1)**
-### **[Multi-LLM Collaborative Search for Complex Problem Solving](http://arxiv.org/abs/2502.18873v1)**
-### **[Learning to Align Multi-Faceted Evaluation: A Unified and Robust Framework](http://arxiv.org/abs/2502.18874v1)**
-### **[Learning to Generate Structured Output with Schema Reinforcement Learning](http://arxiv.org/abs/2502.18878v1)**
-### **[From Hours to Minutes: Lossless Acceleration of Ultra Long Sequence Generation up to 100K Tokens](http://arxiv.org/abs/2502.18890v1)**
-### **[An Empirical Study on Commit Message Generation using LLMs via In-Context Learning](http://arxiv.org/abs/2502.18904v1)**
-### **[A Pipeline of Augmentation and Sequence Embedding for Classification of Imbalanced Network Traffic](http://arxiv.org/abs/2502.18909v1)**
-### **[CLLoRA: An Approach to Measure the Effects of the Context Length for LLM Fine-Tuning](http://arxiv.org/abs/2502.18910v1)**
-### **[END: Early Noise Dropping for Efficient and Effective Context Denoising](http://arxiv.org/abs/2502.18915v1)**
-### **[ClassInvGen: Class Invariant Synthesis using Large Language Models](http://arxiv.org/abs/2502.18917v1)**
-### **[Talking like Piping and Instrumentation Diagrams (P&IDs)](http://arxiv.org/abs/2502.18928v1)**
-### **[JailBench: A Comprehensive Chinese Security Assessment Benchmark for Large Language Models](http://arxiv.org/abs/2502.18935v1)**
-### **[Towards Label-Only Membership Inference Attack against Pre-trained Large Language Models](http://arxiv.org/abs/2502.18943v1)**
-### **[Switching multiplicative watermark design against covert attacks](http://arxiv.org/abs/2502.18948v1)**
-### **[DualSpec: Text-to-spatial-audio Generation via Dual-Spectrogram Guided Diffusion Model](http://arxiv.org/abs/2502.18952v1)**
-### **[Know You First and Be You Better: Modeling Human-Like User Simulators via Implicit Profiles](http://arxiv.org/abs/2502.18968v1)**
-### **[Low-Confidence Gold: Refining Low-Confidence Samples for Efficient Instruction Tuning](http://arxiv.org/abs/2502.18978v1)**
-### **[PEToolLLM: Towards Personalized Tool Learning in Large Language Models](http://arxiv.org/abs/2502.18980v1)**
-### **[GenTool: Enhancing Tool Generalization in Language Models through Zero-to-One and Weak-to-Strong Simulation](http://arxiv.org/abs/2502.18990v1)**
-### **[OntologyRAG: Better and Faster Biomedical Code Mapping with Retrieval-Augmented Generation (RAG) Leveraging Ontology Knowledge Graphs and Large Language Models](http://arxiv.org/abs/2502.18992v1)**
-### **[MEBench: Benchmarking Large Language Models for Cross-Document Multi-Entity Question Answering](http://arxiv.org/abs/2502.18993v1)**
-### **[The Sharpness Disparity Principle in Transformers for Accelerating Language Model Pre-Training](http://arxiv.org/abs/2502.19002v1)**
-### **[Binary Neural Networks for Large Language Model: A Survey](http://arxiv.org/abs/2502.19008v1)**
-### **[Distilling Reinforcement Learning Algorithms for In-Context Model-Based Planning](http://arxiv.org/abs/2502.19009v1)**
-### **[FungalZSL: Zero-Shot Fungal Classification with Image Captioning Using a Synthetic Data Approach](http://arxiv.org/abs/2502.19038v1)**
-### **[Beyond Surface-Level Patterns: An Essence-Driven Defense Framework Against Jailbreak Attacks in LLMs](http://arxiv.org/abs/2502.19041v1)**
-### **[A Dual-Purpose Framework for Backdoor Defense and Backdoor Amplification in Diffusion Models](http://arxiv.org/abs/2502.19047v1)**
-### **[MathClean: A Benchmark for Synthetic Mathematical Data Cleaning](http://arxiv.org/abs/2502.19058v1)**
-### **[Can Large Language Models Outperform Non-Experts in Poetry Evaluation? A Comparative Study Using the Consensual Assessment Technique](http://arxiv.org/abs/2502.19064v1)**
-### **[IndicEval-XL: Bridging Linguistic Diversity in Code Generation Across Indic Languages](http://arxiv.org/abs/2502.19067v1)**
-### **[Sparse Brains are Also Adaptive Brains: Cognitive-Load-Aware Dynamic Activation for LLMs](http://arxiv.org/abs/2502.19078v1)**
-### **[Nexus: A Lightweight and Scalable Multi-Agent Framework for Complex Tasks Automation](http://arxiv.org/abs/2502.19091v1)**
-### **[LongEval: A Comprehensive Analysis of Long-Text Generation Through a Plan-based Paradigm](http://arxiv.org/abs/2502.19103v1)**
-### **[The NeRF Signature: Codebook-Aided Watermarking for Neural Radiance Fields](http://arxiv.org/abs/2502.19125v1)**
-### **[Self-Memory Alignment: Mitigating Factual Hallucinations with Generalized Improvement](http://arxiv.org/abs/2502.19127v1)**
-### **[A Temporal Planning Framework for Multi-Agent Systems via LLM-Aided Knowledge Base Management](http://arxiv.org/abs/2502.19135v1)**
-### **[Amulet: ReAlignment During Test Time for Personalized Preference Adaptation of LLMs](http://arxiv.org/abs/2502.19148v1)**
-### **[Isolating Language-Coding from Problem-Solving: Benchmarking LLMs with PseudoEval](http://arxiv.org/abs/2502.19149v1)**
-### **[RetinaRegen: A Hybrid Model for Readability and Detail Restoration in Fundus Images](http://arxiv.org/abs/2502.19153v1)**
-### **[When Personalization Meets Reality: A Multi-Faceted Analysis of Personalized Preference Learning](http://arxiv.org/abs/2502.19158v1)**
-### **[A Sliding Layer Merging Method for Efficient Depth-Wise Pruning in LLMs](http://arxiv.org/abs/2502.19159v1)**
-### **[Detecting Linguistic Indicators for Stereotype Assessment with Large Language Models](http://arxiv.org/abs/2502.19160v1)**
-### **[CodeIF: Benchmarking the Instruction-Following Capabilities of Large Language Models for Code Generation](http://arxiv.org/abs/2502.19166v1)**
-### **[MEDDxAgent: A Unified Modular Agent Framework for Explainable Automatic Differential Diagnosis](http://arxiv.org/abs/2502.19175v1)**
-### **[UQABench: Evaluating User Embedding for Prompting LLMs in Personalized Question Answering](http://arxiv.org/abs/2502.19178v1)**
-### **[BIG-Bench Extra Hard](http://arxiv.org/abs/2502.19187v1)**
-### **[Simulation of Language Evolution under Regulated Social Media Platforms: A Synergistic Approach of Large Language Models and Genetic Algorithms](http://arxiv.org/abs/2502.19193v1)**
-### **[HDM: Hybrid Diffusion Model for Unified Image Anomaly Detection](http://arxiv.org/abs/2502.19200v1)**
-### **[Bi'an: A Bilingual Benchmark and Model for Hallucination Detection in Retrieval-Augmented Generation](http://arxiv.org/abs/2502.19209v1)**
-### **[Negation-Induced Forgetting in LLMs](http://arxiv.org/abs/2502.19211v1)**
-### **[Two Heads Are Better Than One: Dual-Model Verbal Reflection at Inference-Time](http://arxiv.org/abs/2502.19230v1)**
-### **[Between Circuits and Chomsky: Pre-pretraining on Formal Languages Imparts Linguistic Biases](http://arxiv.org/abs/2502.19249v1)**
-### **[ArtInsight: Enabling AI-Powered Artwork Engagement for Mixed Visual-Ability Families](http://arxiv.org/abs/2502.19263v1)**
-### **[Efficient Federated Search for Retrieval-Augmented Generation](http://arxiv.org/abs/2502.19280v1)**
-### **[Complex LLM Planning via Automated Heuristics Discovery](http://arxiv.org/abs/2502.19295v1)**
-### **[Agent-centric Information Access](http://arxiv.org/abs/2502.19298v1)**
-### **[Rethinking LLM Unlearning Objectives: A Gradient Perspective and Go Beyond](http://arxiv.org/abs/2502.19301v1)**
-### **[Anomaly Detection in Complex Dynamical Systems: A Systematic Framework Using Embedding Theory and Physics-Inspired Consistency](http://arxiv.org/abs/2502.19307v1)**
-### **[Shh, don't say that! Domain Certification in LLMs](http://arxiv.org/abs/2502.19320v1)**
-### **[Agentic Reward Modeling: Integrating Human Preferences with Verifiable Correctness Signals for Reliable Reward Systems](http://arxiv.org/abs/2502.19328v1)**
-### **[Evaluating LLMs and Pre-trained Models for Text Summarization Across Diverse Datasets](http://arxiv.org/abs/2502.19339v1)**
-### **[Can Large Language Models Detect Errors in Long Chain-of-Thought Reasoning?](http://arxiv.org/abs/2502.19361v1)**
-### **[DataMan: Data Manager for Pre-training Large Language Models](http://arxiv.org/abs/2502.19363v1)**
-### **[TheoremExplainAgent: Towards Multimodal Explanations for LLM Theorem Understanding](http://arxiv.org/abs/2502.19400v1)**
-### **[General Reasoning Requires Learning to Reason from the Get-go](http://arxiv.org/abs/2502.19402v1)**
-### **[Learning Code-Edit Embedding to Model Student Debugging Behavior](http://arxiv.org/abs/2502.19407v1)**
-### **[ImageChain: Advancing Sequential Image-to-Text Reasoning in Multimodal Large Language Models](http://arxiv.org/abs/2502.19409v1)**
-### **[Less or More: Towards Glanceable Explanations for LLM Recommendations Using Ultra-Small Devices](http://arxiv.org/abs/2502.19410v1)**
-### **[Code to Think, Think to Code: A Survey on Code-Enhanced Reasoning and Reasoning-Driven Code Intelligence in LLMs](http://arxiv.org/abs/2502.19411v1)**
-### **[Norm Growth and Stability Challenges in Localized Sequential Knowledge Editing](http://arxiv.org/abs/2502.19416v1)**
+### **[Accessing LLMs for Front-end Software Architecture Knowledge](http://arxiv.org/abs/2502.19518v1)**
+### **[Cognitive networks highlight differences and similarities in the STEM mindsets of human and LLM-simulated trainees, experts and academics](http://arxiv.org/abs/2502.19529v1)**
+### **[Winning Big with Small Models: Knowledge Distillation vs. Self-Training for Reducing Hallucination in QA Agents](http://arxiv.org/abs/2502.19545v1)**
+### **[Repurposing the scientific literature with vision-language models](http://arxiv.org/abs/2502.19546v1)**
+### **[When Large Language Models Meet Speech: A Survey on Integration Approaches](http://arxiv.org/abs/2502.19548v1)**
+### **[Distill Not Only Data but Also Rewards: Can Smaller Language Models Surpass Larger Ones?](http://arxiv.org/abs/2502.19557v1)**
+### **[Stay Focused: Problem Drift in Multi-Agent Debate](http://arxiv.org/abs/2502.19559v1)**
+### **[Diffusion-based Planning with Learned Viability Filters](http://arxiv.org/abs/2502.19564v1)**
+### **[Do Large Language Models Know How Much They Know?](http://arxiv.org/abs/2502.19573v1)**
+### **[Where Are We? Evaluating LLM Performance on African Languages](http://arxiv.org/abs/2502.19582v1)**
+### **[Introduction to Sequence Modeling with Transformers](http://arxiv.org/abs/2502.19597v1)**
+### **[Revisiting Word Embeddings in the LLM Era](http://arxiv.org/abs/2502.19607v1)**
+### **[Program Synthesis Dialog Agents for Interactive Decision-Making](http://arxiv.org/abs/2502.19610v1)**
+### **[Evaluation of Hate Speech Detection Using Large Language Models and Geographical Contextualization](http://arxiv.org/abs/2502.19612v1)**
+### **[Self-rewarding correction for mathematical reasoning](http://arxiv.org/abs/2502.19613v1)**
+### **[Is Your Paper Being Reviewed by an LLM? A New Benchmark Dataset and Approach for Detecting AI Text in Peer Review](http://arxiv.org/abs/2502.19614v1)**
+### **[Weaker LLMs' Opinions Also Matter: Mixture of Opinions Enhances LLM's Mathematical Reasoning](http://arxiv.org/abs/2502.19622v1)**
+### **[3D Nephrographic Image Synthesis in CT Urography with the Diffusion Model and Swin Transformer](http://arxiv.org/abs/2502.19623v1)**
+### **[Agentic Mixture-of-Workflows for Multi-Modal Chemical Search](http://arxiv.org/abs/2502.19629v1)**
+### **[Taxonomy, Opportunities, and Challenges of Representation Engineering for Large Language Models](http://arxiv.org/abs/2502.19649v1)**
+### **[SuPreME: A Supervised Pre-training Framework for Multimodal ECG Representation Learning](http://arxiv.org/abs/2502.19668v1)**
+### **[Improving Adversarial Transferability in MLLMs via Dynamic Vision-Language Alignment Attack](http://arxiv.org/abs/2502.19672v1)**
+### **[SubZero: Composing Subject, Style, and Action via Zero-Shot Personalization](http://arxiv.org/abs/2502.19673v1)**
+### **[M-LLM Based Video Frame Selection for Efficient Video Understanding](http://arxiv.org/abs/2502.19680v1)**
+### **[BEVDiffuser: Plug-and-Play Diffusion Model for BEV Denoising with Ground-Truth Guidance](http://arxiv.org/abs/2502.19694v1)**
+### **[Language-Informed Hyperspectral Image Synthesis for Imbalanced-Small Sample Classification via Semi-Supervised Conditional Diffusion Model](http://arxiv.org/abs/2502.19700v1)**
+### **[SAP-DIFF: Semantic Adversarial Patch Generation for Black-Box Face Recognition Models via Diffusion Models](http://arxiv.org/abs/2502.19710v1)**
+### **[Teaching Dense Retrieval Models to Specialize with Listwise Distillation and LLM Data Augmentation](http://arxiv.org/abs/2502.19712v1)**
+### **[Recent Advances on Generalizable Diffusion-generated Image Detection](http://arxiv.org/abs/2502.19716v1)**
+### **[Sensing and Steering Stereotypes: Extracting and Applying Gender Representation Vectors in LLMs](http://arxiv.org/abs/2502.19721v1)**
+### **[Few-Shot Multilingual Open-Domain QA from 5 Examples](http://arxiv.org/abs/2502.19722v1)**
+### **[Tokens for Learning, Tokens for Unlearning: Mitigating Membership Inference Attacks in Large Language Models via Dual-Purpose Training](http://arxiv.org/abs/2502.19726v1)**
+### **[Do Expressions Change Decisions? Exploring the Impact of AI's Explanation Tone on Decision-Making](http://arxiv.org/abs/2502.19730v1)**
+### **[Preference Learning Unlocks LLMs' Psycho-Counseling Skills](http://arxiv.org/abs/2502.19731v1)**
+### **[R1-T1: Fully Incentivizing Translation Capability in LLMs via Reasoning Learning](http://arxiv.org/abs/2502.19735v1)**
+### **[HaLoRA: Hardware-aware Low-Rank Adaptation for Large Language Models Based on Hybrid Compute-in-Memory Architecture](http://arxiv.org/abs/2502.19747v1)**
+### **[Beneath the Surface: How Large Language Models Reflect Hidden Bias](http://arxiv.org/abs/2502.19749v1)**
+### **[Finding Local Diffusion Schrödinger Bridge using Kolmogorov-Arnold Network](http://arxiv.org/abs/2502.19754v1)**
+### **[PolyPrompt: Automating Knowledge Extraction from Multilingual Language Models with Dynamic Prompt Generation](http://arxiv.org/abs/2502.19756v1)**
+### **[In-Context Learning with Hypothesis-Class Guidance](http://arxiv.org/abs/2502.19787v1)**
+### **[ChatMol: A Versatile Molecule Designer Based on the Numerically Enhanced Large Language Model](http://arxiv.org/abs/2502.19794v1)**
+### **[MFSR: Multi-fractal Feature for Super-resolution Reconstruction with Fine Details Recovery](http://arxiv.org/abs/2502.19797v1)**
+### **[Developmental Support Approach to AI's Autonomous Growth: Toward the Realization of a Mutually Beneficial Stage Through Experiential Learning](http://arxiv.org/abs/2502.19798v1)**
+### **[UIFace: Unleashing Inherent Model Capabilities to Enhance Intra-Class Diversity in Synthetic Face Recognition](http://arxiv.org/abs/2502.19803v1)**
+### **[Implicit Search via Discrete Diffusion: A Study on Chess](http://arxiv.org/abs/2502.19805v1)**
+### **[Comet: Fine-grained Computation-communication Overlapping for Mixture-of-Experts](http://arxiv.org/abs/2502.19811v1)**
+### **[Foot-In-The-Door: A Multi-turn Jailbreak for LLMs](http://arxiv.org/abs/2502.19820v1)**
+### **[Analyzing CLIP's Performance Limitations in Multi-Object Scenarios: A Controlled High-Resolution Study](http://arxiv.org/abs/2502.19828v1)**
+### **[ProAPO: Progressively Automatic Prompt Optimization for Visual Classification](http://arxiv.org/abs/2502.19844v1)**
+### **[One-for-More: Continual Diffusion Model for Anomaly Detection](http://arxiv.org/abs/2502.19848v1)**
+### **[ConvCodeWorld: Benchmarking Conversational Code Generation in Reproducible Feedback Environments](http://arxiv.org/abs/2502.19852v1)**
+### **[MIND: Towards Immersive Psychological Healing with Multi-agent Inner Dialogue](http://arxiv.org/abs/2502.19860v1)**
+### **[C-Drag: Chain-of-Thought Driven Motion Controller for Video Generation](http://arxiv.org/abs/2502.19868v1)**
+### **[MMKE-Bench: A Multimodal Editing Benchmark for Diverse Visual Knowledge](http://arxiv.org/abs/2502.19870v1)**
+### **[Towards Multimodal Large-Language Models for Parent-Child Interaction: A Focus on Joint Attention](http://arxiv.org/abs/2502.19877v1)**
+### **[Beyond the Tip of Efficiency: Uncovering the Submerged Threats of Jailbreak Attacks in Small Language Models](http://arxiv.org/abs/2502.19883v1)**
+### **[High-Fidelity Relightable Monocular Portrait Animation with Lighting-Controllable Video Diffusion Model](http://arxiv.org/abs/2502.19894v1)**
+### **[PrimeK-Net: Multi-scale Spectral Learning via Group Prime-Kernel Convolutional Neural Networks for Single Channel Speech Enhancement](http://arxiv.org/abs/2502.19906v1)**
+### **[Order Doesn't Matter, But Reasoning Does: Training LLMs with Order-Centric Augmentation](http://arxiv.org/abs/2502.19907v1)**
+### **[SkipPipe: Partial and Reordered Pipelining Framework for Training LLMs in Heterogeneous Networks](http://arxiv.org/abs/2502.19913v1)**
+### **[LLM-driven Effective Knowledge Tracing by Integrating Dual-channel Difficulty](http://arxiv.org/abs/2502.19915v1)**
+### **[Picking the Cream of the Crop: Visual-Centric Data Selection with Collaborative Agents](http://arxiv.org/abs/2502.19917v1)**
+### **[Meta-Reasoner: Dynamic Guidance for Optimized Inference-time Reasoning in Large Language Models](http://arxiv.org/abs/2502.19918v1)**
+### **[DiffCSS: Diverse and Expressive Conversational Speech Synthesis with Diffusion Models](http://arxiv.org/abs/2502.19924v1)**
+### **[Image Referenced Sketch Colorization Based on Animation Creation Workflow](http://arxiv.org/abs/2502.19937v1)**
+### **[GeoEdit: Geometric Knowledge Editing for Large Language Models](http://arxiv.org/abs/2502.19953v1)**
+### **[Collaborative Stance Detection via Small-Large Language Model Consistency Verification](http://arxiv.org/abs/2502.19954v1)**
+### **[Deterministic or probabilistic? The psychology of LLMs as random number generators](http://arxiv.org/abs/2502.19965v1)**
+### **[Can Large Language Models Unveil the Mysteries? An Exploration of Their Ability to Unlock Information in Complex Scenarios](http://arxiv.org/abs/2502.19973v1)**
+### **[The Lookahead Limitation: Why Multi-Operand Addition is Hard for LLMs](http://arxiv.org/abs/2502.19981v1)**
+### **[Erasing Without Remembering: Safeguarding Knowledge Forgetting in Large Language Models](http://arxiv.org/abs/2502.19982v1)**
+### **[3D-AffordanceLLM: Harnessing Large Language Models for Open-Vocabulary Affordance Detection in 3D Worlds](http://arxiv.org/abs/2502.20041v1)**
+### **[Polish-ASTE: Aspect-Sentiment Triplet Extraction Datasets for Polish](http://arxiv.org/abs/2502.20046v1)**
+### **[Collab-Overcooked: Benchmarking and Evaluating Large Language Models as Collaborative Agents](http://arxiv.org/abs/2502.20073v1)**
+### **[LongRoPE2: Near-Lossless LLM Context Window Scaling](http://arxiv.org/abs/2502.20082v1)**
+### **[Generative augmentations for improved cardiac ultrasound segmentation using diffusion models](http://arxiv.org/abs/2502.20100v1)**
+### **[VDT-Auto: End-to-end Autonomous Driving with VLM-Guided Diffusion Transformers](http://arxiv.org/abs/2502.20108v1)**
+### **[Self-Training Elicits Concise Reasoning in Large Language Models](http://arxiv.org/abs/2502.20122v1)**
+### **[FlexiDiT: Your Diffusion Transformer Can Easily Generate High-Quality Samples with Less Compute](http://arxiv.org/abs/2502.20126v1)**
+### **[Finite State Automata Inside Transformers with Chain-of-Thought: A Mechanistic Study on State Tracking](http://arxiv.org/abs/2502.20129v1)**
+### **[Re-evaluating Open-ended Evaluation of Large Language Models](http://arxiv.org/abs/2502.20170v1)**
+### **[Multimodal Representation Alignment for Image Generation: Text-Image Interleaved Control Is Easier Than You Think](http://arxiv.org/abs/2502.20172v1)**
+### **[An Extensive Evaluation of PDDL Capabilities in off-the-shelf LLMs](http://arxiv.org/abs/2502.20175v1)**
+### **[Layer-Aware Task Arithmetic: Disentangling Task-Specific and Instruction-Following Knowledge](http://arxiv.org/abs/2502.20186v1)**
+### **[ChineseEcomQA: A Scalable E-commerce Concept Evaluation Benchmark for Large Language Models](http://arxiv.org/abs/2502.20196v1)**
+### **[AI Will Always Love You: Studying Implicit Biases in Romantic AI Companions](http://arxiv.org/abs/2502.20231v1)**
+### **[Attention Distillation: A Unified Approach to Visual Characteristics Transfer](http://arxiv.org/abs/2502.20235v1)**
+### **[Teasing Apart Architecture and Initial Weights as Sources of Inductive Bias in Neural Networks](http://arxiv.org/abs/2502.20237v1)**
+### **[FINEREASON: Evaluating and Improving LLMs' Deliberate Reasoning through Reflective Puzzle Solving](http://arxiv.org/abs/2502.20238v1)**
+### **[Beyond Natural Language Perplexity: Detecting Dead Code Poisoning in Code Generation Datasets](http://arxiv.org/abs/2502.20246v1)**
+### **[LLM as a Broken Telephone: Iterative Generation Distorts Information](http://arxiv.org/abs/2502.20258v1)**
+### **[Large Language Models as Attribution Regularizers for Efficient Model Training](http://arxiv.org/abs/2502.20268v1)**
+### **[Explainable, Multi-modal Wound Infection Classification from Images Augmented with Generated Captions](http://arxiv.org/abs/2502.20277v1)**
+### **[Evaluating Human Trust in LLM-Based Planners: A Preliminary Study](http://arxiv.org/abs/2502.20284v1)**
+### **[Conformal Tail Risk Control for Large Language Model Alignment](http://arxiv.org/abs/2502.20285v1)**
+### **[Judge a Book by its Cover: Investigating Multi-Modal LLMs for Multi-Page Handwritten Document Transcription](http://arxiv.org/abs/2502.20295v1)**
+### **[An exploration of features to improve the generalisability of fake news detection models](http://arxiv.org/abs/2502.20299v1)**
+### **[M^3Builder: A Multi-Agent System for Automated Machine Learning in Medical Imaging](http://arxiv.org/abs/2502.20301v1)**
+### **[Mobius: Text to Seamless Looping Video Generation via Latent Shift](http://arxiv.org/abs/2502.20307v1)**
+### **[EAIRA: Establishing a Methodology for Evaluating AI Models as Scientific Research Assistants](http://arxiv.org/abs/2502.20309v1)**
+### **[FlexVAR: Flexible Visual Autoregressive Modeling without Residual Prediction](http://arxiv.org/abs/2502.20313v1)**
+### **[Long-Context Inference with Retrieval-Augmented Speculative Decoding](http://arxiv.org/abs/2502.20330v1)**
+### **[Emergent Symbolic Mechanisms Support Abstract Reasoning in Large Language Models](http://arxiv.org/abs/2502.20332v1)**
+### **[Expertise Is What We Want](http://arxiv.org/abs/2502.20335v1)**
+### **[Thinking Slow, Fast: Scaling Inference Compute with Distilled Reasoners](http://arxiv.org/abs/2502.20339v1)**
+### **[Sparse Auto-Encoder Interprets Linguistic Features in Large Language Models](http://arxiv.org/abs/2502.20344v1)**
+### **[KEDRec-LM: A Knowledge-distilled Explainable Drug Recommendation Large Language Model](http://arxiv.org/abs/2502.20350v1)**
+### **[Bridging the Creativity Understanding Gap: Small-Scale Human Alignment Enables Expert-Level Humor Ranking in LLMs](http://arxiv.org/abs/2502.20356v1)**
+### **[Bridging Legal Knowledge and AI: Retrieval-Augmented Generation with Vector Stores, Knowledge Graphs, and Hierarchical Non-negative Matrix Factorization](http://arxiv.org/abs/2502.20364v1)**
+### **[Constrained Generative Modeling with Manually Bridged Diffusion Models](http://arxiv.org/abs/2502.20371v1)**
+### **[Tight Inversion: Image-Conditioned Inversion for Real Image Editing](http://arxiv.org/abs/2502.20376v1)**
+### **[PhantomWiki: On-Demand Datasets for Reasoning and Retrieval Evaluation](http://arxiv.org/abs/2502.20377v1)**
+### **[Multi-Agent Verification: Scaling Test-Time Compute with Multiple Verifiers](http://arxiv.org/abs/2502.20379v1)**
+### **[Why Are Web AI Agents More Vulnerable Than Standalone LLMs? A Security Analysis](http://arxiv.org/abs/2502.20383v1)**
+### **[R2-T2: Re-Routing in Test-Time for Multimodal Mixture-of-Experts](http://arxiv.org/abs/2502.20395v1)**
