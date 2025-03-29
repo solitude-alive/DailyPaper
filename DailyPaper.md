@@ -1,81 +1,118 @@
-# The Latest Daily Papers - Date: 2025-03-28
+# The Latest Daily Papers - Date: 2025-03-29
 ## Highlight Papers
-### **[Can Large Language Models Predict Associations Among Human Attitudes?](http://arxiv.org/abs/2503.21011v1)**
+### **[Dynamic Motion Blending for Versatile Motion Editing](http://arxiv.org/abs/2503.20724v1)**
 - **Summary**: Here's a summary and critical evaluation of the paper:
 
 **Summary:**
 
-The paper investigates the ability of large language models (LLMs), specifically GPT-4o, to predict human attitudes and beliefs based on other attitudes, even when those attitudes are seemingly disparate and lack surface-level semantic similarity.  The authors created a novel dataset of human responses to diverse attitude statements and tested GPT-4o's ability to recreate pairwise correlations among attitudes and predict individual attitudes. They found that GPT-4o can predict attitudes beyond surface-level similarity, suggesting it captures aspects of the deeper, latent structure of human belief systems.  While semantic similarity improved prediction accuracy, the model's ability to make meaningful social inferences from dissimilar attitudes was a key finding.  The paper also explores the potential for LLMs to be used for persuasive purposes, raising ethical concerns.
+The paper "Dynamic Motion Blending for Versatile Motion Editing" introduces MotionReFit, a novel framework for text-guided motion editing. MotionReFit utilizes an auto-regressive diffusion model enhanced with a motion coordinator to enable spatial and temporal motion edits directly from textual instructions. The key innovation is MotionCutMix, a data augmentation technique that leverages large-scale unannotated motion databases to generate training triplets by blending body parts from multiple motion sequences based on text. This alleviates the reliance on limited pre-collected training triplets.  Experiments demonstrate state-of-the-art performance across tasks like body part replacement, fine-grained adjustment, and style transfer, with ablation studies validating the effectiveness of MotionCutMix in improving generalization.
 
 **Critical Evaluation:**
 
-**Novelty:** The paper's primary novelty lies in its shift of focus from predicting attitudes based on *similar* or closely related topics (as previous research has done) to exploring predictions between *dissimilar* attitudes. This addresses a crucial gap in the existing literature, which has often focused on surface-level semantic similarities to explain LLM performance.  The creation of a new dataset specifically designed to test this aspect is also a valuable contribution.  The paper also breaks new ground by using a novel method to evaluate correlations across attitudes with the OpenAI API. This methodology is novel and can have useful applications to future research. The examination of these factors and the methodology are what elevate the significance of this paper.
+* **Novelty:** The primary novelty lies in the MotionCutMix data augmentation strategy and the combination of an auto-regressive diffusion model with a motion coordinator.  MotionCutMix is a clever approach to expand the training data distribution by dynamically synthesizing triplets. While diffusion models are used in motion generation, the specific auto-regressive architecture combined with the motion coordinator to address incoordination artifacts demonstrates originality. The idea of using a discriminator as guidance in diffusion models for coherence is not entirely new, but its application within the context of motion composition for editing makes this paper a clear advance.
+* **Significance:** The significance of the work stems from addressing a key limitation in text-guided motion editing: the scarcity of high-quality annotated training triplets.  By enabling training with large, unannotated motion datasets, MotionReFit paves the way for more robust and generalizable motion editing systems. Overcoming this limitation is crucial for wider adoption in animation and computer vision. The introduction of the STANCE dataset is a valuable contribution as well, providing a benchmark for evaluating text-guided motion editing.
+* **Strengths:**
+    * **MotionCutMix:**  The data augmentation technique is well-motivated and effectively expands the training data.
+    * **Auto-Regressive Approach:** Facilitates training and enables temporal editing.
+    * **Motion Coordinator:** Addresses the challenge of incoordination introduced by MotionCutMix.
+    * **Comprehensive Evaluation:** Strong experimental results on diverse editing tasks.
+    * **Universal Framework:** Handles both spatial and temporal edits.
+* **Weaknesses:**
+    * While the paper claims universal text-guided motion editing, the framework seems to be limited to relatively simple actions which could be reflected to the quantitative results. Some qualitative examples showcased in the Appendix seem to be limited.
+    * The auto-regressive nature limits the effectiveness of the model handling complex temporal dependencies, this is highlighted in the Future works of the paper.
+    * The evaluation, while comprehensive, could benefit from more user studies assessing the subjective quality and usability of the edits.  Quantitative metrics don't always fully capture user satisfaction.
+    * The framework needs more generalizable constraints to ensure physical plausibility in extreme editing cases.
+* **Potential Influence:** The paper has the potential to influence future research in text-guided motion editing by providing a more scalable training approach and a strong baseline for comparison.  The MotionCutMix technique can be adapted to other generative tasks where annotated data is scarce.
 
-**Significance:**  The findings are significant for several reasons:
+**Justification for Score:**
 
-*   **Understanding LLM Reasoning:** The study provides insights into the inner workings of LLMs, suggesting they are capable of more than just pattern matching based on semantic similarity. They seem to be learning some underlying structure of human belief systems and applying that in their reasoning processes.
-*   **Ethical Implications:**  The paper highlights the potential for LLMs to be used for manipulative purposes by understanding and predicting individual beliefs. This is a timely and important consideration given the increasing prevalence of LLMs in various applications.
-*   **Applications in Social Science:** The finding that LLMs can capture correlational structures in human data has significant implications for social science research, potentially enabling the creation of more accurate simulations of human behavior.
-*   **Practical Applications:** The findings can be used to improve recommendation systems, target advertising, and align chat assistants to the cultural perspectives of their users.
+Given the novelty of the MotionCutMix technique, the demonstrated performance improvements, the valuable STANCE dataset, and the identified limitations, this paper represents a significant contribution to the field of text-guided motion editing. While further work is needed to address some of the acknowledged limitations, MotionReFit offers a compelling approach to training more robust and versatile systems.
 
-**Strengths:**
-
-*   **Clear Research Question:**  The paper clearly defines the problem it's addressing (predicting attitudes across dissimilar topics).
-*   **Robust Methodology:** The study employs a well-designed methodology, including a custom dataset, a validated research experiment, careful construction of prompts, and rigorous statistical analysis.
-*   **Thoughtful Discussion:** The paper offers a balanced and nuanced discussion of the findings, acknowledging limitations and addressing ethical considerations.
-*   **Strong Supporting Evidence:** The claims made in the paper are all strongly supported by clear and robust data.
-
-**Weaknesses:**
-
-*   **Limited Depth on "Latent Structure":** While the paper shows LLMs can predict across dissimilar attitudes, it doesn't delve deeply into *what* this underlying "latent structure" actually is. More qualitative analysis to identify what conceptual connections the LLM is making would strengthen the study.
-*   **Complexity of Metric Presentation:** Some of the experimental metrics are difficult to follow for someone not deeply versed in LLM evaluation, and the structure of the results could be improved with some clarification.
-
-**Overall:**
-
-The paper presents a significant contribution to the field by moving beyond simply demonstrating that LLMs can predict attitudes to exploring *how* they do it, even when surface-level similarities are absent.  The ethical implications and potential applications in social science are also important. Despite minor weaknesses in the depth of explanation and presentation, the study is well-executed and insightful.
-**Score: 8**
-
-**Rationale:**  The score reflects the strong methodology, original and important research question, and insightful findings. The significance of the paper is somewhat tempered by the limitations noted above (specifically the limited deep dive into understanding the latent structure). This score also takes into consideration the high volume of research conducted in the field of LLMs as of late, which limits the influence that research may have unless highly significant.
+Score: 8
 
 - **Score**: 8/10
 
-### **[Online Reasoning Video Segmentation with Just-in-Time Digital Twins](http://arxiv.org/abs/2503.21056v1)**
-- **Summary**: Here's a summary and critical evaluation of the paper:
+### **[Free4D: Tuning-free 4D Scene Generation with Spatial-Temporal Consistency](http://arxiv.org/abs/2503.20785v1)**
+- **Summary**: Here's a summary and critical evaluation of the Free4D paper:
 
 **Summary:**
 
-The paper introduces a novel framework for online reasoning video segmentation (RS) called "Online Reasoning Video Segmentation with Just-in-Time Digital Twins." This framework aims to address the limitations of existing RS approaches that heavily rely on multimodal Large Language Models (LLMs). It disentangles perception and reasoning by employing an LLM planner to construct low-level scene representations (digital twins) from high-level video using specialist vision models. This approach, termed "just-in-time," selectively requests information from these models only when required by the implicit query, improving efficiency and enabling complex reasoning without LLM fine-tuning. The paper introduces a new video reasoning segmentation benchmark comprising 200 videos with 895 implicit text queries across semantic, spatial, and temporal reasoning categories. Experimental results demonstrate that the proposed method outperforms existing approaches across all reasoning categories.
+The paper introduces Free4D, a tuning-free framework for generating dynamic 3D (4D) scenes from a single image. It leverages pre-trained foundation models to achieve spatial-temporal consistency without requiring extensive training on large-scale multi-view video datasets. The approach involves three main steps: (1) animating the input image using an image-to-video diffusion model and initializing 4D geometric structures, (2) generating spatial-temporally consistent multi-view videos using a point-conditioned diffusion model with an adaptive guidance mechanism and latent replacement strategy, and (3) refining the 4D representation using a modulation-based approach. This results in a 4D representation that enables real-time, controllable rendering.
 
 **Critical Evaluation:**
 
-*   **Novelty:** The core novelty lies in the "just-in-time" digital twin concept for video RS. The idea of dynamically constructing a scene representation tailored to the specific query, as opposed to using a fixed, comprehensive representation, is a significant contribution. Disentangling perception from reasoning also allows for the integration of specialized vision models and LLMs optimized for specific roles. While digital twins are an existing concept, their application in this dynamic, query-driven, and online video segmentation setting appears to be novel. The benchmark dataset is also a valuable contribution.
+*   **Novelty:** The paper's main novelty lies in its *tuning-free* approach to 4D scene generation from a single image, relying on distilling information from pre-trained foundation models. The specific techniques employed – adaptive guidance, point-guided denoising, and latent replacement – are tailored to ensure spatial-temporal consistency in a data-efficient manner. The use of the initial geometric estimation combined with the refinement stage provides a strong structure for the generative process. While individual components may not be entirely novel in isolation (diffusion models, geometric structure initialization), the combination and application in this specific context are novel.
 
-*   **Significance:** The significance of this work stems from its potential to advance embodied AI agents. By enabling efficient online RS without LLM fine-tuning, the framework can enable AI agents to understand complex, implicit instructions in real-time, dynamic environments. The improved performance on complex reasoning tasks and spatial/temporal awareness addresses a major bottleneck in existing RS systems. This can facilitate robots and other agents to interact meaningfully with the real world based on high-level instructions. By improving the online capability of RS, this work could also improve online video understanding tasks such as identifying potential hazards in self-driving car footage and automatically captioning important sections of a live stream.
+*   **Significance:** The significance of this work stems from addressing the challenge of 4D scene generation with limited 4D data. By avoiding the need for fine-tuning on large multi-view video datasets, Free4D offers a more practical and accessible solution. The generation of dynamic scenes can have significant impacts on the entertainment, gaming, and augmented reality industries. Demonstrating improved consistency and aesthetic appeal compared to prior methods enhances its significance. The ability to extract 4D information from a single image opens doors to easier scene reconstruction and manipulation.
 
 *   **Strengths:**
-    *   Addresses limitations of current RS approaches (complex reasoning, LLM fine-tuning, online processing).
-    *   Introduces a novel and efficient "just-in-time" digital twin concept.
-    *   Presents a comprehensive video reasoning segmentation benchmark.
-    *   Demonstrates strong experimental results across various reasoning categories and difficulty levels.
-    *   Provides a clear and well-structured framework with detailed explanations.
-    *   The framework doesn't require LLM fine-tuning which is a significant advantage due to the amount of resource required for finetuning, and the risk of catastrophic forgetting
+
+    *   The tuning-free aspect is a significant advantage, reducing the barrier to entry for 4D scene generation.
+    *   The combination of geometric initialization and a diffusion model is effective in creating consistent and realistic dynamic scenes.
+    *   The proposed adaptive guidance and latent replacement strategies address specific challenges related to spatial and temporal inconsistencies.
+    *   The qualitative and quantitative results demonstrate the superiority of Free4D over existing methods in terms of consistency, aesthetics, and dynamic range.
+    *   A comprehensive ablation study analyzes the contribution of individual modules.
+    *   Real-time rendering capabilities enable interactive applications.
 
 *   **Weaknesses:**
-    *   Relies on powerful pre-trained specialist vision models and LLMs. The method's performance is intrinsically tied to the capabilities of these underlying models. Future versions might face challenges as new foundation models are released that perform specific tasks better.
-    *   The implementation details of the LLM-coder for generating executable spatial/temporal reasoning code could be more elaborated upon.
-    *   While the experiments are comprehensive, further analysis of the computational cost and latency of the proposed method in a real-world online setting would strengthen the evaluation.
-    *   The framework makes heavy use of LLMs. Though finetuning is not required, it is still very computationally expensive.
+
+    *   The method still relies heavily on the quality of the pre-trained image-to-video diffusion model. Inheriting limitations of these models, such as difficulties with blurred or defocused regions can affect the final 4D scene.
+    *   The method's ability to generate novel views with large view ranges from limited 3D cues might be limited. The description section acknowledges this.
+    *   Some qualitative results may still exhibit minor artifacts or inconsistencies, indicating room for improvement.
+    *   The reliance on specific diffusion architectures could limit extensibility or adaptation to different models.
 
 *   **Potential Influence:**
-    *   The "just-in-time" digital twin concept could inspire new architectures for video understanding and reasoning.
-    *   The benchmark dataset could facilitate further research and development in video RS.
-    *   The framework could be extended to other embodied AI tasks.
-    *   Future research could investigate ways to make the specialist models more adaptable and less reliant on powerful pre-trained models, or experiment with smaller LLMs
 
-*   **Overall:**
-    The paper presents a significant and novel contribution to the field of video reasoning segmentation. The "just-in-time" digital twin concept, coupled with the disentangled perception-reasoning framework and the comprehensive benchmark dataset, provides a valuable foundation for future research. While there are some limitations, the strengths of the paper outweigh the weaknesses.
+    *   Free4D's tuning-free paradigm can inspire further research in leveraging pre-trained models for 4D scene generation and other related tasks.
+    *   The proposed techniques for ensuring spatial-temporal consistency can be adopted and adapted in other generative models.
+    *   The framework can pave the way for creating more accessible and practical tools for 4D scene creation and manipulation.
+    *   Future work could potentially incorporate better geometric prior and also try generating the geometry entirely with a diffusion model.
 
-**Score: 8**
+**Justification of Score:**
+
+The paper presents a significant advance in 4D scene generation by offering a compelling tuning-free framework. It demonstrably outperforms existing methods, addresses critical challenges in spatial-temporal consistency, and opens up new possibilities for real-time dynamic scene creation. The limitations, such as reliance on pre-trained model quality and potential challenges with large view ranges, are acknowledged and represent avenues for future research. While the underlying components aren't entirely novel, the way they are combined and adapted for 4D generation makes this work a notable contribution.
+
+Score: 8
+
+- **Score**: 8/10
+
+### **[Leveraging LLMs, IDEs, and Semantic Embeddings for Automated Move Method Refactoring](http://arxiv.org/abs/2503.20934v1)**
+- **Summary**: Here's a summary and critical evaluation of the provided research paper:
+
+**Summary:**
+
+The paper introduces MM-ASSIST, a novel LLM-powered assistant for automating the Move Method refactoring. It addresses the challenges of using LLMs for refactoring, particularly hallucinations and limited context size. The approach combines LLM reasoning with static analysis from IDEs and refactoring-aware retrieval augmented generation (RAG) to filter hallucinations, identify suitable target classes, and ensure the validity of recommendations.  Empirical evaluation demonstrates that MM-ASSIST outperforms previous state-of-the-art methods on both synthetic and real-world datasets. A user study confirms that developers find the tool useful and its recommendations helpful.
+
+**Critical Evaluation:**
+
+* **Novelty:** The paper presents several novel aspects:
+    *   **End-to-end LLM powered MOVEMETHOD assistant:** Previous approaches either focused on recommendation *or* preconditions, but not the whole lifecycle.
+    *   **Refactoring-aware RAG:** Adapting RAG to MOVEMETHOD's specific challenges, focusing on retrieving relevant code snippets instead of the whole project, is a novel and crucial contribution.
+    *   **Hallucination Filtering:** The combination of static analysis from the IDE and semantic analysis to filter the LLM's hallucinations is a significant improvement over simply trusting the LLM's output.
+    *   **Use of VoyageAI:** Exploiting codde-trained vector embeddings significantly improves results.
+
+* **Significance:**
+    *   The paper addresses a practical problem in software development that is frequently performed.
+    *   The tool significantly outperforms existing approaches and bridges the gap between research tools and developer practices.
+    *   The techniques used (RAG, hallucination filtering, IDE integration) are applicable to other refactoring tasks and software engineering problems that could benefit from LLMs.
+    *   The creation of a real-world MOVEMETHOD dataset from open-source projects is a valuable contribution to the research community, especially as many current datasets are either synthetic or risk LLM data contamination.
+
+* **Strengths:**
+    *   **Strong empirical validation:** The paper uses a comprehensive and multi-methodology approach, including comparative studies, real-world refactoring analysis, and user studies.
+    *   **Well-defined concepts:** The paper clearly defines key concepts like "valid refactoring recommendation" and "hallucination types."
+    *   **Practical tool:** The MM-ASSIST plugin demonstrates the feasibility of the approach and addresses the practical considerations for integrating it into a developer's workflow.
+    *   **Addresses key LLM limitations:**  The paper acknowledges and tackles the challenges of using LLMs for code refactoring, particularly hallucination and context window limitations.
+
+* **Weaknesses:**
+    *   **Java-centric focus:** The current implementation and evaluation are specific to Java. While the core concepts are generalizable, more evidence of wider applicability would strengthen the paper. The paper admits this but should have provided even higher emphasis.
+    *   **Limited scope of refactoring types:** The paper focuses solely on Move Method. While this is a common refactoring, extending the approach to other refactorings would further demonstrate its value.
+    *   **Dependency on commercial APIs:** reliance on GPT4o and VoyageAI, both commercial LLM APIs, raises concerns about reproducibility and the long-term viability of the approach if these APIs change or become unavailable.
+    *   **Static Method Challenges:** While it made strides in recommending what static methods to refactor, results were weaker than on instance methods.
+
+* **Justification of Score:**
+   The paper delivers a solid, well-validated approach for automating a crucial software refactoring task. It overcomes significant challenges in using LLMs for this purpose and presents a practical tool with clear benefits for developers. While the Java-centric focus and the dependence on commercial APIs are limitations, the novelty and impact of the approach are substantial. The gains over prior work on both standard benchmarks and a novel real-world dataset are impressive.
+
+Score: 8
 
 - **Score**: 8/10
 
@@ -84,108 +121,78 @@ The paper introduces a novel framework for online reasoning video segmentation (
 
 **Summary:**
 
-The paper introduces MoQa, a novel quantization framework specifically designed for Mix-of-Experts (MoE) models.  MoQa addresses the limitations of existing quantization methods, which are primarily designed for dense Large Language Models (LLMs) and fail to account for the unique complexities of MoEs.  The core idea is to decouple the data-model distribution complexity in MoEs into three key analysis stages: sparse data activation, data-parameter mapping, and inter-expert correlations. This decoupling allows the framework to identify the significance of individual experts and parameters with greater awareness of the underlying data distribution. Based on these insights, MoQa proposes fine-grained mix-quantization strategies that adapt to various data activation and expert combination scenarios. The paper presents experimental results demonstrating improved perplexity on language modeling tasks and accuracy on zero-shot inference tasks compared to traditional methods like GPTQ and MoEPTQ.
+The paper introduces MoQa, a novel quantization framework specifically designed for Mixture-of-Experts (MoE) models.  Recognizing that existing quantization methods, which primarily target dense LLMs, are not well-suited for MoEs due to their complex data-model relationships, MoQa employs a multi-stage analysis.  It decouples the complexity by analyzing: (1) sparse data activation and token-level utilization, (2) data-parameter mapping to understand which experts are activated for different data distributions, and (3) inter-expert correlations to identify redundancy and overlap. Based on this detailed analysis, MoQa proposes fine-grained mixed-quantization strategies that adapt to different activation patterns and expert combinations. Experiments demonstrate improved perplexity on language modeling tasks and higher accuracy on zero-shot inference compared to baseline quantization methods like GPTQ and MoEPTQ. The authors also discuss the limitations of existing techniques in the MoE context and provide insights for future MoE construction and optimization.
 
 **Critical Evaluation:**
 
-*   **Novelty:** The paper's primary novelty lies in its multi-stage approach to analyzing and optimizing MoE quantization.  Existing methods largely treat MoEs as monolithic structures or apply random strategies, ignoring the dynamic and complex relationships between data, experts, and parameters. MoQa's approach of decoupling these relationships represents a significant advancement. Specifically, the concept of analyzing token-level utilization, re-weighting data distributions to emphasize relevant tokens, and then mapping this refined data to expert models, before finally considering inter-expert correlations, is novel.
-*   **Significance:** The work has the potential to significantly impact the field of MoE compression. The improved quantization performance achieved by MoQa, without sacrificing accuracy, can make these large models more accessible and deployable in resource-constrained environments. Further, the comprehensive analysis of data-model distribution in MoEs provides valuable insights that can guide future MoE architecture design and optimization. The discussion about the limitations of current quantization approaches for MoEs and the insightful analysis of each stage contributes to the understanding of how and where the existing quantization methods fail in MoE models, leading to a more robust and accurate analysis.
-*   **Strengths:**
-    *   **Comprehensive Analysis:**  The multi-stage analysis is well-motivated and clearly explained.
-    *   **Fine-grained Strategies:** The resulting mix-quantization strategies are tailored to the specific challenges of MoEs.
-    *   **Strong Empirical Results:** The experiments demonstrate substantial improvements compared to existing methods.
-    *   **Clear Writing:** The paper is well-written and easy to follow.
-*   **Weaknesses:**
-    *   **Complexity:** The framework is complex and potentially challenging to implement in practice. The number of tunable hyperparameters for the multi-stage optimization would need to be carefully tuned.
-    *   **Generalization:** While the results are promising, more experiments on a wider range of MoE architectures and datasets would strengthen the claim of general applicability.
-    *   **Limited Scope:** The scope of the evaluation focuses on limited popular LLMs.
-*   **Potential Influence:** If widely adopted, MoQa could become a standard approach for quantizing MoEs. Its insights are likely to inspire new research directions in MoE compression and optimization. It could also influence the design of new MoE architectures that are more amenable to quantization.
+**Novelty:**
 
-**Justification:**
-MoQa addresses a critical and timely challenge in the field of LLMs – efficient compression and deployment of MoE models. The paper's novel multi-stage analysis and tailored quantization strategies represent a significant advancement over existing methods. Although the complexity of the approach may pose some implementation challenges, the strong empirical results and insightful analysis justify a high score. There are limitations such as the potential for increased implementation complexity.
+The paper presents a significant advancement in MoE quantization. The key novelty lies in the multi-stage data-model distribution analysis tailored specifically for the MoE architecture.  While techniques like GPTQ consider data distributions for quantization, they are primarily designed for dense models with simpler one-to-one data-parameter mappings. MoQa's decoupling of the complexities inherent in MoEs—sparse activation, many-to-many expert fitting, and inter-expert correlations—is a genuinely novel approach. Analyzing token utilization and expert significance from a distribution perspective is also a valuable contribution.
+
+**Significance:**
+
+The significance of this paper is high for several reasons:
+
+*   **Addresses a critical gap:** MoEs are increasingly important in scaling LLMs, but their unique structure presents challenges for existing quantization techniques. MoQa directly addresses this gap, providing a much-needed solution.
+*   **Improved performance:**  The experimental results clearly demonstrate the effectiveness of MoQa.  Improvements in both perplexity and zero-shot accuracy over strong baselines like GPTQ and even a MoE-specific variant (MoEPTQ-R) indicate a substantial practical benefit.
+*   **Insightful analysis:**  The paper doesn't just present a method; it offers a thorough analysis of why existing methods fail and how MoQa overcomes these limitations.  The insights into data-model relationships in MoEs are valuable for the broader research community, informing future MoE architecture design and optimization.
+*   **Potential impact:** The findings have the potential to significantly impact the field by improving the efficiency and accessibility of large MoE models, facilitating their deployment in resource-constrained environments. By achieving this, models can achieve better performance and efficiency across multiple scenarios.
+
+**Strengths:**
+
+*   **Clear problem definition:**  The paper clearly articulates the challenges of quantizing MoEs and why existing methods are inadequate.
+*   **Well-designed method:**  MoQa's multi-stage analysis is logically structured and well-motivated.
+*   **Strong experimental results:** The experiments are thorough and compare against relevant baselines on multiple tasks. The results convincingly demonstrate the superiority of MoQa.
+*   **Comprehensive analysis:**  The paper provides a detailed analysis of the results and discusses the implications for MoE quantization and optimization.
+
+**Weaknesses:**
+
+*   **Computational cost of analysis:** The multi-stage analysis might introduce some computational overhead compared to simpler quantization techniques. The paper could benefit from discussing the computational cost of the analysis steps in more detail and how this might scale with larger MoE models.
+*   **Parameter sensitivity:** The method relies on several parameters, such as the re-weighting factor 'a' and the expert partitioning threshold 'T'. The paper could provide more guidance on how to choose these parameters in practice and explore their sensitivity to different datasets and model architectures.
+*   **Generalization:** While the paper tests on several MoE models, further experiments on a wider variety of MoEs and datasets would strengthen the generalization claims. The paper could analyze different scenarios for model-model correlations (Pattern 1 or Pattern 2) and adapt accordingly.
+
+**Justification of Score:**
+
+Considering the paper's novelty, significance, strengths, and weaknesses, I assign a score of **8**. The multi-stage analysis and the resulting performance improvements are valuable contributions. While the computational cost and parameter sensitivity could be explored in more depth, the overall impact of the paper on the field of MoE quantization is substantial. It opens up a new avenue for research and provides a practical solution for making large MoE models more efficient. Future work can build upon MoQa to further refine and optimize MoE quantization strategies.
+
 Score: 8
 
 - **Score**: 8/10
 
-### **[System-wide Instrument Transformer Calibration and Line Parameter Estimation Using PMU Data](http://arxiv.org/abs/2503.21202v1)**
-- **Summary**: Here's a summary and critical evaluation of the provided research paper:
-
-**Summary:**
-
-The paper addresses the challenge of simultaneously calibrating instrument transformers (ITs) and estimating line parameters (LPE) in power systems using phasor measurement unit (PMU) data.  It proposes a statistical framework to solve the interdependent SLIC problem. The key contributions are: a quantization procedure for uniquely identifying line parameters, an algorithm to leverage the accuracy of Revenue Quality Meters (RQMs) for system-wide SLIC using only *one* RQM in a connected tree, and a method to determine the optimal RQM location for minimizing estimation errors. The approach accounts for variations in line parameters and errors inherent in PMU devices. The paper demonstrates the accuracy and robustness of the method using the IEEE 118-bus system, and validates its practicality with real-world PMU data from a U.S. power utility.
-
-**Critical Evaluation:**
-
-* **Novelty:**  The paper presents several novel aspects:
-
-    *   **Quantization Procedure:** The proposed method's novelty lies in its quantization procedure to uniquely identify line parameters, which directly addresses the 'underdetermined' nature of the traditional problem formulations. This is a significant step towards a practical and computationally feasible solution.
-    *   **Minimal RQM Requirement:** The approach reduces reliance on expensive "perfect" ITs (RQMs) and demonstrates that system-wide calibration is achievable with just *one* strategically placed RQM.  This is a cost-effective and significant contribution. Previous approaches often assume or require error-free measurements from multiple ITs or knowledge of line parameters beforehand.
-    *   **RQM Placement Algorithm:**  Developing an algorithm to determine the "best" location for that single RQM is a unique contribution that further enhances the practicality of the approach.
-    *   **Explicit Noise Modeling:** explicitly modeling of the PMU device additive Gaussian noise in the positive-sequence components of the voltage and current phasors. This is crucial for practical applicability, as it provides better estimations.
-
-*   **Significance:** The work is significant for several reasons:
-
-    *   **Improved Accuracy and Reliability:** Calibrating ITs is crucial for ensuring the accuracy of power system monitoring and control applications, leading to more reliable operation.
-    *   **Practical Applicability:**  The method's ability to work with real-world data, requiring only *one* RQM, accounts for line parameter variations, and noise makes it highly relevant for practical implementation by power utilities.
-    *   **Addresses a Fundamental Interdependency:** The simultaneous LPE and IT calibration problem has been a long-standing challenge. This research presents a comprehensive and effective solution that breaks the cycle of interdependency. The paper's comparison to state-of-the-art [19] clearly displays a significant leap in IT estimation.
-    *   The paper makes it easily implementable by sharing the pseudo-code of the proposed algorithms.
-
-*   **Strengths:**
-
-    *   **Rigorous Methodology:**  The approach is based on solid statistical principles (TLS) and a well-defined mathematical formulation.
-    *   **Comprehensive Validation:**  The use of both a standard test system (IEEE 118-bus) and real-world data provides strong evidence of the method's effectiveness.
-    *   **Sensitivity Analysis:**  The sensitivity studies examining the impact of PMU noise and IT accuracy class provide valuable insights into the robustness of the method.
-    *   **Clear Presentation:** The paper is well-written and logically organized, making it easy to understand the proposed method and its results.
-
-*   **Weaknesses:**
-
-    *   **Connected Tree Assumption:**  The requirement of a 'connected tree' topology may not always be satisfied in complex power systems. The paper could benefit from a discussion on how the method could be adapted or extended to handle more general network topologies with loops. While PMUs are commonly placed to satisfy this assumption, a brief consideration of this limitation is warranted.
-    *   **Database Dependency:** reliance on prior information regarding historical value ranges of the network parameters which can introduce external dependencies on system components.
-    *   **Computational Cost:** The algorithm for RQM placement (Algorithm 4), involving repeated execution of the SW-SLIC algorithm, could be computationally expensive for very large-scale systems. While centrality measures are suggested, a more detailed analysis of the computational complexity and scalability would be beneficial.
-    *   **Limited types of variations are considered in the database values:** Line parameters will exhibit variations that have seasonality in them due to temperature and loading conditions. A detailed analysis of the selection of appropriate parameter variation limits must be described.
-
-* **Potential Influence:** This research has the potential to significantly impact the field of power system monitoring and control.  Its practicality, accuracy, and robustness make it a valuable tool for power utilities seeking to improve the accuracy of their state estimation and other applications reliant on PMU data. The use of a minimal number of RQMs can drastically lower the cost of wide-area applications that use synchrophasors.
-
-*Overall, this is a valuable contribution with sound principles that will motivate more research.*
-
-**Score: 8.5**
-
-*Rigorous Rationale:* The score of 8.5 reflects the significant novelty, practical relevance, and comprehensive validation of the research. The paper addresses a long-standing problem in a cost-effective and robust manner. It demonstrates a clear advancement over existing methods, particularly in its ability to function effectively with just one RQM and in accounting for line parameter variations. The main deductions in the score are due to the limitations regarding the connected tree topology and the database dependencies, as well as a lack of a more detailed scalability analysis. In the absence of these limitations, it would easily warrant an excellent rating. However, the paper is well-thought-out and provides considerable advancements in the accuracy of the measurements.
-
-- **Score**: 8/10
-
 ### **[Rethinking Graph Structure Learning in the Era of LLMs](http://arxiv.org/abs/2503.21223v1)**
-- **Summary**: Here's a summary and critical evaluation of the paper:
+- **Summary**: Here's a concise summary and critical evaluation of the paper "Rethinking Graph Structure Learning in the Era of LLMs":
 
 **Summary:**
 
-The paper "Rethinking Graph Structure Learning in the Era of LLMs" proposes a new paradigm for graph structure learning (GSL) specifically designed for text-attributed graphs (TAGs) leveraging large language models (LLMs). Recognizing the limitations of existing GSL methods tailored for traditional graphs without textual information, the authors introduce Large Language and Tree Assistant (LLaTA). LLaTA reformulates the GSL optimization objective as a tree-based optimization task with a language-aware tree sampler. This approach employs a structural encoding tree to capture graph topology, followed by LLM-based in-context learning to understand topology and text, and ultimately performs leaf-oriented two-step sampling for edge addition/removal.  The design aims for a decoupled, training-free model architecture, emphasizing reliable LLM inference over fine-tuning. Extensive experiments on 10 TAG datasets demonstrate LLaTA's flexibility, scalability, and state-of-the-art performance.
+The paper addresses the problem of graph structure learning (GSL) for text-attributed graphs (TAGs) in the context of large language models (LLMs). It argues that traditional GSL methods are not well-suited for TAGs due to the rich textual information and the computational demands of LLMs. The authors propose a new paradigm that reformulates GSL as a tree-based optimization task with decoupled and training-free model design principles. Their proposed method, Large Language and Tree Assistant (LLaTA), constructs a topology-aware encoding tree, leverages LLM in-context learning with tree-based prompts, and performs leaf-oriented two-step sampling to improve graph structure. Experiments on 10 TAG datasets demonstrate that LLaTA achieves state-of-the-art performance while being flexible, scalable, and efficient.
 
 **Critical Evaluation:**
 
-*   **Novelty:** The paper presents a novel approach to GSL for TAGs by shifting the focus from end-to-end training of edge predictors to a tree-based optimization framework driven by LLM in-context learning. The key innovations lie in the tree-based structural encoding to guide the LLM and the decoupled training-free architecture. This is a valuable contribution as prior LLM-based GSL methods often rely on fine-tuning or complex instruction datasets, hindering efficiency and adaptability.
-    The key idea is to harness LLM's in-context learning abilities efficiently without computationally expensive fine-tuning, which provides a significant leap in terms of resource usage. The tree representation, while rooted in existing entropy-based methods, offers a structured framework for integrating textual data and prompting the LLM. This offers clear practical advantages.
-
-*   **Significance:**  The paper is significant because it addresses a critical challenge in graph machine learning – efficient and robust learning with TAGs, a data representation becoming increasingly important.  By decoupling the GSL process from the need for extensive training and customized backbones, the approach makes GSL more accessible and adaptable to real-world applications. The experiments demonstrate substantial performance improvements and efficiency gains compared to existing LLM-based GSL methods.
-    The effectiveness of LLaTA across a range of datasets supports its generalizability, and the ablation studies provide valuable insights into the contributions of different components. The robustness analysis and the analysis of time complexity makes this paper valuable to the community. However, the dependence on a high-performing LLM could be a limitation, as the quality of the LLM directly impacts the performance of LLaTA. Future work should explore how to make the model more robust to the LLM chosen.
-
 *   **Strengths:**
-    *   **Clear Problem Definition:** The paper clearly identifies the limitations of existing GSL methods when applied to TAGs in the era of LLMs.
-    *   **Innovative Approach:**  The tree-based optimization framework and the decoupled, training-free architecture are innovative and well-motivated.
-    *   **Comprehensive Experiments:**  The extensive experiments on 10 TAG datasets demonstrate LLaTA's superior performance, flexibility, and scalability. The ablation studies and robustness analysis provide valuable insights.
-    *   **Well-written:** The paper is generally well-written and organized, making it easy to understand the proposed approach and its benefits.
+    *   **Problem Relevance:** The paper tackles a timely and important problem: adapting GSL to the capabilities of LLMs for enhanced graph learning on TAGs. This aligns well with current research trends in graph machine learning.
+    *   **Novelty of Approach:** The tree-based optimization framework is a significant departure from traditional edge predictor-based GSL methods. The idea of using LLM in-context learning with topology-aware prompts is innovative. This leverages LLMs' strengths without requiring computationally intensive fine-tuning.
+    *   **Model Design Principles:** The decoupled and training-free model design principles offer practical advantages in terms of efficiency, adaptability, and scalability.
+    *   **Empirical Evaluation:** The extensive experimental results on diverse TAG datasets provide strong evidence of LLaTA's superior performance compared to existing GSL methods, including LLM-based approaches. The ablation studies and robustness analysis further validate the design choices.
+    *   **Interpretability:** The case study provides insights into how the LLaTA pipeline works and demonstrates the benefits of the approach.
+    *   **Writing Quality:** The paper is well-written, clearly structured, and easy to follow, with sufficient background information and explanations of the proposed methods.
 
 *   **Weaknesses:**
-    *   **LLM Dependency:** The performance is heavily dependent on the quality and capabilities of the underlying LLM. While this is inherent to the approach, it is a potential limitation.
-    *   **Hyperparameter Sensitivity**: There is sensitivity to the hyperparamter tuning which could be problematic depending on the LLM used.
+    *   **Hyperparameter Sensitivity:** Although the experiments show strong results, the method has several hyperparameters. While the authors performed sensitivity analysis, practical application might still require considerable tuning.
+    *   **Scalability Limitations:** The time complexity analysis shows a polynomial dependence on the number of nodes, which may pose a challenge for very large graphs. While the paper improves running time compared to other LLM-based GSL methods, scalability is an ongoing consideration.
+    *   **Theoretical Guarantees:** The paper focuses mainly on empirical results. Adding some theoretical analysis to support the tree-based optimization or convergence properties would strengthen the work.
+    *   **LLM Dependence:** The method is heavily reliant on the performance of LLMs. While the paper shows results with different LLMs, future improvements or changes in LLMs' behavior may affect the performance of LLaTA.
 
-*   **Potential Influence:** LLaTA has the potential to significantly influence the field of GSL, particularly in applications involving TAGs. The training-free approach and the use of tree prompts can inspire new research directions for leveraging LLMs in graph machine learning.
+*   **Significance:**
+    *   The paper provides a new perspective on GSL in the era of LLMs, shifting the focus from edge prediction to tree-based optimization with LLM-driven prompts.
+    *   The decoupled and training-free approach makes GSL more accessible and practical for real-world applications.
+    *   The empirical results demonstrate significant performance improvements over existing methods, indicating the potential of LLaTA to advance the state-of-the-art in graph learning on TAGs.
+    *   The work provides valuable insights for future research on integrating LLMs with GSL.
 
-**Score: 8.5**
+*Justification of the Score:*
 
-**Justification:**
+The paper presents a significant advancement in GSL for TAGs by effectively integrating LLMs without requiring fine-tuning. The tree-based optimization framework and the use of topology-aware prompts are novel ideas that lead to substantial performance improvements. The empirical evaluation is comprehensive, and the model design is well-motivated. The weaknesses, such as hyperparameter sensitivity and LLM dependence, are common challenges in this field and do not significantly detract from the overall contribution. The paper offers valuable insights and a practical solution for a relevant problem, making it a significant contribution to the field.
 
-The paper makes a substantial contribution by proposing a novel and effective approach to GSL for TAGs in the era of LLMs. The method is well-motivated, innovative, and supported by comprehensive experiments. The decoupled, training-free architecture addresses a crucial challenge in the field by making GSL more efficient and adaptable. While the dependency on LLMs and the number of hyperparameters are potential limitations, the overall novelty and significance of the approach merit a high score. The clear performance gains, scalability, and flexibility position this paper as a valuable contribution that can influence future research in GSL and graph machine learning.
+Score: 8
 
 - **Score**: 8/10
 
@@ -194,203 +201,371 @@ The paper makes a substantial contribution by proposing a novel and effective ap
 
 **Summary:**
 
-The paper introduces ResearchBench, a novel benchmark designed to evaluate the capabilities of Large Language Models (LLMs) in scientific discovery. The benchmark decomposes the complex process of scientific hypothesis formulation into three key sub-tasks: inspiration retrieval, hypothesis composition, and hypothesis ranking. The dataset comprises scientific papers across 12 disciplines, enabling a broad assessment of LLMs' abilities. The authors developed an automated LLM-based framework to extract research questions, background surveys, inspirations, and hypotheses from these papers, ensuring contamination resistance by focusing on recent publications. Experimental results reveal that LLMs show promise in inspiration retrieval (an out-of-distribution task), suggesting their potential as "research hypothesis mines."
+The paper introduces ResearchBench, a novel benchmark designed to evaluate the ability of Large Language Models (LLMs) to perform tasks related to scientific discovery. It decomposes the scientific discovery process into three sub-tasks: inspiration retrieval, hypothesis composition, and hypothesis ranking. The benchmark uses a dataset extracted from scientific papers across 12 disciplines published in 2024, aiming to avoid data contamination. The paper presents an automated framework for extracting research questions, background surveys, inspirations, and hypotheses from these papers. The authors evaluate several popular LLMs on ResearchBench, highlighting their performance, especially in inspiration retrieval, where LLMs show an ability to discover relevant knowledge associations beyond established relationships. The paper positions LLMs as "research hypothesis mines," with the potential to generate innovative hypotheses at scale. The study also identifies inspiration retrieval as a key bottleneck in automated scientific discovery.
 
 **Critical Evaluation:**
 
-*   **Novelty:** The paper makes a significant contribution by addressing a critical gap in evaluating LLMs for scientific tasks. The decomposition of scientific discovery into sub-tasks is a valuable insight, and the creation of a dedicated benchmark addresses a lack of specific resources in this area. The dataset's focus on recent publications is crucial to mitigate data contamination.
+*   **Novelty:** The paper presents a significant contribution in terms of benchmarking LLMs for scientific tasks. The decomposition of scientific discovery into sub-tasks is a valuable approach. The dataset construction methodology, focusing on recent publications and using an automated extraction framework, is also novel and addresses potential data contamination concerns.
 
-*   **Significance:** The benchmark opens up new avenues for studying and improving LLMs' role in scientific research. The finding that LLMs can retrieve relevant inspirations despite their seemingly unrelated nature to the research question is particularly impactful. This suggests that LLMs can indeed generate novel associations, which is a cornerstone of creative and innovative scientific thought. By defining a clear benchmark, the paper sets a framework for future studies and advancements in the field of automated scientific discovery.
+*   **Significance:** The paper has important implications for using LLMs as scientific discovery tools. By identifying inspiration retrieval as a key bottleneck, it guides future research towards improving this aspect of LLM performance. The benchmark allows for comparing LLMs effectively for this purpose, which is vital for selecting appropriate models for various applications. The idea of LLMs as “research hypothesis mines” is a creative concept that could promote innovative research.
+
+*   **Strengths:**
+    *   The study has a clear research question and well-defined evaluation metrics.
+    *   The dataset is relatively large-scale, covering diverse scientific disciplines.
+    *   The paper rigorously addresses potential data contamination.
+    *   The automated framework for data extraction provides an efficient method for maintaining a benchmark.
+    *   The analysis of LLM performance provides actionable insights for improving LLMs for scientific tasks.
+
+*   **Weaknesses:**
+    *   The paper could benefit from an expanded discussion of limitations, beyond data size.
+    *   The selection of specific sub-tasks might be questioned (are there other potential ways to decompose the scientific discovery process?).
+    *   Although the paper mentions expert validation, further details on this process (e.g., inter-rater reliability) could enhance the credibility.
+    *   The conclusion mentions a "paradigm shift", which may be an overstatement given the nascent nature of this research. More conservative language would be appropriate.
+    *   The evaluation of hypothesis composition could be improved by including human evaluation of the hypotheses generated. LLM generated ratings have the potential for inherent bias.
+
+*   **Potential Influence:** The paper has the potential to influence the development of LLMs specifically tailored for scientific applications. It could spur future research in areas like enhancing inspiration retrieval and mitigating biases in hypothesis ranking.
+
+**Score: 8**
+
+**Rationale:**
+
+ResearchBench represents a valuable contribution to the field by providing a comprehensive and well-designed benchmark for assessing LLMs' ability to aid scientific discovery. The decomposition into sub-tasks, particularly the identification of inspiration retrieval as a bottleneck, offers significant insights for future research. However, there's room for improvement in expanding the discussion of limitations, further detailing the expert validation, and justifying the selected sub-tasks. Given the novelty and significance of its contributions and its potential influence on the development of LLM-driven scientific tools, a score of 8 seems appropriate.
+
+- **Score**: 8/10
+
+### **[Reinforced Model Merging](http://arxiv.org/abs/2503.21272v1)**
+- **Summary**: Here's a summary and critical evaluation of the paper "Reinforced Model Merging":
+
+**Summary:**
+
+The paper introduces Reinforced Model Merging (RMM), a novel framework that leverages reinforcement learning (RL) for training-free model merging. RMM treats the merging process as an agent navigating a model layer-by-layer, making decisions about merging actions within a designed environment.  The agent receives rewards based on the performance of the merged model.  To accelerate the process, the paper introduces a Dynamic Average Reward (DAR) mechanism that uses only a small subset of data for evaluation during the RL training phase. The authors demonstrate the effectiveness of RMM on various vision and NLP tasks, showing improved performance compared to existing training-free merging methods. Key claims include reduced computational time, better merging performance, and state-of-the-art results on several datasets.
+
+**Critical Evaluation:**
+
+*   **Novelty:** The core idea of using RL for model merging is genuinely novel.  Most existing training-free merging techniques rely on heuristics or search algorithms. RMM offers a more flexible and adaptive approach by framing the merging process as a decision-making problem. The DAR mechanism is a practical contribution, addressing a key bottleneck in RL-based approaches that often suffer from lengthy evaluation cycles.
+
+*   **Significance:**  The paper's potential significance lies in several areas:
+
+    *   **Improved Merging Performance:** The experimental results demonstrate consistent improvements over state-of-the-art training-free merging methods across a range of tasks. This suggests that RMM can effectively combine knowledge from multiple models to create a more powerful merged model.
+
+    *   **Computational Efficiency:** The DAR mechanism significantly reduces the computational cost of the RL training phase.  This makes RMM more practical for real-world applications where computational resources are limited.
+
+    *   **Adaptability:** The RL framework provides adaptability to different merging scenarios. The action space and reward function can be customized to suit the specific models and tasks being merged.
 
 *   **Strengths:**
 
-    *   **Comprehensive Decomposition:** Breaking down the hypothesis formulation process into sub-tasks is a logical and insightful approach.
-    *   **Data Contamination Control:** The focus on recent publications is commendable and crucial for ensuring the benchmark's validity.
-    *   **Automated Framework:** The development of an automated framework for data extraction adds scalability and reduces manual effort in benchmark construction.
-    *   **Out-of-Distribution Task Analysis:** The exploration of inspiration retrieval as an out-of-distribution task highlights the LLMs' ability to make novel connections.
+    *   **Clear Problem Formulation:** The paper clearly articulates the limitations of existing merging techniques and motivates the need for a more adaptive and efficient approach.
+
+    *   **Well-Designed Framework:** The RMM framework is well-designed and integrates the RL agent, environment, and DAR mechanism seamlessly.
+
+    *   **Comprehensive Evaluation:** The paper provides extensive experimental results across various vision and NLP datasets, comparing RMM to several baseline methods.  The ablation study on DAR provides further insights into its effectiveness.
+
+    *   **Reproducibility:** The code availability enhances reproducibility and allows other researchers to build upon the work.
 
 *   **Weaknesses:**
 
-    *   **Limited scope:** Focusing primarily on papers published during a single year helps to avoid data contamination but may limit the diversity of the benchmark.
-    *   **Expert Validation Sample Size:** The expert evaluation of the data extraction framework (62 papers) is a reasonable starting point, but increasing the sample size would further strengthen the validation.
-    *   **Reliance on extractive methods:** Hypothesis Composition and hypothesis ranking relied on existing text in the literature and can be more powerful if it had the potential to generate more original content.
-*   **Potential Influence:** The paper has the potential to influence the direction of LLM research in scientific discovery. The ResearchBench provides a foundation for further exploration of LLMs' capabilities, fostering innovation in automated hypothesis generation.
-*   **The framework for extracting ideas is not perfect:** While the automated framework helps to extract the necessary components for each hypothesis, it does so with limited accuracy, given that each framework had only roughly 80% accuracy.
+    *   **Complexity:** RL-based approaches introduce complexity in terms of hyperparameter tuning and algorithm selection. It is unclear how robust RMM is to variations in these hyperparameters. The authors could benefit from including a sensitivity analysis to quantify the effect of hyperparameters on the merging process.
+
+    *   **Data Subsetting Strategy:** The DAR is an interesting approach to speed up the evaluation. However, the subsetting of the data during the evaluation phase could introduce bias or limit the generalizability of the merged model. While the experiments show this approach works well, more detailed study on the types of data used and different data subset strategies is warranted.
+
+    *   **Limitations in the choice of baselines:** The study is limited to training-free techniques. While this simplifies the setup, comparison against SOTA fine-tuning techniques would give a good sense of the performance gap between different classes of techniques.
+
+*   **Potential Influence:** RMM has the potential to influence the field of model merging by providing a more flexible, efficient, and adaptable approach. The RL-based framework could be extended to other merging scenarios, such as multi-modal or heterogeneous model merging.  The DAR mechanism could also be adopted by other RL applications where reward feedback is a bottleneck.
+
+**Justification for Score:**
+
+Overall, the paper makes a significant contribution to the field of model merging. The use of RL is novel and addresses key limitations of existing training-free methods. The comprehensive evaluation and the clear articulation of the framework's strengths and weaknesses add value. While the complexity and potential impact of hyperparameter selection and DAR strategy needs to be carefully considered, the paper presents a strong foundation for future research. Given the novelty, significance, and practical impact, I assign a score of:
 
 **Score: 8**
 
 - **Score**: 8/10
 
-### **[HORT: Monocular Hand-held Objects Reconstruction with Transformers](http://arxiv.org/abs/2503.21313v1)**
-- **Summary**: Here is a summary and critical evaluation of the paper:
+### **[Invert2Restore: Zero-Shot Degradation-Blind Image Restoration](http://arxiv.org/abs/2503.21486v1)**
+- **Summary**: Here's a summary and critical evaluation of the provided paper:
 
 **Summary:**
-The paper introduces HORT, a coarse-to-fine transformer-based framework for reconstructing 3D point clouds of hand-held objects from monocular images.  The method first generates a sparse point cloud from image and hand geometry features, then progressively refines it into a dense representation using pixel-aligned image features.  Key aspects include the integration of image features with 3D hand geometry to predict object point clouds and pose relative to the hand, and end-to-end training for optimal performance. Experimental results on synthetic and real datasets show state-of-the-art accuracy with faster inference speed, demonstrating good generalization.
+
+The paper introduces Invert2Restore (I2R), a novel zero-shot, training-free image restoration method. I2R addresses the challenge of image restoration in real-world scenarios where the degradation operator is either completely unknown (fully blind) or only partially known (partially blind).  I2R leverages a pre-trained Denoising Diffusion Implicit Model (DDIM) as a deterministic mapping between normal noise samples and clean images. The core idea is that the noise corresponding to a degraded image, when mapped through the inverted DDIM, resides in a low-probability region of the standard normal distribution. I2R then "restores" the image by guiding this noise towards a higher density region of the standard normal distribution. This is achieved by identifying and correcting local noise patches that deviate from normality, and then transforming back to image space via the DDIM.  The paper demonstrates I2R's effectiveness across a variety of image restoration tasks, including JPEG de-artifacting, deraining, deblurring, and super-resolution, and shows it achieves state-of-the-art performance in many scenarios.
 
 **Critical Evaluation:**
 
-*   **Novelty:** The paper presents a novel approach to 3D reconstruction of hand-held objects by using a coarse-to-fine transformer architecture. The fusion of image and hand geometry is a good idea that leverages implicit cues provided by hand shape. Pixel-aligned image feature extraction is also an efficient technique for refining point clouds. Combining these contributions into a single, end-to-end trainable model adds novelty. The method advances the field of hand-object reconstruction by emphasizing a balance between accuracy and inference speed, which is critical for real-time applications.
-*   **Significance:** Achieving faster inference speeds is indeed significant, as it addresses a key limitation of existing methods (especially diffusion-based ones like D-SCO).  Outperforming state-of-the-art methods (D-SCO) in both speed and accuracy is a strong claim. The experimental results support the claim of state-of-the-art reconstruction accuracy with fast inference speed across various datasets. Generalization to "in-the-wild" images further enhances the significance, as it shows the practicality of the method.
+*   **Novelty:** The core idea of operating in noise space rather than image space for restoration is a fresh perspective, particularly in the context of diffusion models. While diffusion models have been used for image restoration before, the approach of inverting to the noise space and then "rectifying" that noise, guided by statistical properties of the normal distribution, is quite novel. Most existing works address fully/partially blind image restoration by either estimating kernel parameters, or by modifying the DDIM reverse process, making I2R significantly distinct.
+
+*   **Significance:** The ability to perform effective image restoration *without* task-specific training, and *without* needing to know the explicit degradation model, is a significant advancement. It expands the applicability of image restoration techniques to real-world scenarios where degradation models are often unknown or complex. The experimental results appear strong, demonstrating consistent state-of-the-art performance, or at least competitive performance, across a diverse set of degradation types. The method's ability to work even in scenarios where previous approaches require explicit kernel estimation, demonstrates high practical value.
+
 *   **Strengths:**
-    *   The coarse-to-fine architecture is a good design choice for improving efficiency and capturing both global and local details.
-    *   Integrating hand geometry features along with image features is a valuable addition for regularization and reducing ambiguities in monocular 3D reconstruction.
-    *   The end-to-end training strategy simplifies the pipeline and potentially leads to more optimal performance.
-    *   Comprehensive experiments on diverse datasets including ObMan, HO3D, DexYCB, and MOW validate the method's effectiveness and generalization.
-    *   The clear presentation and detailed architecture diagrams contribute to the paper's readability.
+
+    *   **Training-free and zero-shot:** Eliminates the need for costly datasets and retraining for new degradation types.
+    *   **Handles fully blind and partially blind scenarios:** Significantly increases applicability compared to methods requiring full knowledge of the degradation model.
+    *   **Novel approach of noise space rectification:** A unique perspective that shows promise in handling complex degradations.
+    *   **Strong empirical results:**  Demonstrates good quantitative and qualitative performance on a variety of image restoration tasks.
+    *   **Ablation study:** Systematically examines the importance of different components of the method.
+
 *   **Weaknesses:**
 
-    *   While the paper highlights limitations in certain scenarios (heavy occlusion, rare objects), a more detailed analysis of failure cases and their underlying causes would further strengthen the work.
-    *   Although mentioned in the appendix, it could have been more explicit that converting point clouds to meshes requires additional processing and reduces speed, thus diluting the speed claim to some degree.
-    *   The reliance on pre-trained models (DINOv2, hand pose estimator) can limit its applicability in scenarios where domain adaptation or custom models are required. The extent to which the results depend on the quality of those pre-trained models should be explicitly discussed.
-*   **Potential Influence:** The emphasis on efficiency could influence future research towards developing faster and more practical 3D reconstruction methods.  The integration of hand geometry features can serve as a good starting point for addressing similar reconstruction problems with related hand-object interaction. The adoption of transformers for this task is also likely to influence other researchers.
+    *   **Computational cost:** While the paper touches on efficiency, diffusion models are inherently computationally intensive. While the method has reasonable computation time, it is still significant, and improvement would increase practical adoption.
+    *   **Reliance on a strong pre-trained diffusion model:**  The performance is heavily dependent on the quality and generalization ability of the pre-trained DDIM. The models they rely on can sometimes exhibit specific failure modes or biases which impact reconstruction quality.
+    *   **Statistical test parameters tuning:** Though claimed as automatic by using normality tests, there might be situations where the chosen p-value requires specific tuning based on the degradation type, diminishing its generality.
+    *   **Limited Analysis on Failure Modes:** Despite the strong results, there is little discussion in the paper on *why* this method works, or the conditions in which the model fails to perform well.
 
-**Rigorous Rationale for Assigned Score:**
+*   **Potential Impact:**
 
-This paper makes a valuable contribution by addressing the speed limitations of existing monocular hand-object reconstruction methods without sacrificing reconstruction quality. The fusion of image and hand geometry features, combined with an efficient coarse-to-fine transformer architecture, is a strong technical contribution. The comprehensive evaluation and convincing results lend credence to the claims of state-of-the-art performance. While there are minor limitations, the overall quality of the work, its novelty, and potential to influence future research justify a high score.
+    *   The work can spur further research into using noise space manipulations for image restoration and other inverse problems with diffusion models.
+    *   The ability to handle unknown degradations makes it a potentially valuable tool for real-world applications like historical document restoration or medical image enhancement.
+    *   It may prompt the development of more robust statistical tests tailored to the characteristics of noise spaces in diffusion models.
 
-Score: 8
-
-- **Score**: 8/10
-
-### **[Controlling Large Language Model with Latent Actions](http://arxiv.org/abs/2503.21383v1)**
-- **Summary**: Here's a summary and critical evaluation of the paper:
-
-**Summary:**
-
-The paper introduces COLA (Controlling Large Language Models with Latent Actions), a framework designed to improve the controllability and exploration of RL in LLMs by learning a compact latent action space. COLA employs an inverse dynamics model to extract latent actions conditioned on future tokens and fine-tunes the pre-trained LLM to function as a language world model that incorporates these actions. A policy model is then trained to generate actions within this language world model using behavior cloning or RL. Experiments using the Llama-3.1-8B model demonstrate that COLA's latent actions enable greater semantic diversity compared to token-level actions. The framework also shows improved performance in tasks like math reasoning (achieving higher scores on math500), agent-based tasks (Alfworld and ScienceWorld), and enhanced thinking prompts (Countdown game) with reduced computation time, without significantly degrading the original LLM's capabilities. The paper also indicates that using a smaller latent space can reduce the likelihood of reward hacking.
-
-**Critical Evaluation:**
-
-* **Novelty:** The core idea of introducing a latent action space for controlling LLMs is novel. The approach of learning the latent space using an inverse dynamics model and integrating this space into a pre-trained LLM for RL is innovative. Using the pre-trained LLM to create word embeddings and then learning a small action latent space is an interesting twist.
-* **Significance:** The paper addresses a critical challenge in applying RL to LLMs, i.e., the excessively large action space resulting from token-level actions. By reducing the dimensionality of the action space, COLA has the potential to improve the efficiency and effectiveness of RL-based adaptation of LLMs for downstream tasks.  The results showing improved math reasoning and agent-based task performance are important contributions.
-* **Strengths:**
-    * **Sound Methodology:** The framework is well-defined, with clear descriptions of the different components and training procedures.  The integration of the inverse dynamics model, language world model, and policy model seems well-considered.
-    * **Empirical Validation:** The experimental results are comprehensive, covering a variety of tasks and demonstrating the advantages of COLA over baseline approaches, with particular focus on quantitative evaluation on math500 and agent based experiments.
-    * **Computational Efficiency:** The reduction in computation time reported for enhanced thinking prompts is a significant practical benefit, especially as LLMs become more computationally expensive.
-    * **Potential for Controllability and Mitigation of Reward Hacking:** The results regarding enhanced controllability (better preference alignment) and reduced reward hacking highlight a crucial strength of the proposed latent action space approach.
-* **Weaknesses:**
-    * **Dependence on Inverse Dynamics Model:** The learned latent space heavily depends on the quality of the inverse dynamics model.  A poor inverse dynamics model could lead to a sub-optimal latent space and limit the performance of COLA. The paper needs a deeper analysis of its effect and potential limitations.
-    * **Limited Theoretical Analysis:** While the empirical results are promising, the paper lacks a deeper theoretical understanding of the learned latent action space.  Characterizing the properties of the latent space (e.g., its structure, separability, etc.) would provide more insights.
-    * **Scalability:** The experiments are performed on the Llama-3.1-8B model. It needs to be proven on larger models with increased parameters.
-
-**Justification for Score:**
-
-The paper presents a novel framework for controlling LLMs with latent actions, addressing a significant challenge in applying RL to LLMs. The comprehensive empirical results demonstrate clear improvements in task performance and computational efficiency, and the potential to mitigate reward hacking. While the reliance on the inverse dynamics model and the lack of deep theoretical analysis represent weaknesses, the strengths outweigh these limitations. The paper represents a significant advancement in RL-based adaptation of LLMs.
+Overall, the paper makes a novel and significant contribution to the field of image restoration. The method is well-motivated, thoroughly evaluated, and demonstrates strong practical potential.
 
 Score: 8
 
 - **Score**: 8/10
 
 ### **[SyncSDE: A Probabilistic Framework for Diffusion Synchronization](http://arxiv.org/abs/2503.21555v1)**
-- **Summary**: Here's a summary and critical evaluation of the paper:
+- **Summary**: Here's a summary and critical evaluation of the "SyncSDE: A Probabilistic Framework for Diffusion Synchronization" paper:
 
 **Summary:**
 
-The paper introduces SyncSDE, a probabilistic framework for synchronizing multiple diffusion models for collaborative generation tasks.  It addresses the limitations of existing methods that rely on naive heuristics for diffusion trajectory alignment by providing a principled way to model and adapt correlations between these trajectories. The core idea is to formulate diffusion synchronization as an optimization problem involving correlation modeling, task-specific adaption and identifying optimal correlation models for each specific task. This allows SyncSDE to achieve better performance compared to previous approaches by focusing the synchronization efforts and avoids blind application of heuristics. The authors demonstrate SyncSDE's effectiveness across diverse tasks, including mask-based text-to-image generation, text-driven real image editing, wide image generation, ambiguous image generation, 3D mesh texturing, and long-horizon motion generation. The method avoids ad-hoc strategies by modeling conditional probability terms and uses a single tunable hyperparameter.
+The paper introduces SyncSDE, a probabilistic framework for synchronizing multiple diffusion models to enable collaborative generation across different domains (e.g., wide image generation, 3D texturing). It addresses the limitations of existing synchronization methods that rely on naive heuristics (like simple averaging), which often fail to generalize across tasks. SyncSDE models correlations between diffusion trajectories, allowing for task-specific adaptation and identifying where synchronization should be focused. The authors derive optimal correlation models for various tasks, achieving superior results compared to methods that apply a single heuristic indiscriminately. The framework offers a theoretical foundation for understanding why diffusion synchronization works, reducing the need for extensive empirical testing.
 
 **Critical Evaluation:**
 
-*   **Novelty:** The primary novelty lies in the probabilistic framework for diffusion synchronization. While previous works have explored synchronization heuristics, SyncSDE provides a more principled theoretical basis for understanding *why* these heuristics work (or fail) and *where* they should be applied.  The explicit modeling of correlations between diffusion trajectories using a conditional probability formulation is a significant advancement. Identifying where the heuristic is focused is also novel. The idea is not simply a new heuristic, but a framework to understand and improve existing ones.
-
-*   **Significance:** The paper's significance stems from its potential to improve the robustness and generalizability of collaborative generation using diffusion models. By providing a principled approach, SyncSDE reduces the need for extensive trial-and-error to find optimal synchronization strategies for new tasks. This has practical implications for expanding the applicability of multi-diffusion model systems. Also the improvement over prior art are also substantial. The consistent superior performance across various tasks strengthens the paper's claim of generalizability.
+*   **Novelty:** The primary novelty lies in introducing a probabilistic framework for diffusion synchronization. While previous works have explored heuristics for this purpose, SyncSDE offers a principled approach based on modeling correlations between diffusion trajectories. This is a significant departure from purely empirical methods and provides a theoretical foundation for future research.
+*   **Significance:** The significance of this work comes from several aspects:
+    *   **Addresses a General Problem:** Synchronization is a key challenge in collaborative generation using multiple diffusion models. Solving this problem opens the door for many new generative workflows.
+    *   **Provides a Theoretical Basis:** By providing a probabilistic framework, SyncSDE explains *why* certain synchronization strategies work better than others, instead of just relying on empirical observations.
+    *   **Improves Generalization:** By allowing for task-specific adaptations based on modeled correlations, SyncSDE improves the generalizability of diffusion synchronization, enabling better performance across diverse tasks.
+    *   **Reduces Empirical Testing:** The framework helps identify where heuristics should be applied, significantly reducing the need for exhaustive empirical testing, making the development of collaborative generative systems more efficient.
 
 *   **Strengths:**
-
-    *   Strong theoretical foundation: The probabilistic framework provides a clear and mathematically sound basis for diffusion synchronization.
-    *   Task-specific adaptation: The ability to adapt the correlation model to each specific task allows for more effective synchronization compared to methods that apply a single heuristic across all tasks.
-    *   Comprehensive evaluation: The extensive experiments across diverse tasks demonstrate the generalizability and effectiveness of SyncSDE.  The comparisons with state-of-the-art methods in each task highlights the gains achieved by the proposed approach.
-    *   Clear explanations:  The paper is well-written and provides clear explanations of the proposed method and experimental setup. The ablation study of the hyperparameter provides insights on its role.
+    *   **Clear Problem Definition:** The paper clearly identifies the limitations of existing synchronization methods.
+    *   **Well-Motivated Approach:** The proposed probabilistic framework is well-motivated and addresses the identified limitations.
+    *   **Theoretical Foundation:** The theoretical analysis provides valuable insights and guidance for future research.
+    *   **Strong Empirical Results:** The experimental results demonstrate superior performance across diverse tasks compared to state-of-the-art baselines.
+    *   **Scalability:** The approach is shown to be scalable to new tasks, indicating its broad applicability.
 
 *   **Weaknesses:**
+    *   **Complexity:** The probabilistic framework might be complex for some practitioners to implement and adapt.
+    *   **Hyperparameter Tuning:** While the paper mentions the parameter λ, further discussion on its sensitivity and optimal tuning strategies would be beneficial. The dependence on such a parameter does reduce practicality, and may need to be studied further.
+    *   **Dependence on Underlying Diffusion Models:** While not a direct fault, the performance still relies on the quality of underlying diffusion models.
 
-    *   Single Hyperparameter: Although the use of a single hyperparameter is beneficial for its ease of use, it also limits its expressiveness. There might be more complex dependencies between the different diffusion processes, that cannot be sufficiently captured by a single parameter, which controls their influence on each other.
-    *   While the results are demonstrably better, the leap from probabilistic framework to concrete heuristic might benefit from additional clarity or discussion. Are there explicit guidelines for heuristic selection based on the probabilistic framework? Or does the framework merely aid in *understanding* and selecting *among* existing heuristics?
+*   **Potential Impact:** This work has the potential to significantly influence the field of collaborative generation. By providing a principled framework for diffusion synchronization, it can guide the development of more efficient and generalizable generative systems. It might also inspire further research on modeling correlations between diffusion trajectories in other contexts.
 
-*   **Potential Impact:** SyncSDE has the potential to influence future research on collaborative generation using diffusion models. It provides a solid foundation for developing more sophisticated synchronization strategies and expands the range of tasks that can be tackled effectively. Also it serves as a first work to provide theoretical insight behind diffusion synchronization.
-
-**Justification for Score:**
-
-Given the novel probabilistic framework, the consistent improvement over state-of-the-art methods across a diverse set of tasks, and the potential for future research, I assign a score of 8.
-
-The paper provides a significant step forward in the field of diffusion synchronization, addressing a key limitation of existing methods. The probabilistic formulation is novel and promises to enhance the robustness and generalizability of multi-diffusion model systems. However, the aforementioned weakness on the limitation of a single hyperparameter restricts the score.
-
-**Score: 8**
-
-- **Score**: 8/10
-
-### **[AlignDiff: Learning Physically-Grounded Camera Alignment via Diffusion](http://arxiv.org/abs/2503.21581v1)**
-- **Summary**: Here's a summary and critical evaluation of the "AlignDiff: Learning Physically-Grounded Camera Alignment via Diffusion" paper:
-
-**Summary:**
-
-The paper introduces AlignDiff, a novel diffusion-based framework for camera calibration that jointly models intrinsic and extrinsic camera parameters.  It addresses the challenges of real-world optical distortions by moving away from relying solely on semantic features and incorporating geometric priors derived from line detection networks.  The framework also integrates edge-aware attention to focus on geometric features around image edges and leverages a large database of ray-traced lenses to enhance generalizability to diverse lens forms. Experiments demonstrate improved accuracy in ray bundle estimation and overall calibration compared to existing methods.
-
-**Critical Evaluation:**
-
-* **Novelty:** The paper presents a few key novel aspects. First, the shift from semantic-driven feature extraction to geometry-driven is a meaningful step, especially for calibration where precise geometric measurements are crucial. Using line embeddings to condition the diffusion model offers a strong focus on structural cues. The incorporation of a large ray-traced lens database to ground the model in physical optical properties is another substantial contribution, addressing a common limitation of simulated distortion models.  While diffusion-based methods for calibration are not entirely new, the specific combination of geometric conditioning, edge-aware attention, and physical lens grounding is a unique contribution. The way they integrate line segments directly into the DiT architecture, and the design of their loss function for denoising are also technically novel.
-
-* **Significance:**  Accurate camera calibration is a fundamental problem in computer vision and robotics. The ability to accurately calibrate cameras in real-world, unconstrained environments with complex optical distortions has significant implications for various applications, including autonomous driving, augmented reality, and 3D reconstruction.  By addressing the limitations of existing methods that rely on pre-rectification or simplified camera models, AlignDiff offers a promising approach for achieving more robust and accurate 3D perception. The gains in angular error are substantial.
-
-* **Strengths:**
-    * **Geometric Grounding:**  Shifting the focus to geometric features improves robustness to real-world distortions.
-    * **Physical Accuracy:**  Leveraging ray-traced lenses introduces realistic optical profiles.
-    * **Joint Optimization:**  Addresses limitations of decoupling intrinsic and extrinsic calibration.
-    * **Strong Experimental Results:** The demonstrated improvements over existing methods on challenging datasets indicate its practical value.
-    * **Well-written and well-structured.**
-
-* **Weaknesses:**
-    * **Computational Cost:** Diffusion models are known for their computational demands, potentially limiting real-time applications, though the paper does describe a processing step to keep the model lightweight. More clarification of compute requirements would improve the work.
-    * **Scale Ambiguity:** Acknowledged limitation of scale ambiguity in outdoor scenes requires further investigation of integrating scale priors.
-    * **Dataset Dependence:** The paper depends heavily on the availability of a very large lens database for achieving generalizability. The creation and curation of this database may be a limitation for other researchers, and should be expanded to more situations for greater generalizability.
-
-* **Potential Influence:** This work has the potential to influence research in camera calibration, 3D reconstruction, and robotics. The geometric conditioning and physical grounding approaches could be adopted and extended by other researchers to improve the accuracy and robustness of their models. The lens dataset could become a valuable resource for the community.
-
-* **Score:** 8
-
-**Rationale:**
-
-The paper presents a novel and technically sound approach to camera calibration that addresses critical limitations of existing methods. The integration of geometric conditioning, edge-aware attention, and physical lens grounding is a significant contribution that leads to demonstrably improved results. The potential impact of this work is substantial, and it is likely to inspire further research in this area. While the computational cost and potential scale ambiguities represent limitations, the overall strengths of the paper outweigh these weaknesses. As a result, it scores a solid 8.
-
-- **Score**: 8/10
-
-### **[Enhancing Repository-Level Software Repair via Repository-Aware Knowledge Graphs](http://arxiv.org/abs/2503.21710v1)**
-- **Summary**: Okay, here's a summary and critical evaluation of the paper "Enhancing Repository-Level Software Repair via Repository-Aware Knowledge Graphs."
-
-**Summary**
-
-The paper addresses the challenges of repository-level software repair, where bugs often require understanding relationships across multiple files and functions. Existing approaches relying on Large Language Models (LLMs) struggle with semantic ambiguities, limited structural context understanding, and insufficient reasoning capability. To mitigate these issues, the authors propose KGCOMPASS, a novel approach that leverages a repository-aware knowledge graph (KG). This KG accurately links repository artifacts (issues and pull requests) and codebase entities (files, classes, functions). KGCOMPASS also employs a path-guided repair mechanism that uses the KG to augment LLMs with relevant contextual information to generate precise patches with explanations. Experiments on the SWE-Bench-Lite benchmark show KGCOMPASS achieves state-of-the-art repair performance and function-level localization accuracy compared to open-source alternatives. The system also has language-agnostic capabilities and is incrementally updatable, making it suitable for real-world use.
-
-**Critical Evaluation**
-
-**Strengths:**
-
-*   **Novelty:** The key strength lies in its construction and application of a repository-aware knowledge graph for code repair. This approach is more sophisticated than simple text-based analysis of LLMs. The integration of repository artifacts (issues, PRs) with code entities is a key innovation.  The idea of using paths in the KG to guide LLM prompts is also novel and effective.
-*   **Significance:**  Repository-level repair is a crucial problem in software engineering. The paper addresses a major limitation of current LLM-based approaches: lack of context and inability to reason about complex code structures. By improving bug localization and patch generation, this work has the potential to significantly improve the efficiency and accuracy of automated code repair.
-*   **Results:** The empirical results on SWE-Bench-Lite demonstrate significant improvements in repair performance and localization accuracy compared to existing open-source methods. The ablation studies convincingly show the contributions of individual components of KGCOMPASS. The analysis of path lengths in the KG provides valuable insights into the importance of multi-hop relationships. The cost analysis is crucial and shows efficiency in resource use.
-*   **Practicality:** The system is designed to be language-agnostic and incrementally updatable, making it more practical for real-world deployment. The open-source nature (presumed, although not explicitly stated) of the method strengthens its potential for adoption and extension by other researchers.
-
-**Weaknesses:**
-
-*   **Dependency on LLMs:** While the KG augments LLMs, the system still relies heavily on LLMs for patch generation and ranking. The paper acknowledges limitations with domain knowledge, which may influence its applicability for edge cases. Although it's a strength that open source LLMs perform well, it doesn't stand independent of LLMs.
-*   **Benchmark limitations:** While SWE-Bench-Lite is a recognized benchmark, it primarily covers Python projects. It isn't clear how KGCOMPASS will perform on codebases with different characteristics or in other programming languages, despite language agnostic design.
-*   **Limited Interpretability in Patch Generation:** While it improves interpretable decision chains, the LLM-driven parts, specifically patch generation, remain less transparent. The paper mentions limitations of LLMs lacking certain domain knowledge.
-*   **Lack of comparison with all state-of-the-art:** The paper provides good comparison with state-of-the-art open source methods, it doesn't show comparison with leading closed source solutions which poses difficulties with reproduciblity.
-*   **Generalizability in Edge Cases:** The system may struggle with more complex bugs that require deeper semantic understanding or domain-specific knowledge beyond what can be captured in the KG.
-
-**Justification for Score:**
-
-I am assigning a score of **8** out of 10.
-
-*   The paper tackles a critical problem with a novel approach, significantly improving repository-level software repair compared to existing open-source methods. The core idea of integrating a repository-aware knowledge graph to augment LLMs is innovative and well-executed.
-*   The empirical results are strong and well-supported by ablation studies. The design choices, especially the language-agnostic and incremental updatability, enhance practicality.
-*   However, the reliance on LLMs, limitations with respect to long-tail bug resolutions, the focus on a single benchmark, and the lack of comparison with current closed source solutions limit its overall impact and generalizability. While the KG provides valuable context, the LLM still carries a significant amount of the burden for patch generation.
-*   Despite these limitations, the paper represents a significant advancement in the field and provides a solid foundation for future research in repository-level software repair. The insights into the importance of multi-hop relationships and the integration of repository artifacts are valuable contributions.
+*   **Justification for Score:** The paper offers both a novel theoretical contribution and strong empirical results, significantly advancing the understanding of diffusion synchronization. The probabilistic framework provides a foundation for future research and offers practical benefits in terms of improved generalization and reduced empirical testing. However, the complexity of the framework and the dependence on the hyperparameter λ, limit its immediate applicability.
 
 Score: 8
 
 - **Score**: 8/10
 
+### **[Enhancing Repository-Level Software Repair via Repository-Aware Knowledge Graphs](http://arxiv.org/abs/2503.21710v1)**
+- **Summary**: Okay, I will summarize the paper, provide a rigorous and critical evaluation of its novelty and significance, and assign a score with a thorough justification.
+
+**Summary:**
+
+The paper "Enhancing Repository-Level Software Repair via Repository-Aware Knowledge Graphs" introduces KGCOMPASS, a novel approach to repository-level software repair. KGCOMPASS addresses the challenges of bridging the semantic gap between issue descriptions and code patches by leveraging a repository-aware knowledge graph (KG). This KG accurately links repository artifacts (issues and pull requests) with codebase entities (files, classes, and functions), enabling precise bug localization and contextual information retrieval. A path-guided repair mechanism uses KG-mined entity paths to augment LLMs with relevant contextual information, generating precise patches with explanations. Experimental results on SWE-Bench-Lite demonstrate state-of-the-art repair performance and function-level localization accuracy compared to open-source approaches, with low cost per repair. The paper highlights the importance of multi-hop traversals within the knowledge graph for accurately locating bugs. The KGCOMPASS knowledge graph is language-agnostic and incrementally updatable, making it practical for real-world development environments.
+
+**Rigorous and Critical Evaluation:**
+
+**Novelty:**
+
+The paper's novelty lies in its innovative integration of a knowledge graph with LLMs for repository-level software repair. While both knowledge graphs and LLMs have been used in software engineering tasks before, the specific combination and application in KGCOMPASS demonstrates novelty in several areas:
+
+*   **Repository-Aware Knowledge Graph:** The KG's design, which explicitly links repository artifacts (issues, PRs) and code entities, is a crucial contribution. It goes beyond traditional code-focused KGs, capturing the rich contextual information available in software repositories. This explicit connection is not commonly seen in prior works and is crucial for reducing the semantic gap.
+*   **Path-Guided Repair:** Leveraging paths within the KG to augment LLM prompts is a novel technique. Instead of solely relying on code snippets and issue descriptions, KGCOMPASS intelligently provides structural context derived from the KG, enabling more informed patch generation.
+*   **Hybrid Approach:** The hybrid approach combines knowledge graph-based structural analysis with LLM-based textual understanding to provide candidate bug locations, resulting in an approach that is likely more robust.
+
+**Significance:**
+
+The paper demonstrates significant improvements in repair performance and localization accuracy on SWE-Bench-Lite compared to existing open-source approaches. The key results underscore the significance:
+
+*   **State-of-the-Art Performance:** Achieving 45.67% repair performance is a solid achievement on SWE-Bench-Lite, known for its difficulty.
+*   **Improved Localization Accuracy:** The function-level localization accuracy of 51.33% is also a substantial improvement, highlighting the KG's effectiveness in pinpointing bug locations.
+*   **Cost-Effectiveness:** The low cost per repair ($0.20) is a critical advantage, making KGCOMPASS more practical for real-world applications. This is driven by a reduction of the search space.
+*   **Multi-Hop Traversal Analysis:** The analysis demonstrating the need for multi-hop traversals (69.7% of bugs) provides valuable insights into the complexity of repository-level repair and the limitations of purely LLM-based approaches. This helps explain why this method is more accurate than ones focusing only on one code segment.
+* The system uniquely resolves 19 cases no other open-source tools could.
+
+**Strengths:**
+
+*   **Clear Problem Definition:** The paper clearly articulates the challenges of repository-level repair and the limitations of existing approaches.
+*   **Well-Defined Approach:** KGCOMPASS is presented in a well-structured and understandable manner, with clear explanations of the KG construction, path-guided repair mechanism, and patch ranking process.
+*   **Strong Experimental Evaluation:** The evaluation on SWE-Bench-Lite is comprehensive, using standard metrics and comparing against multiple baselines.
+*   **Detailed Analysis:** The paper provides in-depth analysis of the results, including ablation studies, error analysis, and discussions of the KG's effectiveness.
+
+**Weaknesses:**
+
+*   **Dependency on SWE-Bench-Lite:** The evaluation is limited to SWE-Bench-Lite, which may not fully represent the diversity of real-world software repositories. The results should be verified on other benchmarks, especially those with different characteristics and programming languages, although the language agnostic nature does lessen this constraint.
+*   **Limited Discussion of Failure Cases:** While the paper discusses successful cases, it could benefit from a more detailed analysis of failure cases. Understanding why KGCOMPASS fails in certain situations would provide valuable insights for future improvements. This is touched on in the discussion of the case study, however, could be expanded upon.
+*   **Limited Explanation of why KGCOMPASS is better. **While the quantitative results clearly show that KGCOMPASS is superior to the competition, there is little explaining, besides the one case study, why KGCOMPASS succeeds, but other methods fail. This could also be partly answered by more case studies.
+
+**Potential Influence:**
+
+KGCOMPASS has the potential to significantly influence the field of automated software repair by demonstrating the effectiveness of combining knowledge graphs with LLMs for repository-level tasks. It provides a practical and cost-effective solution for addressing the challenges of bug localization and patch generation in large codebases. The approach could inspire further research in the development of more sophisticated knowledge graph-based techniques for software engineering. The low computational costs are likely to have a huge impact as it becomes adopted by more and more developers.
+
+**Score: 8**
+
+**Justification:**
+
+KGCOMPASS presents a novel and significant contribution to the field of automated software repair. The approach combines knowledge graphs and LLMs in a unique way to tackle the challenges of repository-level repair, demonstrating state-of-the-art performance with low cost. The analysis of multi-hop traversals provides valuable insights. The primary reasons for not assigning a higher score are the limited evaluation dataset (SWE-Bench-Lite only) and the lack of in-depth discussion of failure cases and why it is better besides that one case study. The paper is well-written, clearly explains the approach, and presents a thorough experimental evaluation. While further research is needed to validate the approach on more diverse datasets and address the limitations, KGCOMPASS represents a significant step forward in repository-level software repair.
+
+- **Score**: 8/10
+
+### **[Collab: Controlled Decoding using Mixture of Agents for LLM Alignment](http://arxiv.org/abs/2503.21720v1)**
+- **Summary**: Here's a summary and critical evaluation of the paper:
+
+**Summary:**
+
+The paper introduces COLLAB, a novel "mixture of agents"-based controlled decoding strategy for aligning Large Language Models (LLMs) without requiring retraining. COLLAB dynamically selects the most suitable LLM (agent) from a pool of pre-aligned models at each token generation step, based on an "implicit Q-function" that estimates long-term utility with respect to a target reward. The method leverages existing off-the-shelf aligned LLMs, each specializing in different tasks, and combines their strengths at inference time. The authors provide theoretical guarantees for the algorithm's sub-optimality and demonstrate its effectiveness through comprehensive empirical evaluations on diverse tasks and preferences.  COLLAB is shown to outperform state-of-the-art single-agent decoding baselines in task alignment, achieving improvements in average reward and GPT-4-based win rates.
+
+**Critical Evaluation:**
+
+*   **Novelty:** The paper's novelty lies in its unique approach to LLM alignment through a mixture of agents controlled decoding. While controlled decoding itself is not new, COLLAB presents a significant departure from single-agent methods by dynamically switching between multiple pre-aligned LLMs based on a learned metric (Q-function). This approach allows for more flexible and adaptive alignment, leveraging the diverse capabilities of existing models without computationally expensive retraining. The use of an "implicit Q-function" to guide the selection of agents during decoding is also a novel contribution. This allows the system to choose the best agent at each time step with respect to the long-term reward.
+*   **Significance:** The paper addresses a crucial challenge in LLM alignment: the computational cost of fine-tuning for specialized tasks or personalized preferences. By offering a training-free inference-time framework, COLLAB has the potential to significantly reduce the barrier to aligning LLMs with specific objectives. The improvements in average reward, GPT-4-based win rates, diversity and coherence demonstrate the effectiveness of the proposed method and highlight its potential for real-world applications. The theoretical analysis further strengthens the paper's significance by providing guarantees on the algorithm's performance. The paper's emphasis on utilizing existing, pre-trained models is particularly relevant in scenarios where access to model parameters is restricted or computational resources are limited.
+
+*   **Strengths:**
+    *   Novel and well-motivated approach to LLM alignment.
+    *   Provides theoretical guarantees for the algorithm's sub-optimality.
+    *   Comprehensive empirical evaluations demonstrating superior performance.
+    *   Addresses a critical challenge in LLM alignment: the computational cost of fine-tuning.
+    *   Clear and well-written paper.
+*   **Weaknesses:**
+    *   The implicit Q-function relies on a reward model, which is also trained on human preferences, and thus, can be biased towards those preferences. This is mentioned in the paper, but it is a limitation of the algorithm that should be discussed.
+    *   The algorithm might struggle to work effectively if all models in the initial set have very little overlap in the desired task.
+    *   The paper does not explore the scenario where agents are not trained on independent tasks.
+    *   Ablation studies are necessary to justify the design choice and confirm the contribution.
+
+*   **Potential Influence:** COLLAB has the potential to significantly influence the field of LLM alignment by offering a computationally efficient and flexible alternative to fine-tuning-based methods. The paper's "mixture of agents" approach could inspire new research directions in decoding and alignment, leading to more adaptive and personalized LLMs. Furthermore, the paper's theoretical analysis could inform the design of future alignment algorithms with provable performance guarantees.
+
+**Score: 8**
+
+**Rationale:** The paper presents a novel and significant contribution to the field of LLM alignment. The "mixture of agents" approach is well-motivated, theoretically grounded, and empirically validated. The algorithm outperforms state-of-the-art baselines and addresses a critical challenge in LLM alignment. The work opens up new possibilities for creating adaptive and personalized LLMs. However, the reliance on reward model for estimating Q-function poses a limitation.
+
+- **Score**: 8/10
+
+### **[3DGen-Bench: Comprehensive Benchmark Suite for 3D Generative Models](http://arxiv.org/abs/2503.21745v1)**
+- **Summary**: Here's a summary and critical evaluation of the paper "3DGen-Bench: Comprehensive Benchmark Suite for 3D Generative Models":
+
+**Summary:**
+
+The paper introduces 3DGen-Bench, a new benchmark dataset and evaluation framework for 3D generative models. Addressing the lag in 3D evaluation compared to rapid advancements in 3D generation, the authors develop 3DGen-Arena, a platform for gathering human preferences through pairwise comparisons. This platform facilitates the creation of 3DGen-Bench, a large-scale dataset of human preferences collected from both the public and expert annotators on generated 3D models.  The authors then train two automated 3D evaluators: 3DGen-Score (a CLIP-based model) and 3DGen-Eval (an MLLM-based model). Extensive experiments demonstrate the effectiveness of these models in predicting human preferences, surpassing existing metrics in correlation with human rankings. The authors propose that this benchmark promotes more equitable evaluation and further development of 3D generative models and their downstream applications.
+
+**Critical Evaluation:**
+
+*   **Novelty:** The key novelty lies in the construction of a large-scale, human-preference-aligned benchmark specifically tailored for 3D generative models. While individual components, like pairwise comparison evaluation platforms or CLIP-based metrics, exist in other contexts (image generation), their comprehensive integration for 3D generation is new. Creating two automated evaluators 3DGen-Score and 3DGen-Eval, that are based on CLIP and MLLM (large language model) are a significant step forward. However, the architectural ideas behind 3DGen-Score and Eval, while reasonable, are incremental extensions of existing techniques in vision-language modeling.
+
+*   **Significance:** The paper addresses a critical gap in the 3D generative modeling field – the lack of robust, human-aligned evaluation metrics. This is particularly important as the field moves beyond simple quality assessment toward more nuanced criteria like geometric plausibility, texture coherence, and prompt alignment. The human preference data provided by the benchmark allows for training and evaluation of automated metrics that better reflect human perception. Moreover, the establishment of a public benchmark and leaderboard enables fair comparisons between different 3D generative models, promoting progress in the field. This work serves as a strong foundation and will undoubtedly be heavily cited and used in the future.
+
+*   **Strengths:**
+
+    *   **Comprehensive Dataset:** The dataset is substantial in size, encompassing diverse text and image prompts, a wide range of 3D generative models, and carefully designed evaluation criteria.
+    *   **Human-Aligned Evaluation:**  The emphasis on human preference data ensures that the evaluation metrics are grounded in real-world perception. The use of pairwise comparisons mitigates some of the subjective biases associated with individual quality judgments.
+    *   **Automated Evaluators:** The 3DGen-Score and 3DGen-Eval models provide practical tools for automated evaluation, enabling more efficient benchmarking and model development.
+    *   **Open and Accessible:** The public availability of the dataset, the annotation platform, and the trained models encourages community participation and facilitates further research.
+
+*   **Weaknesses:**
+
+    *   **Reliance on 2D CLIP Embeddings:** The evaluators rely on multi-view 2D image encoding of the 3D models, rather than directly processing the 3D data, which might omit crucial 3D information and adds an extra rendering step to the evaluation pipeline. A truly 3D-native evaluation metric remains a challenge to be addressed by the community, and this paper uses what's currently available, which might be deemed a pragmatic weakness, though understandable.
+    *   **Potential Bias in Human Annotations:** While the use of both public users and expert annotators is a strength, there is still potential for biases in the human preference data (e.g., due to annotator fatigue, familiarity with certain model types, or subjective aesthetic preferences). The paper could explore these biases further.
+    *   **MLLM computational Costs:** The adoption of MLLMs can be computationally intensive, which limits the wider adoption of those evaluation models.
+
+*   **Potential Influence:** The 3DGen-Bench has strong potential to become a standard benchmark for the 3D generation community, similar to ImageNet in the image classification field. The provision of evaluation data, the code for training evaluators, and the publicly available leaderboard will drive further research in this area.  The work is also likely to inspire development of even better 3D evaluation techniques that directly operate on 3D representations and further reduce the evaluation gap.
+
+**Justification for Score:**
+
+The paper is a solid contribution to the field of 3D generative modeling. It addresses a significant gap and provides valuable resources for the community. While the technical approach has some limitations (dependence on 2D embeddings, incremental evaluator architectures), the comprehensive nature of the benchmark and its emphasis on human alignment are highly impactful. The work enables better research and progress in 3D generative models.
+
+Score: 8
+
+- **Score**: 8/10
+
+### **[Exploring the Evolution of Physics Cognition in Video Generation: A Survey](http://arxiv.org/abs/2503.21765v1)**
+- **Summary**: Here's a summary and critical evaluation of the provided paper:
+
+**Summary:**
+
+The paper presents a survey on the evolution of physical cognition in video generation. It highlights the advancements in video generation, particularly diffusion models, but also points out their limitations in understanding and adhering to physical laws. The survey proposes a three-tier taxonomy inspired by cognitive science: (1) basic schema perception, (2) passive cognition of physical knowledge, and (3) active cognition for world simulation. It then systematically reviews existing methods, categorizing them based on this taxonomy, and discusses benchmarks, challenges, and future directions in the field.  It underscores the shift from "visual mimicry" to "human-like physical comprehension" in generative models.
+
+**Critical Evaluation:**
+
+*   **Novelty:** The paper's novelty lies primarily in its cognitive science-inspired taxonomy for classifying video generation methods with physical cognition capabilities. While previous surveys in AIGC or 3D/4D generation exist, this approach offers a unique perspective that helps to structure the field and understand the evolution of physical reasoning in video generation systems. It reframes the existing research by viewing the problem from the angle of mimicking human cognitive development of understanding physics.
+*   **Significance:** The survey is significant because it addresses a growing concern within the video generation community: the lack of physical plausibility in generated content despite its visual realism. By organizing and analyzing existing research, the paper highlights the bottlenecks in current approaches and provides directional guidance for future work. It emphasizes the importance of interpretable, controllable, and physically consistent video generation, which has implications for applications in robotics, autonomous driving, and other areas where realistic simulation is crucial. It also addresses the "physical embedding bottleneck".
+*   **Strengths:**
+    *   **Clear Taxonomy:** The three-tier taxonomy provides a coherent framework for understanding different approaches to physical cognition in video generation.
+    *   **Comprehensive Review:** The survey covers a wide range of relevant literature, from basic motion-guided generation to advanced world simulation techniques.
+    *   **Identifies Key Challenges:** The paper clearly articulates the remaining challenges in the field, such as the need for larger physics foundation models, improved physical fidelity in simulators, and better methods for bridging the Sim2Real gap.
+    *   **Well-Structured and Organized:** The paper is logically structured and easy to follow, making it accessible to researchers in the field.
+*   **Weaknesses:**
+    *   **Limited Quantitative Analysis:** The survey primarily focuses on qualitative analysis of different methods. A more detailed quantitative comparison of their performance on specific benchmarks could strengthen the analysis.
+    *   **Potential for Overlapping Categories:**  The categories in the taxonomy, while generally distinct, could potentially have some overlap in practice, making strict categorization of some methods challenging.
+    *   **Focus on Existing Methods:** The survey primarily focuses on established methods, with less discussion about radical new approaches or unexplored avenues for incorporating physical cognition.
+    *   **Depth of Analysis:**  While comprehensive in breadth, the survey could benefit from a deeper dive into the mathematical underpinnings of the various methods and a more rigorous comparison of their theoretical properties.
+
+*   **Potential Influence:** This survey is likely to influence the field by providing a shared vocabulary and framework for discussing physical cognition in video generation. It could also inspire new research directions by highlighting the gaps in current approaches and suggesting potential solutions. The systematic organization could facilitate collaboration and knowledge sharing among researchers. The structured analysis might be leveraged by researchers and practitioners for developing interpretable, controllable, and physically consistent video generation paradigms, addressing a persistent need.
+*   **Score:** 8
+
+**Rigorous Rationale:**
+
+The paper merits a score of 8 due to its novel and significant contribution in structuring a rapidly evolving field. The cognitive-science perspective adds a valuable dimension to understanding and categorizing video generation approaches. It presents a comprehensive overview, highlighting key challenges and future directions. However, the limitations in quantitative analysis and the potential for category overlap prevent it from achieving a higher score. While impactful, it stops short of providing groundbreaking insights or revolutionary approaches, building incrementally upon the current state of the art in a structured and accessible fashion. The analysis is more descriptive than prescriptive, stopping short of making strong theoretical arguments, hence not placing it higher in the ranking.
+
+- **Score**: 8/10
+
+### **[Optimal Stepsize for Diffusion Sampling](http://arxiv.org/abs/2503.21774v1)**
+- **Summary**: Here's a summary and critical evaluation of the paper:
+
+**Summary:**
+
+The paper introduces Optimal Stepsize Distillation (OSS) for diffusion sampling, a dynamic programming framework to derive theoretically optimal stepsize schedules. It treats stepsize optimization as a knowledge distillation problem, where a "student" sampling process with few steps approximates a "teacher" sampling process with many steps.  The core idea is to exploit the recursive substructure inherent in the distillation objective. By reformulating stepsize optimization as recursive error minimization, the method aims to guarantee global discretization bounds through optimal substructure exploitation.  Experimental results demonstrate that OSS achieves significant acceleration (10x) in text-to-image generation while maintaining high performance, and is robust across different architectures, ODE solvers, and noise schedules.
+
+**Critical Evaluation:**
+
+*   **Novelty:** The paper's novelty lies primarily in its formulation of stepsize optimization in diffusion models as a dynamic programming problem with a knowledge distillation perspective. While knowledge distillation is a well-established technique, its application to stepsize selection in this specific manner seems to be a unique contribution. The exploitation of recursive substructure is also a key aspect of novelty. Prior work focused mainly on optimizing the denoising *direction*, while the paper explicitly targets the *stepsize*, representing a somewhat orthogonal but crucial advancement. Also the method's claims of robustness across a number of architectural differences and ODE solvers adds weight to its novelty claim.
+
+*   **Significance:** The significance of this paper stems from its potential to address a major bottleneck in diffusion models: slow sampling speed.  Diffusion models excel in generation quality, but their computational cost limits their widespread use.  A 10x speedup with minimal performance degradation, as claimed by the authors, is a substantial advancement. The claim of "architecture-agnostic robustness" is highly significant as it could allow for the application of optimized stepsizes on a wider variety of already existing models, without having to tailor the stepsizes to each specific architecture, potentially making deployment of latency-efficient diffusion models much more practical. Moreover, the efficient adaptation the method enables across tasks is promising.
+
+*   **Strengths:**
+    *   The dynamic programming approach is well-motivated and appears theoretically sound. The reformulation of stepsize optimization as a knowledge distillation and recursive error minimization problem gives a concrete foundation for their method.
+    *   The claims of architecture-agnostic robustness are strongly supported by experimental results across diverse settings (datasets, noise schedules, solvers, etc.).
+    *   The experimental results on text-to-image generation are compelling, demonstrating significant speedup with minimal performance loss. The application to MAR and video diffusion adds further support to its wide applicability.
+    *   The algorithm is relatively easy to implement and integrate into existing diffusion frameworks because it is "plug-and-play" with existing solvers, something the authors highlight in the paper.
+    *   The performance comparisons to other step-size optimizers are comprehensive and consistently demonstrates superior results.
+
+*   **Weaknesses:**
+    *   While the paper claims "theoretically optimal stepsizes", this optimality is relative to the chosen "teacher" trajectory. The quality of the teacher trajectory influences the optimality of the student trajectory. It may not be a perfect *global* optimum. While the paper notes an "adequate search space" after 200 teacher steps, it might be worth exploring how the "adequacy" changes with differing models, and datasets.
+    *   The results for ImageNet-256 show quite a performance drop when using uniformly set steps (Table 5) suggesting that uniformity might not be the optimal strategy to compare to. It might be more useful to compare it with more state-of-the-art step-size algorithms when there are a limited number of steps, to have more robust results.
+    *   The appendix proofs can be a bit cumbersome, but is mostly justified because they aim to be rigorous.
+
+*   **Potential Influence:**
+
+    *   The OSS framework has the potential to become a standard method for accelerating diffusion sampling.
+    *   It could stimulate further research into dynamic stepsize optimization strategies.
+    *   Its plug-and-play nature could facilitate its adoption by practitioners and researchers.
+
+**Score: 8**
+
+**Rationale:**
+The paper presents a novel, well-motivated, and experimentally validated approach to address a key challenge in diffusion models: slow sampling. While it has some minor limitations in optimality claims and choice of baselines, its potential to significantly improve the efficiency of diffusion models makes it a significant contribution to the field. The strong robustness results and the claim to a "plug-and-play" integration into existing models add weight to the high score.
+
+- **Score**: 8/10
+
 ## Other Papers
+### **[From Annotation to Adaptation: Metrics, Synthetic Data, and Aspect Extraction for Aspect-Based Sentiment Analysis with Large Language Models](http://arxiv.org/abs/2503.20715v1)**
+### **[Dynamic Motion Blending for Versatile Motion Editing](http://arxiv.org/abs/2503.20724v1)**
+### **[RecTable: Fast Modeling Tabular Data with Rectified Flow](http://arxiv.org/abs/2503.20731v1)**
+### **[High Quality Diffusion Distillation on a Single GPU with Relative and Absolute Position Matching](http://arxiv.org/abs/2503.20744v1)**
+### **[MATHGLANCE: Multimodal Large Language Models Do Not Know Where to Look in Mathematical Diagrams](http://arxiv.org/abs/2503.20745v1)**
+### **[Reason-RFT: Reinforcement Fine-Tuning for Visual Reasoning](http://arxiv.org/abs/2503.20752v2)**
+### **[FB-4D: Spatial-Temporal Coherent Dynamic 3D Content Generation with Feature Banks](http://arxiv.org/abs/2503.20784v1)**
+### **[Free4D: Tuning-free 4D Scene Generation with Spatial-Temporal Consistency](http://arxiv.org/abs/2503.20785v1)**
+### **[Mobile-MMLU: A Mobile Intelligence Language Understanding Benchmark](http://arxiv.org/abs/2503.20786v1)**
+### **[StepGrade: Grading Programming Assignments with Context-Aware LLMs](http://arxiv.org/abs/2503.20851v1)**
+### **[Unified Multimodal Discrete Diffusion](http://arxiv.org/abs/2503.20853v1)**
+### **[Assessing Generative Models for Structured Data](http://arxiv.org/abs/2503.20903v1)**
+### **[TransDiffSBDD: Causality-Aware Multi-Modal Structure-Based Drug Design](http://arxiv.org/abs/2503.20913v1)**
+### **[D4R -- Exploring and Querying Relational Graphs Using Natural Language and Large Language Models -- the Case of Historical Documents](http://arxiv.org/abs/2503.20914v1)**
+### **[Leveraging LLMs, IDEs, and Semantic Embeddings for Automated Move Method Refactoring](http://arxiv.org/abs/2503.20934v1)**
+### **[Hacia la interpretabilidad de la detección anticipada de riesgos de depresión utilizando grandes modelos de lenguaje](http://arxiv.org/abs/2503.20939v1)**
+### **[DEMENTIA-PLAN: An Agent-Based Framework for Multi-Knowledge Graph Retrieval-Augmented Generation in Dementia Care](http://arxiv.org/abs/2503.20950v1)**
+### **[Sociotechnical Effects of Machine Translation](http://arxiv.org/abs/2503.20959v1)**
+### **[ScreenLLM: Stateful Screen Schema for Efficient Action Understanding and Prediction](http://arxiv.org/abs/2503.20978v1)**
+### **[Patients Speak, AI Listens: LLM-based Analysis of Online Reviews Uncovers Key Drivers for Urgent Care Satisfaction](http://arxiv.org/abs/2503.20981v1)**
 ### **[FinAudio: A Benchmark for Audio Large Language Models in Financial Applications](http://arxiv.org/abs/2503.20990v1)**
 ### **[Multi-head Reward Aggregation Guided by Entropy](http://arxiv.org/abs/2503.20995v1)**
 ### **[Evaluating Large Language Models for Automated Clinical Abstraction in Pulmonary Embolism Registries: Performance Across Model Sizes, Versions, and Parameters](http://arxiv.org/abs/2503.21004v1)**
@@ -475,5 +650,3 @@ Score: 8
 ### **[Exploring the Evolution of Physics Cognition in Video Generation: A Survey](http://arxiv.org/abs/2503.21765v1)**
 ### **[Optimal Stepsize for Diffusion Sampling](http://arxiv.org/abs/2503.21774v1)**
 ### **[StyleMotif: Multi-Modal Motion Stylization using Style-Content Cross Fusion](http://arxiv.org/abs/2503.21775v1)**
-### **[Video-R1: Reinforcing Video Reasoning in MLLMs](http://arxiv.org/abs/2503.21776v1)**
-### **[VideoMage: Multi-Subject and Motion Customization of Text-to-Video Diffusion Models](http://arxiv.org/abs/2503.21781v1)**
