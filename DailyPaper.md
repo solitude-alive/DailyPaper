@@ -1,1101 +1,1399 @@
-# The Latest Daily Papers - Date: 2025-06-05
+# The Latest Daily Papers - Date: 2025-06-07
 ## Highlight Papers
-### **[Fault Localisation and Repair for DL Systems: An Empirical Study with LLMs](http://arxiv.org/abs/2506.03396v1)**
-- **Summary**: Here's a summary and critical evaluation of the provided research paper:
+### **[CogMath: Assessing LLMs' Authentic Mathematical Ability from a Human Cognitive Perspective](http://arxiv.org/abs/2506.04481v1)**
+- **Summary**: Here's a summary and critical evaluation of the paper "CogMath: Assessing LLMs' Authentic Mathematical Ability from a Human Cognitive Perspective":
 
 **Summary:**
 
-The paper presents an empirical study on fault localization (FL) and repair techniques for deep learning (DL) systems, specifically focusing on the use of Large Language Models (LLMs). It evaluates existing FL and repair techniques, identifies their limitations, and proposes a novel approach leveraging LLMs to address DL faults. The authors conduct experiments on a carefully designed benchmark, revealing the strengths and weaknesses of current methods and highlighting the potential of LLMs in both FL and repair tasks. The study also introduces the concept of "neutrality analysis" to account for multiple alternative "ground truth" repairs, leading to a more comprehensive evaluation.
+The paper introduces *CogMath*, a novel framework for evaluating the mathematical reasoning abilities of Large Language Models (LLMs) by mirroring human cognitive processes. Unlike traditional benchmarks that rely solely on answer accuracy, CogMath breaks down mathematical reasoning into three stages: problem comprehension, problem-solving, and solution summarization. Within these stages, nine fine-grained evaluation dimensions are designed, covering key aspects like sentence paraphrasing, knowledge application, and backward reasoning.  An "Inquiry-Judge-Reference" multi-agent system is used to generate dimension-specific inquiries, refine them, and provide reference answers. CogMath assesses an LLM as truly mastering a problem only if it excels in all nine dimensions. The framework is applied to several mainstream LLMs on standard datasets (GSM8K, MATH) and a new dataset (MExam), revealing that the mathematical capabilities of LLMs are often overestimated, and identifying specific strengths and weaknesses in different reasoning stages.
 
 **Critical Evaluation:**
 
-*   **Novelty:** The key novelty lies in the systematic evaluation of LLMs for both FL and repair in DL, particularly compared to established techniques and in integrating the idea of "neutrality analysis". Previous work has explored either LLMs in SE tasks (e.g., general code repair) or individual DL techniques, but this paper brings both together in a rigorous experimental setting and advances the state-of-the-art.
-*   **Significance:** The significance stems from addressing a critical need in DL systems: improving reliability and accuracy. The findings demonstrate that LLMs offer substantial improvements over existing FL and repair approaches, offering a potentially transformative avenue for future research and practice. Furthermore, the neutrality analysis approach enhances the robustness and accuracy of DL fault evaluation, addressing a recognized limitation in current experimental practices.
-*   **Strengths:**
-    *   **Comprehensive Evaluation:** The paper presents a well-designed and executed empirical study, comparing various FL and repair techniques across a diverse benchmark, including real and artificial faults.
-    *   **Neutrality Analysis:** The idea of neutrality analysis enhances the study by recognizing and accounting for multiple possible repairs, thus giving a better picture of technique effectiveness.
-    *   **Clear Methodology:** The paper provides a clear methodology, including prompts used for LLMs, making the results reproducible.
-    *   **Significant Results:** The experimental results convincingly demonstrate the potential of LLMs in DL FL and repair.
+The paper addresses a crucial limitation of existing LLM evaluation paradigms: the over-reliance on overall accuracy metrics, which masks the underlying reasoning processes and true capabilities of these models. The *CogMath* framework is a significant step forward because it:
 
-*   **Weaknesses:**
-    *   **Limited Scope of DL Faults:** The benchmark focuses on specific categories of DL faults, mainly related to model architecture and hyperparameters. The paper acknowledges that it does not deal with data issues, which could limit the generalizability of the findings.
-    *   **Computational Resources**: Some of the repair tasks are very computationally intensive, with one repair even exceeding 48 hours. This makes the findings more accessible for researchers or engineers with access to more resources.
-    *   **LLM Prompt Engineering:**  While the paper states best practices were followed for prompt engineering, there is more that could be done in this area. The results can be more generalized with automated prompt engineering.
+*   **Provides a more granular and cognitively-inspired evaluation:**  By breaking down mathematical reasoning into distinct stages and dimensions aligned with human cognition, the paper offers a more nuanced and informative assessment of LLM abilities. It moves beyond simply checking if an answer is correct to evaluating *how* the model arrives at that answer.
 
-*   **Potential Influence:** The paper has the potential to significantly influence the field by:
+*   **Identifies specific deficiencies:** The study highlights that current LLMs often struggle in problem comprehension, knowledge application, and backward reasoning, revealing specific areas where improvements are needed. The paper goes beyond a generic statement about LLM limitations and pinpoints specific cognitive skills that are lacking.
 
-    *   Encouraging further research on using LLMs for DL system debugging and repair.
-    *   Promoting the adoption of neutrality analysis for more rigorous evaluation of DL fault localization and repair techniques.
-    *   Informing the development of automated tools that leverage LLMs for DL system maintenance.
+*   **Offers a practical and adaptable framework:** The "Inquiry-Judge-Reference" multi-agent system provides a structured and adaptable approach to generate dimension-specific inquiries, making it possible to tailor the evaluation to different problem types and LLM architectures. This makes it valuable for future research and development.
 
-**Score: 8**
+*   **Reveals overestimation in current accuracy:** A central finding is that existing evaluations overestimate the true mathematical capabilities of LLMs by a substantial margin (30%-40%). This is an important corrective and challenges the perception of LLMs as highly capable mathematical problem solvers.
 
-**Rationale:**
+**Weaknesses and Limitations:**
 
-The paper offers a significant contribution to the field. The use of LLMs with neutrality analysis is novel in a DL context, the study is thorough, and the results are compelling. The empirical study is comprehensive, the methodology is clear, and the findings have the potential to impact future research and practice. However, the limited scope of DL faults in the benchmark, particularly excluding data-related issues, prevents this from being considered a landmark paper, warranting a score below 9.
+*   **Computational cost:** The multi-agent system, while providing thorough evaluation, significantly increases computational cost compared to simple accuracy measurements. This can be a barrier to wider adoption.  The paper could benefit from a more detailed analysis of the computational overhead.
 
-- **Score**: 8/10
+*   **Reliance on LLMs for agents:** The Inquiry, Judge, and Reference agents are themselves LLMs, which introduces potential biases and dependencies.  While the paper describes using GPT-4 for these agents, it would be useful to see how results vary when other models (including smaller ones) are used for the agents. The agents' capabilities ultimately limit the quality of assessments.
 
-### **[Adaptive Task Vectors for Large Language Models](http://arxiv.org/abs/2506.03426v1)**
-- **Summary**: Here's a summary and critical evaluation of the paper "Adaptive Task Vectors for Large Language Models":
+*   **Limited exploration of mitigation strategies:** While the paper identifies weaknesses, it doesn't deeply explore mitigation strategies or propose concrete solutions to address the identified shortcomings. The discussion on CoT and ICL is suggestive but not conclusive.
 
-**Summary:**
+*   **Dataset limitations:** GSM8K and MATH, although common benchmarks, might not fully represent the diversity of mathematical reasoning encountered in real-world scenarios. While the new MExam dataset is a positive contribution, further detail on its construction and characteristics would strengthen the paper. The impact of the model's pre-training on these datasets needs to be clarified.
 
-This paper introduces Adaptive Task Vectors (ATV), a novel framework designed to improve the performance of Large Language Models (LLMs) in in-context learning (ICL) scenarios. ATV addresses limitations of traditional ICL and existing task vector approaches. Instead of relying on fixed demonstrations or static task vectors, ATV dynamically generates task vectors conditioned on each specific input query. This is achieved using a small language model to create intermediate task representations, which are then transformed to match the architecture of the target LLM and guide its output generation. The paper presents theoretical analysis, demonstrating that ATV is expressively equivalent to LoRA under equal rank budgets and more expressive than Prefix-Tuning. Empirical evaluations showcase ATV's strong performance, generalization capabilities, and interesting insights into model capacity and injection behavior across various tasks and model families.
+**Novelty and Significance:**
 
-**Critical Evaluation:**
+The paper is novel in its approach to evaluating LLMs from a human cognitive perspective. The breakdown into distinct stages and dimensions, combined with the multi-agent evaluation system, represents a significant departure from traditional accuracy-based benchmarks. The framework can also be used to identify areas where models fail and to develop better training methods or architectures for future LLMs. The revelation of overestimation in current LLMs makes *CogMath* highly significant for the research community.
 
-*   **Novelty:** The core idea of dynamically generating task vectors conditioned on each input query is a significant step forward. While task vector methods have been explored before, the input-awareness aspect is a key differentiator. This addresses the crucial limitation of static task vectors, which fail to adapt to the nuances of individual input queries, making it difficult to generalize to unseen tasks and to be effective in all domains.
-*   **Significance:** The paper's significance lies in its potential to enhance the robustness and efficiency of ICL. It offers a more adaptable and scalable approach to task-specific steering of LLMs, overcoming constraints related to demonstration order, context length, and computational costs associated with conventional ICL. The theoretical analysis provides a solid foundation for understanding the expressiveness of ATV and its advantages over existing methods like LoRA and Prefix-Tuning.
-*   **Strengths:**
-    *   **Clear Problem Definition:** The paper clearly identifies the limitations of ICL and existing task vector approaches.
-    *   **Technically Sound:** The proposed ATV framework is well-defined and explained. The theoretical analysis comparing ATV to LoRA and Prefix-Tuning adds significant depth.
-    *   **Strong Empirical Results:** The experimental results on diverse datasets and model families (LLaMA3 and Mistral) convincingly demonstrate the effectiveness of ATV, in addition the generalization experiments show a boost of performance in novel tasks compared to static counterparts.
-    *   **Ablation Studies:** The ablation studies on model capacity and injection configuration offer valuable insights into the behavior of ATV. They demonstrate how design choices affect overall performance and interpretability.
-*   **Weaknesses:**
-    *   **Dependency on Input Quality:** The effectiveness of ATV depends on the quality of input data used to train the small language model and the expansion module. Poorly curated or biased datasets may lead to unintended behaviors.
-    *   **Task Variation:** It acknowledges limitations in its effectiveness across all tasks (especially math tasks). Some tasks (particularly in mathematics) are better addressed with other methods where there is a pattern-based matching.
-    *   **Limited Baseline Comparison:** While the paper mentions improvements in terms of token usage, it lacks explicit computation of the inference time reduction compared to other ICL methods, and retrieval augmented approaches.
+**Justification for Score:**
 
-*   **Potential Impact:** ATV has the potential to become a widely adopted technique for enhancing the performance of LLMs in various applications, especially in scenarios where adaptability and resource efficiency are critical. It could inspire further research in developing more context-aware and input-adaptive methods for steering LLMs.
+I assign a score of **8/10**.
 
-The theoretical analysis provides a sound footing for the practical benefits seen in the experiments. This paper combines solid theoretical underpinnings with clear, well-designed experiments. While the dependency on high-quality training data is a common constraint, the results are strong enough to encourage broader adoption and further investigation of this technique.
+*   The paper addresses a crucial problem in LLM evaluation.
+*   The framework is well-defined, cognitively motivated, and adaptable.
+*   The multi-agent system is a novel and technically interesting approach.
+*   The findings challenge existing perceptions of LLM mathematical abilities.
 
-**Score: 8**
-
-Rationale: This paper presents a significant and novel approach to task vector generation, backed by solid theoretical analysis and strong empirical results. The query-specific ATV has the potential to significantly improve in-context learning performance in diverse applications. While there are some limitations and areas for future work, the paper's contribution is substantial and warrants a high score.
-
-- **Score**: 8/10
-
-### **[ProRank: Prompt Warmup via Reinforcement Learning for Small Language Models Reranking](http://arxiv.org/abs/2506.03487v1)**
-- **Summary**: Here's a summary and critical evaluation of the paper:
-
-**Summary:**
-
-The paper "ProRank: Prompt Warmup via Reinforcement Learning for Small Language Models Reranking" addresses the challenge of using small language models (SLMs) for document reranking. While SLMs are computationally efficient, they often struggle to understand task-specific prompts without fine-tuning. ProRank proposes a two-stage training approach: 1) **Prompt Warmup:**  Uses Reinforcement Learning (specifically GRPO) to guide SLMs to understand task prompts and generate coarse-grained binary relevance scores.  2) **Fine-grained Score Learning:**  Fine-tunes the SLM to produce more granular relevance scores by aggregating token logits from the predefined output set of the first stage, avoiding adding new layers.  The authors demonstrate that ProRank outperforms both open-source and proprietary reranking models, even surpassing a 32B LLM with a 0.5B ProRank model.
-
-**Critical Evaluation:**
-
-*   **Novelty:**  The paper introduces a genuinely novel approach.  While Reinforcement Learning and two-stage training strategies are not entirely new *per se*, the application of GRPO specifically to *warm up* the SLM for prompt understanding in the *context of reranking* is a valuable innovation. Using token logits avoids adding extra parameter layers for the fine-grained scoring is also a sensible technique. The focus on enabling *small* language models to achieve results comparable to larger models is a pragmatic and important direction.
-
-*   **Significance:** The paper has significant implications for real-world deployment of reranking systems. By demonstrating that properly trained SLMs can outperform larger LLMs, the authors address the computational cost bottleneck, making high-quality reranking more accessible.  The experimental results are thorough, covering various datasets, languages, and domains. The benchmark comparison against leading models (including commercial APIs) provides strong evidence for ProRank's effectiveness.
-
-*   **Strengths:**
-
-    *   **Clear Problem Statement:** The paper clearly articulates the limitations of using SLMs for reranking and motivates the need for a specialized training approach.
-    *   **Well-Defined Approach:** ProRank's two-stage methodology is well-defined and explained. The choice of GRPO and the use of token logits are justified.
-    *   **Comprehensive Experiments:** The experiments are extensive and well-designed, with comparisons against strong baselines on diverse datasets.
-    *   **Significant Results:** The results convincingly demonstrate that ProRank achieves state-of-the-art performance with SLMs.
-    *   **Code Availability**: Public availability of the code increases the reproducibility of the results
-
-*   **Weaknesses:**
-
-    *   **Ablation Clarity:** While the ablation study highlights the importance of each component, a more granular ablation of the GRPO reward function (specifically the balance between format accuracy and relevance accuracy) could provide further insight.
-    *   **Top-k Sensitivity:**  The discussion about top-k retrieval sensitivity could be expanded, perhaps with experiments exploring adaptive top-k selection strategies. The limitation regarding top-k noise could be discussed more clearly, and experiments could investigate techniques to make ProRank more robust against this noise.
-    *   **Limited Model Scope:** The paper focuses on the Qwen2.5 architecture. Testing with other SLM architectures (e.g., Llama 3 variants, Mistral) would increase confidence in the generalizability of the approach.
-    *   **Hyperparameter Tuning:** The implementation details section includes lora tuning, but discussion of the selection process for the remaining hyperparameters (including GRPO-specific parameters and the learning rate) is lacking.
-
-*   **Potential Influence:**  This work has the potential to significantly influence the field of information retrieval and retrieval-augmented generation. The focus on SLMs will encourage researchers to explore more efficient and accessible reranking solutions. ProRank offers a practical framework that can be readily adopted and extended by others. It provides a starting point for building high-quality, cost-effective reranking systems.
-
-**Rigorous Rationale for Score:**
-
-I am assigning a score of 8.
-
-*   The paper presents a novel and well-executed approach to a practically important problem. ProRank addresses a significant gap in the field by enabling SLMs to achieve state-of-the-art reranking performance. The experiments are thorough, and the results are compelling.
-*   The weaknesses are relatively minor. While more in-depth ablation studies and exploration of various architectures could strengthen the paper, the core contribution and experimental validation are strong.
-*   The impact of the work is likely to be substantial, given the increasing need for efficient and accessible reranking solutions.
+However, the high computational cost, reliance on LLMs for agents, limited exploration of mitigation strategies, and reliance on somewhat limited datasets prevent it from achieving a higher score. More analysis of these limitations could improve the value of the paper.
 
 Score: 8
 
 - **Score**: 8/10
 
-### **[Beyond Memorization: A Rigorous Evaluation Framework for Medical Knowledge Editing](http://arxiv.org/abs/2506.03490v1)**
+### **[SQLens: An End-to-End Framework for Error Detection and Correction in Text-to-SQL](http://arxiv.org/abs/2506.04494v1)**
 - **Summary**: Here's a summary and critical evaluation of the paper:
 
 **Summary:**
 
-The paper introduces MedEditBench, a novel framework for rigorously evaluating the effectiveness of knowledge editing (KE) methods specifically within the medical domain. Recognizing the limitations of existing KE benchmarks that primarily focus on general knowledge, the authors construct a high-quality medical knowledge editing benchmark from existing medical question-answering datasets, along with three distinct knowledge editing paradigms to assess the impact of different knowledge sources used for editing. The framework also utilizes new metrics such as efficacy, generalization, and retention to measure the performance of the editing process. A key contribution is the proposal of Self-Generated Rationale Editing (SGR-Edit), which leverages model-derived rationales as the target knowledge for editing, thereby aiming to improve the underlying reasoning process. Experiments demonstrate that current KE methods tend to only superficially memorize injected information and struggle to generalize, while SGR-Edit can significantly improve the performance of existing methods. Finally, the paper also delves into analyzing medical knowledge localization and the impact of sequential editing in LLMs.
+The paper introduces SQLENS, an end-to-end framework designed to detect and correct semantic errors in SQL queries generated by large language models (LLMs) in text-to-SQL systems.  SQLENS integrates error signals from both the database and the LLM itself to identify potential problems at the clause level. It uses a weak supervision approach to aggregate these signals, trains a classifier to predict semantic correctness, and then guides the LLM through iterative error fixes, prioritizing the most critical errors first.  The SQL Auditor ensures corrections don't degrade correct queries. Experimental results on BIRD and Spider benchmarks show SQLENS improves error detection and boosts the execution accuracy of text-to-SQL systems.
 
 **Critical Evaluation:**
 
-* **Novelty:** The introduction of MedEditBench is a significant contribution. Existing benchmarks are largely unsuitable for assessing the nuance and complexity of medical knowledge. The creation of a specialized medical KE benchmark directly addresses this gap. The three editing paradigms (GTA-Edit, RE-Edit, and SGR-Edit) provide a multi-faceted approach to understanding KE, and SGR-Edit offers a novel way to improve generalization in KE methods.
+*   **Novelty:** The paper's novelty lies in its holistic approach to error detection and correction. While existing methods often rely on LLM self-reflection or execution feedback, SQLENS combines diverse error signals from both the database and the LLM. The fine-grained clause-level error detection, explainability, and iterative correction guided by weak supervision are significant contributions. Furthermore, it addresses the limitations of LLM self-correction, which often suffers from self-preference bias.
 
-* **Significance:**  The medical domain is characterized by rapidly evolving information and the crucial need for reliable, interpretable reasoning. The paper highlights the shortcomings of current KE methods in addressing these requirements.  The MedEditBench framework and the SGR-Edit paradigm offer practical guidance for implementing KE methods in real-world medical applications, where accuracy and reasoning are critical. The insights into knowledge localization within LLMs and the effects of sequential editing are also valuable.
+*   **Significance:** Semantic error detection and correction is a crucial issue for the practical deployment of text-to-SQL systems.  By improving the reliability and accuracy of generated queries, SQLENS addresses a significant gap and can enhance user trust in these systems. The paper shows that LLM-generated queries can be substantially improved without relying on ground truth, indicating significant potential for real-world application. The improvement in F1 scores for error detection and the boost in execution accuracy are substantial and demonstrate the impact of the proposed framework.
 
-* **Strengths:**
-    * **Rigorous Evaluation Framework:** MedEditBench's construction from real-world medical QA datasets ensures practical relevance.
-    * **Addressing a Gap:** The paper clearly identifies and addresses the need for specialized KE evaluations in high-stakes domains.
-    * **SGR-Edit Paradigm:** The use of self-generated rationales as the editing target is a clever approach that improves generalization.
-    * **Comprehensive Evaluation:** The analysis of medical knowledge localization and sequential editing provides valuable insights.
+*   **Strengths:**
+    *   The framework is comprehensive, covering error detection, diagnosis, and correction.
+    *   It utilizes a diverse set of error signals, leveraging both database and LLM knowledge.
+    *   The weak supervision approach is effective in handling noisy error signals.
+    *   The iterative correction strategy minimizes cascading mistakes.
+    *   Experimental results demonstrate significant improvements on standard benchmarks.
+    * The method is clearly described.
 
-* **Weaknesses:**
-    * **Limited Model Coverage:** While the paper evaluates on LLaMA models, exploring a wider range of LLMs (e.g., GPT series, Bard, etc.) could strengthen the generalizability of the findings. Including the Qwen2.5-7B is helpful, but more diverse architectures should be tested.
-    * **SGR-Edit Rationale Generation:**  While self-generated rationales are a strength, the process itself relies on the LLM's initial reasoning capabilities. The rationales may not always be correct or complete, potentially leading to flawed editing.
-    * **Limited Scope of Sequential Edits:** While the paper investigates sequential edits, the study focuses primarily on performance drops. A deeper analysis of the types of knowledge that are lost or altered during sequential editing could be valuable.
-    * **Compute constraints:** The evaluation coverage is limited due to GPU resources.
+*   **Weaknesses:**
+    *   The framework still relies on LLMs, and therefore inherits limitations of the LLM, such as context window constraints and reasoning limitations. While the paper acknowledges this, it may not fully explore the impact of these limitations.
+    *   There is a reliance on the quality of the underlying database schema. The accuracy of the error signals will depend on the level of annotation completeness and accuracy.
+    *   The computational overhead associated with aggregating signals and performing iterative corrections could be a limitation for real-time applications, though the paper argues SQLENS is intended for asynchronous debugging.
+    * While the experiments demonstrate improvements on several base systems, they could be strengthened by comparisons against state-of-the-art text-to-SQL systems that perform well in 2024/2025.
 
-* **Potential Influence:** The paper has the potential to significantly influence future research on knowledge editing, particularly in specialized domains. The MedEditBench framework can serve as a standard for evaluating medical KE methods, and the SGR-Edit paradigm can inspire the development of new approaches that prioritize reasoning and generalization.
+*   **Potential Influence:**  SQLENS can influence future research in several ways:
+    *   It provides a strong baseline for error detection and correction in text-to-SQL.
+    *   It demonstrates the benefits of combining database and LLM knowledge.
+    *   It inspires new methods for leveraging weak supervision in this domain.
+    *   It can be integrated into existing text-to-SQL systems to improve their reliability and accuracy.
 
-**Justification for Score:**
+*Given the solid novelty, experimental results, significance, and potential impact, a well-reasoned yet critical evaluation points to a score reflecting substantial contributions to the field that, while not fundamentally revolutionary, significantly improves the state-of-the-art.*
 
-Considering the novelty of the MedEditBench framework and the SGR-Edit paradigm, as well as its comprehensive analysis and potential influence, the paper represents a substantial contribution to the field of knowledge editing. However, there are still areas for improvement. Therefore a score of 8 is appropriate.
-
-**Score: 8**
+Score: 8
 
 - **Score**: 8/10
 
-### **[Measuring Human Involvement in AI-Generated Text: A Case Study on Academic Writing](http://arxiv.org/abs/2506.03501v1)**
-- **Summary**: Here is a concise summary and evaluation of the research paper "Measuring Human Involvement in AI-Generated Text: A Case Study on Academic Writing":
+### **[BEAR: BGP Event Analysis and Reporting](http://arxiv.org/abs/2506.04514v1)**
+- **Summary**: Here's a summary and critical evaluation of the provided paper:
 
 **Summary:**
 
-The paper addresses the limitations of binary classification methods in detecting AI-generated text, especially when human involvement is present in the generation process. The authors propose a method using BERTScore as a continuous metric to quantify human involvement and a RoBERTa-based regressor with a token classification task to estimate this involvement. They create a continuous dataset (CAS-CS) simulating academic scenarios with varying levels of human input and demonstrate that their approach outperforms existing detectors. They also provide an interpretability module to identify human-contributed words.
+The paper introduces BEAR (BGP Event Analysis and Reporting), a novel framework that uses Large Language Models (LLMs) to generate comprehensive reports explaining detected BGP anomaly events like hijacks and route leaks. BEAR employs a multi-step reasoning process to convert tabular BGP data into detailed textual narratives.  To address the lack of labeled BGP anomaly data, the authors also developed a synthetic data generation framework powered by LLMs.  The framework demonstrates excellent accuracy (100%) on both real and synthetic datasets and outperforms other baseline methods. It explores varying collector availability for BGP data and develops a hierarchical summarization technique to process events with large amounts of data.
 
 **Critical Evaluation:**
 
-**Novelty:** The paper introduces a novel perspective by shifting the focus from binary classification (AI-generated vs. human-written) to quantifying the *degree* of human involvement in AI-assisted text generation. Using BERTScore as a continuous metric and a RoBERTa-based regressor for this purpose represents a departure from traditional detection methods. The creation of the CAS-CS dataset is also a valuable contribution, as it more realistically reflects real-world scenarios than existing polarized datasets.
+* **Novelty:**  The paper's primary novelty lies in applying LLMs to *explain* detected BGP anomalies, rather than just detecting them. Existing work has focused on anomaly detection using various machine learning techniques. Using LLMs for generating human-readable and insightful reports is a significant step forward. The synthetic data generation framework using LLMs is also novel in the BGP anomaly context.  The multi-step reasoning framework designed to translate structured BGP data into a textual format that can then be processed by an LLM is a substantial contribution.
 
-**Significance:**  The research has significant implications for academic integrity, especially with the increasing use of LLMs.  The ability to quantify human involvement offers a more nuanced and robust approach than simply labeling text as AI-generated, which is prone to errors when humans are involved in the process. The interpretability module adds further value by providing insights into which parts of the text are likely human contributions.
+* **Significance:** The work addresses a practical problem:  understanding BGP anomalies is crucial for network operators to mitigate and prevent future incidents.  BEAR offers the potential to automate this process, reducing the reliance on human experts and accelerating incident response. The ability to generate synthetic BGP anomaly data is also significant because it addresses a crucial limitation in the field -- the lack of publicly available, well-labeled data for training and evaluation. The hierarchical summarization approach further extends the applicability of the approach to high-volume anomaly events. The analysis of BEAR under conditions of partial data availability adds robustness to the solution, which has a direct impact in a real-world deployment scenario.
+
+* **Strengths:**
+    * **Comprehensive Approach:** The paper doesn't just apply an LLM; it presents a complete framework including data preparation, prompt engineering, self-consistency, and synthetic data generation.
+    * **Strong Evaluation:** The evaluation uses both real and synthetic data, a crucial combination to validate the method's effectiveness and generalizability. The comparison against different baseline methods and different LLMs provides a thorough analysis of the strengths of the proposed architecture and the effect of the LLM type.
+    * **Practical Considerations:** The work addresses real-world limitations like incomplete data and large data volumes through techniques such as hierarchical summarization and adapting to fewer collectors.
+    * **Clear Presentation:** The paper is well-structured and explains the methodology and experiments clearly.
+
+* **Weaknesses:**
+    * **LLM Cost:**  The paper acknowledges that large LLMs can be expensive.  The exploration of using different, perhaps smaller, LLMs could be more extensive.  The authors did a good job of covering this aspect by implementing and testing the framework with different LLMs.
+    * **Data Availability:** Even though the synthetic data alleviates this issue to an extent, the method still heavily relies on the LLM's pre-existing knowledge, which may limit its ability to identify novel or completely unexpected anomaly types. The dataset for real data is limited to just 10 "real" events and 10 "anonymized" real events. While the generation of the synthetic data is useful, the dataset size for real scenarios is fairly small. A wider experimental evaluation would increase confidence in the approach.
+    * **Explainability of LLM reasoning:**  While the generated reports provide explanations, the inner workings of the LLM's reasoning process remain somewhat opaque. Understanding *why* the LLM makes certain inferences could further improve the system.
+    * **Computational Cost:** The hierarchical summarization process has a high computation cost. More analysis and optimization would be needed for deployment in a high-volume setting.
+
+* **Impact:** This work has the potential to significantly impact network security and operations by providing an automated way to understand and respond to BGP anomalies. The framework and the synthetic data generation method are likely to spur further research in this area.
+
+**Justification for Score:**
+
+The paper presents a genuinely novel and significant contribution to the field of BGP anomaly analysis.  The framework is well-designed, comprehensively evaluated, and addresses practical challenges in real-world deployment. While there are weaknesses related to LLM cost, explainability, dataset size and computation cost, the overall quality and potential impact of the work are substantial. The synthetic data generation framework is itself a valuable contribution. The robust experimental results demonstrating 100% accuracy are compelling.
+Score: 8
+
+- **Score**: 8/10
+
+### **[HALoS: Hierarchical Asynchronous Local SGD over Slow Networks for Geo-Distributed Large Language Model Training](http://arxiv.org/abs/2506.04531v1)**
+- **Summary**: Here's a summary and critical evaluation of the paper:
+
+**Summary:**
+
+The paper introduces HALOS, a hierarchical asynchronous local SGD framework designed for efficient geo-distributed large language model (LLM) training.  HALOS tackles the challenges of slow inter-region communication and hardware heterogeneity by deploying local parameter servers (LPSs) within each region and a global parameter server (GPS) for merging updates.  This structure minimizes expensive inter-region communication, reduces the impact of stragglers, and leverages fast intra-region links.  The paper provides a convergence analysis for HALOS under non-convex objectives, including theoretical guarantees on the role of hierarchical momentum.  Empirical results demonstrate faster convergence than synchronous baselines and existing asynchronous methods while preserving model quality.
+
+**Critical Evaluation:**
+
+* **Novelty:**  The core idea of hierarchical asynchronous training isn't entirely new, as federated learning has explored similar structures. However, applying it specifically to *geo-distributed* LLM training with the emphasis on server-side update accumulation and global model merging introduces a distinct contribution.  The convergence analysis, particularly the in-depth consideration of momentum and delays in a hierarchical asynchronous setting, represents a significant theoretical advance.  The focus on practical challenges like slow inter-region communication, combined with the performance gains, strengthens the practical relevance of the approach.
+* **Significance:**  The paper addresses a critical and increasingly important problem: scaling LLM training beyond single-datacenter setups.  The practical improvements in training time (up to 7.5x faster convergence) are substantial and directly relevant to real-world LLM development. The retention of accuracy compared to synchronous SGD is also very important for adoption.  The detailed analysis of the impact of hyperparameters (momentum, update frequency, merging weight) provides valuable insights for practitioners. The robust testing across several models and datasets is another positive.
 
 **Strengths:**
 
-*   **Problem Definition:** The paper clearly identifies the limitations of binary classification in AI-assisted writing and introduces the concept of "participation detection obfuscation."
-*   **Methodology:** The proposed method is well-defined, combining BERTScore for quantification and a RoBERTa-based regressor for estimation.
-*   **Dataset:** The CAS-CS dataset is a valuable contribution, providing a more realistic evaluation environment than polarized datasets.
-*   **Results:** The experimental results demonstrate the superiority of the proposed method over existing detectors on both classification and regression tasks.
-*   **Interpretability:** The interpretability module enhances the transparency and utility of the approach.
-*   **Generalizability:** The experiments testing for generalizability across different generative models demonstrate the robustness of the approach.
+*   **Strong Empirical Results:** The paper presents convincing empirical evidence of HALOS's effectiveness, including comparisons with relevant baselines (DiLoCo and Async-Local-SGD). The experiments focus on practical metrics like wall-clock time and token consumption.
+*   **Solid Theoretical Foundation:** The convergence analysis adds rigor and offers insights into the behavior of HALOS, particularly regarding the role of momentum and delays.
+*   **Practical Relevance:** The paper directly addresses the challenges of geo-distributed LLM training, a growing area of interest and importance.
+*   **Detailed Ablation Studies:** The ablation studies provide a comprehensive understanding of the impact of different components and hyperparameters within HALOS.
+*  **Open-Source Implementation:** This allows for easier adoption and validation of the results.
 
 **Weaknesses:**
 
-*   **Domain Limitation:** The training and validation datasets are primarily focused on computer science abstracts, limiting the potential generalizability to other academic domains.
-*   **Text Length Limitation:** RoBERTa has a text length limit, preventing the analysis of longer texts like full papers.
-*   **Reliance on Model-Based Score:** The measurement of human involvement relies on a model-based score, which may not be as intuitive or interpretable as direct human assessment.
-*   **Survey Data:** The study mentions plans to incorporate survey data in the future but as of now it is not incorporated.
+*   **Limited Comparison Set:** While the baselines chosen are reasonable, a more comprehensive comparison against other distributed training techniques (e.g., some advanced model parallelism strategies tailored for geo-distributed environments) could strengthen the claims.
+* **Heterogeneous Cluster configuration details:** While it mentions using different speeds for workers, the configuration details are a little sparse. A breakdown showing how this speed translates to hardware and model would be a strong positive.
+
+**Potential Influence:**
+
+HALOS has the potential to influence the way LLMs are trained, particularly in scenarios where access to large, co-located GPU clusters is limited or prohibitively expensive. The framework's ability to leverage geographically distributed resources could democratize LLM development, making it more accessible to a wider range of organizations. The theoretical analysis could also spur further research into asynchronous optimization methods for LLMs.
 
 **Justification for Score:**
 
-While the paper presents a novel and significant contribution, the domain limitation and reliance on model-based scoring slightly temper its overall impact. The methodological soundness and the positive experimental results support a high score, but the limitations warrant a slight deduction. The method's potential to improve detection robustness and understanding of AI's role in writing, as well as the potential to make more informed decisions on detection efforts, also contribute towards a higher score.
+The paper presents a technically sound and practically relevant contribution to the field of distributed LLM training. The combination of a novel hierarchical asynchronous architecture, rigorous convergence analysis, and compelling empirical results warrants a high score. While the novelty isn't revolutionary (drawing inspiration from federated learning), the specific application to geo-distributed LLMs and the detailed analysis of momentum and delays make it a significant advance. The limitations mentioned above (limited comparison set, slightly sparse experiment descriptions) prevent it from achieving a perfect score.
 
-**Score: 8**
+Score: 8
 
 - **Score**: 8/10
 
-### **[Accurate Sublayer Pruning for Large Language Models by Exploiting Latency and Tunability Information](http://arxiv.org/abs/2506.03510v1)**
+### **[Selecting Demonstrations for Many-Shot In-Context Learning via Gradient Matching](http://arxiv.org/abs/2506.04579v1)**
 - **Summary**: Here's a summary and critical evaluation of the provided research paper:
+
+**Summary**
+
+The paper addresses the problem of demonstration selection in many-shot in-context learning (ICL) for large language models (LLMs). Unlike few-shot ICL where demonstrations are carefully selected, many-shot ICL often relies on random selection due to scalability concerns. The authors propose a "Curriculum Latent Gradient" (CLG) method.  CLG selects demonstrations by aligning the fine-tuning gradients of the entire training set with the gradients of the selected examples, aiming to mimic the full training set's learning dynamics within the selected subset. Experiments across diverse NLP tasks and LLMs (including both open-source and closed-source) demonstrate that CLG consistently outperforms random selection and other baseline methods, often by a significant margin. The authors also investigate the transferability of selected demonstrations, the relationship between fine-tuning and ICL performance, and the diversity/coverage of the selected demonstrations.
+
+**Critical Evaluation**
+
+*   **Novelty:** The core idea of using gradient matching to select demonstrations is novel and well-motivated. The insight that ICL and fine-tuning have analogous data requirements is a significant conceptual contribution. CLG offers a different perspective from instance-based or diversity-based demonstration selection. The "curriculum" aspect (using gradients across multiple training epochs) adds a temporal dimension to the selection process, which is also a valuable contribution.
+
+*   **Significance:** The paper tackles a practically relevant problem.  Many-shot ICL is becoming increasingly important as context windows expand, and this work offers a viable alternative to the default random selection strategy. By significantly improving ICL performance, the paper contributes to more efficient and effective usage of LLMs.  Demonstrating transferability to closed-source LLMs is particularly significant as it highlights the method's applicability in real-world scenarios where model weights are inaccessible.
+
+*   **Strengths:**
+
+    *   **Well-Motivated:** The paper clearly articulates the limitations of existing approaches and the potential benefits of gradient matching.
+    *   **Solid Experimental Design:** The authors conduct extensive experiments across a wide range of datasets, tasks, and LLMs. The use of both open-source and closed-source models enhances the generalizability of the results.
+    *   **Thorough Analysis:** The paper not only reports performance gains but also provides insightful analyses, including ablation studies, investigations of diversity and coverage, and the relationship between FT and ICL.
+    *   **Practicality:** The paper discusses the computational cost of CLG and demonstrates its efficiency even at scale.
+
+*   **Weaknesses:**
+
+    *   **Gradient Approximation:**  The method relies on approximating the true ICL learning dynamics using gradients from a smaller model's fine-tuning process. This approximation may not always be accurate, especially if the smaller model has significantly different inductive biases than the larger model. The authors do acknowledge this implicit assumption.
+    *   **Algorithm Complexity:** While claiming efficiency, calculating and matching gradients can be computationally intensive, especially for very large training sets. The authors could further refine and reduce the computational complexity of CLG.
+    *   **Limited Exploration of Order Sensitivity:** The paper acknowledges the order sensitivity limitation of ICL. Although not a focus of the paper, there's a missed opportunity to incorporate order considerations as a minor element given the curriculum-based aspect of CLG. This could add another layer of refinement in demonstration selection.
+
+*   **Potential Influence:** This paper has the potential to significantly influence how demonstrations are selected for many-shot ICL. The CLG method is relatively simple to implement and could be incorporated into existing ICL pipelines.  The insights about the relationship between fine-tuning and ICL can also guide future research in this area. The demonstration of transferability across various LLMs makes the method broadly applicable.
+
+*   **Justification for the Score:** The paper presents a novel and well-supported approach to a practically relevant problem. While the gradient matching relies on an approximation and the computational complexity should be kept in mind, the empirical results and analysis demonstrate clear benefits over existing methods. It introduces a fresh perspective and offers practical guidance for better leveraging many-shot ICL. The results have the potential to be reused and incorporated across multiple LLM models and use cases.
+
+Score: 8
+
+- **Score**: 8/10
+
+### **[Perfecting Depth: Uncertainty-Aware Enhancement of Metric Depth](http://arxiv.org/abs/2506.04612v1)**
+- **Summary**: Here's a summary and critical evaluation of the paper:
 
 **Summary:**
 
-The paper introduces SPRINT (Sublayer PRuning with LateNcy and Tunability Information), a novel sublayer pruning method for large language models (LLMs).  It addresses limitations in existing sublayer pruning techniques by considering both the latency reduction achieved by removing a sublayer and the tunability of the remaining sublayers.  SPRINT iteratively prunes redundant sublayers and quickly tunes the parameters of the remaining layers.  The key components are latency-aware importance scoring, tunability-aware sensitivity evaluation, and techniques to reduce computational cost like activation checkpointing and fast candidate selection.  Experiments on Llama-2 and Llama-3 models demonstrate that SPRINT achieves a better accuracy-speedup trade-off than existing methods, significantly improving performance on zero-shot commonsense reasoning benchmarks.
+The paper introduces "Perfecting Depth," a novel two-stage framework for enhancing sensor depth maps. The first stage utilizes a diffusion model to stochastically estimate the uncertainty of each pixel, effectively identifying unreliable depth regions. This is achieved by training the diffusion model on clean synthetic data and applying it to noisy real-world sensor data, creating a training-inference gap. The second stage employs a deterministic refinement network that focuses on the uncertain regions identified in the first stage, enforcing structural consistency and pixel-level accuracy. The framework is trained on synthetic data but demonstrates generalization to real-world scenarios, removing noise and completing missing data, ultimately improving depth map reliability.
 
 **Critical Evaluation:**
 
-* **Novelty:** The paper's novelty lies primarily in its integrated approach to sublayer pruning. While individual components have been explored in related work, SPRINT distinguishes itself by:
-    * Combining latency and tunability information into the sublayer selection process. This is a more sophisticated and realistic approach than simply focusing on initial sensitivity or ignoring latency differences.
-    * Fast in-compression tuning method
-    * Techniques for decreasing computational cost by the use of activation checkpointing and fast candidate selection
-* **Significance:** Speeding up LLMs is crucial for their wider adoption, and pruning is a promising technique. SPRINT provides a method to enhance LLM efficiency in practical use. The experimental results, showcasing significant accuracy improvements over existing pruning methods (especially on reasoning tasks), highlights the potential real-world relevance of SPRINT. The findings that MLP sublayers and lower-level layers are more critical for accuracy are interesting and provide valuable insights for future research.
-* **Strengths:**
-    * **Comprehensive Approach:**  SPRINT integrates multiple techniques for a well-rounded solution.
-    * **Strong Experimental Results:** SPRINT is shown to achieve a better accuracy-speedup trade-off compared to several established baselines across various models and tasks.
-    * **Ablation Study:** A solid ablation study confirms the contribution of each key element.
-    * **Analysis of pruning patterns**: Provides further insights of which sublayers are more important.
-* **Weaknesses:**
-    * **Complexity:** While the integrated approach is beneficial, the method's complexity can make it more difficult to implement and tune compared to simpler pruning techniques. This is somewhat mitigated by the techniques to reduce computational costs, but the algorithm may still be complex.
-    * **Dataset Dependency:** The calibration dataset (Wikitext2) used for sensitivity measurement might influence the pruning decisions.
-    * **Limited Scope of Benchmarks:** While the commonsense reasoning benchmarks are relevant, it would strengthen the paper to include experiments on a more diverse range of tasks (e.g., NLP tasks) and datasets.
-    * **GPU limitation**: The paper only tested smaller models due to the GPU limitation. Although larger models have been tested it would be more appropriate to test all models on the same setting.
+*   **Novelty:** The core novelty lies in the use of a diffusion model's stochastic nature to automatically estimate pixel-wise uncertainty in sensor depth maps, avoiding the need for manual artifact priors.  The concept of using a training-inference domain gap to explicitly expose aleatoric uncertainty inherent in real-world sensor data is a valuable contribution. The combination of this uncertainty measure with a deterministic refinement network inspired by sparsity-adaptive depth refinement (SDR) techniques is also a relatively novel combination. It bridges generative and discriminative approaches.
+
+*   **Significance:** The paper addresses a critical problem in 3D computer vision: improving the reliability of sensor depth maps, which often suffer from noise, missing data, and distortions.  The potential impact is significant, enabling improved performance in applications such as autonomous driving, robotics, and immersive technologies where accurate depth information is crucial. The framework's ability to generalize to real-world data without real-world training is a notable strength, suggesting its potential for wider adoption.  The improvements shown over existing relative depth estimation methods on noisy data demonstrate a real advance. The detailed evaluation with ablation studies provides good evidence for the effectiveness of each stage of the proposed framework.
+
+*   **Strengths:**
+    *   The approach is well-motivated and addresses a real-world problem.
+    *   The use of diffusion models for uncertainty estimation is a clever and potentially powerful technique.
+    *   The combination of stochastic and deterministic approaches provides a good balance between global consistency and local accuracy.
+    *   The results demonstrate significant improvements over existing methods in various scenarios.
+    *   The paper includes thorough experimental validation, including ablations and qualitative visualizations, to support claims.
+    *   The framework is scalable and generalizable.
+
+*   **Weaknesses:**
+    *   Reliance on Synthetic Data: Although the paper emphasizes generalization to real-world data, the heavy reliance on synthetic training data may limit the extent of generalization, especially in unforeseen situations. This limitation is, however, appropriately acknowledged in the conclusion.
+    *   Computational Cost: Diffusion models, especially those derived from Stable Diffusion, can be computationally expensive. The paper could benefit from a more detailed discussion of the computational cost of the proposed framework and potential optimizations. The paper provides training specifications and hyperparameters. However, inference runtime and computational complexity analysis are absent.
+    *   Potential issues related to the normalization process may compress valid depth values to a narrow range.
+    *   The details of the training procedure and the implementation of some components are provided in the appendix which weakens the paper.
+
+*   **Potential Influence:** The paper introduces a new direction in sensor depth enhancement by leveraging diffusion models for uncertainty estimation. If the framework proves to be robust and computationally efficient in real-world applications, it could become a standard approach for improving the reliability of depth maps. The code release would also assist in increasing the impact.
+
+**Overall:**
+The paper presents a novel and significant contribution to the field of sensor depth enhancement. The core idea of leveraging diffusion model uncertainty for reliable depth estimation is innovative and promising. The results and analysis presented in the paper strongly support the effectiveness of the proposed framework. However, limitations in generalization and computational cost need to be addressed in future work. It provides novel direction in sensor depth enhancement.
+
+Score: 8
+
+- **Score**: 8/10
+
+### **[Advancing Tool-Augmented Large Language Models via Meta-Verification and Reflection Learning](http://arxiv.org/abs/2506.04625v1)**
+- **Summary**: Here's a concise summary and critical evaluation of the paper:
+
+**Summary:**
+
+The paper "Advancing Tool-Augmented Large Language Models via Meta-Verification and Reflection Learning" introduces Tool-MVR, a tool-augmented LLM designed to improve tool utilization capabilities. It addresses two limitations of current models: unreliable tool planning/invocation due to low-quality instruction data and weak tool reflection abilities. Tool-MVR's key innovations are: (1) Multi-Agent Meta-Verification (MAMV), a pipeline for creating a high-quality instruction dataset (ToolBench-V) by rigorously validating APIs, queries, and reasoning trajectories, and (2) Exploration-based Reflection Learning (EXPLORE), an algorithm that improves tool reflection by leveraging tool feedback through an "Error → Reflection → Correction" learning paradigm, creating the ToolBench-R reflection dataset. The authors fine-tune open-source LLMs on both datasets, achieving state-of-the-art performance on StableToolBench, surpassing ToolLLM and GPT-4, while reducing API calls. They also introduce RefineToolBench, a benchmark for evaluating tool reflection, where Tool-MVR demonstrates significantly better error correction compared to ToolLLM.
+
+**Critical Evaluation:**
+
+*   **Novelty:** The paper demonstrates good novelty. While tool-augmented LLMs and reflection learning are not new concepts, the **rigorous and systematic approach to data verification (MAMV) *and* the exploration-based reflection learning (EXPLORE)** are significant contributions. The creation of ToolBench-V and RefineToolBench also represent valuable resources for the community. The idea of a systematic multi-agent verification pipeline is well-explored and shows significant advantages over previous methods that are highly dependent on a sole LLM.
+
+*   **Significance:** The paper's significance stems from its potential to address critical shortcomings in tool-augmented LLMs.  Hallucinations and difficulty in recovering from errors are known issues that limit the reliability and applicability of these models.  The approach improves both accuracy and efficiency. It also improves generalization by training in situations where the agents can explore error conditions. The benchmark to improve reflection is also significant because current research is limited by datasets that don't systematically address error conditions.
+
+*   **Strengths:**
+    *   **Comprehensive Approach:** Addressing both data quality *and* reflection abilities leads to a more robust and reliable tool-augmented LLM.
+    *   **Systematic Methodology:** The MAMV and EXPLORE frameworks are well-defined and offer a clear path for improving existing LLMs.
+    *   **Empirical Validation:**  The extensive experiments on StableToolBench and RefineToolBench provide strong evidence for the effectiveness of Tool-MVR. Comparisons with strong baselines, including GPT-4, strengthen the results.
+    *   **Resource Contribution:** The release of ToolBench-V and RefineToolBench will likely spur further research in tool learning and reflection.
+
+*   **Weaknesses:**
+    *   **Reliance on GPT-4:**  While the MAMV pipeline aims to reduce hallucinations, it still relies on GPT-4 for several crucial steps (e.g., API and query verification). The potential biases and limitations of GPT-4 could be propagated into the training data.
+    *   **Scalability of MAMV:** The labor intensive process of multi-agent meta-verification may make scaling to significantly larger datasets or more complex toolsets challenging.
+    *   **Limited Exploration in EXPLORE:** While EXPLORE introduces error cases, the degree to which the models can actively explore and discover new types of errors may be limited.
+    *   **The "Reflection Generation" part in EXPLORE also rely on GPT-4:** Again, reliance on GPT-4 could limit the model's generation of robust exploration.
+
+*   **Potential Influence:** Tool-MVR has the potential to significantly influence the development of more reliable and efficient tool-augmented LLMs. The MAMV and EXPLORE frameworks offer valuable blueprints for future research. The increased focus on data quality and reflection learning could lead to more robust models capable of handling real-world complexity.
+
+Justification for the score:
+
+The paper presents a well-defined and empirically validated approach to a significant problem in tool-augmented LLMs. The innovations of MAMV and EXPLORE, combined with the creation of valuable datasets, represent a substantial contribution to the field. While the reliance on GPT-4 and potential scalability limitations are valid concerns, the overall impact of the paper is significant. The detailed analysis on System 2 is also very novel.
+
+Score: 8
+
+- **Score**: 8/10
+
+### **[Unfolding Spatial Cognition: Evaluating Multimodal Models on Visual Simulations](http://arxiv.org/abs/2506.04633v1)**
+- **Summary**: Here's a summary and critical evaluation of the paper "Unfolding Spatial Cognition: Evaluating Multimodal Models on Visual Simulations":
+
+**Summary:**
+
+The paper introduces STARE (Spatial Transformations and Reasoning Evaluation), a new benchmark for evaluating the spatial reasoning abilities of multimodal large language models (MLLMs).  STARE focuses on tasks that humans typically solve through visual simulation, contrasting with existing benchmarks that primarily assess verbal reasoning. The benchmark includes tasks ranging from basic geometric transformations (2D/3D), integrated spatial reasoning (cube net folding, tangram puzzles), and real-world spatial reasoning (temporal frame inference, perspective taking).  The authors evaluate several MLLMs on STARE, finding that while models perform reasonably well on simple 2D transformations, they struggle with more complex tasks requiring multi-step visual simulation, often performing close to random chance.  The paper also investigates the impact of providing intermediate visual simulations to the models, revealing inconsistent performance gains, suggesting that MLLMs do not effectively leverage visual guidance.
+
+**Critical Evaluation:**
+
+*   **Novelty:** The paper's primary novelty lies in the creation of the STARE benchmark.  The focus on visual simulation is a clear and important departure from many existing MLLM benchmarks that prioritize linguistic tasks. While spatial reasoning datasets exist, STARE's curated set of tasks, its deliberate inclusion of intermediate visual states, and its emphasis on step-by-step visual simulation represent a significant advancement.
+
+*   **Significance:** The paper highlights a crucial gap in the capabilities of current MLLMs: the inability to effectively perform visual simulations for spatial reasoning.  The findings suggest that models are not truly "understanding" spatial relationships in the same way that humans do, but are instead relying on superficial pattern-matching or textual reasoning. Addressing this gap is essential for developing more robust and human-like AI systems capable of tackling real-world tasks involving physical interactions, object assembly, and spatial navigation. The benchmark is likely to spur further research into better model architectures, training methodologies, and representations that explicitly capture spatial relationships.
+
+*   **Strengths:**
+    *   **Well-defined Benchmark:** STARE is rigorously designed with a clear structure and diverse task categories.
+    *   **Focus on Cognitive Abilities:** The benchmark aligns with established cognitive phenomena related to spatial reasoning and mental imagery.
+    *   **Comprehensive Evaluation:** The paper provides extensive experimental results and error analyses.
+    *   **Emphasis on Visual Simulation:**  The systematic investigation of the impact of intermediate visual states is a strength.
+
+*   **Weaknesses:**
+    *   **Synthetic Data:** The reliance on synthetic data, while enabling controlled experiments, may limit the generalizability of the findings to more complex, real-world scenarios. Although, a good initial design to provide a more consistent environment, more real-world scenarios might give better results to future spatial reasoning models.
+    *   **Limited Model Diversity:** While a reasonable number of models are evaluated, there is limited analysis of the impact of different architectural choices in the models.
+    *   **Scope limitations:** The STARE benchmark may not be exhaustive, with the tasks only targeting fundamental geometric transformations, assembly tasks, and navigation tasks with some limitations, and it may not adequately provide a real-world scenario.
+
+*   **Potential Influence:**  STARE has the potential to significantly influence the field of multimodal AI by:
+
+    *   Directing research towards developing more visually grounded and spatially aware MLLMs.
+    *   Providing a standardized tool for evaluating progress in spatial reasoning capabilities.
+    *   Inspiring the creation of new datasets and benchmarks that address the limitations of STARE.
+    *   Demonstrating the value of incorporating cognitive insights into AI system design.
+
+* **Rigorous Rationale:** The inclusion of visual simulations is a nice design choice, as humans tend to excel with such assistance. The systematic benchmark enables comparison between different MLLMs.
+
+**Score:** 8.  While STARE is a significant contribution, the exclusive reliance on synthetic data and limited model diversity are non-negligible limitations. There is also room for improvement by including more real-world scenarios and additional diversity to better simulate real-world scenarios. However, the paper clearly identifies a crucial gap in MLLM capabilities and provides a well-designed tool for future research. It could potentially prompt a wave of new models and training techniques specifically designed to tackle visual simulation tasks. I emphasize that this score is assigned under the assumption that the proposed dataset is rigorous enough, that many models have been properly tested, and that the novelty has properly been stated. Also, there is plenty of room for follow-up work based on this well designed dataset.
+
+- **Score**: 8/10
+
+### **[Normative Conflicts and Shallow AI Alignment](http://arxiv.org/abs/2506.04679v1)**
+- **Summary**: Here's a summary and critical evaluation of the paper "Normative Conflicts and Shallow AI Alignment" by Raphaël Millière:
+
+**Summary:**
+
+The paper argues that current alignment strategies for large language models (LLMs) are fundamentally inadequate to prevent misuse due to their "shallow alignment." Despite efforts to instill norms like helpfulness, honesty, and harmlessness, LLMs are vulnerable to adversarial attacks that exploit conflicts between these norms. The author contends that LLMs lack a genuine capacity for normative deliberation, leading to easily exploitable behavioral dispositions. Drawing from moral psychology, the paper contrasts this with human resilience to similar attacks, which is attributed to explicit deliberation. The author argues that these limitations carry significant implications for AI safety and regulation, suggesting current approaches are insufficient to mitigate potential harms from increasingly capable AI systems. The paper further explores how even reasoning-focused LLMs are susceptible, and proposes a novel kind of "thought injection attack" demonstrating how LLMs can be manipulated to generate reasoning traces that promote harm, even as the final answer is withheld.
+
+**Critical Evaluation:**
+
+*   **Novelty:** The paper offers a valuable perspective by applying concepts from moral psychology and social engineering to the problem of LLM alignment. The critique of "shallow alignment" and the emphasis on normative conflicts provide a nuanced understanding of why adversarial attacks are so effective. The introduction of the "thought injection attack" is also novel and concerning. The analysis is particularly pertinent given the increasing emphasis on RLMs and chain-of-thought reasoning.
+*   **Significance:** The paper addresses a critical issue in AI safety: the vulnerability of LLMs to misuse, especially through cleverly designed adversarial prompts. The finding that even RLMs are not immune, and potentially introduce new vulnerabilities, carries significant weight. The implications for AI safety and regulation are clearly articulated, highlighting the limitations of current approaches.
+*   **Strengths:** The paper presents a clear and well-reasoned argument, supported by empirical examples and references to relevant literature. The analogy between social engineering and prompt injection is insightful. The discussion of normative conflicts as a key vulnerability is compelling. The paper is written in a lucid style, making it accessible to a broad audience. The author's consideration of potential objections is thorough.
+*   **Weaknesses:** While the paper effectively identifies the problem, it offers only general directions for addressing it, such as the need for explicit normative deliberation. The paper could benefit from a more in-depth exploration of potential technical solutions, perhaps drawing from areas like argumentation or formal ethics. Also, it largely focused on certain attacks related to napalm for demonstration. Considering other harmful scenarios such as misinformation spread with high confidence, etc. might strengthen the generality of the conclusion.
+
+**Justification for Score:**
+
+The paper makes a substantial contribution to our understanding of the challenges of LLM alignment. It provides a compelling explanation for the effectiveness of adversarial attacks, highlighting the limitations of current alignment strategies. While it doesn't offer a complete solution, it identifies a critical problem and provides valuable directions for future research. The novelty of the "thought injection attack" and the detailed examples are significant. The limitations, namely the lack of specific solutions and narrower focus on attack domains, temper the overall impact.
+
+Score: 8
+
+- **Score**: 8/10
+
+### **[Truth in the Few: High-Value Data Selection for Efficient Multi-Modal Reasoning](http://arxiv.org/abs/2506.04755v1)**
+- **Summary**: Okay, I will provide a summary and critical evaluation of the paper "Truth in the Few: High-Value Data Selection for Efficient Multi-Modal Reasoning."
+
+**Summary**
+
+The paper addresses the problem of data redundancy and high computational costs associated with training multi-modal large language models (MLLMs) for complex reasoning tasks. It challenges the common belief that extensive training data is necessary and proposes a novel data selection paradigm called Reasoning Activation Potential (RAP). RAP aims to identify a small subset of "cognitive samples" that effectively trigger multi-modal reasoning. It achieves this through two complementary estimators: (1) Causal Discrepancy Estimator (CDE), which eliminates samples that overly rely on language priors by comparing outputs of multi-modal and text-only inputs; and (2) Attention Confidence Estimator (ACE), which discards samples dominated by irrelevant tokens using token-level self-attention. Furthermore, the paper introduces a Difficulty-aware Replacement Module (DRM) to substitute trivial samples with more cognitively challenging ones. Experiments on several datasets demonstrate that RAP achieves superior performance using only a small fraction (around 9%) of the full training data and reduces computational costs significantly.
+
+**Critical Evaluation**
+
+*   **Strengths:**
+
+    *   **Novelty of the Approach:** The central idea of identifying "cognitive samples" for efficient MLLM training is a valuable contribution. RAP provides a tangible framework to accomplish this. The combination of CDE and ACE offers a multi-faceted approach to data selection, considering both output-level discrepancies and process-level attention. The DRM also adds another layer to the paradigm by enriching the sample pool with challenging cognitive samples.
+    *   **Clear Problem Statement and Motivation:** The paper clearly articulates the problem of data redundancy in MLLM training and motivates the need for high-value data selection. The observations regarding language-prior bias and attention-bias are insightful and well-supported.
+    *   **Solid Experimental Results:** The experiments demonstrate the effectiveness of RAP across multiple datasets and with different base models. The results consistently show superior performance compared to using the full dataset and previous data selection methods. The reduction in training time is also a significant advantage.
+    *   **Thorough Ablation Studies:** The ablation studies provide valuable insights into the contributions of each component of RAP (CDE, ACE, DRM). These studies help justify the design choices and demonstrate the importance of each module.
+    *   **Insightful Qualitative Analysis:** The visualization of cognitive samples and the comparison of reasoning processes with LIMR provide a deeper understanding of how RAP improves multi-modal reasoning.
+    *   **Generalizability:** The findings that RAP works well across different base models like Qwen2.5-VL-3b/7b and InternVL3-2b, and the validation of RAP in the setting of different reinforcement learning algorithms (e.g., RLOO) suggest the wide applicability of the RAP.
+*   **Weaknesses:**
+
+    *   **Hyperparameter Sensitivity:** While the paper discusses hyperparameter sensitivity, the process of selecting the optimal values for λε and λα could be further elaborated. A more systematic approach to hyperparameter tuning might be beneficial.
+    *   **Computational Overhead of RAP components:** While the data selection is fast enough to justify its usage (as suggested in the paper), the individual computational cost incurred by the CDE and ACE components and the DRM could be more explicitly quantified in the paper.
+    *   **Reliance on GRPO:** The paper relies on GRPO as the RL method for the training phase. While it is a well-established method, it could be helpful to show if other reinforcement learning paradigms (e.g., directly fine-tuning the LLM using human feedback) could still leverage the benefit of RAP.
+
+*   **Significance:**
+
+    *   The paper addresses a critical challenge in the field of MLLMs: the need for efficient training methods. RAP offers a promising solution that could significantly reduce computational costs and data redundancy.
+    *   The concept of "cognitive samples" and the proposed data selection paradigm could influence future research in MLLM training and data curation.
+    *   The paper could potentially lead to the development of more efficient and robust MLLMs for a wide range of applications.
 
 **Overall Assessment:**
 
-SPRINT represents a significant step forward in sublayer pruning for LLMs. By carefully considering latency and tunability, it delivers a more effective and practical solution than previous approaches. The integration of multiple techniques and the strong empirical results contribute to the paper's value. While there are some weaknesses in terms of dataset dependency and scope, SPRINT addresses an important problem and offers compelling results.
+The paper presents a novel and well-executed approach to efficient MLLM training. The concept of identifying "cognitive samples" is a significant contribution, and the RAP framework provides a concrete way to achieve this. The experimental results and ablation studies provide strong evidence for the effectiveness of the proposed method. Despite the minor weaknesses mentioned above, the paper has the potential to have a significant impact on the field of MLLMs.
 
-**Score: 8.0**
+Score: 8
+
+**Rationale:** The paper makes a very substantial and valuable contribution, and is extremely well designed. While it's important to acknowledge potential minor limitations, the significance of the paper in terms of promoting resource efficiency for MLLM research, along with its insights into the nature of multi-modal learning, strongly justifies this score. The work is carefully validated with solid experimental designs.
 
 - **Score**: 8/10
 
-### **[DenseDPO: Fine-Grained Temporal Preference Optimization for Video Diffusion Models](http://arxiv.org/abs/2506.03517v1)**
-- **Summary**: Here's a summary and critical evaluation of the paper:
+### **[MMSU: A Massive Multi-task Spoken Language Understanding and Reasoning Benchmark](http://arxiv.org/abs/2506.04779v1)**
+- **Summary**: The paper introduces MMSU, a new benchmark for evaluating spoken language understanding and reasoning in Speech Large Language Models (SpeechLLMs). MMSU consists of 5,000 curated audio-question-answer triplets across 47 tasks, grounded in linguistic theory and covering phonetics, prosody, rhetoric, syntax, semantics, and paralinguistics. The paper evaluates 14 advanced SpeechLLMs, revealing significant room for improvement, particularly in interpreting paralinguistic and prosodic cues.
 
-**Summary:**
+**Rigorous and Critical Evaluation:**
 
-The paper introduces DenseDPO, a novel approach to Direct Preference Optimization (DPO) for text-to-video diffusion models. Addressing the limitations of standard DPO methods which often rely on annotator preferences over independently generated videos, the authors propose three key innovations: 1) creating video pairs from corrupted copies of a ground truth video to encourage aligned motion structures and neutralize the annotator bias towards low-motion clips, 2) leveraging this temporal alignment to obtain finer-grained, segment-level preference labels, and 3) demonstrating the feasibility of automatic preference annotation using vision-language models (VLMs). The authors demonstrate that DenseDPO significantly improves motion generation compared to vanilla DPO while maintaining comparable performance in text alignment, visual quality, and temporal consistency, even with reduced labeled data. The approach also unlocks the use of readily available VLMs for preference labeling, reducing the reliance on human annotation.
-
-**Critical Evaluation:**
-
-*   **Novelty:** The core contribution lies in the combination of guided sampling and segment-level preferences to refine DPO training for video models. While guided sampling has been used in image editing (SDEdit), its adaptation for creating video pairs for preference learning is novel. Segment-level preferences, while inspired by language models, are well-motivated for videos, where artifacts and quality can vary temporally. The demonstration of VLMs for preference scoring, bypassing the need for specialized reward models, adds another layer of novelty.
-*   **Significance:** The paper addresses a critical problem in video generation: the tendency to favor static or low-motion content due to biases in human annotation. The method's ability to improve motion generation while preserving other qualities is practically significant. Moreover, the reduced dependence on human annotation through the use of VLMs opens up opportunities for scaling preference learning in video.
 *   **Strengths:**
+    *   **Comprehensive Scope:** MMSU addresses a crucial gap by providing a comprehensive benchmark for spoken language understanding, encompassing a wide range of linguistic phenomena often overlooked by existing benchmarks.
+    *   **Linguistic Grounding:** The benchmark's design, based on established linguistic principles, is a significant step forward, providing a theoretically sound evaluation framework.
+    *   **Diverse Tasks:** The inclusion of 47 distinct tasks covering perception and reasoning abilities makes MMSU a versatile tool for assessing different aspects of SLU.
+    *   **Real-world Data:** The reliance on authentic audio samples (sourced from open datasets and professional recordings) enhances the ecological validity of the benchmark.
+    *   **Rigorous Evaluation:** The paper provides a thorough evaluation of 14 SpeechLLMs, offering valuable insights into their strengths and weaknesses.
 
-    *   **Well-Motivated Problem:** The paper clearly articulates the issues with existing DPO methods for video generation and the challenges of human preference labeling in dynamic video scenes.
-    *   **Technical Soundness:** The method is technically well-reasoned, building upon existing techniques in a novel way. The proposed solutions (guided sampling, segment preferences, VLM labeling) are practical and effective.
-    *   **Empirical Validation:** The paper provides thorough quantitative and qualitative results, demonstrating the effectiveness of DenseDPO across multiple metrics (VBench, VisionReward) and datasets (VideoJAM-bench, MotionBench). The ablation studies provide insights into the contributions of individual components.
-    *   **Practical Implications:** The reduction in human annotation requirements makes preference learning more accessible and scalable. The enhanced motion generation improves the realism and quality of generated videos.
 *   **Weaknesses:**
+    *   **Limited Custom Data:** While the benchmark prioritizes real-world recordings, a relatively small portion (13.44%) is custom recorded, potentially limiting the control over specific linguistic features.
+    *   **Potential for Bias:** Although expert-reviewed, there is a potential for annotation bias in a curated dataset.
+    *   **Scalability:** The manual curation and review process is time-consuming and may limit the scalability of the benchmark.
+    *   **Limited to English:** The benchmark seems to be heavily focused on English language datasets.
 
-    *   **Dependency on Ground Truth Videos:** The reliance on ground truth videos for data creation limits the diversity of the DPO dataset and could introduce biases. The paper acknowledges this, but more discussion on potential strategies for mitigating this (e.g., using diverse source videos, generative priors) would strengthen the analysis.
-    *   **Limited VLM Understanding of Complex Motion:** While VLM labeling works well for identifying artifacts, the paper admits its limitations in understanding complex actions. Further exploration into improving VLM reasoning about temporal dynamics could lead to further gains.
-    *   **Training Instability:** The authors note training instability issues common in DPO, which needs to be more carefully investigated.
+*   **Novelty and Significance:**
 
-*   **Potential Influence:** The paper is likely to influence future research in preference learning for video generation. The ideas of guided sampling and segment-level preferences could be adopted and extended by other researchers. The successful application of VLMs for annotation could inspire more exploration of automated feedback signals.
+    *   MMSU is novel in its comprehensive coverage of linguistic phenomena and its integration of established linguistic principles into the benchmark design. It establishes a new standard for comprehensive assessment of spoken language understanding.
+
+*   **Potential Influence:**
+
+    *   MMSU can significantly influence the field by providing a standardized evaluation framework, enabling fair comparisons between models and guiding future research directions. The identification of limitations in existing models can spur innovation in SpeechLLMs.
 
 **Justification:**
 
-The paper's clear articulation of the problem, technically sound solutions, thorough empirical validation, and practical implications justify a high score. While the limitations related to reliance on ground truth videos and VLM understanding of complex motion are valid concerns, they do not overshadow the significant contributions of the work. The paper offers a substantial advancement in the field of text-to-video generation, with clear potential for further research and development.
+MMSU represents a significant contribution to the field by addressing the limitations of existing benchmarks and providing a comprehensive, linguistically grounded evaluation framework for spoken language understanding. While there are some limitations regarding data control and potential for bias, the strengths of MMSU outweigh these weaknesses. The potential for influencing future research directions and driving innovation in SpeechLLMs is substantial.
 
 Score: 8
 
 - **Score**: 8/10
 
-### **[Video-Skill-CoT: Skill-based Chain-of-Thoughts for Domain-Adaptive Video Reasoning](http://arxiv.org/abs/2506.03525v1)**
-- **Summary**: Okay, here's a summary and critical evaluation of the paper "VIDEO-SKILL-COT: Skill-based Chain-of-Thoughts for Domain-Adaptive Video Reasoning," based on the provided OCR:
+### **[Joint Evaluation of Answer and Reasoning Consistency for Hallucination Detection in Large Reasoning Models](http://arxiv.org/abs/2506.04832v1)**
+- **Summary**: Okay, I will provide a summary and critical evaluation of the paper "Joint Evaluation of Answer and Reasoning Consistency for Hallucination Detection in Large Reasoning Models."
 
-**Summary**
+**Summary:**
 
-The paper introduces VIDEO-SKILL-COT (VIDEO-SKOT), a novel framework for improving video reasoning capabilities of Multimodal Large Language Models (MLLMs), especially when adapting to different video domains. The core idea is to create and leverage *skill-aware* Chain-of-Thought (CoT) supervision.  The approach involves two main steps:
+The paper introduces RACE (Reasoning and Answer Consistency Evaluation), a novel black-box framework for detecting hallucinations in Large Reasoning Models (LRMs). RACE integrates both the reasoning trace and the final answer into a unified evaluation. It decomposes hallucination detection into four complementary modules: (1) reasoning path consistency, (2) answer uncertainty, (3) reasoning-answer alignment, and (4) reasoning internal coherence.  A CoT Extraction module distills key reasoning steps to reduce noise in reasoning paths. The authors demonstrate that RACE outperforms existing hallucination detection baselines across diverse datasets and LLMs.
 
-1.  **Skill-Based CoT Annotation:** This is done automatically. The method first extracts high-level reasoning skill descriptions from training questions. These skills are then clustered into a taxonomy. Questions are then annotated with the most relevant skills, and multi-step CoT rationales are generated, conditioned on these skills.
-2.  **Skill-Specific Expert Learning:**  The authors train specialized expert models (using LoRA adapters) for different subsets of reasoning skills.  During inference, each input is routed to the most appropriate expert based on the question's required skills.
+**Critical Evaluation:**
 
-The method is evaluated on three diverse video QA datasets: E.T.-Bench (temporal), VSI-Bench (spatial), and CinePile (movie narrative). VIDEO-SKOT consistently outperforms strong baseline MLLMs. The authors also provide ablation studies and visualizations to validate their approach.
-
-**Critical Evaluation**
-
-*   **Novelty:** The paper presents a valuable and relatively novel approach. While CoT has been applied to video understanding, and modular/expert-based learning is not new, the combination of:
-    *   Automatically generating skill-aware CoT annotations specifically for video understanding,
-    *   Creating a skill taxonomy
-    *   Training skill-specialized experts with LoRA
-    is a unique and well-motivated contribution. The focus on *domain adaptation* using skills is a significant aspect of the novelty.
-
-*   **Significance:** The paper addresses a critical problem in video understanding: the difficulty of MLLMs generalizing across different video domains and reasoning tasks. The proposed solution, if effective, can improve the robustness and adaptability of these models. The experimental results demonstrate tangible improvements on several challenging datasets.
+*   **Novelty:** The paper's novelty lies in its holistic approach to hallucination detection in LRMs. Existing methods primarily focus on answer-level uncertainty. RACE, on the other hand, explicitly considers the reasoning trace and its consistency with the final answer. The decomposition into four modules is also a novel contribution, providing a structured way to analyze potential hallucinations. The CoT Extraction module adds to the novelty by addressing noise in reasoning paths, a common challenge in LRM outputs.
+*   **Significance:** The paper addresses an important problem: the detection of hallucinations in LRMs, which can be more subtle and difficult to detect than in standard LLMs. The explicit reasoning traces of LRMs introduce a new dimension for hallucination, which RACE effectively captures. The reported experimental results demonstrate that RACE significantly outperforms existing baselines, suggesting that it is a more robust and generalizable solution. This has practical implications, as it can improve the reliability and trustworthiness of LRMs in real-world applications.
 *   **Strengths:**
-    *   **Clear Problem Definition:** The paper clearly identifies the limitations of existing CoT approaches in adapting to domain-specific skills for video understanding.
-    *   **Well-Designed Framework:** The VIDEO-SKOT framework is logically structured and clearly explained.
-    *   **Automatic Annotation:** The method automates the CoT annotation process, making it scalable and avoiding the cost of manual annotation.
-    *   **Strong Experimental Results:** The experimental results convincingly demonstrate the superiority of VIDEO-SKOT over strong baseline models.  The ablation studies provide insights into the importance of the key components (skill-based CoT and skill-specific experts).
-    *   **Qualitative Analysis:**  The qualitative examples and visualizations help to illustrate the benefits of skill-based CoT.
+    *   The framework's design is well-motivated and grounded in information-theoretic principles.
+    *   The four modules are complementary and capture different aspects of hallucination.
+    *   The CoT Extraction module is a valuable addition, addressing the problem of noise in reasoning paths.
+    *   The experimental results are comprehensive and demonstrate the effectiveness of RACE across diverse datasets and LLMs.
+    *   The black-box nature of RACE makes it applicable to a wide range of LLMs without requiring internal access.
 *   **Weaknesses:**
-    *   **Dependency on underlying MLLM:** The framework's performance depends on the quality of the pre-trained MLLM. The authors acknowledge this limitation.
-    *   **Complexity:** The framework is relatively complex, involving several components. While the paper explains the components clearly, reimplementation may be somewhat challenging.
-    *   **Hyperparameter Tuning:**  While the authors provide training details, a more in-depth discussion of hyperparameter sensitivity would be useful.
-    *   **Limited generalization testing:** While the paper evaluates domain adaptation on unseen video QA datasets with distinct domains, it would be even stronger to demonstrate transfer to tasks requiring skills that were not explicitly seen during training.
+    *   The linear combination of the four metrics in the final score aggregation is simplistic and may not be optimal. A more sophisticated aggregation method could potentially improve performance. Although, in many cases simple has proven to be robust and stable.
+    *   While the CoT Extraction module reduces noise, it also introduces a potential bottleneck. The extraction process may filter out relevant information, leading to a loss of performance.
+    *   The evaluation relies on LLM-as-Judge, which is itself susceptible to hallucinations and biases, this is noted in the paper and acknowledged.
+    *   The added latency for hallucination detection with LRMs is increased due to CoT extraction, though the paper makes the argument it's negligible.
+*   **Potential Influence:** RACE has the potential to significantly influence the field of hallucination detection in LRMs. Its holistic approach and strong experimental results are likely to inspire further research in this area. Future work could focus on:
+    *   Developing more sophisticated aggregation methods for the four metrics.
+    *   Improving the CoT Extraction module to minimize information loss.
+    *   Exploring alternative evaluation methods that do not rely on LLM-as-Judge.
+    *   Investigating the application of RACE to other types of LLMs and tasks.
+*   **Rigorous Rationale:**
+    The paper presents a compelling approach to a crucial problem in the development of reliable LRMs. The idea of jointly evaluating the answer and the reasoning traces in a systematic way and breaking it down into multiple consistency types is novel and well-executed. The improvement over baselines is significant and consistent across different models. The framework and experimentation is quite complete.
 
-*   **Potential Influence:** The paper has the potential to influence the field of video understanding by:
-    *   Motivating researchers to explore skill-aware reasoning in MLLMs.
-    *   Providing a practical framework for domain adaptation in video QA.
-    *   Inspiring new methods for automatic CoT annotation.
+Score: 8
+
+**Justification:**
+The RACE framework provides a novel and effective method for hallucination detection in LRMs. The decomposition of the problem into four components allows for a more comprehensive analysis of potential hallucinations. While there are some weaknesses, the paper's strengths outweigh them, and its potential influence on the field is significant. The score of 8 reflects the strong contribution while acknowledging areas for improvement. A perfect 10 is reserved for breakthroughs with truly paradigm-shifting impact.
+
+- **Score**: 8/10
+
+### **[Sparse Autoencoders, Again?](http://arxiv.org/abs/2506.04859v1)**
+- **Summary**: Here's a summary and critical evaluation of the "Sparse Autoencoders, Again?" paper:
+
+**Summary:**
+
+The paper revisits the topic of sparse autoencoders (SAEs), arguing that despite their long history and wide applicability, there's room for improvement. It identifies limitations in both traditional SAEs and variational autoencoders (VAEs) when applied to sparse encoding tasks. Traditional SAEs suffer from hyperparameter sensitivity and potential for non-convex optimization landscapes, while VAEs tend to promote fixed sparsity patterns that are not adaptive to the input data. The authors propose a hybrid approach called VAEase, which is a modification of VAE that retools the encoder variance to act as an adaptive sparsity selector, leading to more accurate estimation of manifold dimensions and sparser latent representations without compromising reconstruction error. The paper provides theoretical support, demonstrating that global minima of VAEase can provably recover manifold structure, and empirical validation across synthetic and real-world datasets showing superior performance compared to SAEs, VAEs, and diffusion models.
+
+**Critical Evaluation:**
+
+*   **Novelty:** The paper presents a novel approach to sparse autoencoding by modifying the standard VAE architecture.  The core idea of using the encoder variance as a gating mechanism within a VAE framework, leading to *VAEase*, appears to be new. The theoretical analysis of VAEase recovering manifold structures is also a valuable theoretical contribution. While VAEs and SAEs have been used extensively, the specific combination and retuning for *adaptive* sparsity seem to be a genuine advancement.
+
+*   **Significance:** The paper addresses an important problem in representation learning: effectively learning sparse representations of data residing on complex manifolds. The ability to achieve adaptive sparsity is crucial for interpretability and efficiency.  The paper makes a compelling case that existing methods (SAEs, VAEs) fall short in certain scenarios. The theoretical guarantees provide a solid foundation for the proposed approach. The experiments across different datasets (synthetic, image, language model activations) demonstrate the broad applicability of VAEase. Further, the comparison with diffusion models, which have recently shown promise in manifold estimation, adds additional strength and significance.
+
+*   **Strengths:**
+
+    *   Clear problem statement and motivation.
+    *   Well-defined theoretical analysis and proofs.
+    *   Comprehensive experimental validation.
+    *   Addresses a relevant and important problem in representation learning.
+    *   Theoretically well founded.
+    *   Broad empirical coverage.
+
+*   **Weaknesses:**
+
+    *   While the modification is simple, the explanation of *why* it works could be further elaborated upon. For instance, a more detailed comparison to other conditional VAE approaches (beyond simply mentioning that these exist) would strengthen the paper.
+    *   The limitations of VAEase could be better addressed. Are there specific scenarios where VAEase struggles?  Are there limitations on the types of manifolds that can be recovered?  A more thorough discussion of limitations is often crucial.
+
+*   **Potential Impact:** The VAEase approach has the potential to be widely adopted in various applications where sparse representations are desired, including interpretability, compression, and anomaly detection. The results on large language model activations are particularly promising, given the current interest in understanding these complex models. The theoretical analysis may also inspire further research in understanding the properties of sparse autoencoders.
+
+**Score:** 8
+
+**Rationale:**
+
+The paper offers a significant contribution to the field of sparse autoencoding. The *VAEase* approach is novel, well-motivated, theoretically sound, and empirically validated. It addresses a real limitation of existing approaches, particularly the lack of adaptive sparsity in standard VAEs. The theoretical guarantees provide a clear understanding of when and why the proposed method should be expected to work. The experiments are comprehensive and demonstrate the effectiveness of VAEase across different domains.  The weaknesses are relatively minor and don't detract significantly from the overall contribution. While a perfect "10" would require a more groundbreaking paradigm shift, this paper represents a substantial advancement in the state-of-the-art. The potential impact on applications like LLM interpretability further justifies the high score.
+
+- **Score**: 8/10
+
+### **[Verbose ListOps (VLO): Beyond Long Context -- Unmasking LLM's Reasoning Blind Spots](http://arxiv.org/abs/2506.04907v1)**
+- **Summary**: Here's a summary and critical evaluation of the Verbose ListOps paper:
+
+**Summary:**
+
+The paper introduces Verbose ListOps (VLO), a novel benchmark designed to evaluate the reasoning capabilities of Large Language Models (LLMs) in the presence of semantically relevant, distracting narrative. Unlike existing long-context benchmarks that often focus on factual extraction or superficial distractors, VLO programmatically transforms ListOps computations into coherent stories, forcing LLMs to perform internal computation and state management without explicit intermediate results. The benchmark allows for fine-grained control over narrative length and reasoning difficulty. Experiments reveal that leading LLMs, despite performing well on raw ListOps equations, experience a significant performance drop on VLO at modest narrative lengths (≈10k tokens), highlighting a vulnerability in nested sub-reasoning and state management amidst semantically relevant distractors. The authors argue that addressing this failure is crucial for real-world text interpretation. They also provide a framework to extend the benchmark further.
+
+**Critical Evaluation:**
+
+*   **Novelty:** The paper presents a novel perspective on evaluating LLMs by focusing on reasoning *within* complex narratives, as opposed to merely *retrieving* information from large contexts or performing superficially distracting multi-hop QA. This is a crucial distinction. The programmatic generation of stories around deterministic computations is a clever and controlled way to probe reasoning capabilities. The design constraint preventing intermediate results from being explicitly present pushes the LLM to truly compute and maintain state, which is not always the case in retrieval tasks. While there are other benchmarks attempting to evaluate reasoning in long contexts (e.g., LongReason), VLO provides distinct challenges and has a more focused design that allows for isolating reasoning difficulties within a single nested structure rather than scattered reasoning problems. The *agentic* generation process and emphasis on semantically-relevant distractors also enhance the benchmark's quality and relevance.
+
+*   **Significance:** The identified vulnerability of LLMs struggling with state management during nested reasoning within narratives has significant implications.  It suggests that merely increasing context window size isn't a sufficient solution for true text understanding, which requires models to maintain and reason with intermediate results in a dynamic manner as new, semantically-relevant information arises. This capability is crucial for real-world applications involving complex document analysis and knowledge work. The benchmark and the extensible generation framework pave the way for targeted improvements in LLM architectures and training strategies. Moreover, the ability to precisely control narrative complexity and length makes VLO a valuable tool for systematically analyzing scaling behaviors and failure modes.
+
+*   **Strengths:**
+    *   Clear problem definition and motivation.
+    *   Novel benchmark design that addresses limitations of existing benchmarks.
+    *   Programmatic and agentic generation of realistic, yet controlled, datasets.
+    *   Extensive experimentation and analysis, revealing a specific vulnerability.
+    *   Open-source code, datasets, and a detailed description enabling reproducibility and future work.
+    * The constraints enforced are novel and distinguish VLO from other benchmarks
+
+*   **Weaknesses:**
+    * The 10K token length is only modestly long in the current long-context LLM landscape. While this length effectively exposes the problem VLO intends to pinpoint, testing across a wider variety of significantly longer token lengths will be valuable to observe how the issue scales.
+    *   There is a slight bias in dataset generation as the model used in generating the dataset has been used as a baseline. A more diverse range of generative models in the future could offer a less biased benchmark.
+    *   Although the benchmark is well-defined, ListOps is not necessarily representative of all forms of reasoning. While it targets algorithmic reasoning and state management, the generalizability to other complex reasoning scenarios needs further investigation.
+
+*   **Potential Influence:** The paper is likely to influence the direction of LLM research by shifting focus from simple retrieval and long-range dependencies to the internal computation and state management necessary for true narrative understanding.  The benchmark could also serve as a standardized evaluation tool for new architectures designed to address the identified vulnerability, guiding the development of more robust and reliable LLMs. The generation methods and the careful integration of LLMs into the data-generation process is a useful contribution in its own right.
+
+**Score: 8.5**
+
+**Justification:** The paper makes a significant contribution by identifying and exposing a critical weakness in LLMs' reasoning capabilities. The VLO benchmark is innovative and well-designed, offering a controlled environment for studying the interplay between narrative complexity, state management, and reasoning. While the limited context window and dependence on a singular type of model during generative dataset creation introduce some constraints and the generalizability beyond algorithmic reasoning is somewhat limited, the impact on the field could be substantial. It serves as a crucial contribution towards building language models that not only memorize information, but also "truly" understand and manipulate it.
+
+- **Score**: 8/10
+
+### **[When Thinking LLMs Lie: Unveiling the Strategic Deception in Representations of Reasoning Models](http://arxiv.org/abs/2506.04909v1)**
+- **Summary**: Here's a summary and critical evaluation of the paper:
+
+**Summary:**
+
+The paper "When Thinking LLMs Lie: Unveiling the Strategic Deception in Representations of Reasoning Models" investigates strategic deception in Chain-of-Thought (CoT) enabled Large Language Models (LLMs).  The authors argue that unlike simple hallucinations, CoT models can exhibit intentional, goal-directed misinformation. They introduce two new frameworks: threat-based and role-playing paradigms to induce strategic deception. Using representation engineering via Linear Artificial Tomography (LAT), they detect deception patterns in model activations with 89% accuracy. Furthermore, they develop an intervention framework using steering vectors to control deceptive behavior while maintaining core reasoning abilities. The study offers empirical evidence that CoT models exhibit intrinsic deception capabilities, even without explicit prompting.
+
+**Critical Evaluation:**
+
+**Strengths:**
+
+*   **Novel Problem Formulation:** The paper tackles a crucial and increasingly relevant problem: strategic deception in LLMs. It moves beyond simple inaccuracy and considers the intentional and goal-oriented aspect of deception, a critical consideration for deploying these models in real-world scenarios.
+*   **Rigorous Methodology:** The paper proposes a systematic and comprehensive methodology that combines empirical observation, controlled intervention, and interpretable analysis. The two novel deception induction frameworks (threat-based and role-playing) are well-designed and address different facets of deception.
+*   **Technical Innovation:** The use of representation engineering, specifically LAT and steering vectors, to detect and control deception is a strong technical contribution. The high detection accuracy (89%) is impressive and demonstrates the effectiveness of LAT for identifying deceptive patterns in model activations.
+*   **Empirical Validation:** The paper provides substantial empirical evidence to support its claims, with controlled experiments and analyses that demonstrate the emergence of strategic deception in CoT models.  The findings related to layer-wise performance variations and semantic understanding are interesting and provide valuable insights.
+*   **Practical Implications:**  The intervention framework for controlling deception has significant practical implications for AI alignment. By enabling precise induction or suppression of deceptive behavior, the work offers a pathway for balancing capability and safety in AI systems.
+
+**Weaknesses:**
+
+*   **Limited Scope of Deception:** While the two frameworks are novel, they may still not capture the full spectrum of real-world deception strategies that LLMs might employ.  The scenarios are still somewhat constrained.
+*   **Interpretability Challenges:** While LAT and steering vectors provide some level of interpretability, the paper could benefit from deeper mechanistic insights into *why* specific steering vectors are effective at inducing or suppressing deception. A more detailed examination of the architectural components involved in the generation of deceptive content would be valuable.
+*   **Generalizability Concerns:** The experiments are primarily conducted on one specific model (QwQ-32b).  The results might not generalize to other LLM architectures or different model sizes. Testing the framework on a wider range of models would strengthen the claims.
+*   **Evaluation Metric Limitations:** While the quantitative results are strong, the evaluation of open-role deception relies on external LLM evaluation, which has its own set of biases and limitations. A more robust evaluation metric might improve the validity of the conclusions.
+* **Unclear motivations of models:** The assumption that LLMs will behave rationally or strategically based on set goals is anthropomorphic, and these claims need stronger justification.
+
+**Significance:**
+
+The paper makes a significant contribution to the field of AI safety and alignment. It highlights the emerging risks associated with strategic deception in advanced reasoning models and provides a practical framework for detecting and controlling this behavior. The work advances our understanding of how deception manifests in LLMs' internal representations and lays the groundwork for developing more trustworthy AI systems. The combination of novel behavioral paradigms with interpretable representation-based methods is particularly powerful.
+
+**Overall Assessment:**
+
+The paper is well-written, technically sound, and addresses an important and timely problem. The methodology is rigorous, the empirical results are convincing, and the practical implications are significant. While some limitations exist, the strengths outweigh the weaknesses, making this a valuable contribution to the field.
+
+**Score: 8**
+
+- **Score**: 8/10
+
+### **[PoCGen: Generating Proof-of-Concept Exploits for Vulnerabilities in Npm Packages](http://arxiv.org/abs/2506.04962v1)**
+- **Summary**: Here's a summary and critical evaluation of the paper "POCGEN: Generating Proof-of-Concept Exploits for Vulnerabilities in Npm Packages":
+
+**Summary:**
+
+The paper introduces POCGEN, a novel approach that leverages Large Language Models (LLMs), along with static and dynamic analysis, to automatically generate and validate Proof-of-Concept (PoC) exploits for vulnerabilities in npm packages.  POCGEN takes a vulnerability report as input, extracts relevant information, uses an LLM to generate candidate exploits, and then validates these exploits using runtime checks and refinement processes. The authors evaluate POCGEN on the SecBench.js dataset and a newly created dataset, demonstrating significantly improved success rates compared to existing techniques like Explode.js. The paper also analyzes the cost-effectiveness of POCGEN and examines the impact of different components and refinement techniques.
+
+**Critical Evaluation:**
+
+* **Novelty:** The paper's primary novelty lies in its fully automated integration of LLMs with static and dynamic analysis for PoC exploit generation in the npm ecosystem. While previous works have explored LLMs for software engineering tasks and PoC generation using traditional methods, POCGEN represents a significant step forward by combining these elements into a robust and autonomous system. The iterative refinement process using LLMs based on validation feedback is also a novel contribution.
+
+* **Significance:** The significance of this work is considerable.  The lack of PoC exploits in vulnerability reports is a well-documented problem, hindering timely patching, testing, and regression prevention. POCGEN addresses this issue by enabling the automatic generation of PoC exploits, which can benefit developers, security researchers, and the broader npm community. The significantly higher success rate compared to the state-of-the-art tool Explode.js demonstrates the practical impact of this approach. Furthermore, the newly created dataset (CWEBench.js) provides a valuable resource for future research in this area.
+
+* **Strengths:**
+    * **Effective Integration of LLMs and Program Analysis:** The core strength is the synergy between LLMs for code understanding and generation, and static/dynamic analysis for exploit validation and refinement.
+    * **Comprehensive Evaluation:** The paper provides a thorough evaluation on two datasets, including a newly created one. The ablation study highlights the contribution of individual components.
+    * **Cost-Effectiveness:** The low cost per generated exploit (approximately $0.02) makes the approach practically viable.
+    * **Addresses a Real-World Problem:** The work directly tackles a significant challenge in vulnerability management.
+
+* **Weaknesses:**
+    * **Reliance on Validator:**  The system's effectiveness is heavily reliant on the quality of the validator. While the paper outlines the validation checks used, the expressiveness limitations of these rule based approaches are a weakness.  The validator may filter out potentially valid but unconventional exploits.
+    * **Generalizability Limitations:**  The performance on CWEBench.js (37% success rate) is noticeably lower than on SecBench.js (77%). This indicates potential limitations in generalizability to more recent and diverse vulnerabilities.  The dependency on specific execution environments and vulnerability triggers further limits the system's broad applicability.
+    * **Limited to Certain Vulnerability Types:** The approach is limited to five specific vulnerability types (path traversal, prototype pollution, command injection, code injection, and ReDoS). Expanding the range of supported vulnerabilities would increase the impact of the work.
+    * **Potential for Bias:**  The LLM's training data could introduce bias, affecting its ability to generate exploits for vulnerabilities not well-represented in the data. This is partially addressed by evaluating vulnerabilities past the LLM training cut off.
+    * **Ethical Considerations:** Automated exploit generation raises ethical concerns about the potential for malicious use. However, the paper emphasizes the potential benefits for vulnerability remediation and responsible disclosure.
+
+* **Potential Influence:**  POCGEN has the potential to significantly impact vulnerability management in the npm ecosystem by automating PoC exploit generation. This can lead to faster patching, better regression testing, and improved vulnerability reporting. The work also provides a valuable framework for future research on LLM-assisted vulnerability exploitation and mitigation.
 
 **Justification for Score:**
 
-I am assigning a score of **8**. The paper presents a novel and well-evaluated framework that addresses a significant problem in video understanding. The automatic generation of skill-aware CoT annotations and the use of skill-specific experts are valuable contributions. The experimental results are convincing, and the ablation studies provide insights into the effectiveness of the framework. The paper is also well-written and clearly explains the proposed approach.
-
-The weaknesses of the paper (complexity, some dependency on the underlying MLLM, and potential halluciations) are present, but are somewhat mitigated by its strengths and the clarity of the presentation.
-Score: 8
-
-- **Score**: 8/10
-
-### **[BPO: Revisiting Preference Modeling in Direct Preference Optimization](http://arxiv.org/abs/2506.03557v1)**
-- **Summary**: Here's a summary and critical evaluation of the paper:
-
-**Summary:**
-
-The paper identifies a problem called "Degraded Chosen Responses" (DCR) in Direct Preference Optimization (DPO), a popular technique for aligning large language models (LLMs) with human preferences. DCR occurs when the likelihood of chosen responses decreases during DPO training, potentially leading to out-of-distribution responses and degraded performance. To address this, the authors propose Balanced Preference Optimization (BPO), a novel framework that balances the optimization of chosen and rejected responses through two components: a balanced reward margin and a gap adaptor. BPO requires only a single line of code modification to existing DPO implementations and shows significant performance improvements on mathematical reasoning tasks compared to DPO and its variants.
-
-**Critical Evaluation:**
-
-*   **Novelty:** The paper's primary novelty lies in the identification and characterization of the DCR problem within the context of DPO and the subsequent BPO framework to address it. This is more than a simple hyperparameter tuning; it's a rethinking of the reward signal to maintain the quality of chosen responses.  The balanced reward margin concept, while simple in implementation (a `min` function), is a crucial conceptual contribution. The gap adaptor provides a tunable mechanism to fine-tune the balance between maximizing chosen responses and suppressing rejected ones.
-
-*   **Significance:** The significance of this paper comes from its practical implications. DPO has become a widely adopted method for LLM alignment, and any improvement in its stability and performance has a direct impact on the quality of LLMs.  The empirical results, demonstrating consistent improvements over DPO and its variants across various model architectures and scales, underscore the significance. Moreover, the simplicity of implementation makes BPO easy to adopt, increasing its potential impact. While the experiments primarily focus on mathematical reasoning, this application highlights the potential benefit in tasks requiring factual accuracy and reasoning capability, which is crucial for many LLM applications. The theoretical analysis, though presented concisely, also adds significance by providing insights into the mechanism driving performance improvements and proving a lower bound on chosen response likelihood.
-
-*   **Strengths:**
-    *   Clear problem definition (DCR).
-    *   Simple and elegant solution (BPO).
-    *   Significant performance improvements across multiple models and benchmarks.
-    *   Easy to implement (single line code change).
-    *   Provides theoretical justification.
-    *   Addresses a relevant and important problem in LLM alignment.
-
-*   **Weaknesses:**
-    *   Experiments focus primarily on mathematical reasoning. Further experiments across diverse datasets like text generation, instruction following would strengthen the claim.
-    *   Limited limitations discussion. While the paper mentions the restriction to offline methods, a more thorough discussion of potential failure cases or sensitivity to hyperparameter settings would enhance the paper.
-
-**Rationale for the score:**
-
-The paper presents a well-defined problem in DPO, a popular alignment technique, and offers a surprisingly simple and effective solution. The empirical results are compelling, demonstrating consistent improvements over DPO and its variants. The ease of implementation further increases its potential impact. While the experimental validation could be expanded, and a more comprehensive discussion of limitations would enhance the paper, the novelty and significance of the contribution justify a strong score.
-
-Score: 8
-
-- **Score**: 8/10
-
-### **[ConsistentChat: Building Skeleton-Guided Consistent Dialogues for Large Language Models from Scratch](http://arxiv.org/abs/2506.03558v1)**
-- **Summary**: Here's a concise summary and critical evaluation of the paper "ConsistentChat: Building Skeleton-Guided Consistent Dialogues for Large Language Models from Scratch":
-
-**Summary:**
-
-The paper introduces *ConsistentChat*, a novel framework for synthesizing multi-turn instruction datasets for Large Language Models (LLMs). Addressing the limitations of existing methods that focus on single-turn interactions and often result in context drift, ConsistentChat models human conversational intent by (1) assigning dialogues to predefined intent trajectories (Intent Modeling) and (2) generating structurally grounded user queries aligned with these intents (Skeleton Generation). This approach aims to produce more coherent and goal-oriented conversations. The authors create a dataset with approximately 15,000 multi-turn dialogues and 224,392 utterances using their framework, and experimental results on various benchmarks demonstrate that models fine-tuned on ConsistentChat exhibit significant improvements in chat consistency and task success rates compared to models trained on existing datasets.
-
-**Critical Evaluation:**
-
-*   **Novelty:** The core idea of modeling conversational intent with predefined trajectories to guide multi-turn dialogue generation is a significant contribution. Prior works have largely focused on turn-level coherence or used less structured approaches. Explicitly modeling conversational intent and information flow is a good way to structure multi-turn conversations and avoid context drift. The introduction of the skeleton-guided approach is also novel.
-*   **Significance:** The paper addresses a crucial limitation in current instruction data synthesis methods. By tackling the problem of context drift and improving consistency in multi-turn dialogues, this work is definitely relevant. The experimental results demonstrating improvements in both chat consistency and task success suggest that ConsistentChat can enable LLMs to engage in more effective and realistic conversations.
-*   **Strengths:**
-    *   The paper is well-written and presents a clear and concise methodology.
-    *   The experiments are comprehensive, covering several dialogue benchmarks and comparing against various baselines.
-    *   The reported improvements in chat consistency and task success are substantial and statistically significant.
-    *   The analysis of how existing models degrade in multi-turn conversations is insightful and motivates the proposed approach well.
-*   **Weaknesses:**
-    *   The specific intent trajectories used (nine categories) may be somewhat arbitrary, and the impact of different choices could be explored further. The description in the Appendix is helpful, but a more detailed justification for the selection of these particular categories would be useful.
-    *   The framework heavily relies on LLMs for query and response generation. The generated content might still suffer from biases or limitations of the underlying LLMs. Human evaluation of the generated dialogues could strengthen the validation of the dataset's quality.
-    *   While the paper shows improvements, there's limited discussion on the types of dialogues/tasks where ConsistentChat provides the most significant benefit.
-*   **Potential Influence:** The ConsistentChat framework has the potential to influence the development of more sophisticated and realistic dialogue agents. The insights from the paper could guide future research on instruction data synthesis, multi-turn dialogue modeling, and evaluation metrics for conversational AI.
-*   **Justification:** The paper presents a novel and well-evaluated approach to address a key challenge in multi-turn dialogue generation. While there are areas for further investigation and improvement, the ConsistentChat framework and the generated dataset offer a valuable resource for the research community. The significant performance gains demonstrated on multiple benchmarks solidify the paper's contribution.
-*   **Rigorous Rationale:** The study effectively combines a theoretical understanding of the problem (context drift), a structured approach (intent trajectories and skeleton generation), and empirical validation (improvements on established benchmarks). The authors also provide detailed implementation details, which promote reproducibility. While acknowledging the LLM's role and potential biases is important, the novel approach to guiding the generation process is significant and the positive empirical results justify a high score.
-
-Score: 8
-
-- **Score**: 8/10
-
-### **[FreePRM: Training Process Reward Models Without Ground Truth Process Labels](http://arxiv.org/abs/2506.03570v1)**
-- **Summary**: Here's a summary and critical evaluation of the paper "FreePRM: Training Process Reward Models Without Ground Truth Process Labels."
-
-**Summary:**
-
-The paper introduces FreePRM, a novel weakly supervised framework for training Process Reward Models (PRMs) without requiring costly step-level labels.  Instead of relying on manually annotated or automatically generated step-level labels, FreePRM generates pseudo step-level labels based on the correctness of the final outcome. It then incorporates a "buffer probability" mechanism to mitigate the impact of noise inherent in these pseudo labels. The method aims to represent a neutral state for uncertain steps and absorb the inaccuracies in label assignments.  Experimental results on ProcessBench and mathematical reasoning tasks demonstrate that FreePRM achieves competitive or even superior performance compared to PRMs trained with full or automatically-generated labels, offering a more scalable and practical training approach.
-
-**Critical Evaluation:**
-
-*   **Novelty:** The core novelty lies in the weak supervision approach that leverages the final outcome and buffer probability. While pseudo-labeling isn't entirely new, its application to PRM training, coupled with the buffer probability to handle noise in the pseudo labels, represents a novel combination of techniques. The idea of a "buffer" state to account for uncertainty in step-wise correctness is a valuable contribution.
-
-*   **Significance:** The significance of the work stems from addressing a key bottleneck in PRM training: the difficulty and cost of obtaining accurate step-level labels. By developing a method that significantly reduces the reliance on such labels, FreePRM could make PRMs more accessible and applicable to a broader range of tasks.  The improved performance compared to some supervised PRMs further underscores the potential of the approach. The empirical results on ProcessBench are compelling and provide solid evidence of the method's effectiveness. The fact that FreePRM shows performance comparable or even better than some existing PRMs trained with explicit step-level labels is a significant result and suggests that the proposed approach can effectively learn from weaker supervision.
-
-*   **Strengths:**
-    *   Clear problem statement and motivation.
-    *   Well-defined methodology with a clear explanation of the buffer probability mechanism.
-    *   Strong empirical results on a challenging benchmark.
-    *   Comparison to relevant baselines.
-    *   Ablation studies to demonstrate the importance of different components.
-    *   Theoretical analysis that supports the robustness and stability of FreePRM.
-
-*   **Weaknesses:**
-    *   While the paper compares against several baselines, it could benefit from comparisons with other weak supervision techniques applied to similar tasks, if any exist.
-    *   The performance gap with the fully supervised PRM800K model (though admitted as small) could be addressed in the future by combining FreePRM with automated data annotation techniques to further improve performance.
-    *   The societal impact discussion is relatively brief. More in-depth consideration of potential biases introduced by using outcome correctness as a proxy for step correctness would be beneficial.
-    *   Some of the examples in Appendixes are trivial and not necessary.
-
-*   **Potential Influence:** This work has the potential to significantly influence the field of PRM training by providing a more scalable and cost-effective alternative to traditional methods. The weak supervision approach could inspire further research into developing similar techniques for other areas of machine learning where labeled data is scarce.
-
-**Rigorous Rationale:**
-The score reflects the paper's strong contributions to the field. While pseudo-labeling is not a completely new concept, the authors present a novel and effective way to apply it to PRM training, overcoming a significant bottleneck. The introduction of the buffer probability further enhances the method's robustness. The experimental results clearly demonstrate the method's superiority to several existing baselines, including some trained with full supervision. The limitations are clearly addressed, and the paper is well-written and easy to follow. Overall, this work provides a valuable contribution to the field and has the potential to significantly impact future research in PRM training.
+The paper presents a novel and significant contribution to the field of vulnerability management. The effective integration of LLMs and program analysis, the comprehensive evaluation, and the addressing of a real-world problem warrant a high score. However, the limitations in generalizability, the dependence on the validator, and the restricted range of vulnerability types prevent it from being a truly exceptional contribution. Therefore, a score of 8 reflects the significant strengths of the paper while acknowledging its limitations.
 
 **Score: 8**
 
 - **Score**: 8/10
 
-### **[Improving LLM-Based Fault Localization with External Memory and Project Context](http://arxiv.org/abs/2506.03585v1)**
-- **Summary**: Here's a summary and critical evaluation of the paper "Improving LLM-Based Fault Localization with External Memory and Project Context":
+### **[From Struggle (06-2024) to Mastery (02-2025) LLMs Conquer Advanced Algorithm Exams and Pave the Way for Editorial Generation](http://arxiv.org/abs/2506.04965v1)**
+- **Summary**: Okay, here's a summary and critical evaluation of the paper "From Struggle (06-2024) to Mastery (02-2025): LLMs Conquer Advanced Algorithm Exams and Pave the Way for Editorial Generation".
 
 **Summary:**
 
-The paper introduces MemFL, a novel fault localization technique that enhances Large Language Model (LLM)-based approaches by incorporating project-specific knowledge through an external memory system. The external memory consists of two parts: static memory (pre-generated summaries of the project and its classes) and dynamic memory (iteratively gathers debugging guidance from prior attempts). MemFL structures the debugging process into three steps: Bug Review Generation, Code Condensation, and Fault Confirmation. The authors demonstrate that MemFL, when using GPT-40-mini, achieves higher Top-1 accuracy compared to existing LLM-based baselines on the Defects4J benchmark, while also significantly reducing execution time and API cost. The performance gains are more pronounced on complex projects. The use of GPT-4.1-mini further improves the results. Ablation studies demonstrate the effectiveness of each component of MemFL.
+The paper evaluates the performance of recent Large Language Models (LLMs) on a challenging university-level advanced algorithms exam, originally administered in Romanian but also available in a high-quality English translation. The authors tested a wide range of LLMs, assessing their problem-solving capabilities, consistency in generating solutions, and multilingual performance. The study reveals that newer LLMs achieve scores comparable to top-performing students and demonstrate robust reasoning skills, although they still struggle with graph-based tasks.  Building on these findings, the paper explores the potential of LLMs to support educational environments through the generation of high-quality editorial content (e.g., detailed grading schemes, actionable student feedback), offering instructors tools to enhance student learning. They propose a human-in-the-loop approach and offer a web-based platform for these tasks. They also show consistency measures on the generated responses.
 
 **Critical Evaluation:**
 
-*   **Novelty:** The core novelty lies in the explicit incorporation of project-specific knowledge into an LLM-based fault localization approach via a structured external memory mechanism.  This addresses a crucial limitation of existing LLM-based methods, which often rely solely on the LLM's inherent knowledge and can struggle with complex projects requiring domain expertise. The dynamic memory component, which iteratively learns from previous debugging attempts, is a further novel contribution. The structured three-step approach also adds to the practical application of LLM.
+*   **Novelty:** The paper's novelty lies in the following aspects:
 
-*   **Significance:** The paper's significance stems from several aspects:
+    *   **Real-world Exam Setting:** Evaluating LLMs on a *real*, challenging, university-level algorithms exam, rather than synthetic or simplified problems, provides a more realistic assessment of their capabilities.
+    *   **Multilingual Analysis:** Testing on both the original Romanian exam and its English translation allows for insights into the LLMs' multilingual proficiency and potential biases. The inclusion of a low-resource language (Romanian) is a valuable contribution.
+    *   **Consistency Analysis:** The detailed analysis of LLM consistency in exam grading is a significant contribution to understanding the reliability of these models in educational applications.
+    *   **Editorial Generation Application:**  The exploration of LLMs for generating detailed grading schemes and actionable student feedback is a valuable contribution, addressing a practical need in education. The proposed human-AI collaboration approach makes a difference.
+    *   **Dataset and Tooling:** The release of the exam dataset and the web-based platform contribute to the research community, enabling further investigation and experimentation.
 
-    *   **Improved accuracy:** The demonstrated improvement in fault localization accuracy, especially on complex projects like Closure, directly translates to reduced debugging time and cost for developers.
-    *   **Reduced cost:**  The significant reduction in execution time and API costs compared to other LLM-based approaches makes the technique more practical and accessible for wider adoption. It mitigates a key barrier to entry for using LLMs in software engineering tasks.
-    *   **Generalizability:**  While the evaluation is limited to Java projects on Defects4J, the underlying principle of incorporating project-specific knowledge is applicable to other programming languages and domains. The inclusion of GPT-4.1 also provides an aspect to the model's generalizability.
-    *   **Insights:** The ablation studies provide valuable insights into the importance of different components of MemFL, guiding future research and development in this area. The determination of an optimal dynamic memory generation policy is also a useful contribution.
+*   **Significance:** The findings are significant for several reasons:
+
+    *   **Demonstration of LLM Progress:** The paper clearly demonstrates the rapid progress of LLMs in solving complex algorithmic problems. This has important implications for the potential of AI in education and other technical domains.
+    *   **Identification of Strengths and Weaknesses:** The study identifies specific areas where LLMs excel (e.g., theoretical exercises, applying string algorithms) and where they struggle (e.g., graph-based tasks), providing valuable guidance for future research and development.
+    *   **Potential for Educational Innovation:** The paper highlights the potential of LLMs to transform education by providing personalized feedback, generating detailed grading schemes, and supporting instructors in various tasks.
+    *   **Practical Implications:** The proposed human-in-the-loop approach and the web-based platform offer practical tools that can be immediately used by educators.
 
 *   **Strengths:**
 
-    *   **Well-defined problem:**  The paper clearly identifies the limitations of existing LLM-based fault localization techniques.
-    *   **Novel solution:** MemFL offers a compelling and well-structured solution.
-    *   **Strong empirical evaluation:** The experiments on Defects4J provide convincing evidence of the effectiveness of MemFL. The overlap analysis is particularly insightful.
-    *   **Thorough analysis:** The ablation studies and dynamic memory generation policy analysis provide valuable insights.
-    *   **Clear and concise writing:**  The paper is well-written and easy to understand.
+    *   **Comprehensive Evaluation:** The study involves a thorough evaluation of a wide range of LLMs.
+    *   **Rigorous Methodology:** The methodology is well-defined and executed, with clear metrics and analyses.
+    *   **Practical Applications:** The paper explores practical applications of LLMs in education, demonstrating their potential to address real-world challenges.
+    *   **Publicly Available Resources:** The release of the exam dataset and the web-based platform enhances the value and impact of the work.
+    *   **Insightful Analysis:**  The authors present an insightful analysis of the results, identifying key trends and challenges.
 
 *   **Weaknesses:**
 
-    *   **Limited benchmark:** The evaluation is primarily limited to the Defects4J benchmark, which, while widely used, may not fully represent the diversity of real-world software projects. It will be interesting to see the result for projects not only from Defects4j dataset.
-    *   **Java-centric:** The approach is evaluated only on Java projects, raising questions about its generalizability to other languages.
-    *   **LLM reliance:** The performance of MemFL is inherently tied to the capabilities of the underlying LLM. Advancements in LLMs could impact the relative benefits of MemFL.
-    *   **Dynamic memory generation:** While the paper presents an "optimal" dynamic memory generation policy, the process is still somewhat heuristic. A more rigorous and automated approach to generating and refining dynamic memory could be beneficial.
-    *   **Static memory scalability:** For very large projects, pre-generating and managing static memory (project and class summaries) could become a challenge. The efficiency of the method can be improved by the static memory generation method.
-    *   **Indirect dataset exposure:** Despite the authors’ efforts, the possibility that the LLM used in the experiment has seen the Defects4J benchmark still remains a threat.
+    *   **Limited Scope:** While the study is comprehensive within its defined scope, it is limited to a single university-level exam. Further research is needed to validate the findings across different subjects and educational levels.
+    *   **Dependence on LLM API Availability:** The findings are based on currently available LLMs. Changes in API availability and model capabilities could affect the results.
+    *   **Ethical Considerations:** While mentioned, the paper could further elaborate on the ethical considerations related to using LLMs in education, such as potential biases and the impact on student learning.
 
-*   **Potential Influence:** The paper has the potential to significantly influence research on LLM-based software engineering tools. The external memory approach could be adapted and extended to other tasks, such as automated program repair, code summarization, and vulnerability detection. The findings about the importance of project-specific knowledge and the benefits of iterative refinement will likely guide future research in this area.
+*   **Overall Impact:** The paper makes a solid contribution to the growing body of research on LLMs in education. It provides a realistic assessment of the current capabilities of LLMs, identifies promising applications, and highlights areas for future research and development.
 
 **Score: 8**
 
 **Justification:**
 
-MemFL represents a significant advancement in LLM-based fault localization by addressing a key limitation: the lack of project-specific knowledge. The external memory approach is novel, well-structured, and demonstrably effective. The paper is well-written and presents a strong empirical evaluation. While the evaluation is somewhat limited by the Java-centric focus and reliance on Defects4J, the potential impact of the work on the field is substantial. The approach of incorporating external knowledge has the potential to be applied in a variety of contexts, leading to a greater accuracy and efficiency. Overall, the paper makes a valuable contribution to the field and warrants a high score.
+The paper is a valuable contribution that highlights the recent advancements in LLMs for solving complex algorithmic problems and generating educational resources. The use of a real-world exam and the detailed analysis of consistency are strengths. The identification of both strengths and weaknesses of LLMs in this context makes it a very interesting read. The proposal of a human-in-the-loop approach and the developed tooling provides more value and allows other researchers to reuse and expand the paper's outcomes. While the scope is limited, the paper provides a solid foundation for future research. It demonstrates the potential of LLMs to transform education while acknowledging the remaining challenges and ethical considerations. A score of 8 reflects the paper's significant contributions and promising implications, but also acknowledges its limitations and the need for further research.
 
 - **Score**: 8/10
 
-### **[ControlThinker: Unveiling Latent Semantics for Controllable Image Generation through Visual Reasoning](http://arxiv.org/abs/2506.03596v1)**
-- **Summary**: Here's a summary and evaluation of the ControlThinker paper:
+### **[FPTQuant: Function-Preserving Transforms for LLM Quantization](http://arxiv.org/abs/2506.04985v1)**
+- **Summary**: Here's a summary and critical evaluation of the paper:
 
 **Summary:**
 
-The paper introduces ControlThinker, a novel framework for controllable image generation. It addresses the semantic gap between sparse text prompts and detailed target images by employing a "comprehend-then-generate" paradigm. First, a fine-tuned Multimodal Large Language Model (MLLM) analyzes control images to extract latent semantics, effectively enriching the text prompt.  This enriched prompt then guides the image generation process. To handle uncertainties in the control images, the framework explores multiple reasoning trajectories and selects the optimal one using a metric-based output reward model (ORM).  Experiments demonstrate improved visual quality and semantic consistency across various benchmarks without modifying the underlying image generators.
+The paper "FPTQuant: Function-Preserving Transforms for LLM Quantization" introduces a novel method for quantizing Large Language Models (LLMs) to INT4 precision, while minimizing performance degradation caused by outlier activations. FPTQuant leverages four novel, lightweight function-preserving transforms (FPTs) designed to shape intermediate activation distributions for better quantization. These transforms include a pre-RoPE transform, a value transform, an MLP scaling transform, and a dynamic scaling transform, which exploit equivariances and independencies inherent in the transformer architecture.  A key feature is the mergeability of most transforms, resulting in minimal inference overhead and no custom kernels.  The transforms are trained locally and then end-to-end to match the output of a full-precision model. Results show FPTQuant achieves state-of-the-art speedups, while maintaining competitive accuracy compared to existing quantization techniques.
 
 **Critical Evaluation:**
 
-*   **Novelty:** The core idea of using an MLLM to enrich text prompts for controllable image generation is relatively novel. Prior work has focused on modifying the image generation architecture or directly feeding control signals. Leveraging the reasoning capabilities of MLLMs to extract higher-level semantic information from control images and incorporate this information into the text prompt is a distinct contribution. The two-stage training process (SFT and RFT) for the MLLM, tailored to handle control images, is also a novel aspect. The use of a metric-based ORM to select the best reasoning trajectory further adds to the novelty.
+**Novelty:**
 
-*   **Significance:** The paper addresses a critical limitation of current controllable image generation methods: the reliance on low-level control signals and the inability to bridge the semantic gap between text and image. ControlThinker's approach significantly improves semantic consistency and visual quality, indicating a substantial step forward.  The results demonstrate clear improvements over existing state-of-the-art methods across multiple control types. Furthermore, the modular design allows for potential integration with various existing image generators.
+The paper demonstrates strong novelty in its design and application of FPTs to LLMs. While the concept of function-preserving transforms is not entirely new, FPTQuant's key innovations lie in:
 
-*   **Strengths:**
+*   **Specifically designed FPTs for Transformers:** The transforms are not generic, but tailored to the specific operations and structure of Transformer blocks, exploiting their inherent mathematical properties. The pre-RoPE transform is especially clever in addressing quantization challenges while respecting the position encoding.
+*   **Mergeability and Low Overhead:** The focus on mergeable transforms significantly differentiates this work.  Many prior works introduce transformations that require additional computation during inference, which diminishes the benefits of quantization. By fusing transforms into existing weights, FPTQuant circumvents this issue.
+*   **Dynamic scaling tailored approach:** Different from prior methods like SmoothQuant, FPTQuant only scales after entry-wise product, but before the scaling commutable matmul. This results in outlier mitigation without adding additional online cost and reduces quantization error.
 
-    *   Clear problem definition and motivation.
-    *   Well-defined framework with clear explanations of each component (MLLM, SFT/RFT training, ORM).
-    *   Comprehensive experimental evaluation across multiple benchmarks and control types.
-    *   Ablation studies that demonstrate the effectiveness of each component.
-    *   Qualitative results show significant improvements in semantic coherence and visual quality.
-    *   Provides a viable solution to address the limitations of relying on low-level image control.
+*   **Limitations** The method relies on manual derivation and specific properties of transformer operation. More general and automated approaches that do not require human guidance can potentially be more impactful.
 
-*   **Weaknesses:**
+**Significance:**
 
-    *   The reliance on a curated dataset for fine-tuning the MLLM could be a limitation. The size and quality of this dataset are crucial for the performance of the framework. However, the paper has shown that the curated dataset has better quality and the authors are generous with details of how it was generated.
-    *   The improvement could also potentially vary significantly depending on the quality of the control image.
-    *   The paper acknowledges this uncertainty, they have introduced the Inference Scaling to mitigate.
-    *   While the paper shows improvements in both semantic consistency and visual quality, it does not provide a comprehensive analysis on the limitations and failures of the system.
+The paper's significance stems from its ability to enable aggressive INT4 quantization of LLMs with minimal performance loss and inference overhead. The key strengths contributing to its significance include:
 
-*   **Potential Impact:**
+*   **Practicality:** FPTQuant offers a practically viable solution for deploying LLMs on resource-constrained devices. The low-overhead transforms and avoidance of custom kernels make it readily deployable in existing inference frameworks.
+*   **Performance:** The reported speedups and accuracy are competitive with or superior to other quantization methods that introduce overhead. The paper makes a strong case for an excellent speed-accuracy trade-off, making LLM inference significantly more efficient.
+*   **Comprehensiveness:** The paper offers a thorough ablation study and a guide for practitioners on selecting the appropriate FPTs, which enhances its usability and potential impact.
 
-    *   ControlThinker has the potential to influence future research in controllable image generation by shifting the focus towards leveraging higher-level semantic understanding.
-    *   The framework could be extended to other related tasks, such as image editing and video generation.
-    *   The modular design of ControlThinker could encourage the development of new reasoning modules and reward models.
+However, some limitations should be considered:
 
-* **Justification of Score:**
-While ControlThinker presents a novel approach and demonstrates significant improvements in controllable image generation, the dependency on a curated dataset for fine-tuning the MLLM, the potential for performance variation based on the control image, and the limited analysis on the potential limitations affect its overall score. However, the significant improvements shown over state-of-the-art methods, clear problem definition, and the potential influence on the field do merit a high score.
+*   **Dependence on specific LLM architectures:**  The effectiveness of the transforms might be sensitive to variations in Transformer architectures. While the core principles are likely applicable, the specific FPTs might need adjustments for different models.
+*   **Training requirements:**  While the paper aims for minimal overhead, the training process for the FPTs and quantization grids still requires a calibration dataset and student-teacher training, which might not be feasible for all scenarios. More research is required to explore zero shot setting where post-training-quantization transforms can directly be applied with pre-calibrated grids.
+
+**Justification for Score:**
+
+FPTQuant represents a substantial advance in LLM quantization. Its focus on mergeable transforms and architectural properties enables high-performance INT4 quantization with minimal overhead. While it may not be a complete solution (requiring student-teacher training), its practicality, speed-accuracy trade-off, and comprehensible guidance justify a high score.
 
 Score: 8
 
 - **Score**: 8/10
 
-### **[Robustness of Prompting: Enhancing Robustness of Large Language Models Against Prompting Attacks](http://arxiv.org/abs/2506.03627v1)**
+### **[FlowDirector: Training-Free Flow Steering for Precise Text-to-Video Editing](http://arxiv.org/abs/2506.05046v1)**
+- **Summary**: Here's a summary and critical evaluation of the paper "FlowDirector: Training-Free Flow Steering for Precise Text-to-Video Editing":
+
+**Summary:**
+
+The paper presents FlowDirector, a novel training-free framework for text-driven video editing.  It addresses limitations of existing inversion-based methods, which often lead to temporal inconsistencies and structural degradation. FlowDirector models the editing process as a direct evolution in data space guided by an Ordinary Differential Equation (ODE), preserving temporal coherence and structural details.  Key components include: (1) Spatially Attentive Flow Correction (SAFC), which uses attention-guided masking to enable localized and controllable edits; and (2) Differential Averaging Guidance (DAG), inspired by Classifier-Free Guidance, to improve semantic alignment while mitigating the limitations of structural preservation.  Experiments demonstrate state-of-the-art performance in instruction adherence, temporal consistency, and background preservation.
+
+**Critical Evaluation:**
+
+**Novelty:**
+
+The paper introduces a truly novel approach to text-to-video editing by moving away from the conventional inversion-based techniques that dominate the field. While flow-based methods have been explored in image editing, their application to video and the specific combination of SAFC and DAG for precise and controllable edits are significant innovations.
+*   **Inversion-Free Framework**: The core idea of directly evolving the video in data space using ODEs is a fresh perspective. It avoids the pitfalls of inverting videos into the latent space of diffusion models, known to cause structural and temporal inconsistencies.
+*   **Spatial Attentive Flow Correction (SAFC)**: This mechanism provides a more direct and controllable way to preserve unedited regions than previous latent space manipulation methods.
+*   **Differential Averaging Guidance (DAG)**: While inspired by CFG, DAG adapts this concept to flow steering, offering a clever way to improve semantic alignment without sacrificing structural integrity. The differential signals help refine the editing trajectory efficiently.
+
+**Significance:**
+
+The significance of this work lies in its ability to generate higher-quality, temporally coherent, and structurally consistent edited videos compared to existing training-free methods. This opens up possibilities for more practical and reliable video editing tools.
+*   **Improved Editing Quality**: The qualitative and quantitative results clearly show the superiority of FlowDirector in key areas like instruction adherence, temporal consistency, and background preservation.
+*   **Practicality**: A training-free approach is inherently more practical as it eliminates the need for expensive and time-consuming fine-tuning for specific editing tasks.
+*   **Influence on the Field**: By introducing an alternative to inversion-based methods, FlowDirector has the potential to shift the research focus towards more direct manipulation techniques in video editing. It could inspire new approaches that combine the strengths of both inversion-based and inversion-free methods.
+
+**Strengths:**
+
+*   The paper is well-written and clearly explains the technical details of the proposed framework.
+*   The ablation studies provide strong evidence for the effectiveness of the individual components (SAFC and DAG).
+*   The quantitative and qualitative results are compelling and demonstrate a clear improvement over existing methods.
+*   The paper addresses a significant challenge in text-to-video editing (temporal consistency and structural fidelity) with a novel and effective solution.
+
+**Weaknesses:**
+
+*   The paper acknowledges that FlowDirector might not achieve the highest WarpSSIM score due to its ability to perform more substantial object deformations. It would be helpful to explore alternative metrics that better capture the quality of edits involving significant structural changes.
+*   While training-free, the computational cost of directly manipulating video data can still be high. The paper briefly mentions the runtime but could benefit from a more thorough analysis and comparison to other methods.  Also, the appendix mentions the increased computational cost from 4 to 29 minutes (depending on the method used) for editing a 41-frame video.
+*   The paper could explore the limitations of the method more thoroughly, e.g., the types of edits that are still challenging for FlowDirector. The impact of the quality of the input text Csrc on the editing result Ctar should be investigated to better understand the limits of the method.
+
+**Score:**
+
+Score: 8
+
+**Rationale:**
+
+FlowDirector represents a significant advancement in text-to-video editing, offering a novel and effective approach that addresses key limitations of existing methods. The inversion-free framework, combined with SAFC and DAG, demonstrates a clear improvement in editing quality, temporal consistency, and structural fidelity. While there are minor weaknesses regarding the computational cost and limited exploration of potential limitations, the overall contribution of the paper is substantial and has the potential to significantly impact the field. The method successfully improves video editing without retraining, offering a practical and adaptable solution.
+
+- **Score**: 8/10
+
+### **[Reason-to-Recommend: Using Interaction-of-Thought Reasoning to Enhance LLM Recommendation](http://arxiv.org/abs/2506.05069v1)**
 - **Summary**: Here's a summary and critical evaluation of the paper:
 
 **Summary:**
 
-The paper introduces "Robustness of Prompting" (RoP), a novel two-stage prompting strategy designed to enhance the robustness of Large Language Models (LLMs) against input perturbations (e.g., typos, character order errors). RoP consists of: (1) **Error Correction:** Generating adversarial examples by perturbing inputs and creating prompts that teach the LLM to restore the original intent.  (2) **Guidance:** Automatically generating optimal guidance prompts based on the corrected input to steer the model towards more accurate inferences.  The approach is evaluated across arithmetic, commonsense, and logical reasoning tasks, demonstrating improved robustness compared to standard prompting and other prompting techniques like Chain-of-Thought, APE, and PromptAgent. The authors also include ablation studies and analyze robustness across different perturbation levels and model architectures.
+The paper introduces R2Rec, a reasoning-enhanced recommendation framework leveraging Large Language Models (LLMs). It addresses the challenge of applying LLM reasoning techniques to recommendation tasks, which lack explicit reasoning data and supervision. R2Rec constructs "interaction chains" from user-item interaction graphs and transforms them into structured "interaction-of-thoughts" using a masked prompting strategy.  A two-stage training pipeline (supervised fine-tuning (SFT) followed by reinforcement learning (RL)) is used to improve the LLM's recommendation capabilities by learning stepwise decision-making based on implicit interaction patterns. The approach aims to improve both recommendation accuracy and interpretability. The results demonstrate improved performance compared to classical and LLM-based baselines and offer more interpretable reasoning chains.
 
 **Critical Evaluation:**
 
-*   **Novelty:** The paper proposes a novel prompting strategy that directly addresses the sensitivity of LLMs to input perturbations. While the idea of using adversarial examples for robustness is not entirely new, the specific application within a prompting framework, combined with the two-stage approach (error correction followed by optimized guidance), appears to be a significant step forward. The automatic generation of prompts to address these perturbations also enhances novelty. Existing methods either focus on improving prompting techniques without explicitly addressing robustness, or focus on adversarial attacks. RoP specifically tries to improve robustness *through* prompting.
+**Novelty:** The paper makes several novel contributions. The core idea of transforming user-item interactions into explicit, structured reasoning chains suitable for LLMs is a significant step. The progressive, masked prompting strategy for creating "interaction-of-thoughts" appears to be a novel approach to eliciting stepwise reasoning from LLMs within the recommendation domain.  The two-stage SFT+RL training pipeline is also well-motivated and addresses the scarcity of explicit reasoning data. While LLM reasoning and prompt engineering are active research areas, applying them to the specific problem of recommendation using this particular interaction chain representation is a distinctive contribution.
 
-*   **Significance:** The paper addresses a practical and well-known problem with LLMs: their fragility when faced with noisy or adversarial inputs.  Enhancing robustness has significant real-world implications for deploying LLMs in applications where input quality cannot be guaranteed. The experimental results demonstrate clear improvements in robustness across multiple datasets and perturbation types, making a compelling case for the effectiveness of RoP. Ablation studies give insight in to the importance of both stages of the RoP pipeline. Testing RoP against different levels of noise also adds to the significance of the approach.
+**Significance:**  The paper addresses a crucial gap in the application of LLMs to recommendation systems. While LLMs have shown promise, directly leveraging their reasoning capabilities has been challenging due to the implicit nature of user feedback. R2Rec offers a structured approach to introduce reasoning, which can improve accuracy and interpretability. The performance gains reported, especially the average improvement of 10.48% in HitRatio@1 over strong baselines, are practically significant. The enhanced interpretability provided by the explicit reasoning chains is also valuable, as it can provide insights into the model's decision-making process and potentially improve user trust.  The ablation studies provide strong evidence for the effectiveness of the individual components of the framework. The transfer learning results further strengthen the significance.
 
-*   **Strengths:**
+**Strengths:**
 
-    *   The RoP method consistently improves the accuracy under various attack settings across various settings.
-    *   Comprehensive experimental evaluation. The paper thoroughly evaluates RoP on multiple datasets, perturbation types, and even across different LLM architectures. This extensive evaluation strengthens the validity of the claims.
-    *   Ablation studies are included demonstrating that both stages of the pipeline are important for effectiveness.
-    *   The paper is well-written and clearly explains the RoP framework and the experimental setup.
-    *   The performance against different levels of noise give insight into the approach.
+*   **Well-Motivated Problem:** The paper clearly identifies and motivates a relevant problem.
+*   **Novel Approach:** R2Rec presents a novel framework for injecting structured reasoning into LLM-based recommendation.
+*   **Strong Empirical Results:** The experiments are comprehensive, using multiple real-world datasets and comparing against strong baselines. The performance gains are significant.
+*   **Ablation Studies:** Thorough ablation studies demonstrate the importance of each component of the proposed framework.
+*   **Interpretability:** The paper emphasizes and demonstrates the improved interpretability of the model's recommendations.
+*   **Reproducibility:** The authors provide open-source code, which facilitates reproducibility and further research.
 
-*   **Weaknesses:**
+**Weaknesses:**
 
-    *   The perturbation types are limited to a set of five predefined categories. While these cover some common errors, the paper acknowledges that they do not encompass the full range of real-world noise (e.g., grammatical errors, pragmatic shifts). The reliance on synthetic perturbations might also limit generalizability.
-    *   The method relies on GPT-4 to generate the instructions, meaning the LLM needs to be fairly capable to be able to benefit from RoP. This also may introduce some bias towards solutions that the GPT-4 thinks are valid.
-    *   The paper lacks a deeper analysis of *why* RoP works. Understanding the specific mechanisms by which error correction and optimized guidance enhance robustness would be valuable.
-    *   A comparison to more recent state-of-the-art robustness methods would strengthen the impact.
+*   **Computational Cost:** The use of LLMs and the two-stage training pipeline can be computationally expensive. The paper mentions the hardware used, but further discussion of the training and inference costs (e.g., training time, inference latency) would be beneficial for practical deployment considerations.
+*   **Context Length Limitations:** As the authors acknowledge, the context length of LLMs limits the number of interaction-of-thought sequences that can be processed simultaneously. This could restrict the model's ability to consider a wider range of interactions.
+*   **Prompt Sensitivity:**  LLM performance can be highly sensitive to prompt design.  While the paper describes the prompting strategy, a more detailed analysis of the impact of different prompt variations could be included.
+*   **Scalability:** While the paper describes the interaction chains as enabling scalability and overcomes the implicit nature of user feedback, the performance of the framework over much larger graphs are untested.
 
-*   **Potential Influence:** The paper has the potential to influence research in prompting strategies, adversarial robustness for LLMs, and practical deployment of LLMs in noisy environments.  The RoP framework provides a solid foundation for future research aimed at developing more robust and reliable prompting techniques.
+**Overall:**
 
-*   **Overall:** The paper presents a valuable contribution to the field by addressing a key limitation of LLMs and proposing a practical and effective solution. While there are some limitations, the strengths of the paper outweigh the weaknesses.
+R2Rec is a well-designed and thoroughly evaluated framework for enhancing LLM-based recommendation with structured reasoning. The novelty of the interaction chain representation and prompting strategy, combined with the strong empirical results and interpretability benefits, makes this a valuable contribution to the field. The limitations regarding computational cost and context length are acknowledged and represent potential areas for future research.
 
 **Score: 8**
 
-**Rationale:** The paper demonstrates a significant and novel improvement in LLM robustness through a well-defined prompting strategy. The comprehensive evaluation and insightful ablation studies make a strong case for the RoP framework. While the reliance on synthetic perturbations and the limited analysis of the underlying mechanisms are weaknesses, the overall impact and potential influence of the paper justify a score of 8.
+**Justification:** The paper presents a novel and significant contribution to the field of recommender systems by effectively integrating structured reasoning into LLM-based models. The approach demonstrably improves performance and interpretability. While the computational cost and context length limitations are valid concerns, the overall impact of the work warrants a high score. The paper has the potential to influence future research directions in this area.
 
 - **Score**: 8/10
 
-### **[EmoArt: A Multidimensional Dataset for Emotion-Aware Artistic Generation](http://arxiv.org/abs/2506.03652v1)**
-- **Summary**: Here's a summary and critical evaluation of the EmoArt paper:
+### **[PixCell: A generative foundation model for digital histopathology images](http://arxiv.org/abs/2506.05127v1)**
+- **Summary**: Here's a summary and critical evaluation of the PixCell paper:
 
 **Summary:**
 
-The paper introduces EmoArt, a large-scale (132,664 artworks) dataset for emotion-aware artistic image analysis and generation.  It covers 56 painting styles and includes structured annotations for each image, including objective scene descriptions, five visual attributes (brushwork, composition, color, line, light), binary arousal-valence labels, twelve emotion categories, and potential art therapy effects. The authors use GPT-4o assisted annotation with human validation. The paper benchmarks state-of-the-art diffusion models for emotion alignment and visual coherence, highlighting the dataset's utility in affective computing, computational art, and well-being applications.
+The paper introduces PixCell, the first diffusion-based generative foundation model for digital histopathology images. Trained on PanCan-30M, a large and diverse dataset of H&E-stained whole slide images, PixCell generates high-quality, diverse histopathology images. The paper demonstrates the model's ability to: (1) be used to train self-supervised learning (SSL) models, effectively replacing real data and addressing privacy concerns; (2) enable controllable image generation through conditioning on cell segmentation masks, facilitating data augmentation; and (3) perform stain translation from H&E to IHC images, achieving state-of-the-art results. The model weights and code are publicly released.
 
 **Critical Evaluation:**
 
-*   **Novelty:** The paper's primary novelty lies in the **scale and richness** of the dataset specifically tailored for emotional analysis of *artistic* images. While prior datasets exist in the realm of emotion recognition, they typically focus on real-world photos and lack the detailed visual attribute annotations and art-specific categories. Combining these with Art Therapy potential is relatively novel. The use of a modern LLM (GPT-4o) for annotation is appropriate and yields a comprehensive annotation structure for each image. The benchmarking experiments validate its suitability for AIGC research and further emphasize the value of the annotations.
+*   **Novelty:** The paper's primary novelty lies in the creation of a large-scale generative foundation model specifically for histopathology. While diffusion models have been used in other domains, their application to histopathology at this scale and with the demonstrated capabilities (SSL training, controllable generation, and stain translation) is a significant contribution. The use of UNI-2h embeddings for conditioning is also a clever adaptation to the lack of image-caption pairs. The progressive training strategy and the use of a large, diverse, pan-cancer dataset are essential for scaling up the model.
 
-*   **Significance:** The EmoArt dataset addresses a significant gap in the field.  Generating emotionally expressive artistic images is a challenging task, and the lack of large-scale, well-annotated datasets has been a major impediment. EmoArt provides the research community with a valuable resource to develop and evaluate emotion-aware image generation models.  The inclusion of art therapy effects opens up new avenues for exploration. The comprehensive annotation structure allows for various research directions, including multimodal emotion grounding, style transfer, and the study of the interplay between visual attributes and emotional expression. It provides valuable insights to build better generation models.
+*   **Significance:** The paper has potentially high significance.
+    *   **Data Scarcity and Privacy:** Generative models address data scarcity and privacy issues in pathology, allowing for data sharing without regulatory hurdles. The demonstration that synthetic images can effectively train SSL models is a crucial step.
+    *   **Controllable Generation:** The ability to control image generation based on cell masks opens avenues for targeted data augmentation and educational tools.
+    *   **Stain Translation:** Virtual staining could significantly reduce the need for expensive and time-consuming IHC procedures.
+    *   **Foundation Model:** PixCell offers a foundation for future research in computational pathology.
 
 *   **Strengths:**
-    *   **Large Scale and Diversity:** The dataset's size and stylistic diversity are a major strength, enabling robust training and evaluation of machine learning models.
-    *   **Comprehensive Annotations:** The detailed and structured annotations are a significant asset, providing rich information for various tasks.
-    *   **High Annotation Quality:** The GPT-4o assisted annotation, followed by human validation, ensures a high level of annotation quality.
-    *   **Rigorous Evaluation:** The paper includes a thorough evaluation of state-of-the-art diffusion models using both quantitative and qualitative metrics.
-    *   **Ethical Considerations:**  Explicit mention of using publicly accessible sources and rigorous filtering for content safety and image quality demonstrate that the authors have considered ethical use.
+    *   **Scale and Diversity:** The PanCan-30M dataset is substantial, contributing to the model's generalizability.
+    *   **Multiple Applications:** The paper convincingly demonstrates PixCell's versatility through multiple applications.
+    *   **State-of-the-art Results:** The stain translation achieves SoTA, further validating the approach.
+    *   **Open Release:** The public release of code and models promotes further research.
 
 *   **Weaknesses:**
-    *   **Potential Bias in Annotations:** While human validation is present, potential biases inherent in GPT-4o's training data or the annotators themselves could influence the emotional labels. More detailed analysis of annotation biases would strengthen the paper.
-    *   **Subjectivity of Emotional Labels:** Emotional perception is inherently subjective.  While the paper acknowledges this through human validation, a more in-depth discussion of the challenges of capturing subjective emotional responses in art would be beneficial.
-    *   **Limited Exploration of Art Therapy Effects:** The paper introduces the concept of art therapy potential but doesn't explore this aspect in detail within the evaluation. Future work could focus on this dimension.
-*   **Impact and Influence:** The EmoArt dataset is likely to have a significant impact on the fields of affective computing, computational art, and multimodal learning. It provides a valuable resource for researchers to advance the development of emotion-aware image generation models and explore the therapeutic potential of art. The benchmarks provided will also serve as a useful reference point for future research.
+    *   **Lack of Pixel-Perfect Alignment in H&E to IHC Translation:** The model operates patch-wise due to dataset imperfections which results in sub-optimal stain translation.
+    *   **Generalization Limits of IHC Translation:** While good results are shown on MIST-HER2, the performance and robustness on other IHC stains require further evaluation. The reliance on a rectification flow model, while computationally efficient, might limit the complexity of the learned transformation.
+    *   **Data Privacy:** The paper acknowledges limitations in data privacy.
+    *   **Limited evaluation for downstream tasks using the synthesized data:** Although the paper evaluates synthetic images by training SSL models using the synthesized data, it is worth evaluating whether other downstream tasks like classification, segmentation are also performing comparably.
+
+*   **Potential Influence:** The paper is likely to stimulate significant follow-up research in generative models for histopathology. It establishes a strong baseline and provides a blueprint for future work. Researchers can build upon PixCell for more advanced controllable generation, stain translation, and synthetic data augmentation techniques.
+
+**Overall:**
+
+While there are some limitations, the paper represents a substantial advancement in computational pathology. The scale of the model, the diversity of the training data, and the demonstration of multiple impactful applications make it a significant contribution. The weaknesses, primarily related to dataset limitations and the need for more comprehensive evaluation, do not detract significantly from the overall impact. The publicly released models and code will undoubtedly accelerate research in this area.
+
+**Score: 8**
+
+- **Score**: 8/10
+
+### **[DiCoRe: Enhancing Zero-shot Event Detection via Divergent-Convergent LLM Reasoning](http://arxiv.org/abs/2506.05128v1)**
+- **Summary**: Here is a summary and evaluation of the paper "DiCoRe: Enhancing Zero-shot Event Detection via Divergent-Convergent LLM Reasoning":
+
+**Summary:**
+The paper introduces DICORE, a novel framework to improve zero-shot event detection (ED) performance using Large Language Models (LLMs). DICORE addresses limitations in directly prompting LLMs for ED due to the complexity of event ontologies and task constraints. It employs a divergent-convergent reasoning approach, decoupling the ED task into two main components: Dreamer and Grounder. Dreamer fosters divergent reasoning by enabling open-ended event discovery without task-specific constraints. Grounder then introduces convergent reasoning to align Dreamer's predictions with a closed event ontology, utilizing a finite-state machine (FSM) for constrained decoding. Finally, an LLM Judge verifies the grounded predictions. The paper demonstrates through experiments on six datasets that DICORE consistently outperforms existing zero-shot, transfer learning, and reasoning baselines.
+
+**Critical Evaluation:**
+
+*   **Novelty:** The core innovation of this paper is the separation of the event detection task into divergent and convergent reasoning stages, each optimized for specific aspects of the problem. While the individual components (like FSM-guided decoding and LLM-based judging) have been explored in other contexts, their specific combination and application to zero-shot ED in the DICORE pipeline appear novel. The idea of using a "Dreamer" to generate potentially relevant events without constraints to increase recall is a compelling approach to overcome inherent biases and limitations of LLMs.
+*   **Significance:** Event detection is a crucial task in many downstream applications. The limitations of using LLMs directly for this task and the high cost of expert-annotated data for training motivate research in zero-shot methods. DICORE's improved performance over baselines suggests it can make ED systems more robust and accessible, particularly for specialized domains where labeled data is scarce. The paper also demonstrates a potential pathway to more effective utilization of LLMs for complex tasks by carefully decoupling constraints and leveraging their reasoning capabilities in a structured manner.
+*   **Strengths:**
+    *   **Strong Empirical Evaluation:** The paper presents a thorough experimental evaluation across diverse datasets and LLMs. The consistent outperformance of DICORE over various baselines strengthens the claim that it is a robust zero-shot ED framework.
+    *   **Clear Architecture:** The description of DICORE's components and their roles is clear and well-motivated. The paper effectively explains how each part contributes to overall performance.
+    *   **Ablation Study:** The ablation study provides insights into the contributions of each component of the DICORE pipeline, which helps to confirm the design choices and explain the mechanism of performance gains.
+    *   **Efficiency Gains:** Results showing improved F1 scores at a fraction of the computational cost relative to chain-of-thought methods are significant.
+
+*   **Weaknesses:**
+    *   **Complexity:** The overall system involves multiple components, which could increase the complexity of implementation. The paper is clear but may be a little challenging to reproduce.
+    *   **Lack of comparison against LLM-finetuned models directly:** The paper compares against transfer learning models, but could also provide a more direct comparison with LLMs that are finetuned. This would help emphasize the efficiency advantages of the proposed approach.
+
+*   **Potential Influence:**
+    DICORE can influence future research in zero-shot ED by demonstrating the effectiveness of divergent-convergent reasoning frameworks. Its design can be adapted for other complex NLP tasks where constraints can hinder LLM performance. The FSM-guided decoding and LLM-Judge components can be incorporated into other IE pipelines. The work also provides valuable insights into the limitations of current LLM prompting strategies for complex IE tasks.
+
+**Score:** 8
+
+**Rationale:** While the individual components of DICORE are not entirely novel, their synergistic combination within a carefully designed pipeline for zero-shot ED is a valuable contribution. The paper's strengths lie in its strong empirical results, clear explanations, and demonstration of efficiency gains. The separation of tasks in the proposed framework, however, may increase implementation challenges. Furthermore, the paper lacks a direct comparison with standardly fine-tuned LLMs. Nevertheless, DICORE presents a novel and effective approach that pushes the boundaries of zero-shot learning with LLMs in ED and other IE applications. The observed improvements over existing baselines, along with the conceptual novelty of the method, justify a score of 8, indicating a strong contribution to the field with significant potential for further research and practical applications.
+
+- **Score**: 8/10
+
+### **[TreeRPO: Tree Relative Policy Optimization](http://arxiv.org/abs/2506.05183v1)**
+- **Summary**: Here's a summary and critical evaluation of the TREERPO paper:
+
+**Summary:**
+
+The paper introduces TREERPO, a novel reinforcement learning method designed to improve the reasoning capabilities of Large Language Models (LLMs).  TREERPO addresses the limitations of trajectory-level reward signals by estimating rewards at various reasoning steps through a tree-based sampling approach.  It builds upon the Group-Relative Policy Optimization (GRPO) framework, innovating by computing rewards based on step-level groups generated during tree sampling. This provides fine-grained reward signals without relying on separate step reward models.  The authors demonstrate that TREERPO significantly improves the accuracy of Qwen-2.5-Math on mathematical benchmarks compared to GRPO, while also reducing response length.
+
+**Critical Evaluation:**
+
+*   **Novelty:**
+
+    *   The core novelty of TREERPO lies in its tree-based sampling approach to approximate step-level rewards in a reward-model-free setting. This is a significant improvement over existing methods that rely on trajectory-level rewards or require a separate reward model. The combination of tree-based sampling with GRPO's group-relative reward training mechanism is also a novel contribution.
+    *   While GRPO's general framework exists, the adaptation and extension to a tree-based sampling strategy for deriving step-level rewards is a non-trivial contribution. The authors clearly define how the tree structure is built, and how rewards are propagated and aggregated.
+    *   The advantage computation method adapted for continuous reward is a contribution, although maybe minor.
+
+*   **Significance:**
+
+    *   Improving the reasoning abilities of LLMs is a crucial area of research, and TREERPO presents a potentially valuable technique for this. The experimental results, showing substantial gains in accuracy on challenging mathematical benchmarks, demonstrate the practical significance of the approach.
+    *   The reduction in response length while maintaining or improving accuracy is also significant, as it indicates more efficient and precise reasoning.
+    *   The method offers an efficient and scalable way to achieve dense reward signals without needing a separate reward model. This addresses a crucial bottleneck in scaling reinforcement learning for LLMs.
+    *   The experimental methodology is sound, and the paper provides sufficient details for reproducibility.
+    *   The code availability enhances the paper's significance and facilitates further research in this area.
+    *   The results focus only on mathematical reasoning. It would be beneficial to test on different types of reasoning tasks (e.g. commonsense reasoning).
+    *   While promising, the paper only uses Qwen-2.5-Math, a specific model. Evaluation on other models is crucial for generalization.
+
+*   **Strengths:**
+
+    *   Clear and well-written.
+    *   Addresses a critical limitation of trajectory-level rewards.
+    *   Introduces a novel tree-based sampling technique.
+    *   Demonstrates significant performance improvements on mathematical benchmarks.
+    *   Reduces response length, indicating more efficient reasoning.
+    *   Provides details for reproducibility and offers code availability.
+
+*   **Weaknesses:**
+
+    *   The evaluation is primarily focused on mathematical reasoning tasks. Broader applicability to other types of reasoning should be explored.
+    *   Experiments are limited to Qwen-2.5-Math, further validations is desired.
+    *   The engineering efficiency optimization is mentioned as future work. Without an optimized sampling procedure, the method might be impractically slow.
+    *   The precise step segmentation based on token length might be too basic and require improvement.
+
+**Overall:**
+
+TREERPO presents a novel and potentially impactful approach to improve the reasoning capabilities of LLMs. The combination of tree-based sampling and group-relative reward computation is a significant contribution. The paper provides strong empirical evidence demonstrating the effectiveness of the method on challenging mathematical benchmarks. While the evaluation could be broader, and certain aspects could be optimized, TREERPO offers a promising direction for future research in this area.
+
+**Score: 8**
+
+*Rationale:*  TREERPO offers a valuable advancement in reinforcement learning for LLMs. The novelty of combining tree-based sampling with GRPO's reward mechanism is significant and is backed by strong experimental results on math benchmarks. While the reliance on Qwen-2.5-Math and lack of broader reasoning evaluations slightly lowers the score, the clarity of the paper, the potential impact on the field, and code availability justify the assigned score. Without code or more general experiments, I might have scored it 7.
+
+- **Score**: 8/10
+
+### **[Transformers Meet In-Context Learning: A Universal Approximation Theory](http://arxiv.org/abs/2506.05200v1)**
+- **Summary**: Okay, I will provide a summary and a critical evaluation of the paper "Transformers Meet In-Context Learning: A Universal Approximation Theory."
+
+**Summary:**
+
+The paper develops a universal approximation theory for in-context learning (ICL) in transformers.  Unlike much of the recent work that frames transformers as algorithm approximators (i.e., emulating optimization algorithms), this work takes a fundamentally different approach rooted in universal function approximation. The paper demonstrates how to construct a transformer that, *without further weight updates*, can perform reliable prediction given only a few in-context examples.  The key result is a bound on the prediction error after observing N in-context examples, which depends on the complexity of the function class (represented by an epsilon-cover size) and the transformer's architecture (number of layers, input dimension). The analysis involves (i) identifying a collection of universal general-purpose features to linearly represent any function from the target function class and (ii) constructing transformer layers to perform in-context computation of the optimal linear coefficients on the fly.  The paper's results are presented as a theorem stating the existence of such a transformer and providing bounds on its performance.
+
+**Critical Evaluation:**
+
+*   **Novelty:** The paper's primary novelty lies in its function approximation perspective on transformer-based ICL.  Most prior theoretical work has focused on transformers as algorithm approximators, specifically emulating optimization algorithms like gradient descent.  Moving away from this algorithmic lens and providing direct function approximation guarantees is a significant departure. This offers the potential to understand how transformers can learn general-purpose representations beyond the limitations imposed by the convergence properties of specific optimization methods. The explicit universal approximation results for transformers, especially with an emphasis on in-context learning, seem to be a genuinely new contribution.
+
+*   **Significance:** The significance of this work is substantial, although with some caveats.  The universal approximation theory provides a foundation for understanding the power of transformers in ICL and how they can adapt dynamically to new tasks.  The paper's results offer insights into the architectural choices of transformers (depth, input dimension) and their relation to the complexity of the target function class. The logarithmic dependence on the covering number is also an interesting finding. The paper provides a plausible theoretical framework that offers explanation that goes beyond the current literature's limited insights through algorithm emulation.
+
+    *   **Strengths:** The key strengths are:
+
+        *   A new theoretical perspective: The shift from algorithm approximation to direct function approximation.
+        *   General results:  The results apply to general function classes, not just convex problems or linear functions.
+        *   Insights into architecture:  The analysis provides guidance for designing transformers for ICL.
+        *   Clear presentation: the paper is well-written and clearly explains its results.
+
+    *   **Weaknesses:** There are also some weaknesses to consider:
+
+        *   Existence proof: The paper demonstrates the *existence* of a transformer with the desired properties but does not provide a practical algorithm for training such a transformer. It gives a constructive proof, but the construction might not be practical.
+
+        *   Constants and Logarithmic Factors: The approximation guarantees are stated "up to logarithmic factors," which can sometimes hide significant dependencies.
+
+        *   Practical Relevance: The complexity results, while theoretically interesting, might not directly translate into practical advice for training large language models. LLMs might not be trained in the way as is assumed here.
+        * Technical Complexity: Some of the proofs are only sketched or left in the appendix. Full understanding of all technical details requires further investigation.
+
+*   **Impact:** The paper's impact will depend on whether the theoretical insights can be translated into practical improvements in ICL.  The function approximation perspective could inspire new training techniques or architectural designs.  The results could also serve as a foundation for further theoretical work on ICL. The focus on end-to-end training dynamics is still somewhat missing.
+
+**Overall Assessment:**
+
+The paper makes a novel and significant contribution by providing a universal approximation theory for transformers in ICL. The function approximation perspective offers a valuable alternative to the dominant algorithm approximation view and provides insights into architectural choices and the relationship between model complexity and function class complexity. While the paper has some limitations (existence proof, logarithmic factors, practical relevance), its theoretical insights are likely to have a lasting impact on the field.
+
+**Score: 8**
+
+- **Score**: 8/10
+
+### **[LLM-First Search: Self-Guided Exploration of the Solution Space](http://arxiv.org/abs/2506.05213v1)**
+- **Summary**: Here's a concise summary and critical evaluation of the paper:
+
+**Summary:**
+
+The paper introduces LLM-First Search (LFS), a novel approach to search algorithms for Large Language Models (LLMs). Unlike traditional methods like Monte Carlo Tree Search (MCTS), which rely on predefined search strategies and hyperparameters, LFS empowers the LLM to autonomously control the search process through self-guided exploration.  The LLM evaluates the promise of the current search path and decides whether to continue or explore alternatives, based on its internal scoring mechanisms. LFS is evaluated on Countdown and Sudoku against traditional search algorithms like Tree-of-Thoughts (ToT), Best-First Search (BestFS), and MCTS. The results indicate that LFS performs better on more challenging tasks without additional tuning, is computationally more efficient, scales better with stronger models and increased compute budget.
+
+**Critical Evaluation:**
+
+* **Novelty:** The core idea of LFS, allowing the LLM to drive the search strategy itself, is a significant departure from traditional search algorithms adapted for LLMs.  While LLMs have been used as components *within* search algorithms (e.g., for value estimation), giving the LLM complete control over the exploration-exploitation trade-off is novel. The design fundamentally rethinks the role of search, from an external process guiding the LLM to an internalized, language-driven mechanism. The prompts detailed in the Appendix are critical in enabling this.
+
+* **Significance:**  The potential impact of LFS is considerable.  The traditional reliance on carefully tuned hyperparameters in methods like MCTS is a significant bottleneck. By automating the exploration strategy, LFS addresses a key limitation, making LLM-based reasoning more adaptable and practical. The improved computational efficiency and scalability are also highly valuable, particularly as LLMs grow larger and more capable. Demonstrated success on two benchmark tasks (Countdown and Sudoku) adds credibility to LFS and opens exciting avenues for future research.
+
+* **Strengths:**
+    * **Adaptive Search Strategy:** The core strength of LFS is its adaptability, eliminating the need for manual tuning of exploration parameters, making the algorithm more robust across different tasks and model capabilities.
+    * **Computational Efficiency and Scalability:** Empirical results clearly demonstrate LFS's improved computational efficiency and scalability with stronger models and increased compute budget. This is crucial for practical applications of LLMs in complex reasoning tasks.
+    * **Clear Evaluation:**  The paper presents a well-defined problem setting, clear evaluation metrics, and thorough comparisons against strong baselines. The inclusion of performance profiles and AUP scores strengthens the robustness of the evaluation.
+    * **Open Source Code:** Providing the code promotes reproducibility and allows for future work to build upon LFS.
+
+* **Weaknesses:**
+    * **Limited Task Diversity:**  While Countdown and Sudoku are valuable benchmarks, they are relatively structured and deterministic.  It remains to be seen how well LFS generalizes to more complex, real-world tasks with higher degrees of uncertainty or requiring interaction with external environments.
+    * **Reliance on Prompt Engineering:** The performance of LFS heavily depends on the design of the exploration and evaluation prompts. Although the prompts are detailed in the Appendix, their sensitivity and generalizability require further investigation.  Different prompts may yield varying performance, and there isn't a clear methodology presented for optimizing these prompts.
+    * **Limited Exploration of Incremental Improvements:** The paper focuses on the core innovation of LFS but doesn't extensively explore potential incremental improvements such as the integration of self-consistency, reflection or debate - components that could enhance LFS further.
+    * **Lack of Theoretical Analysis:**  While the empirical results are compelling, the paper lacks a theoretical analysis of LFS's convergence properties or exploration efficiency.
+    * **Computational Budget Restrictions:** The limited scope of test runs prevents the full realization of LFS’s potential, especially in high-complexity situations.
+
+* **Potential Influence:** LFS has the potential to significantly influence the field of LLM-based reasoning and problem-solving. By reimagining search as an integrated, language-driven mechanism, LFS offers a promising direction for developing more adaptable, efficient, and scalable LLM agents. Its impact would be further amplified when combined with other enhancements.
+
+**Score:** 8/10
+
+**Justification:** LFS presents a novel and significant advancement in search algorithms for LLMs, addressing a key limitation of existing methods through its adaptive self-guided exploration.  The empirical results support its improved efficiency and scalability.  However, the limited task diversity, dependence on prompt engineering, lack of a theoretical analysis, and computational budget restrictions prevent a higher score.  The paper establishes a strong foundation, and future work addressing these limitations has the potential to greatly enhance its impact.
+
+- **Score**: 8/10
+
+### **[Micro-Act: Mitigate Knowledge Conflict in Question Answering via Actionable Self-Reasoning](http://arxiv.org/abs/2506.05278v1)**
+- **Summary**: Here is a summary and critical evaluation of the paper "Micro-Act: Mitigate Knowledge Conflict in Question Answering via Actionable Self-Reasoning":
+
+**Summary:**
+
+The paper addresses the problem of knowledge conflicts in Retrieval-Augmented Generation (RAG) systems for question answering (QA). Knowledge conflicts occur when retrieved external knowledge contradicts the inherent, parametric knowledge of Large Language Models (LLMs). The authors propose a novel framework called MICRO-ACT, which uses a hierarchical action space to automatically perceive context complexity and decompose each knowledge source into a sequence of fine-grained comparisons. These comparisons are represented as actionable steps that enable reasoning beyond the superficial context. The approach dynamically adjusts granularity through decomposition actions at both the model and action level, enabling precise conflict detection across different granularity levels. The paper demonstrates through extensive experiments on five benchmark datasets that MICRO-ACT consistently outperforms state-of-the-art baselines in QA accuracy, especially in temporal and semantic conflict types. Crucially, it also shows robustness in non-conflict scenarios.
+
+**Critical Evaluation:**
+
+**Novelty:** The key innovation of the paper lies in its hierarchical action space and the adaptive granularity adjustment through decomposition actions. Existing approaches primarily rely on side-by-side comparisons or generation-aided reasoning, which can be overwhelmed by extraneous context or limited by manually crafted instructions. MICRO-ACT’s ability to dynamically perceive context complexity and decompose knowledge sources into actionable steps is a novel approach for mitigating knowledge conflicts.
+
+**Significance:** The problem of knowledge conflicts is a critical challenge in RAG systems, affecting the reliability and factual accuracy of LLM responses. By addressing this challenge, MICRO-ACT has the potential to significantly improve the performance of RAG systems in downstream tasks such as QA. The experimental results demonstrate that MICRO-ACT consistently outperforms state-of-the-art baselines across various datasets and conflict types. More importantly, the observed robustness in non-conflict scenarios highlights the practical value of MICRO-ACT in real-world RAG applications.
+
+**Strengths:**
+
+*   **Novel Approach:** The hierarchical action space and adaptive granularity adjustment are innovative techniques for mitigating knowledge conflicts.
+*   **Strong Performance:** The experimental results demonstrate significant improvements in QA accuracy over state-of-the-art baselines across various datasets and conflict types.
+*   **Robustness:** The framework exhibits robust performance in non-conflict scenarios, highlighting its practical value in real-world applications.
+*   **Detailed Analysis:** The paper provides a detailed analysis of the limitations of existing approaches and the benefits of MICRO-ACT.
+*   **Understanding Complexity:** The work demonstrates the ability of Micro-Act to effectively detect complexity and dynamically adjust granularity
+
+**Weaknesses:**
+
+*   **Computational Cost:** While the authors justify the additional computational cost of MICRO-ACT, the increased token usage and inference time may be a concern for resource-constrained applications. The marginal cost will be unacceptable for certain contexts.
+
+*   **Error Types:** Some error types, primarily contextual distraction, do still exist and limits effectiveness. While this isn't a fundamental flaw, it doesn't demonstrate full mitigation.
+
+*   **English Language Focus:** The evaluation focuses primarily on English language contexts, and the effectiveness of decomposition strategies might vary across different languages and cultural contexts.
+
+*   **Limited Generality:** The paper could be made more general and not only apply to the QA case.
+
+**Potential Influence:**
+
+The paper has the potential to influence future research in the following areas:
+
+*   Development of more robust and reliable RAG systems.
+*   Design of adaptive strategies for mitigating knowledge conflicts in LLMs.
+*   Exploration of hierarchical action spaces and decomposition techniques for natural language processing tasks.
+
+**Justification for Score:**
+
+The paper presents a novel approach to addressing a critical challenge in RAG systems. The strong experimental results and the demonstrated robustness of the framework justify a high score. However, some limitations remain with respect to its computational cost and scope of evaluation. Taking all of these factors into account:
+
+Score: 8
+
+- **Score**: 8/10
+
+### **[Stable Vision Concept Transformers for Medical Diagnosis](http://arxiv.org/abs/2506.05286v1)**
+- **Summary**: Here's a summary and critical evaluation of the paper "Stable Vision Concept Transformers for Medical Diagnosis":
+
+**Summary:**
+
+The paper introduces a novel approach called Stable Vision Concept Transformer (SVCT) for medical image diagnosis. SVCT addresses two key issues in existing concept bottleneck models (CBMs): 1) performance degradation due to relying solely on concept features and overlooking intrinsic image features, and 2) instability in explanations when faced with input perturbations. SVCT leverages Vision Transformers (ViTs) as a backbone and incorporates a label-free conceptual layer.  It fuses concept features with image features, enhancing decision-making while maintaining interpretability.  To improve stability, the paper utilizes Denoised Diffusion Smoothing (DDS).  The authors demonstrate the effectiveness of SVCT through comprehensive experiments on four medical datasets, showing improved accuracy and stable explanations even under perturbations.  They also provide theoretical justification for their approach and conduct ablation studies to validate the components of their model.
+
+**Critical Evaluation:**
+
+*   **Novelty:** The paper demonstrates a solid degree of novelty by addressing the limitations of existing CBMs in the medical image domain.  The key innovation lies in the combination of ViTs, label-free concept generation, feature fusion, and DDS to achieve both high accuracy and stable interpretability. The theoretical analysis contributes to the rigor of the proposed SVCT. The introduction of a formal definition of stable VCTs is also a notable contribution.
+
+*   **Significance:**  The work has significant potential for impact in the medical field.  The medical domain demands trustworthy and interpretable AI systems. By providing stable and understandable explanations, SVCT could increase the adoption of AI in medical diagnosis. The improvement in accuracy compared to existing CBMs addresses a critical barrier to practical deployment. The empirical results on diverse datasets are compelling and support the claims of improved performance and stability.
+
+*   **Strengths:**
+
+    *   **Addresses a Real-World Problem:** The paper directly tackles the need for interpretable and robust AI in medical imaging.
+    *   **Comprehensive Approach:** The SVCT architecture incorporates multiple techniques to achieve its goals: ViTs for feature extraction, label-free concept learning for interpretability, feature fusion for accuracy, and DDS for stability.
+    *   **Strong Empirical Validation:** The experiments are conducted on four diverse medical datasets with a well-defined experimental setup, including comparisons with relevant baselines and ablation studies.
+    *   **Theoretical Foundation:** The paper provides a formal definition of stable CBMs and theoretical proof, backing the empirical findings.
+    *   **Well-written and organized:** The paper is generally well-written and clearly explains the proposed method and experimental results.
+
+*   **Weaknesses:**
+
+    *   **Limited Perturbation Types:** While the paper addresses perturbation stability, the experiments primarily focus on Gaussian noise. Further investigation into robustness against other types of adversarial attacks or real-world image corruptions would strengthen the paper.
+    *   **Computational Cost:** While discussed in appendix I, the GFLOPS performance cost comparison is not significant, and the extra parameters need to be further addressed.
+    *   **Medical expert evaluation of the identified concepts:** A user study involving medical professionals to assess the quality and clinical relevance of the generated concepts is missing. This will significantly improve the quality of evaluation of the "interpretability" claim.
+    *   **Presentation of Figures:** Some figures, especially those visualizing concept weights, are difficult to read.
+
+*   **Potential Influence:**  SVCT could inspire further research in explainable AI for medical imaging, particularly in developing methods that balance accuracy, interpretability, and robustness.  The use of DDS for stabilizing explanations is a promising direction that could be explored in other domains.
+
+**Justification of Score:**
+
+The SVCT paper presents a well-motivated and technically sound approach with promising results. The combination of techniques to address both accuracy and stability is a valuable contribution. While the paper has minor limitations, its strengths outweigh its weaknesses. The theoretical analysis adds depth, and the empirical results demonstrate the practical benefits of the approach. The paper addresses a significant need in the medical field and has the potential to influence future research in explainable AI for medical diagnosis.
+
+Score: 8
+
+- **Score**: 8/10
+
+### **[AliTok: Towards Sequence Modeling Alignment between Tokenizer and Autoregressive Model](http://arxiv.org/abs/2506.05289v1)**
+- **Summary**: Here's a summary and critical evaluation of the AliTok paper:
+
+**Summary:**
+
+The paper introduces AliTok, a novel aligned tokenizer for autoregressive image generation. It addresses the issue that conventional tokenizers create bidirectional dependencies among encoded tokens, hindering the performance of decoder-only autoregressive models. AliTok uses a causal decoder during tokenizer training to encourage unidirectional dependencies in the encoded tokens, aligning the tokenizer's approach with the autoregressive model's. It also includes prefix tokens to improve reconstruction quality in the first row of the image and employs a two-stage training process for better reconstruction consistency. Experiments on ImageNet-256 demonstrate that models using AliTok, even smaller ones, achieve competitive or superior generation quality (gFID) compared to state-of-the-art methods, including diffusion models, with significantly faster sampling speeds.
+
+**Critical Evaluation:**
+
+*   **Novelty:** The core idea of aligning the tokenizer with the autoregressive model by enforcing causal dependencies in the encoded tokens is a significant contribution.  Existing work often focuses on adapting the autoregressive model itself (e.g., masked approaches) or enhancing quantization techniques. AliTok directly targets the tokenization stage, offering a different perspective. The addition of prefix tokens is a clever solution to mitigate the issues caused by causality at the start of the raster scan. The two stage training also contributes to improve reconstruction quality without sacrificing generation performance.
+
+*   **Significance:** Achieving high-quality image generation with standard decoder-only autoregressive models is a significant goal, especially given their simplicity and scalability compared to diffusion models. AliTok demonstrates that this is achievable by carefully designing the tokenizer. This has the potential to revitalize research in autoregressive image generation and promote multi-modal unification. The faster sampling speed is also a practical advantage.
+
+*   **Strengths:**
+    *   **Clear Problem Definition:** The paper clearly identifies the issue of bidirectional dependencies in tokens generated by conventional tokenizers.
+    *   **Well-Motivated Solution:** AliTok directly addresses the problem with a carefully designed architecture and training process.
+    *   **Strong Experimental Results:**  The experiments convincingly demonstrate the effectiveness of AliTok, achieving state-of-the-art or competitive gFID scores with much smaller models and faster sampling times.  The ablation studies provide valuable insights into the contributions of each component.
+    *   **Well-structured paper:** the paper flows smoothly and the technical descriptions of the model are clear and concise.
+
+*   **Weaknesses:**
+    *   **Limited Tokenizer Exploration:** While the paper highlights the importance of tokenizer design, it relies on a ViT-based architecture similar to TA-TiTok. The paper could have explored other tokenizer architectures or focused more on the design space of the tokenizer itself.
+    *   **Reconstruction Bottleneck:** The discussion section acknowledges a bottleneck in reconstruction quality due to the limited codebook size. While the generation performance is impressive, further improvements in the tokenizer's reconstruction capability could lead to even better results.
+
+*   **Potential Influence:** AliTok provides a new direction for research in autoregressive image generation by focusing on the tokenizer. It could inspire other researchers to explore different tokenizer architectures and training techniques that are better aligned with autoregressive models. The faster sampling speeds and smaller model sizes make AliTok a practical and attractive alternative to diffusion models. Furthermore, the idea of aligning encoder-decoder frameworks can be relevant to other domains beyond image generation.
+
+*   **Justification of Score:**
+    AliTok presents a novel and significant contribution to the field of autoregressive image generation by introducing a simple yet effective tokenizer design that aligns with the modeling approach of autoregressive models. This shift in focus demonstrates potential benefits. While the paper has minor weaknesses regarding tokenizer exploration and reconstruction bottlenecks, its strong experimental results, clear problem definition, and potential influence make it a valuable contribution to the field.
+
+Score: 8
+
+- **Score**: 8/10
+
+### **[Constrained Entropic Unlearning: A Primal-Dual Framework for Large Language Models](http://arxiv.org/abs/2506.05314v1)**
+- **Summary**: Here's a summary and critical evaluation of the paper "Constrained Entropic Unlearning: A Primal-Dual Framework for Large Language Models":
+
+**Summary:**
+
+The paper introduces a novel primal-dual framework for machine unlearning in large language models (LLMs).  It addresses the limitations of existing unlearning methods, which often trade off forgetting and retention through regularized optimization, leading to unstable optimization and degraded performance on retained data. The proposed framework formulates unlearning as a constrained optimization problem, explicitly enforcing forgetting through a novel "logit-margin flattening loss" (aiming for uniform output distributions on the forget set) and preserving retention through a hard constraint on a separate retain set.  The authors solve this constrained problem using a scalable primal-dual algorithm, dynamically balancing forgetting and retention via the dual variable. They demonstrate, on TOFU and MUSE benchmarks across diverse LLM architectures, that their method consistently matches or exceeds state-of-the-art baselines while effectively removing targeted information and maintaining downstream utility.
+
+**Critical Evaluation:**
+
+**Novelty:**
+
+*   **Strength:** The primary novelty lies in the constrained optimization formulation and the logit-margin flattening loss.  The idea of explicitly separating the forgetting and retention objectives as a constrained problem rather than a regularized trade-off is a significant conceptual shift. The logit-margin flattening loss is a novel approach to encourage uniform output distributions that is also softmax-free and numerically stable, addressing practical issues of existing entropy-based methods.
+*   **Weakness:**  While the individual components (primal-dual optimization, entropy regularization) are not entirely new to machine learning, the *specific combination* tailored to the unlearning problem in LLMs *is* novel. There may be some connections to existing constrained optimization formulations for safety or fairness in machine learning, but the specific application and loss function are distinct.
+
+**Significance:**
+
+*   **Strength:** The paper addresses a crucial and timely problem: the need for efficient and reliable machine unlearning in LLMs. This is significant given growing concerns around privacy, copyright, harmful content generation and regulatory compliance.  The empirical results, demonstrating superior performance compared to strong baselines on established benchmarks, are compelling.
+*   **Weakness:**  The empirical evaluations, while comprehensive, are limited to specific datasets (TOFU, MUSE) and LLM architectures.  Further evaluation on diverse tasks (e.g., toxicity removal, bias mitigation) and under different threat models (e.g., membership inference attacks, model extraction) would strengthen the generalizability of the claims. There also needs to be a rigorous comparison to *exact* retraining. While exact retraining is not practical, the results provide a theoretical upper bound to the performance that unlearning can realistically achieve. Without this comparison, it's difficult to ascertain how close the method can come to *true* unlearning. The current experimental results only shows that the method performs as well or better than *other methods*.
+
+**Strengths:**
+
+*   **Principled Formulation:** The constrained optimization framework provides a more principled and interpretable approach to unlearning.
+*   **Numerical Stability:** The logit-margin flattening loss offers improved numerical stability compared to entropy-based methods.
+*   **Strong Empirical Results:** The method consistently matches or exceeds state-of-the-art baselines.
+*   **Scalability:**  The primal-dual algorithm is designed to be scalable for large language models.
+* The dynamical changes in the dual variable provide insights on the impact and effects of the retain loss.
+
+**Weaknesses:**
+
+*   **Limited Generalizability:**  Further evaluation is needed on diverse tasks and threat models.
+*   **Fluency Drop:** A fluency drop is observed under certain setups. The authors provide some arguments as to why they believe it is a feature and not a bug. More investigations into why it can affect downstream utility is needed.
+* There is no theoretical upper bound for the performance of this model, namely exact retraining, to see how close the method can come to *true* unlearning.
+
+**Potential Influence:**
+
+The paper has the potential to influence the field of machine unlearning by:
+
+*   Providing a more principled and effective framework for unlearning in LLMs.
+*   Introducing a novel loss function that addresses the limitations of existing entropy-based methods.
+*   Inspiring further research on constrained optimization approaches to machine unlearning.
+* Can be used as a benchmark for comparison with other unlearning methods.
+
+**Overall:**
+
+The paper presents a significant contribution to the field of machine unlearning for LLMs. The constrained optimization framework and the logit-margin flattening loss offer a promising approach to address the limitations of existing methods. The empirical results are compelling, demonstrating superior performance on established benchmarks. While further evaluation is needed on diverse tasks and threat models, the paper has the potential to influence the field and inspire further research.
 
 **Score: 8**
 
 **Rationale:**
 
-The paper presents a novel and significant contribution to the field. The EmoArt dataset fills a crucial gap by providing a large-scale, well-annotated resource specifically for emotion-aware artistic image analysis and generation. The paper demonstrates that emotion-aware models can be trained more effectively on art datasets.  The inclusion of art therapy insights is a noteworthy addition. While there is subjectivity in emotional annotations and potential LLM bias, the authors have addressed these issues through a rigorous validation pipeline and discussion of annotation complexities. This, combined with solid benchmarking experiments makes for a strong contribution.
+The paper exhibits strong novelty in its formulation and the proposed logit-margin flattening loss. The empirical results demonstrate significant improvements over existing methods. The weaknesses (limited generalizability, slight fluency drop, and lack of comparison to theoretical upper bound) slightly reduces the score. While not revolutionary, the paper presents a substantial advancement in the field and warrants a high score due to its strong conceptual contributions and promising empirical findings. A score of 8 reflects the significant value and potential impact of this research.
 
 - **Score**: 8/10
 
-### **[Scaling Transformers for Discriminative Recommendation via Generative Pretraining](http://arxiv.org/abs/2506.03699v1)**
-- **Summary**: Here's a summary and critical evaluation of the paper "Scaling Transformers for Discriminative Recommendation via Generative Pretraining":
-
-**Summary:**
-
-The paper addresses the problem of overfitting when training large Transformer models for discriminative recommendation tasks like CTR and CVR prediction.  The authors observe that simply scaling up Transformer models for these tasks often leads to diminishing returns due to overfitting, which they categorize into "one-epoch" and "within-one-epoch" overfitting. They propose a framework called GPSD (Generative Pretraining for Scalable Discriminative Recommendation) that leverages generative pretraining followed by a sparse parameter freezing strategy in discriminative fine-tuning.  The generative pretraining is done using an autoregressive Transformer to predict the next item in a user's behavior sequence. In the discriminative stage, only the dense parameters of the Transformer are trained, while the sparse parameters (typically embeddings) are frozen after initialization from the generative pretraining.  They demonstrate through extensive experiments on both industrial and public datasets, as well as in online A/B tests, that GPSD effectively mitigates overfitting, leading to significant performance improvements and enabling consistent scaling of Transformers to larger sizes, following power laws similar to those observed in language models. The authors also explore cross-architecture transfer to other recommendation architectures and apply the framework in an online setting.
-
-**Critical Evaluation:**
-
-*   **Novelty:** The paper's novelty lies primarily in its specific application of generative pretraining and sparse parameter freezing to address the overfitting issues in *discriminative* recommendation. While generative pretraining is a well-established technique in NLP, its adoption in recommendation, *specifically* with this particular freezing strategy, to solve a *specific and well-defined overfitting* problem in discriminative tasks, is a key contribution. The categorization of overfitting into two distinct types (one-epoch and within-one-epoch) is also a valuable observation. The empirical demonstration of consistent scaling laws is another innovative component. Prior work has applied transfer learning in recommendation, but the specific combination and focus on scaling discriminative models is distinct.
-
-*   **Significance:** The paper tackles a crucial challenge in deploying large-scale recommendation systems. Overfitting is a significant bottleneck, limiting the effectiveness of larger models.  By demonstrating a way to train larger, more powerful Transformer-based models that follow predictable scaling laws, the paper has the potential to significantly impact industrial recommendation practices. It opens the door to adopting techniques from large language models in the recommendation domain. The empirical results are convincing, showing improvements across multiple datasets and in an online setting.  The framework's compatibility with various recommendation models is another significant implication.
-
-*   **Strengths:**
-    *   Well-defined problem statement and clear motivation.
-    *   Technically sound approach with a strong emphasis on practical considerations.
-    *   Extensive experiments across diverse datasets (industrial and public).
-    *   Online A/B test results demonstrate real-world impact.
-    *   Addresses a key scalability issue for large-scale recommendation systems.
-    *   Detailed analysis of overfitting phenomena.
-
-*   **Weaknesses:**
-    *   While the paper demonstrates improved scalability, it does not fully explore the *limits* of scalability.  How much further can the model be scaled, and what other techniques might be needed to push beyond the current limits?
-    *   The paper could benefit from a more in-depth theoretical analysis of why the sparse parameter freezing strategy is so effective. Some hypothesis is provided but lack theoretical foundation.
-    *   The analysis of the sensitivity of GPSD to different hyperparameter settings is relatively limited.
-    *   While the code is publicly available, details regarding how to reproduce the experiments are somehow high level.
-
-*   **Potential Influence:** The paper has the potential to significantly influence the research and practice of recommendation systems, particularly in large-scale industrial settings. It provides a concrete solution for training larger, more effective recommendation models and opens avenues for applying LLM techniques to the recommendation domain. The identification and analysis of overfitting in discriminative tasks is also a valuable contribution that can inform future research.
-
-**Rigorous Rationale for Score:**
-
-The paper presents a novel and practically significant approach to address a critical challenge in large-scale recommendation systems.  The combination of generative pretraining and sparse parameter freezing, along with the detailed analysis of overfitting, makes a valuable contribution to the field. The extensive empirical validation, including online A/B tests, strengthens the paper's impact. While some aspects (theoretical analysis, sensitivity analysis, and discussion of limits of scalability) could be further strengthened, the paper demonstrates a clear and significant improvement over existing methods.
-
-Score: 8
-
-- **Score**: 8/10
-
-### **[Learning-at-Criticality in Large Language Models for Quantum Field Theory and Beyond](http://arxiv.org/abs/2506.03703v1)**
-- **Summary**: Here's a summary and critical evaluation of the paper "Learning-at-Criticality in Large Language Models for Quantum Field Theory and Beyond":
-
-**Summary:**
-
-The paper introduces a "learning at criticality" (LaC) approach to train Large Language Models (LLMs) for complex symbolic problems in physics, specifically in situations where data is scarce. The core idea is to fine-tune the LLM, using Reinforcement Learning (RL), to a 'critical' training phase. This critical point, analogous to a phase transition, allows the LLM to achieve strong problem-solving capabilities and generalization with minimal training data, sometimes even a single example. The authors demonstrate this first with a 7-digit base-7 addition task where a Qwen2.5-7B model generalization peaked precisely at the critical point. They then propose a minimal "concept-network model" (CoNet) to explain the observed behavior, drawing parallels to phase transitions in physics. Finally, they apply LaC to the symbolic evaluation of Matsubara frequency sums in Quantum Field Theory (QFT), showing that an 8-billion parameter LLM trained with LaC outperforms much larger models on solving complex diagrams.
-
-**Critical Evaluation:**
-
-*   **Novelty:** The idea of exploiting criticality to improve learning in LLMs, particularly in data-scarce environments, is genuinely novel. While RL fine-tuning of LLMs is not new, the emphasis on precisely targeting a critical point to maximize generalization is a significant contribution. The CoNet model, while simplified, provides a valuable framework for understanding the internal workings of LLMs during learning, suggesting a connection between the emergent behavior of LLMs and the principles of statistical physics.
-*   **Significance:** The paper addresses a critical problem in applying AI to fundamental physics: the lack of large datasets needed for traditional machine learning. By demonstrating that LLMs can learn complex tasks with only a few examples using LaC, the paper opens up new possibilities for AI-driven discovery in theoretical physics and other data-limited scientific domains.  The application to QFT is particularly compelling, showing the potential for AI to assist in solving complex analytical problems that are traditionally challenging for humans. The demonstrated outperformance of smaller LaC-trained models compared to substantially larger, conventionally trained models highlights the efficiency gain from this approach.
-*   **Strengths:**
-    *   Clear problem definition and motivation.
-    *   A well-defined LaC methodology with a physical intuition.
-    *   Experimental validation on two distinct tasks: base-7 arithmetic and QFT calculations.
-    *   Introduction of the CoNet model as an explanatory tool.
-    *   Comparison against baseline, larger models, clearly showcasing the benefits of LaC.
-*   **Weaknesses:**
-    *   The CoNet model is a significant simplification of LLM internals.  While it provides a useful analogy, it may not fully capture the complexity of LLM reasoning.
-    *   The mechanism for identifying the "critical point" remains somewhat empirical.  More theoretical understanding of how to predict or control this transition would be valuable. There needs to be explicit guidance and instructions on how to operationalize "navigating critical points" as the method exists currently.
-    *   The QFT experiments, while impressive, are limited to a specific class of problems (Matsubara sums).  Generalization to other areas of QFT or other areas of theoretical physics needs to be further demonstrated.
-    *   The base-7 addition accuracy of 7% after training on a single instance initially may not be impressive to some without explicitly articulating the low chance of memorization (addressed in the paper) as the model never saw 7-base additions in training.
-*   **Potential Influence:** The paper is likely to stimulate significant interest in the AI and physics communities. The LaC approach could be adopted and extended to other scientific domains with scarce data.  The CoNet model could inspire further research into the connections between LLM learning and statistical physics.
-
-**Justification for Score:**
-
-The paper's novelty, the practical implications for data-scarce scientific problems, and the sound experimental validation justify a high score. While the CoNet model is a simplification and the scope of the QFT application is limited, the overall contribution is significant. The methodology described allows scientists to use smaller models to achieve similar or better performance than significantly larger models; this will lead to greater adoption and use of AI in frontier science. It is also important to note that it does not require a pre-existing, pre-trained LLM. By identifying the correct parameter landscape, smaller models can be effectively fine-tuned. The significance of this finding cannot be understated. The model provides a path forward to make LLMs more applicable to specific cases, and the LaC makes these models much more data efficient.
-
-**Score: 8**
-
-- **Score**: 8/10
-
-### **[Verbalized Confidence Triggers Self-Verification: Emergent Behavior Without Explicit Reasoning Supervision](http://arxiv.org/abs/2506.03723v1)**
-- **Summary**: Here's a summary and critical evaluation of the paper "Verbalized Confidence Triggers Self-Verification: Emergent Behavior Without Explicit Reasoning Supervision":
-
-**Summary:**
-
-The paper introduces Confidence-Supervised Fine-Tuning (CSFT), a method for calibrating verbalized confidence in Large Language Models (LLMs) when performing chain-of-thought (CoT) reasoning.  Surprisingly, the authors demonstrate that fine-tuning LLMs with scalar confidence labels alone, without explicit reasoning supervision, is sufficient to elicit self-verification behaviors.  The model learns to generate longer, self-checking responses for low-confidence queries and more concise answers for high-confidence ones. They further propose a test-time scaling method to improve performance. Experiments on GSM8K and other reasoning tasks show that CSFT improves calibration, accuracy, and interpretability by aligning the model's reasoning path with its confidence.
-
-**Critical Evaluation:**
-
-*   **Novelty:** The key novelty lies in the simplicity and surprising effectiveness of the approach. Prior work on confidence calibration in LLMs often involves complex techniques like reinforcement learning or classifier probing. The demonstration that merely fine-tuning with *scalar* confidence labels can induce more deliberative reasoning (self-verification, adaptive response length) is a significant and unexpected finding. The paper also breaks away from the existing focus on shorter question answering and declarative confidence, by tackling chain of thought generation.
-*   **Significance:** The paper addresses a critical issue: the reliability of LLMs in high-stakes settings. Overconfident errors can be dangerous, and user reliance on LLM-provided confidence scores mandates good calibration. The finding that models can learn to express uncertainty and self-verify, particularly without explicit guidance, is important because it points to a scalable way of improving the trustworthiness of LLMs. The adaptive response generation behavior, where models offer lengthier explanations when less confident, enhances the interpretability of the model’s reasoning.
-*   **Strengths:**
-
-    *   **Simplicity:** The method is straightforward to implement, using a standard SFT pipeline.
-    *   **Surprising Result:** The main finding (emergent self-verification) is unexpected and challenges assumptions about the need for complex training procedures.
-    *   **Strong Empirical Evidence:** The paper provides results on multiple datasets, demonstrating both improved calibration and accuracy. The ablation studies provide insights into the factors that contribute to CSFT's success. Qualitative examples support the claim of self-verification behavior.
-    *   **Generalizability:** The experiments on held-out reasoning tasks show the model generalizes well, even to question types not seen during training.
-*   **Weaknesses:**
-
-    *   **Reliance on Synthetic Confidence Labels:** The method relies on generating synthetic self-confidence labels during the data creation process. While effective, the quality of these synthetic labels impacts the downstream performance and might be the bottleneck. More detailed analysis on the impact of k (number of samples from LLM for self-consistency labeling) on the quality and stability of training could be done.
-    *   **Limited Scope of Self-Verification Analysis:** While the paper demonstrates self-verification behaviors, it could benefit from a more in-depth analysis of the *types* of errors caught by the self-verification process. Are they mostly arithmetic errors, logical fallacies, or something else? Also, the evaluation of the GPT-4.1-based self-verification detector is omitted.
-    *   **Lack of Comparison to State-of-the-Art Calibration Methods:** The paper lacks a direct comparison to other state-of-the-art calibration methods in the chain-of-thought setting. Although the main result stands even without it, adding a comparison to the best performing calibration method may increase the credibility of the result.
-    *   **Prompt Dependence:** As with most LLM-based approaches, the performance likely depends on the specific prompt used for eliciting confidence. While the paper provides prompt examples, a more thorough exploration of prompt engineering would strengthen the findings.
-*   **Potential Influence:** The paper has the potential to influence the development of more reliable and trustworthy LLMs. The simplicity of CSFT suggests that it could be easily integrated into existing SFT pipelines, making it accessible to a wide range of researchers and practitioners. It may inspire other researchers to explore the use of simpler training methods for eliciting complex behaviors from LLMs.
-
-**Justification for Score:**
-
-I assign a score of **8** out of 10. The paper offers a significant contribution with a surprisingly simple and effective method for improving confidence calibration and eliciting self-verification behavior in LLMs performing CoT reasoning. The novelty of the core finding (emergent behavior with minimal supervision) is high, and the empirical results are compelling. The method addresses a critical challenge in the field. However, the reliance on synthetic labels, the scope of self-verification and comparison to state-of-the-art calibration method, and prompt dependence slightly limits the overall impact. The potential for future research and practical application is substantial.
-
-**Score: 8**
-
-- **Score**: 8/10
-
-### **[AssetOpsBench: Benchmarking AI Agents for Task Automation in Industrial Asset Operations and Maintenance](http://arxiv.org/abs/2506.03828v1)**
-- **Summary**: Here's a summary and critical evaluation of the provided research paper:
-
-**Summary:**
-
-The paper introduces AssetOpsBench, a new benchmark framework for evaluating AI agents designed for task automation in industrial asset operations and maintenance. It addresses the gap between general-purpose AI agent advancements and the specific challenges of real-world industrial settings. AssetOpsBench offers a unified environment with a catalog of domain-specific AI agents, a curated dataset of human-authored natural language queries, a simulated industrial environment, and an automated evaluation framework. The framework allows for comparing architectural paradigms and discovering emergent failure modes in multi-agent systems. Key insights from the paper include the need for a multi-agent approach in complex industrial settings and the importance of aligning agent workflows with the natural language and intent patterns of industrial end-users. The authors perform extensive experiments with different language models and evaluate different agentic strategies (Tool-as-Agent vs Plan-and-Execute).
-
-**Critical Evaluation:**
-
-*   **Novelty:** The creation of a benchmark specifically designed for AI agents in industrial asset management is a significant contribution. Existing benchmarks are often tailored towards general ML, IT, or customer-service domains, lacking the unique challenges and data characteristics of industrial applications (e.g., multi-modal data, complex business objects). The inclusion of time-series data and the focus on multiple operational personas further enhance its novelty.
-
-*   **Significance:** Automating asset management workflows is a high-impact area for Industry 4.0, promising to reduce downtime, minimize human workload, and improve decision-making. AssetOpsBench provides a valuable tool for guiding the development and evaluation of AI agents in this domain. The paper's emphasis on multi-agent systems and addressing the specific language patterns of industrial users represents a crucial step towards deploying AI in real-world settings. The evaluation metrics consider task completness, retrieval accuracy, result verification, correct sequences, clarity and justification, important components not usually assessed in general AI papers. The analysis of different agentic strategies (Tool-as-Agent vs Plan-and-Execute) is useful, providing insights into the trade-offs between different architectural choices. The systematic procedure for discovering emergent failure modes provides a means to address the black-box nature of LLMs, which is extremely pertinent.
-
-*   **Strengths:**
-    *   Well-defined problem and clear motivation.
-    *   Comprehensive framework with multiple components (agents, dataset, environment, evaluation).
-    *   Emphasis on real-world industrial challenges and data characteristics.
-    *   Detailed experiments and analysis of different approaches.
-    *   The analysis of failure modes and its implication to the taxonomy of agent failures is a key contribution.
-
-*   **Weaknesses:**
-    *   The simulated industrial environment, while a good starting point, may not capture the full complexity and unpredictability of real-world operations. The models need to be evaluated in real industrial settings.
-    *   While the dataset includes a variety of data modalities, its scale is relatively limited. The inclusion of more assets, sensors, and failure events would further enhance the benchmark's value.
-    *   The evaluation focuses primarily on performance metrics. Aspects like cost, security, and robustness are not extensively evaluated.
-    *   Results are highly dependent on the selection of the LLM (e.g. GPT4 performed better in the tools as agents configuration while mistral-large performed better in the plan and execute configuration), so the value of the insights is limited by the advances and changes in the rapidly evolving LLM space.
-
-*   **Potential Influence:** AssetOpsBench has the potential to become a standard benchmark in the field of AI for industrial asset management. It can guide the development of more effective and reliable AI agents for automating operational workflows and improving decision-making in industrial settings. The insights from the framework, such as the importance of multi-agent systems and the need to align with user intent, can influence future research directions.
-
-*   **Justification of Score:** The score reflects the novelty and potential impact of AssetOpsBench, tempered by the limitations in its scale and scope. While the framework addresses a critical need and provides valuable insights, further work is needed to address the limitations. The creation of benchmarks of this complexity is usually hard to replicate and requires deep collaboration between research and industry. For those reasons, the value of this specific contribution is extremely high.
-
-Score: 8.5
-
-- **Score**: 8/10
-
-### **[More or Less Wrong: A Benchmark for Directional Bias in LLM Comparative Reasoning](http://arxiv.org/abs/2506.03923v1)**
-- **Summary**: Here's a summary and evaluation of the paper:
-
-**Summary:**
-
-The paper introduces MathComp, a novel benchmark to investigate directional biases in large language models (LLMs) when performing comparative reasoning tasks involving math word problems. The authors show that LLMs exhibit a systematic bias towards the framing terms used in prompts (e.g., "more," "less," or "equal").  Even logically equivalent questions framed differently can elicit different answers, steering predictions in the direction of the framing. They also investigate how this framing bias interacts with demographic identity terms, finding that the inclusion of terms like "a woman" or "a Black person" can amplify the bias.  Finally, they explore mitigation strategies such as chain-of-thought prompting and structured outputs, finding that while these techniques offer some reduction in bias, they don't eliminate it entirely. The paper emphasizes the importance of framing-aware benchmarks to evaluate reasoning robustness and fairness in LLMs.
-
-**Critical Evaluation:**
-
-*   **Novelty:** The paper's novelty lies in isolating and quantifying the effect of semantic framing on LLM reasoning, specifically in a controlled, objective mathematical context. Prior work has explored prompt sensitivity and demographic bias in LLMs, but this paper uniquely focuses on the directional nature of errors introduced by comparative phrasing and its interaction with social cues. The creation of the MathComp benchmark itself is a valuable contribution.
-*   **Significance:** The findings have significant implications for how we evaluate and trust LLMs. The paper demonstrates that standard accuracy metrics can obscure systematic reasoning biases that arise from subtle linguistic variations. This suggests that existing benchmarks may overestimate the true capabilities of LLMs and that we need more sophisticated evaluation methods that account for framing effects. The fact that demographic cues can amplify these biases raises concerns about fairness and the potential for LLMs to perpetuate harmful stereotypes.
-*   **Strengths:**
-    *   **Controlled Experimentation:** The design of the MathComp benchmark is well-suited for isolating framing effects, allowing for precise measurement of directional errors.
-    *   **Comprehensive Analysis:** The authors evaluate a range of LLMs, prompt variations, and output modes, providing a thorough investigation of the phenomenon.
-    *   **Practical Implications:** The paper identifies specific biases that can affect LLM reasoning and suggests directions for mitigation, such as framing-aware prompting.
-    *   **Reproducibility:** Releasing the dataset and code allows for future research and validation of the findings.
-*   **Weaknesses:**
-    *   **Limited Scope of MathComp:** While controlled, the MathComp benchmark is limited to simple comparative math problems. The extent to which these findings generalize to more complex, real-world reasoning tasks remains to be seen.
-    *   **Binary Gender Representation:** The use of only binary gender categories is a limitation, as acknowledged by the authors.
-    *   **Mitigation Strategies:** Although the paper investigates mitigation strategies, they only partially reduce the framing-induced errors. Further research is needed to develop more effective methods for mitigating these biases.
-
-* **Justification for Score:** The paper makes a valuable contribution by highlighting a previously underappreciated limitation in how LLMs reason. The methodical construction of the MathComp benchmark and comprehensive analysis across LLMs, prompt types and demographic attributes demonstrates that semantic phrasing systematically biases model outputs and reveals the potential for the magnification of societal stereotypes. Though the tasks examined are relatively simple, they still surface a substantial problem that exists to some degree across all language models and evaluation methods. 
-In short, the paper demonstrates the need to rethink how language models are evaluated and to pay greater attention to potentially harmful biases arising from subtle framing effects.
-
-**Score: 8**
-
-- **Score**: 8/10
-
-### **[Solving Inverse Problems via Diffusion-Based Priors: An Approximation-Free Ensemble Sampling Approach](http://arxiv.org/abs/2506.03979v1)**
-- **Summary**: Okay, I've analyzed the paper "Solving Inverse Problems via Diffusion-Based Priors: An Approximation-Free Ensemble Sampling Approach" and will provide a summary and critical evaluation.
-
-**Summary:**
-
-The paper addresses the challenge of solving Bayesian inverse problems (BIPs) using diffusion models (DMs) as priors.  Current DM-based posterior sampling methods often rely on heuristic approximations to the generative process.  The authors propose a novel ensemble-based algorithm called Approximation-Free Diffusion Posterior Sampler (AFDPS) that avoids these approximations. The key idea is to leverage the sequential Monte Carlo (SMC) method, combined with a principled utilization of pre-trained DMs for prior evolution.  The authors derive a modified partial differential equation (PDE) governing the evolution of the posterior distribution, which includes a modified diffusion term and a reweighting term.  This PDE is then simulated using stochastic weighted particle methods. The paper offers theoretical guarantees, proving error bounds relating the posterior sampling accuracy to the training error of the pre-trained score function.  Empirical validation on imaging inverse problems demonstrates that AFDPS provides more accurate reconstructions than existing DM-based methods. The AFDPS allows flexible frameworks based on SDE and ODE+Corrector, respectively.
-
-**Critical Evaluation:**
-
-**Novelty:** The paper presents a significant advance in DM-based BIPs by moving away from heuristic approximations. Deriving the exact PDE governing the posterior evolution given a pre-trained diffusion model is a genuinely novel contribution. The idea of incorporating this PDE within an SMC framework to achieve approximation-free posterior sampling is also a worthwhile innovation. The error analysis is a strong feature which provides a concrete justification of the method convergence.
-
-**Significance:** The significance of this work stems from its potential to improve the accuracy and reliability of solutions to BIPs. Bypassing heuristic approximations can lead to more trustworthy reconstructions, especially in scenarios where the approximations may be inaccurate or invalid. The paper's approach offers a theoretically sound alternative to the often ad-hoc nature of current DM-based BIP methods. The presented results in diverse imaging problems validates the method's practical value.
-
-**Strengths:**
-
-*   **Principled approach:** Avoids heuristic approximations by deriving and utilizing the exact posterior evolution PDE.
-*   **Theoretical guarantees:**  Provides rigorous error bounds and convergence analysis.
-*   **Empirical validation:** Demonstrates improved reconstruction accuracy compared to existing methods on multiple imaging inverse problems.
-*   **Flexibility:** Provides two variants based on SDE and ODE, providing flexibility and compatibility with different diffusion architectures.
-
-**Weaknesses:**
-
-*   **Computational cost:**  Ensemble-based methods can be computationally expensive.  While the paper addresses this to some extent by reducing the number of particles for the ODE version, the computational cost remains a factor to consider. The empirical details about convergence rate in practical time are still relatively unclear.
-*   **Dependence on pre-trained score function:**  The method's performance relies on the quality of the pre-trained score function. Thus the error is inherently bounded by the approximation error of the score function which may have practical limitations.
-*   **Limited scope:** The theoretical analysis does not consider the effects of discretization, as used in the Algorithm, meaning that a theoretical gap to reality remains.
-
-**Influence on the Field:**
-
-The paper has the potential to influence the field by setting a new standard for DM-based BIP methods.  The emphasis on approximation-free sampling and theoretical rigor could encourage future research to focus on more principled approaches. The work could be especially impactful in applications where accurate and reliable reconstructions are crucial.
-
-**Justification for the Score:**
-
-I assign a score of 8 because the paper makes a novel and significant contribution to the field. The mathematical rigor, clear presentation of the method, and strong empirical validation are convincing. While the computational cost and dependence on the pre-trained score function are limitations, the benefits of approximation-free sampling and theoretical guarantees outweigh these drawbacks. Its reliance on pre-trained models and specific datasets may reduce its broader impact to other areas, although the results are very promising.
-
-Score: 8
-
-- **Score**: 8/10
-
-### **[Unveiling and Eliminating the Shortcut Learning for Locate-Then-Edit Knowledge Editing via Both Subject and Relation Awareness](http://arxiv.org/abs/2506.04042v1)**
+### **[Generalizable, real-time neural decoding with hybrid state-space models](http://arxiv.org/abs/2506.05320v1)**
 - **Summary**: Here's a summary and critical evaluation of the paper:
 
 **Summary:**
 
-The paper addresses the issue of uncontrolled knowledge editing in large language models (LLMs) when using locate-then-edit methods like ROME. The authors identify a "shortcut learning" problem where the editing process over-learns the subject feature while neglecting the relation feature, leading to unintended changes in facts related to the subject. To mitigate this, they propose a Two-stage Optimization Process (TOP) that explicitly balances learning of both subject and relation features. The first stage optimizes the relation feature, and the second stage optimizes the subject feature.  Experimental results demonstrate improved performance over existing methods on knowledge editing benchmarks, particularly in terms of specificity and controllability.
+The paper introduces POSSM, a novel hybrid neural architecture for real-time decoding of neural activity. It combines spike tokenization (using the POYO approach) with a recurrent state-space model (SSM) backbone. This architecture aims to achieve a balance between accuracy, inference speed, and generalization. POSSM tokenizes individual spikes and feeds them to a cross-attention module to create a fixed-size latent representation. This is then processed by an SSM, enabling fast, causal online predictions.  The paper evaluates POSSM on monkey motor tasks and human handwriting and speech decoding, demonstrating its ability to generalize across sessions, individuals, tasks, and even species (monkey to human).  Notably, POSSM achieves comparable accuracy to Transformers at a fraction of the inference cost.
 
 **Critical Evaluation:**
 
-* **Novelty:** The identification of the shortcut learning issue (over-reliance on the subject feature during knowledge editing) and the proposed TOP to address it is novel. While causal tracing and feature analysis have been used in prior work related to LLMs, the specific application to understand and improve knowledge editing controllability, focusing on balancing subject and relation features, appears to be a significant contribution. The two-stage optimization process is a simple, yet effective way to address this problem.
+*   **Novelty:** The core novelty lies in the hybrid architecture combining spike tokenization with SSMs for neural decoding.  While spike tokenization (POYO) and SSMs are not novel individually, their specific combination and application within the real-time decoding context appear to be a significant and previously unexplored direction. The cross-species transfer learning result is also notably interesting, suggesting fundamental similarities in motor control across primates.
 
-* **Significance:** The work directly addresses a crucial limitation of existing knowledge editing techniques: the unintended modification of unrelated facts. Making knowledge editing more controllable is essential for building trustworthy and reliable LLMs. The paper's experimental results demonstrate a clear improvement in specificity without sacrificing other performance metrics like efficacy and generalization. Addressing the "shortcut" learning problem opens up avenues for more refined and targeted knowledge interventions in LLMs.  The trade-off analysis on choosing optimal layers for relation awareness offers practical guidance for implementing this method.
+*   **Significance:**  The paper addresses a critical bottleneck in neural decoding: the trade-off between accuracy, speed, and generalization.  Many high-accuracy decoding models (e.g., Transformers) are too computationally expensive for real-time applications, while simpler, faster models often lack generalization. POSSM offers a promising solution to this problem. The demonstrated transfer learning capabilities are also highly significant, potentially reducing the data requirements for human BCIs by leveraging data from animal models. This could have a meaningful impact on clinical translation. The reported performance improvements over existing approaches within this very critical tradeoff space (accuracy, latency, generalization) are compelling.
 
-* **Strengths:**
-    * **Clear Problem Definition:** The paper provides a well-defined and easily understandable explanation of the shortcut learning issue in knowledge editing.
-    * **Thorough Analysis:** The gradient saliency analysis and causal tracing experiments provide empirical evidence to support the authors' claims.
-    * **Effective Solution:** The proposed TOP method is relatively simple to implement and yields significant improvements in controllability.
-    * **Comprehensive Evaluation:** The paper includes a thorough evaluation on established knowledge editing benchmarks and compares against strong baselines.
-    * **Trade-off Analysis:** The examination of layer selection and its impact on specificity and generalization offers valuable insights for practitioners.
+*   **Strengths:**
+    *   **Strong Results:** The paper presents convincing empirical results across diverse datasets (monkey reaching, human handwriting, and speech) and demonstrates performance comparable to state-of-the-art Transformers with superior inference speed.
+    *   **Addressing a Key Problem:** The work tackles a fundamental challenge in the field – the need for accurate, fast, and generalizable neural decoders for real-time applications.
+    *   **Cross-Species Transfer:** The demonstrated ability to transfer knowledge from monkey motor cortex to human handwriting decoding is a significant finding with potential for broader applicability.
+    *   **Clear Architecture:** The paper clearly describes the POSSM architecture and its components.
 
-* **Weaknesses:**
-    * **Limited Scope of Solution:** While TOP addresses the specific shortcut learning issue related to subject-relation imbalance, it might not be a comprehensive solution to all controllability problems in knowledge editing. The current TOP is based on ROME, a specific locate-then-edit method.  Its applicability and potential modifications for other knowledge editing architectures (e.g., those using attention modification) might require further investigation.
-    * **Implementation Detail:** The paper mentions editing 18th and 19th layers successively for GPT2-XL which adds complexity of applying the method.
-    * **Ablation Study:** It is important to isolate how each component in the proposed TOP contributes to the performance. Additional controlled experiments are necessary to determine the individual effects of the optimization components, leading to a better understanding of the system.
+*   **Weaknesses:**
+    *   **Offline Evaluation:** While the architecture is designed for real-time applications, the evaluations are performed offline.  While offline performance is a necessary step, online validation in a closed-loop system would strengthen the claims significantly.
+    *   **Limited Baseline Comparisons in Some Tasks:**  While the monkey reaching tasks include several comparisons, the human speech decoding benchmarks could have included more direct comparisons to state-of-the-art speech recognition systems (even if adapted for neural data).
+    *   **SSM Backbone Choice:** While the paper explores S4D, GRU and Mamba backbones it does not fully justify this specific set of SSM backbones, a more extensive ablation study to explore the specific suitability of each SSM component and contribution to the network may bolster the work.
 
-* **Potential Impact:** This paper has the potential to significantly influence the direction of knowledge editing research by highlighting the importance of controllability and providing a practical solution to a key limitation of existing methods.  It also provides insights that could be generalized to other problems related to controlling the behavior of LLMs.
+*   **Potential Impact:**  If validated in online, closed-loop systems, POSSM could significantly advance the development of brain-computer interfaces, motor prostheses, and other neurotechnology applications. The cross-species transfer learning aspect could also accelerate clinical translation by reducing the need for large human datasets.
 
-* **Score Justification:**
-Given the clear novelty in identifying and addressing the shortcut learning issue, the significance of the work in improving the controllability of knowledge editing, the rigorous analysis and experimental results, and the potential impact on the field, the paper warrants a high score. However, the limited scope of the solution and the potential for further improvements justify not assigning a perfect score.
+**Score: 8**
 
-Score: 8
+**Rationale:**
+
+The paper makes a significant contribution by introducing POSSM, a hybrid neural architecture that effectively balances accuracy, speed, and generalization for real-time neural decoding. The architecture is novel and the results are compelling across a diverse set of tasks, including a demonstration of successful cross-species transfer learning. The primary limitation is the lack of online, closed-loop validation, which would be the crucial next step to fully demonstrate the practical benefits of POSSM. Despite this, the work addresses a key problem in the field and has the potential to enable significant advances in neurotechnology. Therefore the score reflects a very high quality, impactful contribution, with a notable, but not insurmountable, limitation. The limitations are primarily those of verification within a closed loop experiment.
 
 - **Score**: 8/10
 
-### **[Multimodal Tabular Reasoning with Privileged Structured Information](http://arxiv.org/abs/2506.04088v1)**
-- **Summary**: Here's a summary and critical evaluation of the provided research paper:
+### **[MINT-CoT: Enabling Interleaved Visual Tokens in Mathematical Chain-of-Thought Reasoning](http://arxiv.org/abs/2506.05331v1)**
+- **Summary**: Here's a summary and critical evaluation of the paper "MINT-CoT: Enabling Interleaved Visual Tokens in Mathematical Chain-of-Thought Reasoning":
 
 **Summary:**
 
-The paper addresses the task of tabular reasoning, specifically when only table images are available at inference time, a more realistic scenario than having structured tables. It introduces TURBO (TabUlar Reasoning with Bridged information), a framework that leverages privileged structured tables during training to enhance the reasoning capabilities of multimodal large language models (MLLMs).  TURBO generates structure-aware reasoning traces using DeepSeek-R1, creating high-quality data to bridge the modality gap between structured tables and images. It then uses supervised fine-tuning (SFT) and Group Relative Policy Optimization (GRPO) to iteratively refine the model's reasoning skills, achieving state-of-the-art performance with limited training data. The key idea is to transfer the rich semantics and precise structure of structured tables (available only during training) to the MLLM, enabling it to reason effectively over table images.
+The paper introduces MINT-CoT, a novel approach to enhance mathematical reasoning in Multimodal Large Language Models (MLLMs) by interleaving relevant visual tokens from mathematical figures within the Chain-of-Thought (CoT) process. Unlike existing methods that rely on coarse-grained bounding boxes or external visual modification tools, MINT-CoT uses an "Interleave Token" mechanism to dynamically select fine-grained visual regions of arbitrary shapes relevant to each reasoning step. To support this, the authors create a new dataset, MINT-CoT, comprising 54K mathematical problems with token-level alignments between textual rationales and visual inputs. They also propose a three-stage training strategy involving text-only CoT SFT, interleaved CoT SFT, and interleaved CoT RL to train a MINT-CoT-7B model. Experiments demonstrate that MINT-CoT significantly outperforms baseline models on benchmarks like MathVista, GeoQA, and MMStar.
 
 **Critical Evaluation:**
 
-*   **Novelty:** The paper's novelty lies in its approach to bridging the modality gap in tabular reasoning by using privileged information (structured tables only available during training). While the individual components (SFT, reinforcement learning with relative policy optimization) are not entirely novel, their specific combination and application to this problem, particularly with the structure-aware reasoning trace generation, constitutes a significant contribution. The idea of generating high-quality reasoning traces using a powerful LLM (DeepSeek-R1) and then using these traces to train an MLLM for table reasoning is also novel. The overall pipeline to improve the multimodal reasoning with limited data using structure tables in training is novel.
+*   **Novelty:** The paper demonstrates novelty in several aspects. First, the Interleave Token mechanism provides a more fine-grained and adaptive way to incorporate visual information compared to bounding box-based methods. Second, the automated pipeline for generating the MINT-CoT dataset with token-level annotations is a valuable contribution. Third, the three-stage training strategy is well-designed to gradually improve the MLLM's ability to reason with interleaved visual and textual content. The innovation lies in the adaptive selection of visual tokens rather than relying on fixed region proposals or external modifications.
 
-*   **Significance:** The paper tackles a practical problem: reasoning over table images, which are more common than structured tables in real-world scenarios. The performance improvements demonstrated by TURBO are substantial, showcasing the effectiveness of the proposed framework. The experimental results across multiple datasets strengthen the significance of the work. The paper also highlights the importance of interpretability by focusing on generating clear reasoning traces. This is highly valuable for debugging and understanding the model's decision-making process. The code and training pipeline may allow for more interpretable frameworks for real-world tasks.
+*   **Significance:** The significance of this work lies in its potential to improve MLLMs' capabilities in mathematical reasoning, particularly when visual information is essential for solving problems. The limitations of existing methods in handling the complex visual structures of math images are well-addressed by MINT-CoT. The performance gains on established benchmarks demonstrate the effectiveness of the approach. The released dataset and code could spur further research in this area.
 
 *   **Strengths:**
-    *   Well-defined problem and clear motivation.
-    *   Novel framework combining reasoning trace generation, SFT, and RL.
-    *   Strong experimental results, outperforming existing baselines by a significant margin, especially with limited data.
-    *   Emphasis on interpretability and explainability.
-    *   Comprehensive ablation studies validating the contributions of individual components.
-    *   Careful consideration of experimental setup, including data sampling and hyperparameter tuning.
-    *   Ablation studies confirm the important roles of each stage (SFT and RL).
+
+    *   **Adaptive Visual Token Selection:** The Interleave Token allows the model to focus on the most relevant visual information for each step in the reasoning process.
+    *   **Dataset Construction:** The MINT-CoT dataset is a significant resource, as it provides fine-grained alignments between textual and visual information.  The data generation pipeline sounds automated and scalable, which is essential for training robust models.
+    *   **Well-Defined Training Strategy:** The three-stage training approach is logical and helps the model learn progressively.
+    *   **Strong Empirical Results:** The reported results on multiple benchmarks clearly show the effectiveness of MINT-CoT compared to existing methods.
 
 *   **Weaknesses:**
-    *   Reliance on DeepSeek-R1 for reasoning trace generation. While this leverages a powerful LLM, it also introduces a dependency and potential bias. The experiments depend a lot on the reasoning from DeepSeek and whether it can generate reliable responses.
-    *   The paper could benefit from a more in-depth analysis of the types of errors made by TURBO and the remaining challenges in tabular reasoning.
-    *   The evaluation does not consider other metrics that are commonly used in structured data reasoning.
 
-*   **Potential Influence:** The paper has the potential to significantly influence the field of tabular reasoning. The idea of using privileged structured information for training MLLMs could be applied to other tasks where there's a modality gap. The framework provides a solid foundation for future research on improving the reasoning capabilities of MLLMs for real-world applications.
+    *   **Dependency on OCR and GPT-4o:** The dataset creation pipeline relies heavily on OCR for text localization and GPT-4o for extracting key words and annotating visual indices. This dependence could introduce biases and limitations based on the performance of these tools.
+    *   **Limited Scope:** While the experiments focus on mathematical reasoning, it's unclear how well MINT-CoT would generalize to other tasks that require visual grounding.
+    *   **Complexity:** While the approach is novel, it introduces additional complexity compared to simpler box-based methods. The need for Interleave Tokens, projectors, and a multi-stage training strategy might make it harder to adopt and adapt for other tasks.
 
-**Justification for Score:**
-
-Considering the novelty, significance, strengths, and weaknesses, I assign this paper a score of **8**. The paper presents a well-designed and effective framework for a practical problem, demonstrating significant performance improvements with limited data. The idea of bridging modalities with privileged information and the emphasis on interpretability are valuable contributions. While there are limitations, such as the dependency on DeepSeek-R1, they do not diminish the overall impact of the work. The code will contribute to further research.
+*   **Potential Influence:** The paper is likely to influence future research in multimodal reasoning, especially in domains where fine-grained visual understanding is crucial. The MINT-CoT dataset will serve as a valuable benchmark and resource for training and evaluating MLLMs. The adaptive visual token selection mechanism could be adapted for other tasks beyond mathematical reasoning.
 
 **Score: 8**
 
+**Rationale:**
+
+The paper presents a novel and well-executed approach to visual mathematical reasoning. The Interleave Token mechanism and the MINT-CoT dataset are valuable contributions. The empirical results are convincing, and the paper is well-written and clearly explains the proposed method. The reliance on OCR and GPT-4o for dataset creation is a limitation. While the paper makes a significant step forward, the potential for broader applicability and the complexity of the approach prevent a higher score. The improvements on major benchmarks, specifically MathVista (+34%), demonstrate a considerable advance over existing approaches and is a key factor in assigning a relatively high score.
+
 - **Score**: 8/10
 
-### **[Image Editing As Programs with Diffusion Models](http://arxiv.org/abs/2506.04158v1)**
-- **Summary**: Here's a summary and critical evaluation of the paper "Image Editing As Programs with Diffusion Models":
+### **[Search Arena: Analyzing Search-Augmented LLMs](http://arxiv.org/abs/2506.05334v1)**
+- **Summary**: Here's a summary and critical evaluation of the "Search Arena: Analyzing Search-Augmented LLMs" paper:
 
 **Summary:**
 
-The paper introduces IEAP (Image Editing As Programs), a novel framework for instruction-driven image editing using diffusion models, specifically built upon the Diffusion Transformer (DiT) architecture. The core idea is to decompose complex editing instructions into sequences of simpler, "atomic" operations. These atomic operations include RoI localization, RoI inpainting, RoI editing, RoI compositing, and global transformations. A vision-language model (VLM)-based agent programs these operations in sequence, which are then executed by a lightweight adapter sharing the DiT backbone. This modular approach allows for handling structurally inconsistent edits, which are a known weakness of current diffusion models. The paper demonstrates state-of-the-art performance across various benchmarks, particularly for complex, multi-step instructions.
+The paper introduces Search Arena, a new large-scale (24,069 conversations) human-preference dataset focused on interactions with search-augmented Language Models (LLMs). The dataset is multi-turn, multilingual, and covers a diverse range of user intents beyond simple fact retrieval. The authors analyze the data to understand how users interact with these systems and what factors influence their preferences, including the number, types, and attribution of citations. They find, surprisingly, that users often prefer responses with more citations, even if the cited material doesn't directly support the claims, raising concerns about perceived vs. actual credibility. The paper also presents a cross-arena evaluation, testing the performance of search-augmented and regular LLMs in different settings (search-intensive vs. general chat) to understand the impact of web search capabilities. The dataset is released to the public.
 
 **Critical Evaluation:**
 
-*   **Novelty:** The central novelty lies in the "decomposition" approach to image editing using diffusion models. While the individual components (DiT, VLM agents, atomic operations) are not entirely new, the combination of these elements into a cohesive system capable of handling structural inconsistencies is a significant advance. The idea of framing image editing as a program execution problem is also refreshing and offers a structured way to approach the complex task of instruction following.
-
-*   **Significance:** The paper addresses a critical limitation in instruction-driven image editing – the difficulty of handling substantial layout changes. By modularizing the editing process, IEAP demonstrates a significant improvement in accuracy and semantic fidelity, particularly for complex instructions. The results presented are compelling and show that the proposed framework outperforms existing methods on standard benchmarks. The potential for IEAP to improve diverse applications is considerable, for example, image story telling and scientific visualizations.
-
 *   **Strengths:**
 
-    *   **Clear Problem Definition:** The paper clearly articulates the limitations of existing diffusion models for instruction-driven editing.
-
-    *   **Innovative Approach:** The decomposition into atomic operations is a clever way to tackle the structural inconsistency problem.
-
-    *   **Strong Experimental Results:** The paper provides extensive experimental validation, demonstrating the effectiveness of IEAP across various editing scenarios. The visual results are convincing.
-    * **Open-source**: The release of code further enhance the impact of the study
+    *   **Novel and Needed Dataset:**  The dataset fills a critical gap in the evaluation of search-augmented LLMs. Existing datasets tend to be smaller, focus on single-turn interactions, and primarily address fact-checking scenarios. Search Arena's scale, diversity of intents, and multi-turn dialogues represent a significant advancement.
+    *   **Comprehensive Analysis:** The analysis of user preferences provides valuable insights into the human-AI interaction aspects of search-augmented LLMs. The findings about citation preferences and the source types are particularly interesting and highlight important considerations for building trustworthy systems.
+    *   **Rigorous Methodology:** The study employs a robust methodology for data collection, annotation (user intent classification), and analysis (Bradley-Terry modeling, citation attribution pipeline).
+    *   **Practical Relevance:** The cross-arena evaluation provides practical guidance on the use of search augmentation, showing where it helps and where it may not be necessary.
+    *   **Publicly Available Resource:**  Releasing the dataset promotes further research and development in the field.
 
 *   **Weaknesses:**
 
-    *   **Computational Cost:** The paper acknowledges the significant per-operation latency, precluding real-time interactivity. This is a practical limitation.
-    *   **Complex Scene Handling:** While IEAP addresses structural inconsistencies, it still struggles with highly dynamic scenes (motion blur) and complex physical interactions (lighting inconsistencies).
-    *   **Resource intensive**: running DiT requires expensive hardware.
+    *   **Potential for Bias in Crowd-Sourced Data:** While acknowledged by the authors, the crowd-sourced nature of the dataset introduces the potential for biases related to demographics, language proficiency, and subjective preferences. There might be cultural nuances that affect prompt formulation and judgement quality that aren't fully captured.
+    *   **Simplification of Citation Relevance:** The LLM-based citation attribution pipeline is a useful tool, but inherently subjective claim relevance assessments are subject to limitations in LLM reasoning and are hard to fully automate.
+    *   **Limited Model Exploration:** The cross-arena evaluation only examines a single model family (Gemini). Exploring performance with other LLM architectures would provide a more comprehensive picture. Also, inline citations had to be disabled in the Text Arena to avoid vote bias, thereby changing the model.
+    *   **Generalization of Findings:** Some findings might be specific to the characteristics of the deployed models, the platform's user base, or the types of tasks presented in Search Arena.
 
-*   **Potential Impact:** The IEAP framework has the potential to influence future research in instruction-driven image editing. The modular design offers a clear direction for improvement and extension. Other researchers may adopt the "programming" approach to tackle other challenges in image generation and manipulation.
-*   **Rigorous Rationale:**
+*   **Novelty and Significance:** The paper makes a substantial contribution to the field. The dataset itself is a significant resource, and the analysis provides valuable insights into user preferences and the impact of web search. The study uncovers nuances not captured in existing benchmarks, such as how users respond to citations and different source types.
 
-    *   The paper's innovation score of 8 is based on the following arguments: First, by decomposing the problem to a set of atomic operations the method presents significant improvement on structural alteration tasks, one of the current challenges in image editing. Second, the work contributes strong empirical results. Third, the design of IEAP offers a clear direction to improvements for the research in image editing. One should notice that IEAP still has room for improvement in the performance of handling the interactions of complex scenes and that the reliance on DiT architectures comes with the price of relatively high computational costs.
+*   **Potential Influence:** The dataset and analysis will likely influence future research directions in search-augmented LLMs. The findings can be used to develop more trustworthy and user-friendly systems. For example, it underscores the need to improve how LLMs attribute and incorporate information from citations to avoid misleading users with superficial credibility indicators.
 
 **Score: 8**
 
+**Justification:** The paper offers a genuinely novel and important dataset, and the analysis identifies critical factors in human-LLM interactions that existing literature and datasets have largely overlooked. The limitations primarily stem from inherent challenges in data collection and the scope of analysis, which are well acknowledged by the authors. The public release of the dataset ensures a lasting impact on the development and evaluation of search-augmented LLMs. It is a significant step towards understanding the complexities of these systems and their influence on user behavior and perception of information quality.
+
 - **Score**: 8/10
 
-### **[SuperWriter: Reflection-Driven Long-Form Generation with Large Language Models](http://arxiv.org/abs/2506.04180v1)**
-- **Summary**: Here's a concise summary and a critical evaluation of the paper, adhering to the specified criteria:
+### **[Why LLM Safety Guardrails Collapse After Fine-tuning: A Similarity Analysis Between Alignment and Fine-tuning Datasets](http://arxiv.org/abs/2506.05346v1)**
+- **Summary**: Okay, I'm ready to provide a summary and critical evaluation of the paper.
 
 **Summary:**
 
-The paper introduces SuperWriter-Agent, a framework designed to enhance the quality and consistency of long-form text generation by large language models (LLMs).  It tackles the limitations of current LLMs, which often struggle with coherence, logical consistency, and maintaining text quality as the sequence length increases. SuperWriter-Agent addresses this by incorporating explicit structured thinking—through planning and refinement stages—into the generation pipeline.  It trains a 7B SuperWriter-LM on a supervised fine-tuning dataset and employs a hierarchical Direct Preference Optimization (DPO) procedure that uses Monte Carlo Tree Search (MCTS) to optimize each generation step. Empirical results demonstrate state-of-the-art performance compared to even larger-scale baseline models.
+This paper investigates why safety guardrails in Large Language Models (LLMs) tend to collapse after downstream fine-tuning. The authors hypothesize that the similarity between the upstream safety-alignment datasets and the downstream fine-tuning datasets plays a critical role. They find that high similarity between these datasets significantly weakens safety guardrails, making models more susceptible to jailbreak attacks, while low similarity results in more robust models. The authors explore methods to select safety-alignment subsets based on their similarity to downstream tasks and demonstrate that guardrails derived from low-similarity subsets are significantly more durable. The paper suggests that a narrow focus on downstream fine-tuning processes has led to an overlooking of upstream alignment effects, and that both privacy and representation attributes of upstream alignment datasets significantly influence the durability of safety guardrails. The paper concludes by proposing a similarity-aware model selection pipeline as a means of proactively mitigating jailbreak vulnerabilities.
 
 **Critical Evaluation:**
 
-*   **Strengths:**
-    *   **Novelty:** The framework introduces a valuable, structured approach to long-form generation that mimics the human writing process more closely than many existing methods. Explicitly integrating planning, writing, and refining steps is a significant step towards better coherence and consistency.
-    *   **Methodology:** The use of hierarchical DPO with MCTS for optimizing each generation step is a well-designed and potentially impactful technique.  The creation of a specialized, thinking-oriented dataset is also a strength, addressing a recognized gap in current training corpora.
-    *   **Empirical Validation:** The paper demonstrates impressive empirical results across diverse benchmarks.  Achieving state-of-the-art performance with a 7B model is particularly noteworthy, suggesting efficiency and potential scalability.  The ablation studies further strengthen the claim that the hierarchical DPO and structured thinking steps contribute significantly to the model's performance.
+**Novelty:** The paper makes a valuable contribution by shifting the focus from post-hoc defensive measures and reactive mitigation strategies to the role of the original safety-alignment data in ensuring robust safety guardrails. The idea that similarity between upstream alignment data and downstream fine-tuning data is a key factor is a relatively novel perspective. While some prior work has identified subsets of data within benign datasets that can erode safety, this paper provides a more systematic analysis of the *relationship* between alignment and fine-tuning datasets using similarity metrics. The anchor-free approach to identifying harmful subsets is a useful improvement over previous anchor-based approaches.
 
-*   **Weaknesses:**
-    *   **Scope of Tasks:** While WritingBench is a solid benchmark, the paper should discuss the types of long-form generation tasks for which SuperWriter-Agent is most and least effective. Does it perform equally well on creative writing, technical documentation, and argumentative essays?  A more nuanced analysis would improve the evaluation.
-    *   **Computational Cost:**  The use of MCTS and hierarchical DPO inevitably increases computational cost. The paper needs to quantify this overhead and discuss its implications for practical deployment, especially compared to simpler, single-pass generation methods.
-    *   **Model Size Limitation:**  While achieving strong results with a 7B model is commendable, the paper should acknowledge the potential limitations imposed by the model size.  How does the performance scale with larger models, and what kinds of knowledge-intensive tasks might still require larger models regardless of the framework?
+**Significance:** The findings have significant implications for the practical development and deployment of LLMs. If high similarity can erode safety guardrails, it indicates a need for more carefully designed alignment datasets and for fine-tuning service providers to be aware of potential similarity risks. The proposed similarity-aware model selection pipeline offers a practical strategy for mitigating jailbreak vulnerabilities. The suggestion that publicly accessible datasets are more prone to malicious exploitation due to the ability of adversaries to leverage high-similarity data is also noteworthy. This research can inform both industry practice and regulatory discussions.
 
-*   **Significance:**
-    *   The paper provides a practical and effective approach to address a key challenge in LLM research—producing high-quality, coherent, and consistent long-form text. The SuperWriter-Agent framework and training methodologies could influence the development of future generation models and improve the utility of LLMs for various applications.
+**Strengths:**
 
-**Justification for the Score:**
+*   **Clear Hypothesis and Experimental Design:** The paper formulates a clear hypothesis and designs experiments to systematically test the relationship between similarity and safety guardrail robustness.
+*   **Comprehensive Evaluation:** The authors experiment with several datasets, models, and downstream tasks, increasing the generalizability of their findings.
+*   **Practical Implications:** The paper provides actionable insights for fine-tuning service providers and contributes to the development of more robust and trustworthy LLMs.
+*   **Well-Defined Methodology:** The paper clearly outlines the methodology used for selecting safety-alignment subsets based on similarity.
+*   **Strong Empirical Support:** The experimental results clearly support the paper's central claim.
 
-I assign a score of **8** to this paper.  It presents a novel and well-executed framework with strong empirical support and tackles a significant problem in the field. The strengths clearly outweigh the weaknesses. The work is both technically sound and practically relevant. However, acknowledging limitations related to task scope, computational cost, and model size would further enhance the paper. The assigned score reflects the fact that, while the paper represents a substantial contribution, there is room for further investigation of its capabilities and scalability.
+**Weaknesses:**
 
-**Score: 8**
+*   **Limited Exploration of Underlying Mechanisms:** While the paper demonstrates the correlation between similarity and safety guardrail collapse, it offers limited explanation regarding the *underlying mechanisms* responsible for this phenomenon. Further research into the neural underpinnings of durable safety would be beneficial. Why specifically does high representation similarity weaken safety and promote jailbreaking?
+*   **Scope of Modalities:** The research focuses on text-based models and tasks. Future work should examine the applicability of these findings to multimodal models and tasks.
+*   **Data Privacy Considerations:** The similarity-aware model selection pipeline requires access to both upstream alignment and downstream task datasets, which raises data privacy concerns. The paper could benefit from a more thorough discussion of potential privacy-preserving techniques.
+*   **Reliance on Cosine Similarity:** While cosine similarity is a common measure, other representation similarity metrics could also be explored to see if they are more strongly correlated with guardrail durability.
 
-- **Score**: 8/10
+**Overall Assessment:**
 
-### **[TracLLM: A Generic Framework for Attributing Long Context LLMs](http://arxiv.org/abs/2506.04202v1)**
-- **Summary**: Here's a summary and critical evaluation of the paper "TracLLM: A Generic Framework for Attributing Long Context LLMs":
-
-**Summary:**
-
-The paper introduces TracLLM, a novel framework for tracing the origins of an LLM's output back to specific texts within its input context. The framework is designed for long-context LLMs and addresses the challenge of efficiently and accurately pinpointing the most influential segments of a long document that contribute to the generated output.  TracLLM employs an informed search algorithm to reduce the computational cost associated with existing feature attribution methods like Shapley values, and incorporates techniques such as contribution score denoising and ensemble methods to improve accuracy.  The paper demonstrates TracLLM's effectiveness across various real-world applications, including debugging LLM systems, post-attack forensic analysis (identifying malicious injected texts), and enhancing user trust by tracing knowledge sources.
-
-**Critical Evaluation:**
-
-*   **Novelty:** The paper's novelty lies in the development of a practical and efficient framework for context traceback in long-context LLMs. While feature attribution methods exist, their application to long contexts becomes computationally prohibitive. TracLLM addresses this by combining an informed search strategy with denoising and ensemble techniques, leading to improved efficiency and accuracy. This is a significant advancement given the growing prevalence of long-context models. The idea of informed search tailored to context traceback appears to be a key contribution.
-
-*   **Significance:** The applications of TracLLM are of considerable significance. The ability to debug LLM-based systems, conduct post-attack forensic analysis (e.g., identifying injected malicious code), and trace knowledge sources has far-reaching implications for the trustworthiness and reliability of LLMs. This is especially important as LLMs are deployed in critical domains such as information retrieval, decision support, and autonomous agents. The forensic analysis use case is particularly compelling in a world where LLM security is paramount. The ability to trace back harmful outputs to their source materials can help mitigate risks associated with prompt injection, data poisoning, and other adversarial attacks.
-
-*   **Strengths:**
-
-    *   **Practicality:** The framework is designed to be generic and compatible with existing feature attribution methods, making it easily adaptable and deployable.
-    *   **Efficiency:** The informed search algorithm provides a substantial improvement in computational efficiency compared to directly applying methods like Shapley values to long contexts.
-    *   **Improved Accuracy:** Contribution score denoising and ensemble techniques enhance the accuracy of context traceback.
-    *   **Comprehensive Evaluation:** The paper presents a thorough experimental evaluation on a variety of benchmark datasets, applications, and LLMs.
-    *   **Theoretical Analysis:** The inclusion of a theoretical analysis lends further support to the effectiveness of TracLLM.
-
-*   **Weaknesses:**
-
-    *   **Computational Cost:** While more efficient than direct application of Shapley, TracLLM still has non-negligible computational cost, which might limit its applicability in latency-sensitive applications. This is a clear limitation, though the authors acknowledge it and suggest it as future work.
-    *   **Reliance on Existing Methods:** TracLLM relies on existing feature attribution methods. Therefore, its performance is ultimately bounded by the limitations of the underlying method.
-    *   **Limited Discussion on Scalability:** The paper could benefit from a more detailed discussion on the scalability of TracLLM with extremely long contexts (e.g., millions of tokens) and on how the framework might be optimized for such scenarios.
-    *   **Black-box LLMs**: The techniques for calculating conditional probability may not be possible for black box LLMs without API access.
-
-*   **Potential Influence:** TracLLM has the potential to influence research in several areas, including:
-
-    *   Explainable AI (XAI) for LLMs
-    *   LLM security and adversarial robustness
-    *   Debugging and testing of LLM-based systems
-    *   Knowledge management and source attribution
-
-*   **Rigorous Rationale:** The paper clearly articulates the problem, proposes a well-engineered solution, and provides convincing empirical evidence to support its claims. The limitations are appropriately acknowledged.
+The paper addresses an important and timely issue in the field of LLM safety. The core idea of focusing on similarity between alignment and fine-tuning datasets is novel, and the empirical results provide strong evidence for the importance of this factor. While the paper could benefit from further exploration of underlying mechanisms and privacy considerations, it offers valuable insights and practical guidance for building more robust and trustworthy LLMs. The work is technically sound and addresses a genuine and growing concern in the community.
 
 **Score: 8**
 
-**Justification:**
-
-I assign a score of 8 because TracLLM offers a significant and practical contribution to the field by providing a generic and efficient framework for context traceback in long-context LLMs. It addresses a key challenge associated with applying feature attribution methods to long contexts and offers a compelling set of applications, particularly in the area of LLM security. While further optimizations for extreme-scale contexts are needed, the framework is well-designed and thoroughly evaluated.
-
-- **Score**: 8/10
-
-### **[Advancing Multimodal Reasoning: From Optimized Cold Start to Staged Reinforcement Learning](http://arxiv.org/abs/2506.04207v1)**
-- **Summary**: Here's a summary and critical evaluation of the research paper:
-
-**Summary**
-
-The paper "Advancing Multimodal Reasoning: From Optimized Cold Start to Staged Reinforcement Learning" introduces ReVisual-R1, a 7B parameter open-source multimodal large language model (MLLM) designed to improve complex reasoning capabilities. The key innovation is a three-stage training curriculum consisting of: 1) a carefully curated text-based cold start to establish strong foundational language understanding and reasoning skills; 2) multimodal reinforcement learning (MRL) using Group Relative Policy Optimization (GRPO) enhanced with Prioritized Advantage Distillation (PAD) to address gradient stagnation issues and promote more stable and efficient learning; and 3) a text-only reinforcement learning (TRL) phase to refine linguistic fluency and advanced reasoning.  The authors demonstrate that this staged approach, along with the PAD algorithm, leads to state-of-the-art performance among open-source 7B MLLMs on challenging benchmarks, even surpassing some closed-source commercial models in specific areas. The paper emphasizes the importance of data curation and algorithmic optimization over sheer model scale.
-
-**Critical Evaluation**
-
-*   **Strengths:**
-
-    *   **Novelty in Training Paradigm:** The paper presents a well-reasoned and empirically supported staged training curriculum. The core concept of first establishing strong text-based reasoning followed by multimodal grounding and subsequent textual refinement seems sound and addresses a key bottleneck in current MLLM training.
-    *   **Addressing Gradient Stagnation:**  The Prioritized Advantage Distillation (PAD) algorithm is a significant contribution. Identifying and addressing the gradient stagnation issue in multimodal RL using GRPO is a concrete and valuable finding. The proposed solution (PAD) appears technically sound and is backed by ablation studies.
-    *   **Comprehensive Evaluation:**  The paper showcases extensive experimental results on a wide range of challenging benchmarks, demonstrating the effectiveness of ReVisual-R1 and the proposed training approach. The comparisons against both open-source and closed-source models add credibility to the claims.
-    *   **Open-Source Contribution:** Releasing ReVisual-R1 as an open-source model is a significant contribution to the community, enabling further research and development in the field. The reproducibility is enhanced by the provision of the code page and detailed implementation descriptions.
-    *   **Emphasis on Data Curation:** The effort to create the GRAMMAR dataset underscores the importance of high-quality, reasoning-focused training data.
-
-*   **Weaknesses:**
-
-    *   **Limited Theoretical Justification for Staging:** While the empirical results are strong, the theoretical underpinnings explaining *why* this specific three-stage curriculum is optimal could be more developed. A deeper analysis of the interplay between perceptual grounding and cognitive reasoning in MLLMs would strengthen the argument.
-    *   **Dependency on Specific Architectures:** The model is built on Qwen2.5-VL-7B. It would be beneficial to show how the proposed training strategy generalizes to other MLLM architectures to prove that it is not architecture specific.
-    *   **Scope of Generalization:** Despite strong performance on reasoning tasks, the paper could benefit from a more thorough investigation of ReVisual-R1's performance on other downstream tasks (e.g., image captioning, visual question answering beyond math/logic), to better understand its generalizability.
-    *   **Ablation Study Completeness:** While PAD components are ablated, more detailed parameter sensitivity analysis of Thigh, Tlow, and p within the PAD framework could improve its adoption and application in other MLLM training scenarios.
-    *   **Justification of Efficient-Length Reward:** While the concept is intuitive, the justification of the chosen values for parameters such as *a* and delta would strengthen the reward design.
-
-*   **Significance and Potential Influence:**
-
-    *   The paper's findings have the potential to significantly influence the MLLM training landscape. The emphasis on optimized cold starts and staged reinforcement learning offers a practical and effective approach for improving reasoning capabilities.
-    *   The PAD algorithm has the potential to be widely adopted in MLLM training, as it directly addresses a known issue (gradient stagnation) and offers a computationally efficient solution.
-    *   The open-source release of ReVisual-R1 can serve as a valuable benchmark for future research and development in the field.
-
-**Justification for Score:**
-
-This paper addresses a critical challenge in the development of MLLMs: achieving robust reasoning capabilities. The proposed three-stage training curriculum, especially the PAD algorithm, offers a concrete and well-validated solution. The experimental results convincingly demonstrate the superiority of ReVisual-R1 over existing open-source alternatives. The significance of this paper lies in its emphasis on principled training strategies and algorithmic enhancements, rather than simply scaling model size. The open-source release of ReVisual-R1 will further amplify its impact on the research community. While there are areas for improvement, as mentioned above, the novelty and potential influence of this work are substantial.
-
-**Score: 8**
+**Rationale:** I assigned an 8 because the paper makes a novel and significant contribution to the field of LLM safety, offering a fresh perspective and actionable insights. While there are some limitations, particularly in exploring the underlying mechanisms and privacy concerns, the strengths outweigh the weaknesses. The paper's focus on upstream data design is particularly valuable and has the potential to significantly impact the development of more robust LLMs. An 8 is intended to reflect that the paper presents a significant, though not groundbreaking contribution, and that there is a strong avenue for further research to build on the work in this paper to improve and fully understand the role of upstream fine-tuning datasets.
 
 - **Score**: 8/10
 
 ## Other Papers
-### **[Adversarial Attacks on Robotic Vision Language Action Models](http://arxiv.org/abs/2506.03350v1)**
-### **[Robustness in Both Domains: CLIP Needs a Robust Text Encoder](http://arxiv.org/abs/2506.03355v1)**
-### **[Ask a Local: Detecting Hallucinations With Specialized Model Divergence](http://arxiv.org/abs/2506.03357v1)**
-### **[A Multimodal, Multilingual, and Multidimensional Pipeline for Fine-grained Crowdsourcing Earthquake Damage Evaluation](http://arxiv.org/abs/2506.03360v1)**
-### **[Comparison of different Unique hard attention transformer models by the formal languages they can recognize](http://arxiv.org/abs/2506.03370v1)**
-### **[Universal Reusability in Recommender Systems: The Case for Dataset- and Task-Independent Frameworks](http://arxiv.org/abs/2506.03391v1)**
-### **[Fault Localisation and Repair for DL Systems: An Empirical Study with LLMs](http://arxiv.org/abs/2506.03396v1)**
-### **[Sampling Preferences Yields Simple Trustworthiness Scores](http://arxiv.org/abs/2506.03399v1)**
-### **[Trajectory Prediction Meets Large Language Models: A Survey](http://arxiv.org/abs/2506.03408v1)**
-### **[Hybrid Ensemble of Segmentation-Assisted Classification and GBDT for Skin Cancer Detection with Engineered Metadata and Synthetic Lesions from ISIC 2024 Non-Dermoscopic 3D-TBP Images](http://arxiv.org/abs/2506.03420v1)**
-### **[DistRAG: Towards Distance-Based Spatial Reasoning in LLMs](http://arxiv.org/abs/2506.03424v1)**
-### **[A Data-Driven Diffusion-based Approach for Audio Deepfake Explanations](http://arxiv.org/abs/2506.03425v1)**
-### **[Adaptive Task Vectors for Large Language Models](http://arxiv.org/abs/2506.03426v1)**
-### **[Time Course MechInterp: Analyzing the Evolution of Components and Knowledge in Large Language Models](http://arxiv.org/abs/2506.03434v1)**
-### **[Delta-KNN: Improving Demonstration Selection in In-Context Learning for Alzheimer's Disease Detection](http://arxiv.org/abs/2506.03476v1)**
-### **[Facial Appearance Capture at Home with Patch-Level Reflectance Prior](http://arxiv.org/abs/2506.03478v1)**
-### **[APT: Improving Specialist LLM Performance with Weakness Case Acquisition and Iterative Preference Training](http://arxiv.org/abs/2506.03483v1)**
-### **[ProRank: Prompt Warmup via Reinforcement Learning for Small Language Models Reranking](http://arxiv.org/abs/2506.03487v1)**
-### **[EpiCoDe: Boosting Model Performance Beyond Training with Extrapolation and Contrastive Decoding](http://arxiv.org/abs/2506.03489v1)**
-### **[Beyond Memorization: A Rigorous Evaluation Framework for Medical Knowledge Editing](http://arxiv.org/abs/2506.03490v1)**
-### **[Measuring Human Involvement in AI-Generated Text: A Case Study on Academic Writing](http://arxiv.org/abs/2506.03501v1)**
-### **[CHIME: Conditional Hallucination and Integrated Multi-scale Enhancement for Time Series Diffusion Model](http://arxiv.org/abs/2506.03502v1)**
-### **[Beyond C/C++: Probabilistic and LLM Methods for Next-Generation Software Reverse Engineering](http://arxiv.org/abs/2506.03504v1)**
-### **[Accurate Sublayer Pruning for Large Language Models by Exploiting Latency and Tunability Information](http://arxiv.org/abs/2506.03510v1)**
-### **[DenseDPO: Fine-Grained Temporal Preference Optimization for Video Diffusion Models](http://arxiv.org/abs/2506.03517v1)**
-### **[VChatter: Exploring Generative Conversational Agents for Simulating Exposure Therapy to Reduce Social Anxiety](http://arxiv.org/abs/2506.03520v1)**
-### **[TokAlign: Efficient Vocabulary Adaptation via Token Alignment](http://arxiv.org/abs/2506.03523v1)**
-### **[Seed-Coder: Let the Code Model Curate Data for Itself](http://arxiv.org/abs/2506.03524v1)**
-### **[Video-Skill-CoT: Skill-based Chain-of-Thoughts for Domain-Adaptive Video Reasoning](http://arxiv.org/abs/2506.03525v1)**
-### **[Across Programming Language Silos: A Study on Cross-Lingual Retrieval-augmented Code Generation](http://arxiv.org/abs/2506.03535v1)**
-### **[Debate, Reflect, and Distill: Multi-Agent Feedback with Tree-Structured Preference Optimization for Efficient Language Model Enhancement](http://arxiv.org/abs/2506.03541v1)**
-### **[BPO: Revisiting Preference Modeling in Direct Preference Optimization](http://arxiv.org/abs/2506.03557v1)**
-### **[ConsistentChat: Building Skeleton-Guided Consistent Dialogues for Large Language Models from Scratch](http://arxiv.org/abs/2506.03558v1)**
-### **[MiMo-VL Technical Report](http://arxiv.org/abs/2506.03569v1)**
-### **[FreePRM: Training Process Reward Models Without Ground Truth Process Labels](http://arxiv.org/abs/2506.03570v1)**
-### **[Exchange of Perspective Prompting Enhances Reasoning in Large Language Models](http://arxiv.org/abs/2506.03573v1)**
-### **[KG-BiLM: Knowledge Graph Embedding via Bidirectional Language Models](http://arxiv.org/abs/2506.03576v1)**
-### **[Improving LLM-Based Fault Localization with External Memory and Project Context](http://arxiv.org/abs/2506.03585v1)**
-### **[Preface to the Special Issue of the TAL Journal on Scholarly Document Processing](http://arxiv.org/abs/2506.03587v1)**
-### **[Resolving Task Objective Conflicts in Unified Multimodal Understanding and Generation via Task-Aware Mixture-of-Experts](http://arxiv.org/abs/2506.03591v1)**
-### **[ControlThinker: Unveiling Latent Semantics for Controllable Image Generation through Visual Reasoning](http://arxiv.org/abs/2506.03596v1)**
-### **[Auto prompt sql: a resource-efficient architecture for text-to-sql translation in constrained environments](http://arxiv.org/abs/2506.03598v1)**
-### **[Learning to Insert [PAUSE] Tokens for Better Reasoning](http://arxiv.org/abs/2506.03616v1)**
-### **[Do Large Language Models Know Folktales? A Case Study of Yokai in Japanese Folktales](http://arxiv.org/abs/2506.03619v1)**
-### **[Robustness of Prompting: Enhancing Robustness of Large Language Models Against Prompting Attacks](http://arxiv.org/abs/2506.03627v1)**
-### **[EmoArt: A Multidimensional Dataset for Emotion-Aware Artistic Generation](http://arxiv.org/abs/2506.03652v1)**
-### **[MambaNeXt-YOLO: A Hybrid State Space Model for Real-time Object Detection](http://arxiv.org/abs/2506.03654v1)**
-### **[Facts are Harder Than Opinions -- A Multilingual, Comparative Analysis of LLM-Based Fact-Checking Reliability](http://arxiv.org/abs/2506.03655v1)**
-### **[Trustworthy Medical Question Answering: An Evaluation-Centric Survey](http://arxiv.org/abs/2506.03659v1)**
-### **[Reason from Future: Reverse Thought Chain Enhances LLM Reasoning](http://arxiv.org/abs/2506.03673v1)**
-### **[Robust Preference Optimization via Dynamic Target Margins](http://arxiv.org/abs/2506.03690v1)**
-### **[Advancements in Artificial Intelligence Applications for Cardiovascular Disease Research](http://arxiv.org/abs/2506.03698v1)**
-### **[Scaling Transformers for Discriminative Recommendation via Generative Pretraining](http://arxiv.org/abs/2506.03699v1)**
-### **[AdaDecode: Accelerating LLM Decoding with Adaptive Layer Parallelism](http://arxiv.org/abs/2506.03700v1)**
-### **[Learning-at-Criticality in Large Language Models for Quantum Field Theory and Beyond](http://arxiv.org/abs/2506.03703v1)**
-### **[ScoreRAG: A Retrieval-Augmented Generation Framework with Consistency-Relevance Scoring and Structured Summarization for News Generation](http://arxiv.org/abs/2506.03704v1)**
-### **[Verbalized Confidence Triggers Self-Verification: Emergent Behavior Without Explicit Reasoning Supervision](http://arxiv.org/abs/2506.03723v1)**
-### **[Sign-SGD is the Golden Gate between Multi-Node to Single-Node Learning: Significant Boost via Parameter-Free Optimization](http://arxiv.org/abs/2506.03725v1)**
-### **[SAAT: Synergistic Alternating Aggregation Transformer for Image Super-Resolution](http://arxiv.org/abs/2506.03740v1)**
-### **[Understanding Physical Properties of Unseen Deformable Objects by Leveraging Large Language Models and Robot Actions](http://arxiv.org/abs/2506.03760v1)**
-### **[Act-as-Pet: Benchmarking the Abilities of Large Language Models as E-Pets in Social Network Services](http://arxiv.org/abs/2506.03761v1)**
-### **[AhaKV: Adaptive Holistic Attention-Driven KV Cache Eviction for Efficient Inference of Large Language Models](http://arxiv.org/abs/2506.03762v1)**
-### **[ClozeMath: Improving Mathematical Reasoning in Language Models by Learning to Fill Equations](http://arxiv.org/abs/2506.03763v1)**
-### **[Unifying Uniform and Binary-coding Quantization for Accurate Compression of Large Language Models](http://arxiv.org/abs/2506.03781v1)**
-### **[Knockout LLM Assessment: Using Large Language Models for Evaluations through Iterative Pairwise Comparisons](http://arxiv.org/abs/2506.03785v1)**
-### **[Attention-Only Transformers via Unrolled Subspace Denoising](http://arxiv.org/abs/2506.03790v1)**
-### **[From Theory to Practice: Real-World Use Cases on Trustworthy LLM-Driven Process Modeling, Prediction and Automation](http://arxiv.org/abs/2506.03801v1)**
-### **[Personalized MR-Informed Diffusion Models for 3D PET Image Reconstruction](http://arxiv.org/abs/2506.03804v1)**
-### **[AssetOpsBench: Benchmarking AI Agents for Task Automation in Industrial Asset Operations and Maintenance](http://arxiv.org/abs/2506.03828v1)**
-### **[Prompt Candidates, then Distill: A Teacher-Student Framework for LLM-driven Data Annotation](http://arxiv.org/abs/2506.03857v1)**
-### **[EuroGEST: Investigating gender stereotypes in multilingual language models](http://arxiv.org/abs/2506.03867v1)**
-### **[Evaluating Apple Intelligence's Writing Tools for Privacy Against Large Language Model-Based Inference Attacks: Insights from Early Datasets](http://arxiv.org/abs/2506.03870v1)**
-### **[RadialRouter: Structured Representation for Efficient and Robust Large Language Models Routing](http://arxiv.org/abs/2506.03880v1)**
-### **[Video, How Do Your Tokens Merge?](http://arxiv.org/abs/2506.03885v1)**
-### **[Magic Mushroom: A Customizable Benchmark for Fine-grained Analysis of Retrieval Noise Erosion in RAG Systems](http://arxiv.org/abs/2506.03901v1)**
-### **[Learning from Noise: Enhancing DNNs for Event-Based Vision through Controlled Noise Injection](http://arxiv.org/abs/2506.03918v1)**
-### **[HSSBench: Benchmarking Humanities and Social Sciences Ability for Multimodal Large Language Models](http://arxiv.org/abs/2506.03922v1)**
-### **[More or Less Wrong: A Benchmark for Directional Bias in LLM Comparative Reasoning](http://arxiv.org/abs/2506.03923v1)**
-### **[VisCoder: Fine-Tuning LLMs for Executable Python Visualization Code Generation](http://arxiv.org/abs/2506.03930v1)**
-### **[DiffCAP: Diffusion-based Cumulative Adversarial Purification for Vision Language Models](http://arxiv.org/abs/2506.03933v1)**
-### **[Graph Counselor: Adaptive Graph Exploration via Multi-Agent Synergy to Enhance LLM Reasoning](http://arxiv.org/abs/2506.03939v1)**
-### **[From Real to Synthetic: Synthesizing Millions of Diversified and Complicated User Instructions with Attributed Grounding](http://arxiv.org/abs/2506.03968v1)**
-### **[Solving Inverse Problems via Diffusion-Based Priors: An Approximation-Free Ensemble Sampling Approach](http://arxiv.org/abs/2506.03979v1)**
-### **[Around the World in 24 Hours: Probing LLM Knowledge of Time and Place](http://arxiv.org/abs/2506.03984v1)**
-### **[GORACS: Group-level Optimal Transport-guided Coreset Selection for LLM-based Recommender Systems](http://arxiv.org/abs/2506.04015v1)**
-### **[Rex-Thinker: Grounded Object Referring via Chain-of-Thought Reasoning](http://arxiv.org/abs/2506.04034v1)**
-### **[Privacy and Security Threat for OpenAI GPTs](http://arxiv.org/abs/2506.04036v1)**
-### **[Generating Automotive Code: Large Language Models for Software Development and Verification in Safety-Critical Systems](http://arxiv.org/abs/2506.04038v1)**
-### **[Mitigating Hallucinations in Large Vision-Language Models via Entity-Centric Multimodal Preference Optimization](http://arxiv.org/abs/2506.04039v1)**
-### **[Unveiling and Eliminating the Shortcut Learning for Locate-Then-Edit Knowledge Editing via Both Subject and Relation Awareness](http://arxiv.org/abs/2506.04042v1)**
-### **[Lacuna Inc. at SemEval-2025 Task 4: LoRA-Enhanced Influence-Based Unlearning for LLMs](http://arxiv.org/abs/2506.04044v1)**
-### **[Explainability-Based Token Replacement on LLM-Generated Text](http://arxiv.org/abs/2506.04050v1)**
-### **[High Accuracy, Less Talk (HALT): Reliable LLMs through Capability-Aligned Finetuning](http://arxiv.org/abs/2506.04051v1)**
-### **[Crowd-SFT: Crowdsourcing for LLM Alignment](http://arxiv.org/abs/2506.04063v1)**
-### **[Progressive Mastery: Customized Curriculum Learning with Guided Prompting for Mathematical Reasoning](http://arxiv.org/abs/2506.04065v1)**
-### **[Controlling Difficulty of Generated Text for AI-Assisted Language Learning](http://arxiv.org/abs/2506.04072v1)**
-### **[A Novel Data Augmentation Approach for Automatic Speaking Assessment on Opinion Expressions](http://arxiv.org/abs/2506.04077v1)**
-### **[LLMEval-Med: A Real-world Clinical Benchmark for Medical LLMs with Physician Validation](http://arxiv.org/abs/2506.04078v1)**
-### **[EuroLLM-9B: Technical Report](http://arxiv.org/abs/2506.04079v1)**
-### **[A Generative Adaptive Replay Continual Learning Model for Temporal Knowledge Graph Reasoning](http://arxiv.org/abs/2506.04083v1)**
-### **[Multimodal Tabular Reasoning with Privileged Structured Information](http://arxiv.org/abs/2506.04088v1)**
-### **[AmbiK: Dataset of Ambiguous Tasks in Kitchen Environment](http://arxiv.org/abs/2506.04089v1)**
-### **[TextAtari: 100K Frames Game Playing with Language Agents](http://arxiv.org/abs/2506.04098v1)**
-### **[Rectified Sparse Attention](http://arxiv.org/abs/2506.04108v1)**
-### **[Guided Speculative Inference for Efficient Test-Time Alignment of LLMs](http://arxiv.org/abs/2506.04118v1)**
-### **[Recent Advances in Medical Image Classification](http://arxiv.org/abs/2506.04129v1)**
-### **[TRiSM for Agentic AI: A Review of Trust, Risk, and Security Management in LLM-based Agentic Multi-Agent Systems](http://arxiv.org/abs/2506.04133v1)**
-### **[MMR-V: What's Left Unsaid? A Benchmark for Multimodal Deep Reasoning in Videos](http://arxiv.org/abs/2506.04141v1)**
-### **[Establishing Trustworthy LLM Evaluation via Shortcut Neuron Analysis](http://arxiv.org/abs/2506.04142v1)**
-### **[A Dataset for Addressing Patient's Information Needs related to Clinical Course of Hospitalization](http://arxiv.org/abs/2506.04156v1)**
-### **[Image Editing As Programs with Diffusion Models](http://arxiv.org/abs/2506.04158v1)**
-### **[VISCA: Inferring Component Abstractions for Automated End-to-End Testing](http://arxiv.org/abs/2506.04161v1)**
-### **[Does Prompt Design Impact Quality of Data Imputation by LLMs?](http://arxiv.org/abs/2506.04172v1)**
-### **[SkipGPT: Dynamic Layer Pruning Reinvented with Token Awareness and Module Decoupling](http://arxiv.org/abs/2506.04179v1)**
-### **[SuperWriter: Reflection-Driven Long-Form Generation with Large Language Models](http://arxiv.org/abs/2506.04180v1)**
-### **[Long or short CoT? Investigating Instance-level Switch of Large Reasoning Models](http://arxiv.org/abs/2506.04182v1)**
-### **[R-Search: Empowering LLM Reasoning with Search via Multi-Reward Reinforcement Learning](http://arxiv.org/abs/2506.04185v1)**
-### **[TracLLM: A Generic Framework for Attributing Long Context LLMs](http://arxiv.org/abs/2506.04202v1)**
-### **[Cascadia: A Cascade Serving System for Large Language Models](http://arxiv.org/abs/2506.04203v1)**
-### **[EPiC: Towards Lossless Speedup for Reasoning Training through Edge-Preserving CoT Condensation](http://arxiv.org/abs/2506.04205v1)**
-### **[Advancing Multimodal Reasoning: From Optimized Cold Start to Staged Reinforcement Learning](http://arxiv.org/abs/2506.04207v1)**
-### **[Diffusion Domain Teacher: Diffusion Guided Domain Adaptive Object Detector](http://arxiv.org/abs/2506.04211v1)**
-### **[FullDiT2: Efficient In-Context Conditioning for Video Diffusion Transformers](http://arxiv.org/abs/2506.04213v1)**
-### **[Sounding that Object: Interactive Object-Aware Image to Audio Generation](http://arxiv.org/abs/2506.04214v1)**
+### **[Zero-Shot Open-Schema Entity Structure Discovery](http://arxiv.org/abs/2506.04458v1)**
+### **[Watermarking Degrades Alignment in Language Models: Analysis and Mitigation](http://arxiv.org/abs/2506.04462v1)**
+### **[Aligning Large Language Models with Implicit Preferences from User-Generated Content](http://arxiv.org/abs/2506.04463v1)**
+### **[Matching Markets Meet LLMs: Algorithmic Reasoning with Ranked Preferences](http://arxiv.org/abs/2506.04478v1)**
+### **[CogMath: Assessing LLMs' Authentic Mathematical Ability from a Human Cognitive Perspective](http://arxiv.org/abs/2506.04481v1)**
+### **[SQLens: An End-to-End Framework for Error Detection and Correction in Text-to-SQL](http://arxiv.org/abs/2506.04494v1)**
+### **[FALO: Fast and Accurate LiDAR 3D Object Detection on Resource-Constrained Devices](http://arxiv.org/abs/2506.04499v1)**
+### **["Don't Do That!": Guiding Embodied Systems through Large Language Model-based Constraint Generation](http://arxiv.org/abs/2506.04500v1)**
+### **[Schema Generation for Large Knowledge Graphs Using Large Language Models](http://arxiv.org/abs/2506.04512v1)**
+### **[BEAR: BGP Event Analysis and Reporting](http://arxiv.org/abs/2506.04514v1)**
+### **[DRE: An Effective Dual-Refined Method for Integrating Small and Large Language Models in Open-Domain Dialogue Evaluation](http://arxiv.org/abs/2506.04516v1)**
+### **[Please Translate Again: Two Simple Experiments on Whether Human-Like Reasoning Helps Translation](http://arxiv.org/abs/2506.04521v1)**
+### **[HALoS: Hierarchical Asynchronous Local SGD over Slow Networks for Geo-Distributed Large Language Model Training](http://arxiv.org/abs/2506.04531v1)**
+### **[hdl2v: A Code Translation Dataset for Enhanced LLM Verilog Generation](http://arxiv.org/abs/2506.04544v1)**
+### **[Perceptual Decoupling for Scalable Multi-modal Reasoning via Reward-Optimized Captioning](http://arxiv.org/abs/2506.04559v1)**
+### **[From Standalone LLMs to Integrated Intelligence: A Survey of Compound Al Systems](http://arxiv.org/abs/2506.04565v1)**
+### **[OpenAg: Democratizing Agricultural Intelligence](http://arxiv.org/abs/2506.04571v1)**
+### **[Demonstrations of Integrity Attacks in Multi-Agent Systems](http://arxiv.org/abs/2506.04572v1)**
+### **[Reasoning or Overthinking: Evaluating Large Language Models on Financial Sentiment Analysis](http://arxiv.org/abs/2506.04574v1)**
+### **[Are LLMs Reliable Translators of Logical Reasoning Across Lexically Diversified Contexts?](http://arxiv.org/abs/2506.04575v1)**
+### **[Selecting Demonstrations for Many-Shot In-Context Learning via Gradient Matching](http://arxiv.org/abs/2506.04579v1)**
+### **[LESS: Large Language Model Enhanced Semi-Supervised Learning for Speech Foundational Models](http://arxiv.org/abs/2506.04586v1)**
+### **[Safe: Enhancing Mathematical Reasoning in Large Language Models via Retrospective Step-aware Formal Verification](http://arxiv.org/abs/2506.04592v1)**
+### **[A MISMATCHED Benchmark for Scientific Natural Language Inference](http://arxiv.org/abs/2506.04603v1)**
+### **[SmartAvatar: Text- and Image-Guided Human Avatar Generation with VLM AI Agents](http://arxiv.org/abs/2506.04606v1)**
+### **[Exploring bidirectional bounds for minimax-training of Energy-based models](http://arxiv.org/abs/2506.04609v1)**
+### **[Revisiting Test-Time Scaling: A Survey and a Diversity-Aware Method for Efficient Reasoning](http://arxiv.org/abs/2506.04611v1)**
+### **[Perfecting Depth: Uncertainty-Aware Enhancement of Metric Depth](http://arxiv.org/abs/2506.04612v1)**
+### **[Look Before You Leap: A GUI-Critic-R1 Model for Pre-Operative Error Diagnosis in GUI Automation](http://arxiv.org/abs/2506.04614v1)**
+### **[Advancing Tool-Augmented Large Language Models via Meta-Verification and Reflection Learning](http://arxiv.org/abs/2506.04625v1)**
+### **[Unfolding Spatial Cognition: Evaluating Multimodal Models on Visual Simulations](http://arxiv.org/abs/2506.04633v1)**
+### **[Text-Aware Real-World Image Super-Resolution via Diffusion Model with Joint Segmentation Decoders](http://arxiv.org/abs/2506.04641v1)**
+### **[TaDA: Training-free recipe for Decoding with Adaptive KV Cache Compression and Mean-centering](http://arxiv.org/abs/2506.04642v1)**
+### **[Neural Network Reprogrammability: A Unified Theme on Model Reprogramming, Prompt Tuning, and Prompt Instruction](http://arxiv.org/abs/2506.04650v1)**
+### **[E-bike agents: Large Language Model-Driven E-Bike Accident Analysis and Severity Prediction](http://arxiv.org/abs/2506.04654v1)**
+### **[Gen-n-Val: Agentic Image Data Generation and Validation](http://arxiv.org/abs/2506.04676v1)**
+### **[Normative Conflicts and Shallow AI Alignment](http://arxiv.org/abs/2506.04679v1)**
+### **[MARS: Radio Map Super-resolution and Reconstruction Method under Sparse Channel Measurements](http://arxiv.org/abs/2506.04682v1)**
+### **[MMRefine: Unveiling the Obstacles to Robust Refinement in Multimodal Large Language Models](http://arxiv.org/abs/2506.04688v1)**
+### **[Recycling the Web: A Method to Enhance Pre-training Data Quality and Quantity for Language Models](http://arxiv.org/abs/2506.04689v1)**
+### **[Towards Better Generalization via Distributional Input Projection Network](http://arxiv.org/abs/2506.04690v1)**
+### **[Cracking the Code: Enhancing Implicit Hate Speech Detection through Coding Classification](http://arxiv.org/abs/2506.04693v1)**
+### **[Empowering Economic Simulation for Massively Multiplayer Online Games through Generative Agent-Based Modeling](http://arxiv.org/abs/2506.04699v1)**
+### **[LLM-based phoneme-to-grapheme for phoneme-based speech recognition](http://arxiv.org/abs/2506.04711v1)**
+### **[Towards Holistic Visual Quality Assessment of AI-Generated Videos: A LLM-Based Multi-Dimensional Evaluation Model](http://arxiv.org/abs/2506.04715v1)**
+### **[Learning dissection trajectories from expert surgical videos via imitation learning with equivariant diffusion](http://arxiv.org/abs/2506.04716v1)**
+### **[Lifelong Evolution: Collaborative Learning between Large and Small Language Models for Continuous Emergent Fake News Detection](http://arxiv.org/abs/2506.04739v1)**
+### **[Multi-Layer GRPO: Enhancing Reasoning and Self-Correction in Large Language Models](http://arxiv.org/abs/2506.04746v1)**
+### **[Truth in the Few: High-Value Data Selection for Efficient Multi-Modal Reasoning](http://arxiv.org/abs/2506.04755v1)**
+### **[Exp4Fuse: A Rank Fusion Framework for Enhanced Sparse Retrieval using Large Language Model-based Query Expansion](http://arxiv.org/abs/2506.04760v1)**
+### **[Log-Linear Attention](http://arxiv.org/abs/2506.04761v1)**
+### **[GOLFer: Smaller LM-Generated Documents Hallucination Filter & Combiner for Query Expansion in Information Retrieval](http://arxiv.org/abs/2506.04762v1)**
+### **[OpenGT: A Comprehensive Benchmark For Graph Transformers](http://arxiv.org/abs/2506.04765v1)**
+### **[Fine-Grained Interpretation of Political Opinions in Large Language Models](http://arxiv.org/abs/2506.04774v1)**
+### **[MMSU: A Massive Multi-task Spoken Language Understanding and Reasoning Benchmark](http://arxiv.org/abs/2506.04779v1)**
+### **[Towards LLM-Centric Multimodal Fusion: A Survey on Integration Strategies and Techniques](http://arxiv.org/abs/2506.04788v1)**
+### **[Dissecting Logical Reasoning in LLMs: A Fine-Grained Evaluation and Supervision Study](http://arxiv.org/abs/2506.04810v1)**
+### **[Design of intelligent proofreading system for English translation based on CNN and BERT](http://arxiv.org/abs/2506.04811v1)**
+### **[LogicPuzzleRL: Cultivating Robust Mathematical Reasoning in LLMs via Reinforcement Learning](http://arxiv.org/abs/2506.04821v1)**
+### **[Evaluating Vision-Language and Large Language Models for Automated Student Assessment in Indonesian Classrooms](http://arxiv.org/abs/2506.04822v1)**
+### **[DualX-VSR: Dual Axial Spatial$\times$Temporal Transformer for Real-World Video Super-Resolution without Motion Compensation](http://arxiv.org/abs/2506.04830v1)**
+### **[Joint Evaluation of Answer and Reasoning Consistency for Hallucination Detection in Large Reasoning Models](http://arxiv.org/abs/2506.04832v1)**
+### **[On Automating Security Policies with Contemporary LLMs](http://arxiv.org/abs/2506.04838v1)**
+### **[Multiple-Choice Question Generation Using Large Language Models: Methodology and Educator Insights](http://arxiv.org/abs/2506.04851v1)**
+### **[Improving AI-generated music with user-guided training](http://arxiv.org/abs/2506.04852v1)**
+### **[Prompting LLMs: Length Control for Isometric Machine Translation](http://arxiv.org/abs/2506.04855v1)**
+### **[Sparse Autoencoders, Again?](http://arxiv.org/abs/2506.04859v1)**
+### **[LLMs for sensory-motor control: Combining in-context and iterative learning](http://arxiv.org/abs/2506.04867v1)**
+### **[Invisible Backdoor Triggers in Image Editing Model via Deep Watermarking](http://arxiv.org/abs/2506.04879v1)**
+### **[Evaluating the Effectiveness of Linguistic Knowledge in Pretrained Language Models: A Case Study of Universal Dependencies](http://arxiv.org/abs/2506.04887v1)**
+### **[ICPC-Eval: Probing the Frontiers of LLM Reasoning with Competitive Programming Contests](http://arxiv.org/abs/2506.04894v1)**
+### **[From Objects to Anywhere: A Holistic Benchmark for Multi-level Visual Grounding in 3D Scenes](http://arxiv.org/abs/2506.04897v1)**
+### **[Verbose ListOps (VLO): Beyond Long Context -- Unmasking LLM's Reasoning Blind Spots](http://arxiv.org/abs/2506.04907v1)**
+### **[When Thinking LLMs Lie: Unveiling the Strategic Deception in Representations of Reasoning Models](http://arxiv.org/abs/2506.04909v1)**
+### **[Simulating LLM-to-LLM Tutoring for Multilingual Math Feedback](http://arxiv.org/abs/2506.04920v1)**
+### **[APVR: Hour-Level Long Video Understanding with Adaptive Pivot Visual Information Retrieval](http://arxiv.org/abs/2506.04953v1)**
+### **[PoCGen: Generating Proof-of-Concept Exploits for Vulnerabilities in Npm Packages](http://arxiv.org/abs/2506.04962v1)**
+### **[From Struggle (06-2024) to Mastery (02-2025) LLMs Conquer Advanced Algorithm Exams and Pave the Way for Editorial Generation](http://arxiv.org/abs/2506.04965v1)**
+### **[Evaluating Prompt-Driven Chinese Large Language Models: The Influence of Persona Assignment on Stereotypes and Safeguards](http://arxiv.org/abs/2506.04975v1)**
+### **[Agentic AI for Intent-Based Industrial Automation](http://arxiv.org/abs/2506.04980v1)**
+### **[TextVidBench: A Benchmark for Long Video Scene Text Understanding](http://arxiv.org/abs/2506.04983v1)**
+### **[FPTQuant: Function-Preserving Transforms for LLM Quantization](http://arxiv.org/abs/2506.04985v1)**
+### **[Mathematical Reasoning for Unmanned Aerial Vehicles: A RAG-Based Approach for Complex Arithmetic Reasoning](http://arxiv.org/abs/2506.04998v1)**
+### **[SCOP: Evaluating the Comprehension Process of Large Language Models from a Cognitive View](http://arxiv.org/abs/2506.05000v1)**
+### **[QiMeng: Fully Automated Hardware and Software Design for Processor Chip](http://arxiv.org/abs/2506.05007v1)**
+### **[Automatic Robustness Stress Testing of LLMs as Mathematical Problem Solvers](http://arxiv.org/abs/2506.05038v1)**
+### **[FlowDirector: Training-Free Flow Steering for Precise Text-to-Video Editing](http://arxiv.org/abs/2506.05046v1)**
+### **[TALL -- A Trainable Architecture for Enhancing LLM Performance in Low-Resource Languages](http://arxiv.org/abs/2506.05057v1)**
+### **[A Survey on Vietnamese Document Analysis and Recognition: Challenges and Future Directions](http://arxiv.org/abs/2506.05061v1)**
+### **[Does It Make Sense to Speak of Introspection in Large Language Models?](http://arxiv.org/abs/2506.05068v1)**
+### **[Reason-to-Recommend: Using Interaction-of-Thought Reasoning to Enhance LLM Recommendation](http://arxiv.org/abs/2506.05069v1)**
+### **[RIVAL: Reinforcement Learning with Iterative and Adversarial Optimization for Machine Translation](http://arxiv.org/abs/2506.05070v1)**
+### **[Just a Scratch: Enhancing LLM Capabilities for Self-harm Detection through Intent Differentiation and Emoji Interpretation](http://arxiv.org/abs/2506.05073v1)**
+### **[SeedEdit 3.0: Fast and High-Quality Generative Image Editing](http://arxiv.org/abs/2506.05083v1)**
+### **[Astraea: A GPU-Oriented Token-wise Acceleration Framework for Video Diffusion Transformers](http://arxiv.org/abs/2506.05096v1)**
+### **[Membership Inference Attacks on Sequence Models](http://arxiv.org/abs/2506.05126v1)**
+### **[PixCell: A generative foundation model for digital histopathology images](http://arxiv.org/abs/2506.05127v1)**
+### **[DiCoRe: Enhancing Zero-shot Event Detection via Divergent-Convergent LLM Reasoning](http://arxiv.org/abs/2506.05128v1)**
+### **[Do Large Language Models Judge Error Severity Like Humans?](http://arxiv.org/abs/2506.05142v1)**
+### **[Knowledgeable-r1: Policy Optimization for Knowledge Exploration in Retrieval-Augmented Generation](http://arxiv.org/abs/2506.05154v1)**
+### **[Dissecting Bias in LLMs: A Mechanistic Interpretability Perspective](http://arxiv.org/abs/2506.05166v1)**
+### **[ECoRAG: Evidentiality-guided Compression for Long Context RAG](http://arxiv.org/abs/2506.05167v1)**
+### **[Associative Memory and Generative Diffusion in the Zero-noise Limit](http://arxiv.org/abs/2506.05178v1)**
+### **[On the Comprehensibility of Multi-structured Financial Documents using LLMs and Pre-processing Tools](http://arxiv.org/abs/2506.05182v1)**
+### **[TreeRPO: Tree Relative Policy Optimization](http://arxiv.org/abs/2506.05183v1)**
+### **[Counterfactual reasoning: an analysis of in-context emergence](http://arxiv.org/abs/2506.05188v1)**
+### **[Quantifying Cross-Modality Memorization in Vision-Language Models](http://arxiv.org/abs/2506.05198v1)**
+### **[Transformers Meet In-Context Learning: A Universal Approximation Theory](http://arxiv.org/abs/2506.05200v1)**
+### **[OGGSplat: Open Gaussian Growing for Generalizable Reconstruction with Expanded Field-of-View](http://arxiv.org/abs/2506.05204v1)**
+### **[RELIC: Evaluating Compositional Instruction Following via Language Recognition](http://arxiv.org/abs/2506.05205v1)**
+### **[Follow-Your-Motion: Video Motion Transfer via Efficient Spatial-Temporal Decoupled Finetuning](http://arxiv.org/abs/2506.05207v1)**
+### **[The Common Pile v0.1: An 8TB Dataset of Public Domain and Openly Licensed Text](http://arxiv.org/abs/2506.05209v1)**
+### **[LLM-First Search: Self-Guided Exploration of the Solution Space](http://arxiv.org/abs/2506.05213v1)**
+### **[Improving Low-Resource Morphological Inflection via Self-Supervised Objectives](http://arxiv.org/abs/2506.05227v1)**
+### **[Diagonal Batching Unlocks Parallelism in Recurrent Memory Transformers for Long Contexts](http://arxiv.org/abs/2506.05229v1)**
+### **[Progressive Tempering Sampler with Diffusion](http://arxiv.org/abs/2506.05231v1)**
+### **[MesaNet: Sequence Modeling by Locally Optimal Test-Time Training](http://arxiv.org/abs/2506.05233v1)**
+### **[Aligning Latent Spaces with Flow Priors](http://arxiv.org/abs/2506.05240v1)**
+### **[SECNEURON: Reliable and Flexible Abuse Control in Local LLMs via Hybrid Neuron Encryption](http://arxiv.org/abs/2506.05242v1)**
+### **[On the Convergence of Gradient Descent on Learning Transformers with Residual Connections](http://arxiv.org/abs/2506.05249v1)**
+### **[LeanPO: Lean Preference Optimization for Likelihood Alignment in Video-LLMs](http://arxiv.org/abs/2506.05260v1)**
+### **[Teaming in the AI Era: AI-Augmented Frameworks for Forming, Simulating, and Optimizing Human Teams](http://arxiv.org/abs/2506.05265v1)**
+### **[Micro-Act: Mitigate Knowledge Conflict in Question Answering via Actionable Self-Reasoning](http://arxiv.org/abs/2506.05278v1)**
+### **[Stable Vision Concept Transformers for Medical Diagnosis](http://arxiv.org/abs/2506.05286v1)**
+### **[EOC-Bench: Can MLLMs Identify, Recall, and Forecast Objects in an Egocentric World?](http://arxiv.org/abs/2506.05287v1)**
+### **[AliTok: Towards Sequence Modeling Alignment between Tokenizer and Autoregressive Model](http://arxiv.org/abs/2506.05289v1)**
+### **[Sample Complexity and Representation Ability of Test-time Scaling Paradigms](http://arxiv.org/abs/2506.05295v1)**
+### **[Power Law Guided Dynamic Sifting for Efficient Attention](http://arxiv.org/abs/2506.05300v1)**
+### **[Perceive Anything: Recognize, Explain, Caption, and Segment Anything in Images and Videos](http://arxiv.org/abs/2506.05302v1)**
+### **[ProRefine: Inference-time Prompt Refinement with Textual Feedback](http://arxiv.org/abs/2506.05305v1)**
+### **[Constrained Entropic Unlearning: A Primal-Dual Framework for Large Language Models](http://arxiv.org/abs/2506.05314v1)**
+### **[Improving Data Efficiency for LLM Reinforcement Fine-tuning Through Difficulty-targeted Online Data Selection and Rollout Replay](http://arxiv.org/abs/2506.05316v1)**
+### **[Generalizable, real-time neural decoding with hybrid state-space models](http://arxiv.org/abs/2506.05320v1)**
+### **[MINT-CoT: Enabling Interleaved Visual Tokens in Mathematical Chain-of-Thought Reasoning](http://arxiv.org/abs/2506.05331v1)**
+### **[Search Arena: Analyzing Search-Augmented LLMs](http://arxiv.org/abs/2506.05334v1)**
+### **[VideoMolmo: Spatio-Temporal Grounding Meets Pointing](http://arxiv.org/abs/2506.05336v1)**
+### **[Exploring Diffusion Transformer Designs via Grafting](http://arxiv.org/abs/2506.05340v1)**
+### **[Direct Numerical Layout Generation for 3D Indoor Scene Synthesis via Spatial Reasoning](http://arxiv.org/abs/2506.05341v1)**
+### **[ContentV: Efficient Training of Video Generation Models with Limited Compute](http://arxiv.org/abs/2506.05343v1)**
+### **[SparseMM: Head Sparsity Emerges from Visual Concept Responses in MLLMs](http://arxiv.org/abs/2506.05344v1)**
+### **[Why LLM Safety Guardrails Collapse After Fine-tuning: A Similarity Analysis Between Alignment and Fine-tuning Datasets](http://arxiv.org/abs/2506.05346v1)**
+### **[Contrastive Flow Matching](http://arxiv.org/abs/2506.05350v1)**
