@@ -4,7 +4,8 @@ This project automates the process of fetching, filtering, and summarizing resea
 # Paper
 
 - [Daily Papers](./DailyPaper.md)
-- [All Papers](./summaries/all_papers.md)
+
+[//]: # (- [All Papers]&#40;./summaries/all_papers.md&#41;)
 
 ### How it works
 

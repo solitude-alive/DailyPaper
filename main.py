@@ -3,7 +3,7 @@ import datetime
 
 from script.fetch_papers import fetch_papers
 from script.filter_papers import duplicate_papers, filter_papers, select_top_papers
-from script.generate_markdown import generate_markdown_for_day, update_all_papers
+from script.generate_markdown import generate_markdown_for_day
 from script.git_operations import create_pull_request, git_commit_and_push
 from script.process_papers import process_papers
 from script.update_daily import update_daily_papers
@@ -62,8 +62,8 @@ def main():
     print("Updating highlight papers to DailyPaper.md ...")
     update_daily_papers(highlight_papers, filtered_papers, date)
 
-    print("Updating all papers file...")
-    update_all_papers(filtered_papers, date)
+    # # print("Updating all papers file...")
+    # update_all_papers(filtered_papers, date)
 
     print("Committing and pushing changes to Git...")
     git_commit_and_push(date)
