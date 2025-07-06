@@ -172,6 +172,9 @@ The paper explores the trade-offs involved in conditioning synthetic data genera
 
 *   **Potential Influence:** The paper has the potential to influence future research on synthetic data generation for object detection.  The findings on the importance of diversity and the scaling behavior of synthetic data can guide the development of more effective data augmentation techniques. The emphasis on conditioning strategies and the relative benefits of image-first and labels-first proxy methods will likely inspire further investigations in this area. The paper can also be used to improve object detection in various applications, such as industrial vision systems and robotics.
 
+
+DisCon has the potential to influence future research in autoregressive image generation. The discrete-as-condition paradigm offers a promising direction for combining the strengths of discrete and continuous representations.  It could also inspire new methods for multimodal generation and integration with LLMs.
+
 **Score:** 8
 
 **Rationale:**
@@ -267,6 +270,45 @@ The paper introduces Hita, a novel image tokenizer designed to improve autoregre
 
 A score of 8 reflects the paper's significant contributions, clear presentation, comprehensive experimentation, and potential impact on the field. It is not scored higher due to the dependence on a pre-trained foundation model, the limitation in the dataset used, and the incremental nature of the improvement in the context of rapid progress in the field. The paper is well-executed and provides a solid foundation for future research, but it is not a paradigm shift that would warrant a higher score.
 
+
+The paper presents a novel and well-performing image generation framework (DisCon) that effectively addresses the limitations of existing AR models. The approach of treating discrete tokens as conditions for continuous generation is a valuable contribution, resulting in superior image quality and faster inference. The paper is well-written, well-motivated, and supported by strong experimental results. The main weakness lies in the dependency on pre-trained components and potentially incremental gains of each building block. However, the overall innovation and impact on the field justify the score. Given these considerations, a score of 8 reflects the significant, yet not groundbreaking, contribution of this paper.
+
+- **Score**: 8/10
+
+### **[Frontiers of Generative AI for Network Optimization: Theories, Limits, and Visions](http://arxiv.org/abs/2507.01773v1)**
+- **Summary**: ### Summary The paper titled "Frontiers of Generative AI for Network Optimization: Theories, Limits, and Visions" offers a thorough review and analysis of the applications of generative AI (GenAI) in network optimization, particularly focusing on generative diffusion models (GDMs) and large pre-trained models (LPTMs). The authors categorize network optimization problems into two main types: one-shot optimization and Markov decision processes (MDPs). They trace foundational contributions from the AI field and outline current efforts in applying GenAI to network tasks. The paper critically investigates theoretical generalization bounds for GDMs, underscoring limitations such as constraint satisfaction issues, poor conceptual understanding, and the probabilistic nature of the generated outputs. The authors argue against the overestimation of GenAI capabilities, cautioning that there is a significant gap between generation and optimization. Future directions discussed include the need for a clearer theoretical understanding of how these two domains can be better integrated.  ### Critical Evaluation **Novelty and Significance:**  The paper provides a significant contribution by addressing a rapidly evolving intersection of generative AI and network optimization. The categorization of optimization problems into one-shot and MDP settings is particularly novel, as it helps to structure the understanding of GenAI's applicability and performance in these contexts. Delving into theoretical generalization bounds and reflecting on the limitations of current models adds depth to the discourse, which is often lacking in existing literature. However, while the paper does a commendable job of synthesizing information and theorizing about future directions, it could be argued that some insights could have been more deeply explored or supported with empirical data. The caution against overestimating GenAI capabilities is a timely warning but lacks robust case studies within the paper to illustrate these concerns effectively. **Strengths:** 1. **Comprehensive Review:** The paper effectively consolidates various works related to GenAI and network optimization, making it a useful resource for future research. 2. **Critical Perspective:** It encourages a realistic understanding of GenAI's capabilities rather than promoting an idealized view. 3. **Structured Analysis:** The clear categorization of optimization types presents an organized approach to the complexities within the field. **Weaknesses:** 1. **Lack of Empirical Support:** The theoretical insights are not sufficiently substantiated by practical examples, potentially limiting the paper’s applicability. 2. **Overemphasis on Limitations:** While acknowledging limitations is crucial, a more balanced approach showcasing successful applications could provide a richer perspective. 3. **Depth of Future Directions:** Suggestions for future research, while interesting, lack specific methodologies or frameworks that researchers could utilize. **Potential Influence:** Given the increasing integration of GenAI in network optimization solutions, the findings and discussions in this paper are poised to shape future research directions significantly. Researchers and practitioners may draw from this work to develop more sophisticated models that are both efficient and aligned with realistic capabilities. Overall, this paper represents an important step in addressing the gaps in understanding the nuances of applying generative AI to network optimization, and it sets the groundwork for future exploration in bridging theory between generation and optimization. ### Score: 8 The score of 8 reflects the paper’s strong synthesis of knowledge and critical insights into the applications and limitations of GenAI in network optimization, while also acknowledging some areas where further development and empirical grounding could enhance its impact and utility in the field.
+- **Score**: 8/10
+
+### **[APRMCTS: Improving LLM-based Automated Program Repair with Iterative Tree Search](http://arxiv.org/abs/2507.01827v1)**
+- **Summary**: Here's a summary and critical evaluation of the paper:
+
+**Summary:**
+
+The paper "APRMCTS: Improving LLM-based Automated Program Repair with Iterative Tree Search" proposes a novel approach to enhance LLM-based Automated Program Repair (APR). The method, called APRMCTS, integrates Monte Carlo Tree Search (MCTS) into the patch searching process.  Instead of relying on trial-and-error patch generation, APRMCTS globally evaluates explored patches and iteratively refines the most promising ones. The algorithm involves four stages: Patch Selection (using UCT), Patch Generation (incorporating Chain-of-Thought and self-reflection), Patch Evaluation (using LLM-as-Judge and Test-as-Judge), and Patch Tree Updating. Experiments on the Defects4J dataset show APRMCTS outperforms state-of-the-art baselines in terms of the number of fixed bugs, while also being more efficient (lower time and monetary costs). The approach is also demonstrated to be flexible, working well with different LLMs and effective in multi-language settings.
+
+**Critical Evaluation:**
+
+*   **Novelty:** The primary novelty of the paper lies in the integration of MCTS, a tree search algorithm, with LLM-based APR. While LLMs have been increasingly used in APR, leveraging tree search to guide the patch generation process is a less explored area. The use of CoT and self-reflection during patch generation and LLM-as-Judge alongside Test-as-Judge for patch evaluation are also valuable additions. Combining these elements contributes a novel approach.
+*   **Significance:** The paper demonstrates significant improvements in APR performance compared to existing methods, particularly in terms of the number of bugs fixed and cost efficiency. The fact that APRMCTS reduces the need for massive patch generation (smaller patch sizes) is a crucial advantage, directly addressing the cost and time limitations of existing LLM-based APR systems. The generalizability of the approach (compatibility with various LLMs and languages) enhances its practical value. The analysis showing the effectiveness of individual components, such as CoT, test information, and search/evaluation, is important for understanding the benefits of the proposed design.  The ability to fix bugs that are hard for simpler line-based approaches (demonstrated by the Cli_19 case study) is a significant contribution.
+*   **Strengths:**
+
+    *   The integration of MCTS provides a structured and efficient way to explore the vast search space of potential code fixes.
+    *   The use of CoT and self-reflection improves the quality of generated patches by guiding the LLM to reason more explicitly.
+    *   The adaptive evaluation strategy (LLM-as-Judge and Test-as-Judge) addresses the limitations of test coverage in certain datasets.
+    *   Extensive experimental validation across multiple datasets (Defects4J, QuixBugs, ConDefects) and LLMs demonstrates the robustness of APRMCTS.
+    *   Cost analysis clearly highlights the efficiency advantages compared to existing LLM-based APR methods.
+*   **Weaknesses:**
+
+    *   The paper's claim of being *model-agnostic* should be qualified.  While APRMCTS works with several LLMs, its performance improvement varies across them.  Deeper analysis into why specific LLMs benefit more from APRMCTS would improve the paper.
+    *   While the paper emphasizes lower costs, the exact monetary costs can vary based on API pricing changes.  A sensitivity analysis based on token costs would strengthen the cost analysis.
+    *   The current focus is on defects in specific well-defined datasets.  Future work should consider how APRMCTS performs on other bug types (e.g., security vulnerabilities) or on real-world software projects.
+    *   The selection of baselines, while covering multiple categories, could be expanded to include more recent and potentially competitive LLM-based APR approaches.
+*   **Potential Influence:** APRMCTS has the potential to significantly influence the field of automated program repair by providing a more effective and efficient approach for leveraging LLMs.  Its combination of tree search, CoT reasoning, and adaptive evaluation could inspire new APR techniques and frameworks. The reduction in computational cost makes LLM-based APR more accessible and practical for wider adoption.
+
+**Score: 8**
+
+**Rationale:** The paper introduces a novel and effective approach to LLM-based APR, demonstrating significant performance improvements and efficiency gains.  The extensive experimental validation and detailed component analysis strengthen the claims. The key advantage lies in structured exploration, cost reduction, and handling complex bugs that simpler approaches often miss.  While there is room for further investigation and refinement, the current work represents a substantial contribution to the field and is likely to inspire future research in the area of automated program repair. The weaknesses are primarily areas for future work that do not significantly detract from the core contribution.
+
 - **Score**: 8/10
 
 ### **[Posterior Transition Modeling for Unsupervised Diffusion-Based Speech Enhancement](http://arxiv.org/abs/2507.02391v1)**
@@ -305,7 +347,7 @@ The paper introduces two novel unsupervised speech enhancement algorithms, DEPSE
 
 The paper represents a significant advancement in unsupervised speech enhancement. The explicit modeling of the conditional transition distribution, particularly the introduction of a diffusion process over the noisy speech (DEPSE-TL), is a novel and impactful idea. The experimental results demonstrate clear improvements in performance and robustness compared to existing methods. The weaknesses mentioned (lack of SOTA comparisons and computational complexity analysis) are not fatal flaws, given the paper's primary focus on improving unsupervised methods and robustness under domain mismatch. The strengths substantially outweigh the weaknesses.
 
-Score: 8
+The paper presents a novel and well-executed approach to a challenging problem in instruction-based image editing. The contributions, including the HI-IE task definition, the Reason50K dataset, and the ReasonBrain architecture, are significant and have the potential to advance the field. While there are minor weaknesses, the overall quality and impact of the paper justify a score of 8. It is a notable advancement in the field, introducing new benchmarks and a new approach to editing that require deeper reasoning skills.
 
 - **Score**: 8/10
 
@@ -369,7 +411,7 @@ The paper presents AC-Refiner, a novel framework for optimizing arithmetic circu
 
 The paper presents a significant contribution to the field, addressing a crucial problem with a novel and well-executed approach. The use of conditional diffusion models for arithmetic circuit optimization is innovative, and the results demonstrate tangible improvements over existing methods. While some weaknesses exist, such as the heuristic legalization and technology-dependent cost predictor, they do not diminish the overall value of the work. The paper is well-written, clearly explains the methodology, and provides comprehensive experimental results. The potential for further research and applications is substantial. Given these factors, a score of 8 is warranted.
 
-**Score: 8**
+The paper presents a novel and well-executed study that raises important questions about the capabilities and limitations of LLMs. While the corpus size and specific LLMs used are limitations, the experimental design, incorporation of FDMs, analysis of user perception, and clear conclusions make a significant contribution to the field. The paper's findings are likely to influence future research on LLM evaluation, trust, and deployment in high-stakes domains, and could lead to a rethinking of the relationship between comprehension, persuasion, and effectiveness in dialogue systems and argumentation theory.
 
 - **Score**: 8/10
 
