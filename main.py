@@ -21,7 +21,7 @@ def main():
         "Video Generation",
     ]  # Keywords to filter papers
     max_results = 500  # Maximum number of papers to fetch
-    highlight_number = 5  # Number of papers to highlight
+    highlight_number = 10  # Number of papers to highlight
 
     date = datetime.datetime.now().strftime("%Y-%m-%d")
 
@@ -56,7 +56,7 @@ def main():
     highlight_papers = select_top_papers(filtered_papers, highlight_number)
 
     print("Generating daily markdown file...")
-    generate_markdown_for_day(filtered_papers, date)
+    generate_markdown_for_day(highlight_papers, date)
 
     print("Updating highlight papers to DailyPaper.md ...")
     update_daily_papers(highlight_papers, filtered_papers, date)
