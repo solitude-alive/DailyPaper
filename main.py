@@ -14,12 +14,11 @@ def main():
     query = "cat:cs.*"  # Fetch computer science papers
     keywords = [
         "Large Language Models",
-        "transformers",
-        "Watermarking",
         "Diffusion Model",
         "Generative Adversarial Networks",
         "Chain-of-Thought",
         "Image Generation",
+        "Video Generation",
     ]  # Keywords to filter papers
     max_results = 500  # Maximum number of papers to fetch
     highlight_number = 5  # Number of papers to highlight
